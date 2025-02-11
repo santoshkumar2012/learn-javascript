@@ -16,7 +16,7 @@
         console.log (strStore)
     </script>
 
-    <script>
+    <!-- <script>
     function wordCount(input) {
     let words = input.toLowerCase().split(/\s+/); 
     let wordMap = new Map();
@@ -32,35 +32,80 @@
 
 let input = "the quick brown fox jumps over the lazy dog";
 console.log(wordCount(input));
-    </script>
+    </script> -->
+
+
 
     <script>
 
-let a = [2, 1, 2, 3, 4, 10]; 
+numbers = [96,7,18,7,26,10,7,45,26,18]
 
-let uniqueArr = [];
+remove_duplicate_number(numbers)
 
-for (let i = 0; i < a.length; i++) {
-    let isDuplicate = false;
-    
-    // Check if the current element already exists in uniqueArr
-    for (let j = 0; j < uniqueArr.length; j++) {
-        if (a[i] === uniqueArr[j]) {
-            isDuplicate = true;
-            break;
+function remove_duplicate_number(data){
+  console.log('Old--->', data);
+  let numbers = data
+  // console.log('data.length--->', data.length);
+  for(let i=0; i <= data.length-1; i++ ){ // i = 7
+    // console.log('array--->', data[i]);
+
+    counter = 0
+    for(let j=0; j<= i; j++ ){
+      if(data[i] == data[j]){
+        counter += 1
+      }
+    }
+    if (counter >= 2){
+      numbers[i] = 0
+    }
+  }
+
+  numbers = numbers.filter(Number)
+  console.log('New--->', numbers);
+}
+
+    </script>
+
+<!-- <script>
+    str = "LOVE"
+    let storestr = ""
+    for (let i=str.length-1; i>=0; i--){
+        storestr += str[i]
+    }
+    console.log (storestr)
+</script> -->
+
+<script>
+
+numbers = [25,36,84,47,25,36,84]
+
+dublicate_remove (numbers)
+
+function dublicate_remove(data) {
+    // console.log(data)
+
+    let numbers = data
+
+    for(let i=0; i<=data.length-1; i++){
+        // console.log(data)
+            counter = 0
+
+        for( let j=0; j <= i; j++){
+            if(data[i] == data[j]){
+                counter += 1
+            }
+        }
+        if ( counter >= 2 ) {
+            numbers[i] = 0
         }
     }
     
-    // If it's not a duplicate, add it to uniqueArr
-    if (!isDuplicate) {
-        uniqueArr.push(a[i]);
-    }
+    numbers = numbers.filter(Numbers)
+
+    console.log(numbers)
 }
 
-console.log(uniqueArr); // Output: [2, 1, 3, 4, 10]
-      
-
-    </script>
+</script>
     
 </body>
 </html>
