@@ -1,0 +1,106 @@
+/** JAVASCRIPT **/
+
+1. What is prototype ? 
+Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function.
+<code>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Adding a method to the prototype
+    Person.prototype.sayHello = function() {
+        return `Hello, my name is ${this.name}`;
+    };
+    
+    const person1 = new Person("Santosh", 30);
+    console.log(person1.sayHello()); // Output: Hello, my name is Santosh    
+</code>
+
+2. Closure ?
+Ans. A closure in JavaScript is a function that has access to variables in its parent scope. 
+Inner function retain access to the variable.
+<code>
+    function outerFunction() {
+        let count = 0;  // count is in the lexical scope of innerFunction
+    
+        function innerFunction() {
+            count++;  // innerFunction remembers 'count'
+            console.log(count);
+        }
+    
+        return innerFunction;  // Returns the inner function
+    }
+    
+    const counter = outerFunction();  // outerFunction executes and returns innerFunction
+    counter(); // Output: 1
+    counter(); // Output: 2
+    counter(); // Output: 3    
+</code>
+
+3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
+* Let and Const 
+* Arrow Functions : const add = (a, b) => a + b;
+* Rest and Spread Operators
+* Classes
+* Promises
+* Map and Set
+<code>
+const sum = (...numbers) => numbers.reduce((a, b) => a + b);
+const arr = [1, 2, 3];
+const newArr = [...arr, 4]; // Spread
+</code>
+
+4. Destructuring 
+Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
+* Array Destructuring
+const arr = [1, 2, 3];
+const [a, b] = arr;
+console.log(a); // 1
+console.log(b); // 2
+
+5. Promise
+A promise is an object that my produce a single value some time in  the futrue. 
+
+6. Callback Function 
+Ans - A callback is a function passed as an argument to another function.
+
+7. How to use multiple API in angular ?
+Angular, We can use multiple APIs in different ways.
+Using forkJoin (Parallel API Calls - Best for Independent APIs)
+
+<script>
+    forkJoin([
+      this.http.get('https://api.example.com/users'),
+      this.http.get('https://api.example.com/posts')
+    ]).subscribe(([users, posts]) => {
+      console.log('Users:', users);
+      console.log('Posts:', posts);
+    });
+</script>
+
+2. State Management in Angular
+State management in Angular is the process of handling application data efficiently across components, services, and routes. 
+Local State
+Component State 
+Service State (App-Level State)
+
+3. How to Use AngularJS?
+AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). It extends HTML with additional attributes and binds data to the UI dynamically.
+
+4. Component there are the basic building block of and angular application contract html views.
+
+5. Modules -  Modules is a container group related component directives, pipes and services @ngModule
+
+6. Decorator - Decorator is a function that add metadata to a class.
+@component, @directives, @ngModule
+
+7. directives
+Diretives is class that modifies the behaviour appearance of the elements
+Structural directives
+attributes directives 
+
+8. Services Angular services is a resuable typescript class that provides data. Resuable <code></code>
+
+9. @injectable
+@injectale is a decorator in angular that makes a class as a services.
