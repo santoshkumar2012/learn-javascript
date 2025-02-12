@@ -7,6 +7,13 @@
 </head>
 <body>
 
+    <div class="container p-5">
+    <h5> Reverse Letter </h5>
+    <code>
+    let a = [2,4,5,6,8,4]
+    let b = a.map((x) => x*2 )
+    console.log (b)
+    </code>
     <!-- <script>
         let str = "APPLE"
         let storestr = ""
@@ -16,15 +23,209 @@
         console.log (storestr)
     </script> -->
 
-    <h5> Array Map ( Array every elements calculation with 2) </h5>
-
+    <h5 class="mt-3"> Array Map ( Array every elements calculation with 2) </h5>
+    <code>
+        let a = [2,4,5,6,8,4]
+    let b = a.map((x) => x*2 )
+    console.log (b)
+    </code>
     <script>
-    
     let a = [2,4,5,6,8,4]
     let b = a.map((x) => x*2 )
     console.log (b)
-
     </script>
-    
+
+<h5 class="mt-3"> Array Filter ( Find odd number and Even Number ) </h5>
+
+<code>
+    a = [2,4,5,8,9,7,5,4]
+    let k = a.filter((y) => y%2 )
+    console.log (k)
+</code>
+
+<script>
+    a = [2,4,5,8,9,7,5,4]
+    let k = a.filter((y) => y%2 === 0 )
+    console.log (k)
+</script>
+
+<h5 class="mt-3"> Find Sum (  ) </h5>
+
+<script>
+const findsum = [2,5,43,76,10]
+const totalFind = (findsum) => {
+  let sum = 0 ;
+  for(let i=0; i<findsum.length; i++){
+    sum += findsum[i]
+  }
+  return sum
+}
+console.log(totalFind(findsum));
+</script>
+
+<h5 class="mt-3">  Dublicte Number Delete From Array </h5>
+<script>
+numbers = [96,7,18,7,26,10,7,45,26,18]
+remove_duplicate_number(numbers)
+function remove_duplicate_number(data){
+//   console.log('Old--->', data);
+  let numbers = data
+  // console.log('data.length--->', data.length);
+  for(let i=0; i <= data.length-1; i++ ){ // i = 7
+    // console.log('array--->', data[i]);
+    counter = 0
+    for(let j=0; j<= i; j++ ){
+      if(data[i] == data[j]){
+        counter += 1
+      }
+    }
+    if (counter >= 2){
+      numbers[i] = 0
+    }
+  }
+  numbers = numbers.filter(Number)
+  console.log('New--->', numbers);
+}
+</script>
+
+<h5> Traingle Pattern Left Angled Triangle </h5>
+<script>
+    let n = 5; // Number of rows
+for (let i = 1; i <= n; i++) {
+    let row = "";
+    for (let j = 1; j <= i; j++) {
+        row += "* ";
+    }
+    console.log(row);
+}
+</script>
+
+<h5 class="mt-3">  4. Inverted Right-Angled Triangle </h5>
+<script>
+    let q = 5;
+    for (let i = q; i >= 1; i--) {
+    let row = "* ".repeat(i);
+    console.log(row);
+}
+</script>
+
+<h5> Traingle Pattern Pyramid Allignment </h5>
+<script>
+    let l = 5;
+for (let i = 1; i <= l; i++) {
+    let row = " ".repeat(l - i) + "* ".repeat(i);
+    console.log(row);
+}
+</script>
+
+
+<h5 class="mt-3"> Find Index (  ) </h5>
+<script>
+const agess = [10,23,40,55,25]
+const adultAgess = agess.findIndex(m)
+function m(n){
+  return n >= 50
+}
+console.log(adultAgess);
+</script>
+
+<h5 class="mt-3"> Roman numerals, Input: s = "LVIII", Output: 58, Explanation: L = 50, V= 5, III = 3 </h5>
+<script>
+    // Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+// I can be placed before V (5) and X (10) to make 4 and 9. 
+// X can be placed before L (50) and C (100) to make 40 and 90. 
+// C can be placed before D (500) and M (1000) to make 400 and 900. 
+// Given a roman numeral, convert it to an integer.
+// Input: s = "LVIII"
+// Output: 58
+// Explanation: L = 50, V= 5, III = 3
+function romanToInt(s) {
+    // Map of Roman numerals and their corresponding integer values
+    const romanMap = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    };
+    let result = 0;
+    // Iterate through the string
+    for (let i = 0; i < s.length; i++) {
+        // If the current value is less than the next value, subtract it
+        if (i < s.length - 1 && romanMap[s[i]] < romanMap[s[i + 1]]) {
+            result -= romanMap[s[i]];
+        } else {
+            // Otherwise, add it to the result
+            result += romanMap[s[i]];
+        }
+    }
+    return result;
+}
+// Example Usage
+const s = "LVIII"; // Input
+console.log(romanToInt(s)); // Output: 58
+</script>
+
+
+<h5 class="mt-3"> HappyNumbers(1) </h5>
+<script>
+  function HappyNumbers(num) {
+  let seen = new Set();
+  while (num !== 1 && !seen.has(num)) {
+    seen.add(num);
+    num = sumOfSquares(num);
+  }
+  return num === 1;
+}
+function sumOfSquares(n) {
+  return n.toString()
+    .split('')
+    .map(digit => Number(digit) ** 2) // Square each digit
+    .reduce((sum, sq) => sum + sq, 0); // Sum all squares
+}
+// Test cases
+console.log(HappyNumbers(1));
+</script>
+
+<h5 class="mt-3"> Palindrome Swapper "kayak" (swap 'y' and 'a') </h5>
+<script>
+    function PalindromeSwapper(str) {
+  // Helper function to check if a string is a palindrome
+  function isPalindrome(s) {
+    return s === s.split('').reverse().join('');
+  }
+  // If the string is already a palindrome, return it
+  if (isPalindrome(str)) {
+    return str;
+  }
+  let arr = str.split('');
+    console.log(arr)
+  // Try swapping each pair of characters to check if it becomes a palindrome
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = i + 1; j < arr.length; j++) {
+      // Swap characters
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+      // Check if the swapped string is a palindrome
+      if (isPalindrome(arr.join(''))) {
+        return arr.join('');
+      }
+      // Swap back to restore original string
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  // If no valid swap makes it a palindrome, return the original string
+  return str;
+}
+// Test cases
+console.log(PalindromeSwapper("anna"));  // Output: "anna" (already a palindrome)
+console.log(PalindromeSwapper("kyaak")); // Output: "kayak" (swap 'y' and 'a')
+</script>
+
+
+
+</div>
+
 </body>
 </html>
