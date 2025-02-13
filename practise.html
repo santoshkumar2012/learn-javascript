@@ -256,6 +256,48 @@ console.log(bubbleSort([5, 3, 8, 1, 2])); // Output: [1, 2, 3, 5, 8]
 
 </script>
 
+<h6> Closures </h6>
+
+<script>
+  message = "Good Morning"
+  function hello1() {
+    let message = "Good Morning"
+    console.log("Hello 1: " + message ) 
+  let c = function hello2(){
+      console.log ("I am c" + message)
+    }
+    return c
+  }
+  c = hello1()
+  c()
+</script>
+
+<script>
+  let str ="LOVE"
+  let totalstr = ""
+
+  for (let i=str.length-1; i>=0; i--){
+    totalstr += str[i]
+  }
+
+  console.log (totalstr)
+
+</script>
+
+<script>
+  let strs = [1,2,3]
+  stroess = strs.reverse();
+  console.log(stroess)
+</script>
+
+<script>
+  let strss = "LOVE"
+  let reverseStrss = strss.split("").reverse("").join("");
+  console.log (reverseStrss)
+</script>
+
+
+
 </div>
 
 </body>
