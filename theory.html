@@ -2,6 +2,7 @@
 
 1. What is prototype ? 
 Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function.
+
 <code>
     function Person(name, age) {
         this.name = name;
@@ -42,14 +43,23 @@ Inner function retain access to the variable.
 3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
 * Let and Const 
 * Arrow Functions : const add = (a, b) => a + b;
-* Rest and Spread Operators rest(...)
+* Rest and Spread Operators (...a,...b) 
 * Classes
 * Promises
-* Map and Set
+* Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
 <code>
 const sum = (...numbers) => numbers.reduce((a, b) => a + b);
 const arr = [1, 2, 3];
 const newArr = [...arr, 4]; // Spread
+</code>
+<code>
+let myArray = [1,2,3]
+let obj = new set(myArray);
+console.log(obj)
+--------------------
+let myMap=new Map();
+myMap.set('name', 'Santosh');
+console.log(myMap);
 </code>
 
 4. Destructuring 
@@ -66,7 +76,33 @@ A promise is an object that my produce a single value some time in  the futrue.
 6. Callback Function 
 Ans - A callback is a function passed as an argument to another function.
 
-7. How to use multiple API in angular ?
+7. Data Structural 
+JavaScript provides various data structures to handle different use cases.
+Array, Object, Map, Set, Data Types
+
+8. Hoisting is JavaScript's default behavior of moving declarations to the top.
+<code>
+    getName();
+    var = 5
+    function getName(){
+        console.log("santosh")
+    }
+</code>
+
+ANGULAR 17 New Features
+----------------------------------------------------------------------
+
+angular.dev
+Standalone by default
+Improved SSR Support
+Signals are Stable now
+Cotrol Flow
+*ngIf - @if
+*ngFor - @for
+*ngSwitch - @switch
+
+
+1. How to use multiple API in angular ?
 Angular, We can use multiple APIs in different ways.
 Using forkJoin (Parallel API Calls - Best for Independent APIs)
 
@@ -105,3 +141,10 @@ attributes directives
 
 9. @injectable
 @injectale is a decorator in angular that makes a class as a services.
+
+10. In Angular 17, authentication involves:
+
+Login Page – User enters credentials.
+Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
+Dashboard Component – Accessible only after login.
+Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
