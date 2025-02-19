@@ -17,8 +17,7 @@ Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we
     const person1 = new Person("Santosh", 30);
     console.log(person1.sayHello()); // Output: Hello, my name is Santosh    
 </code>
-AOT - Ahead of time compilation at build time application runs. 
-JIT - Just in time
+
 2. Closure ?
 Ans. A closure in JavaScript is a function that has access to variables in its parent scope. 
 Inner function retain access to the variable.
@@ -39,6 +38,8 @@ Inner function retain access to the variable.
     counter(); // Output: 2
     counter(); // Output: 3    
 </code>
+
+5. Hoisting is a default behavior in JavaScript where variable and function declarations are moved to the top.
 
 3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
 * Let and Const 
@@ -89,6 +90,10 @@ Array, Object, Map, Set, Data Types
     }
 </code>
 
+Undefined that has been declared but not yet assigned a value.
+
+Null is an assignment value meaning that a varriable has been declared and given the value of null.
+
 ANGULAR 17 New Features
 ----------------------------------------------------------------------
 
@@ -101,6 +106,8 @@ Cotrol Flow
 *ngFor - @for
 *ngSwitch - @switch
 
+AOT - Ahead of time compilation at build time application runs. 
+JIT - Just in time
 
 1. How to use multiple API in angular ?
 Angular, We can use multiple APIs in different ways.
@@ -132,15 +139,22 @@ AngularJS is a JavaScript framework developed by Google for building dynamic sin
 6. Decorator - Decorator is a function that add metadata to a class.
 @component, @directives, @ngModule
 
+8. Constructor - Constructor is a function that initialization an application component servcies and directives.
+
 7. directives
 Diretives is class that modifies the behaviour appearance of the elements
 Structural directives
 attributes directives 
 
-8. Services Angular services is a resuable typescript class that provides data. Resuable <code></code>
+8. Services Angular services is a resuable typescript class that provides data. Resuable 
+<code></code>
 
 9. @injectable
 @injectale is a decorator in angular that makes a class as a services.
+
+Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
+
+
 
 10. In Angular 17, authentication involves:
 
@@ -148,3 +162,8 @@ Login Page – User enters credentials.
 Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
 Dashboard Component – Accessible only after login.
 Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
+
+Lazy loading ondemand load 
+
+Git pull automatically merges the fetched changes into the current branch, git fetch does no 
+Fetching is what you do when you want to see everybody else has been working on. 
