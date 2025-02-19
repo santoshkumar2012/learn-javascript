@@ -1,0 +1,47 @@
+/** Animation **/
+Animation - Used to create complex animations with multiple keyframes.
+Requires @keyframes to define multiple animation steps.
+
+transition - Used for smooth transitions between two states (e.g., hover effects).
+Does not use keyframes; transitions between two states only.
+-------------------------------------------------------
+CSS Grid	
+A two-dimensional layout system (handles both rows and columns).
+Best for overall page layouts, grids, and complex structures.
+example - <code>
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        grid-template-rows: auto;
+        gap: 10px;
+    }
+    // 1fr is fraction unit just like 200px width
+    // Automatically adjusts based on available space.
+</code>
+
+FlexBox
+A one-dimensional layout system (handles either rows or columns, not both at once).
+Best for aligning items in a row or column, great for components.
+display:flex
+-------------------------------------------------------
+Media Queries - in CSS allow us to apply different styles based on the screen size, resolution, or device type. 
+Extra Small (Mobile)	max-width: 576px
+Small (Tablets)     	max-width: 768px
+Medium (Laptops)	    max-width: 992px
+Large (Desktops)	    max-width: 1200px
+----------------------------------------------------------------------
+Viewport Units → Great for scaling elements dynamically without fixed sizes.
+vw (Viewport Width)	1vw = 1% of the viewport’s width
+vh (Viewport Height)	1vh = 1% of the viewport’s height
+vmin (Viewport Minimum)	Takes the smaller value of vw or vh
+vmax (Viewport Maximum)	Takes the larger value of vw or vh
+----------------------------------------------------------------------
+px for fixed elements (borders, images)
+em for scaling within a component (buttons, cards).
+rem for consistent typography across a website.
+-------------------------------------------------------
+ES6 (ECMAScript 2015) and later versions introduced many powerful features that make JavaScript cleaner, faster, and easier to work with.
+let & const (Block-Scoped Variables)
+Arrow Functions (Shorter Syntax)
+Spread & Rest Operator (...)
+Promises & Async/Await (Handle Async Code Better)
