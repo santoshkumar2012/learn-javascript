@@ -59,6 +59,32 @@
             transform: scale(45deg);
         }
 
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            animation: bounce 1s infinite;
+            margin-top: 50px;
+        }
+
+        .box3 {
+    width: 100px;
+    height: 100px;
+    margin-top: 25px;
+    background-color: black;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.box3:hover {
+    background-color: blue;
+}
+
     </style>
 </head>
 <body>
@@ -66,6 +92,8 @@
     <div class="container">
         <div class="rectangle"> </div>
         <div class="box"></div>
+        <div class="box1"> </div>
+        <div class="box3"> </div>
     </div>
 
 </body>
