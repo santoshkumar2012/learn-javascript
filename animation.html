@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Animation </title>
+    <style>
+        .container { background-color: red; padding: 15px; height: 100vh;}
+        .rectangle {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 10px;
+            position: relative;
+            /* animation-fill-mode: backwards; */
+            /* animation-name: rectAnimation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+            animation-timing-function: linear;
+            animation-direction: alternate; */
+            /* animation: 5s ease-in-out 2 alternate none running rectAnimation; */
+        }
+
+        @keyframes rectAnimation {
+            0% {
+                top:1%;
+                left:5%;
+            }
+            30% {
+                top: 5%;
+                left: 90%;
+            }
+            60% {
+                top:90%;
+                left:10%
+            }
+            100% {
+                top:95%;
+                left:90%;
+            }
+        }
+
+        .box {
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            margin-top: 50px;
+            border-radius: 5px;
+            /* transition-property: all;
+            transition-duration: 4s;
+            transition-delay: 1s;
+            transition-timing-function: linear; */
+            transition: all 4s;
+        }
+
+        .box:hover {
+            background-color: black;
+            width: 500px;
+            transform: scale(45deg);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="rectangle"> </div>
+        <div class="box"></div>
+    </div>
+
+</body>
+</html>
