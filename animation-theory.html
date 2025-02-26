@@ -1,9 +1,29 @@
 /** Animation **/
 Animation - Used to create complex animations with multiple keyframes.
 Requires @keyframes to define multiple animation steps.
+animation: 5s ease-in-out 2 alternate none running rectAnimation; 
+@keyframes rectAnimation {
+    0% {
+        top:1%;
+        left:5%;
+    }}
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
+    }
+    animation: bounce 1s infinite;
 
 transition - Used for smooth transitions between two states (e.g., hover effects).
 Does not use keyframes; transitions between two states only.
+ease-in - slow start, Fast end 
+ease-in-ouit - somooth start & End
+transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+transition: all 4s;
+transition-property:all;
+-delay:1s
+:hover {transform:scale(45deg)}
+
 -------------------------------------------------------
 CSS Grid	
 A two-dimensional layout system (handles both rows and columns).
