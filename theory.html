@@ -105,8 +105,14 @@ Cotrol Flow
 *ngFor - @for
 *ngSwitch - @switch
 
+AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). It extends HTML with additional attributes and binds data to the UI dynamically.
+
+the core type of the RxJS library
+
 AOT - Ahead of time compilation at build time application runs. 
 JIT - Just in time
+
+Observable - Angular, an observable is a data stream that can change over time.  It's a core part of reactive programming.
 
 1. How to use multiple API in angular ?
 Angular, We can use multiple APIs in different ways.
@@ -128,8 +134,7 @@ Local State
 Component State 
 Service State (App-Level State)
 
-3. How to Use AngularJS?
-AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). It extends HTML with additional attributes and binds data to the UI dynamically.
+SSR - erver-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
 
 4. Component there are the basic building block of and angular application contract html views.
 
@@ -138,12 +143,12 @@ AngularJS is a JavaScript framework developed by Google for building dynamic sin
 6. Decorator - Decorator is a function that add metadata to a class.
 @component, @directives, @ngModule
 
-8. Constructor - Constructor is a function that initialization an application component servcies and directives.
-
 7. directives
 Diretives is class that modifies the behaviour appearance of the elements
 Structural directives
 attributes directives 
+
+8. Constructor - Constructor is a function that initialization an application component servcies and directives.
 
 8. Services Angular services is a resuable typescript class that provides data. Resuable 
 <code></code>
@@ -151,7 +156,7 @@ attributes directives
 9. @injectable
 @injectale is a decorator in angular that makes a class as a services.
 
-Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
+11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
 
 
 
@@ -164,5 +169,18 @@ Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mecha
 
 Lazy loading ondemand load 
 
-Git pull automatically merges the fetched changes into the current branch, git fetch does no 
-Fetching is what you do when you want to see everybody else has been working on. 
+1. Git pull automatically merges the fetched changes into the current branch, git fetch does no 
+2. Git Fetch a primary command used to download contents from a remote repository.
+3. Git stash git stash command takes your uncommitted changes and saves later use. 
+
+Angular project
+Login page Validation Issues
+In one of my Angular projects, the login page validation was not working correctly. Even when users entered invalid credentials, the error messages were not displaying properly.
+
+Solution 
+I checked the form setup and realized i had forgotten to use Angular's FormGroup and FormControl properly.
+I updated the form using ReactiveForms Module and added Validation for required fields and incorrect credentials.
+Used this.loginForm.controls ["email"].errors to correctly display validation messages.
+
+Learend
+Always check if ReactiveFormsModule is imported in the module.
