@@ -41,8 +41,13 @@ Inner function retain access to the variable.
 5. Hoisting is a default behavior in JavaScript where variable and function declarations are moved to the top.
 
 3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
-* Let and Const 
+
+var is function-scoped
+let is block-scoped : It is only accessible within the block {}
+
+* Let and Const : It is accessible throughout the function
 * Arrow Functions : const add = (a, b) => a + b;
+
 * Rest Operator - Rest Operator 'collects' multiple elements into an array.
 <code> 
 function sum(...numbers) { return numbers.reduce((total, num) => total + num, 0); }
@@ -102,11 +107,15 @@ slice() - Extracts a portian of an array without modifying the orginal.
 splice() - Adds, remove or replace element in an array. - array.splice (2,0, 30)
 map() - Create a new array by applying a function to every elements. const santk = pragya.map((x) => x*2)
 
-Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
+=> Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
 
 Undefined that has been declared but not yet assigned a value.
 
 Null is an assignment value meaning that a varriable has been declared and given the value of null.
+
+ForEach method is used to iterate over arrays and execute a provided function once for each element.
+* ForEach is faster because it doesn’t create a new array.
+* map is slightly slower because it returns a new array.
 
 ANGULAR 17 New Features
 ----------------------------------------------------------------------
@@ -158,6 +167,10 @@ SSR - erver-side rendering (SSR) is a process that involves rendering pages on t
 6. Decorator - Decorator is a function that add metadata to a class.
 @component, @directives, @ngModule
 
+7. @ViewChild and @ViewChildren are decorators used to access child components,
+   @ViewChild - It is used to get a single child component, directive.
+   @viewChildren - It is used to get multiple child components, directives.
+
 7. directives
 Diretives is class that modifies the behaviour appearance of the elements
 Structural directives
@@ -173,6 +186,7 @@ attributes directives
 
 11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
 
+12. Store is a centralized state management solution that holds the application’s state  and provides mechanisms to update and access the state efficiently.
 
 
 10. In Angular 17, authentication involves:
@@ -199,3 +213,32 @@ Used this.loginForm.controls ["email"].errors to correctly display validation me
 
 Learend
 Always check if ReactiveFormsModule is imported in the module.
+
+<script> 
+    
+user_details = [
+  {
+    name: "achyut kadam",
+    age: 28
+  },
+  {
+    name: "Santosh Kumar",
+    age: 39
+  },
+  {
+    name: "gorakh sanas",
+    age: 33
+  }
+]
+
+length = user_details.length
+
+for(let i=0; i< length; i++){
+  console.log('user--->', user_details[i]);
+}
+
+for(let user of user_details){
+  console.log('user--->', user);
+}
+
+</script>
