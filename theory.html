@@ -43,17 +43,20 @@ Inner function retain access to the variable.
 3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
 * Let and Const 
 * Arrow Functions : const add = (a, b) => a + b;
-* Rest and Spread Operators (...a,...b) 
 * Rest Operator - Rest Operator 'collects' multiple elements into an array.
+<code> 
+function sum(...numbers) { return numbers.reduce((total, num) => total + num, 0); }
+console.log(sum(10, 20, 30, 40));
+</code>
 * Spread Operator - Spread operator is used to spread the content of an array.
+<code>
+    const arr1 = [1, 2, 3];
+    const arr2 = [...arr1, 4, 5, 6];
+    console.log(arr2);
+</code>
 * Classes
 * Promises
 * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
-<code>
-const sum = (...numbers) => numbers.reduce((a, b) => a + b);
-const arr = [1, 2, 3];
-const newArr = [...arr, 4]; // Spread
-</code>
 <code>
 let myArray = [1,2,3]
 let obj = new set(myArray);
@@ -109,10 +112,10 @@ ANGULAR 17 New Features
 ----------------------------------------------------------------------
 
 angular.dev
-Standalone by default
-Improved SSR Support
-Signals are Stable now
-Cotrol Flow
+-Standalone by default - No Need for NgModules – Simplifies component structure., Faster Bootstrap, Better Lazy Loading
+-Improved SSR Support
+-Signals are Stable now
+-Cotrol Flow
 *ngIf - @if
 *ngFor - @for
 *ngSwitch - @switch
