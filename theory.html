@@ -117,6 +117,26 @@ ForEach method is used to iterate over arrays and execute a provided function on
 * ForEach is faster because it doesn’t create a new array.
 * map is slightly slower because it returns a new array.
 
+
+Currying
+Transforming a function with multiple arguments into a sequence of functions.
+
+Debouncing & Throttling
+Debouncing limits the execution of a function until after a certain delay.
+
+Throttling ensures a function runs at most once in a specified interval.
+
+const numbers = [1, 2, 3, 4];
+
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]
+
+const evens = numbers.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4]
+
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // 10
+
 ANGULAR 17 New Features
 ----------------------------------------------------------------------
 
@@ -129,7 +149,8 @@ angular.dev
 *ngFor - @for
 *ngSwitch - @switch
 
-AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). It extends HTML with additional attributes and binds data to the UI dynamically.
+AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). 
+It extends HTML with additional attributes and binds data to the UI dynamically.
 
 the core type of the RxJS library
 
@@ -186,7 +207,8 @@ attributes directives
 
 11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
 
-12. Store is a centralized state management solution that holds the application’s state  and provides mechanisms to update and access the state efficiently.
+12. Store is a centralized state management solution that holds the application’s state  
+and provides mechanisms to update and access the state efficiently.
 
 
 10. In Angular 17, authentication involves:
