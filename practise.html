@@ -69,11 +69,8 @@ console.log(totalFind(findsum));
 numbers = [96,7,18,7,26,10,7,45,26,18]
 remove_duplicate_number(numbers)
 function remove_duplicate_number(data){
-//   console.log('Old--->', data);
   let numbers = data
-  // console.log('data.length--->', data.length);
-  for(let i=0; i <= data.length-1; i++ ){ // i = 7
-    // console.log('array--->', data[i]);
+  for(let i=0; i <= data.length-1; i++ ){ 
     counter = 0
     for(let j=0; j<= i; j++ ){
       if(data[i] == data[j]){
@@ -92,7 +89,7 @@ function remove_duplicate_number(data){
 <h5> Traingle Pattern Left Angled Triangle </h5>
 <script>
     let n = 5; // Number of rows
-for (let i = 1; i <= n; i++) {
+      for (let i = 1; i <= n; i++) {
     let row = "";
     for (let j = 1; j <= i; j++) {
         row += "* ";

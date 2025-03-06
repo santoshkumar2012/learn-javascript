@@ -265,3 +265,33 @@ for(let user of user_details){
 }
 
 </script>
+
+<div *ngIf="isLoggedIn; else showLogin">
+  <p>Welcome, User!</p>
+</div>
+
+<form [formGroup]="lead_form" (ngSubmit)="saveLead()">
+  <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  <div class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
+  Name is required. </div>
+  </form>
+
+  const routes: Routes = [
+  { path: '', component: HomeComponent },
+  ];
+
+  // services 
+  previousButton(){
+    if(sessionStorage.getItem('role') == "client"){
+      return false
+    }
+    return true
+  }
+
+  //api call
+  ngOnInit() {
+    this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+      this.user = resposne.user
+      console.log(resposne);
+    })
+  }
