@@ -40,13 +40,7 @@ Inner function retain access to the variable.
 
 5. Hoisting is a default behavior in JavaScript where variable and function declarations are moved to the top.
 
-3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript.
-
-var is function-scoped
-let is block-scoped : It is only accessible within the block {}
-
-* Let and Const : It is accessible throughout the function
-* Arrow Functions : const add = (a, b) => a + b;
+3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript. Rest operation, Spread
 
 * Rest Operator - Rest Operator 'collects' multiple elements into an array.
 <code> 
@@ -59,8 +53,39 @@ console.log(sum(10, 20, 30, 40));
     const arr2 = [...arr1, 4, 5, 6];
     console.log(arr2);
 </code>
-* Classes
-* Promises
+* Classes - class is a blueprint for creating objects with properties and methods. 
+<code>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    greet() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+  }
+  const person1 = new Person("John", 25);
+  person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+</code>
+
+* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
+<code> let myPromise = new Promise((resolve, reject) => {
+  let success = true; // Change this to false to see the reject case
+
+  setTimeout(() => {
+    if (success) {
+      resolve("Operation Successful!");
+    } else {
+      reject("Something went wrong!");
+    }
+  }, 2000);
+});
+
+myPromise
+  .then(result => console.log(result)) // Runs when promise is resolved
+  .catch(error => console.log(error)); // Runs when promise is rejected
+</code>
+
 * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
 <code>
 let myArray = [1,2,3]
@@ -139,6 +164,25 @@ console.log(sum); // 10
 
 ANGULAR 17 New Features
 ----------------------------------------------------------------------
+
+How Angular Works?
+AppModule bootstraps the app.
+AppComponent loads and displays the UI.
+Routing manages navigation.
+Services fetch data and provide logic.
+Components render UI dynamically.
+Directives & Pipes manipulate the DOM.
+
+Angular Architecture :--
+      User Action (Click, Input, Navigation)
+                     ↓
+        Component (Handles UI + Logic)
+                     ↓
+        Service (Manages Data & API Calls)
+                     ↓
+        HTTP Client (Fetches Data)
+                     ↓
+        Backend Server (Database)
 
 angular.dev
 -Standalone by default - No Need for NgModules – Simplifies component structure., Faster Bootstrap, Better Lazy Loading
@@ -237,38 +281,32 @@ Used this.loginForm.controls ["email"].errors to correctly display validation me
 Learend
 Always check if ReactiveFormsModule is imported in the module.
 
-<script> 
-    
-user_details = [
-  {
-    name: "achyut kadam",
-    age: 28
-  },
-  {
-    name: "Santosh Kumar",
-    age: 39
-  },
-  {
-    name: "gorakh sanas",
-    age: 33
-  }
-]
-
-length = user_details.length
-
-for(let i=0; i< length; i++){
-  console.log('user--->', user_details[i]);
-}
-
-for(let user of user_details){
-  console.log('user--->', user);
-}
-
-</script>
 
 <div *ngIf="isLoggedIn; else showLogin">
   <p>Welcome, User!</p>
 </div>
+-------------------------------------
+export class AppComponent {
+  users = [
+    { id: 1, name: 'John', age: 25 },
+    { id: 2, name: 'Jane', age: 28 },
+    { id: 3, name: 'Alice', age: 22 }
+  ];
+}
+<h3>User List:</h3>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.age }}</td>
+  </tr>
+</table>
+-----------------------------------
 
 <form [formGroup]="lead_form" (ngSubmit)="saveLead()">
   <input type="text" class="form-control" placeholder="Name" formControlName="name">
