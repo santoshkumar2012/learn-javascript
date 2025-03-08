@@ -269,3 +269,62 @@ Debouncing & Throttling
 
 
 
+// scss variable
+<code>
+$primary-color: blue;
+.button {
+  color: $primary-color;
+  padding: 10px;
+}
+</code>
+
+--------------------
+// nesting in scss  
+.navbar {
+    background: #333;
+    padding: 10px;
+  
+    .menu {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: inline-block;
+        margin-right: 10px;
+  
+        a {
+          text-decoration: none;
+          color: white;
+  
+          &:hover {
+            color: yellow;
+          }
+        }
+      }
+    }
+  }
+
+  //Mixins in SCSS
+
+  @mixin button-style {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn {
+    @include button-style;
+    background: blue;
+    color: white;
+  }
+  
+  .btn-danger {
+    @include button-style;
+    background: red;
+  }
+  
+//sass
+$primary-color: blue
+.button
+  color: $primary-color
+  padding: 10px

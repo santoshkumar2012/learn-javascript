@@ -23,6 +23,21 @@
         console.log (storestr)
     </script> -->
 
+
+    Max Number
+    
+    function findMax(arr) {
+      let max = arr[0]; // Assume first element is the max
+      for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+          max = arr[i]; // Update max if a bigger number is found
+        }
+      }
+      return max;
+    }
+    
+    console.log(findMax([10, 5, 20, 8, 30])); // Output: 30
+
     <h5 class="mt-3"> Array Map ( Array every elements calculation with 2) </h5>
     <code>
         let a = [2,4,5,6,8,4]
