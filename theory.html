@@ -193,6 +193,14 @@ angular.dev
 *ngFor - @for
 *ngSwitch - @switch
 
+how to improve angular single page application ?
+Optimize Lazy Loading & Code Splitting
+Use Server-Side Rendering (SSR) 
+API Responses with Service Workers
+Lazy Loading Images
+Reduce Third-Party Dependencies
+-----------------------------------------
+
 AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). 
 It extends HTML with additional attributes and binds data to the UI dynamically.
 
@@ -200,7 +208,8 @@ the core type of the RxJS library
 
 AOT - Ahead of time compilation at build time application runs. 
 JIT - Just in time
-
+--------------------------------
+rxjs 
 Observable - Angular, an observable is a data stream that can change over time.  It's a core part of reactive programming.
 
 1. How to use multiple API in angular ?
@@ -255,7 +264,7 @@ custom directives
 12. Store is a centralized state management solution that holds the application’s state  
 and provides mechanisms to update and access the state efficiently.
 
-
+--------------------------------
 10. In Angular 17, authentication involves:
 
 Login Page – User enters credentials.
@@ -264,6 +273,7 @@ Dashboard Component – Accessible only after login.
 Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
 
 Lazy loading ondemand load 
+---------------------------------------
 
 1. Git pull automatically merges the fetched changes into the current branch, git fetch does no 
 2. Git Fetch a primary command used to download contents from a remote repository.
@@ -281,31 +291,6 @@ Used this.loginForm.controls ["email"].errors to correctly display validation me
 Learend
 Always check if ReactiveFormsModule is imported in the module.
 
-
-<div *ngIf="isLoggedIn; else showLogin">
-  <p>Welcome, User!</p>
-</div>
--------------------------------------
-export class AppComponent {
-  users = [
-    { id: 1, name: 'John', age: 25 },
-    { id: 2, name: 'Jane', age: 28 },
-    { id: 3, name: 'Alice', age: 22 }
-  ];
-}
-<h3>User List:</h3>
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Age</th>
-  </tr>
-  <tr *ngFor="let user of users">
-    <td>{{ user.id }}</td>
-    <td>{{ user.name }}</td>
-    <td>{{ user.age }}</td>
-  </tr>
-</table>
 -----------------------------------
 
 <form [formGroup]="lead_form" (ngSubmit)="saveLead()">
@@ -333,3 +318,58 @@ export class AppComponent {
       console.log(resposne);
     })
   }
+--------------------------------------------
+Directive
+
+ngfor 
+employees = [
+{
+id: 1,
+name: "Santosh Kumar",
+age: 30,
+department: "Human Resources",
+salary: 5000000
+},
+<tr *ngFor="let employee of employees"> </tr>
+
+----------------------
+
+isVisiable:boolean = false 
+<h2 *ngIf="isVisiable"> Welcome to NgIf</h2>
+
+----------------------
+
+  // custom directive
+
+custom Directive Command - ng g d directive-name (cdirective)
+
+@Input() color!:string;
+
+constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
+
+ngOnInit(): void { 
+// this.el.nativeElement.style.backgroundColor = 'red';
+    this.el.nativeElement.style.backgroundColor = this.color;
+}
+
+<p cdirective color="red"> Form </p>
+
+--------------------------------------------------
+
+@Input() defaultColor: string = 'yellow'; // Default color
+@Input() highlightColor: string = 'red'; // Color on click
+private isHighlighted = false;
+
+onclick button 
+ ngOnInit(): void {
+    this.el.nativeElement.style.backgroundColor = this.defaultColor;
+  }
+
+@HostListener('click') onClick() {
+  this.isHighlighted = !this.isHighlighted; 
+  this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+  }
+
+<button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+
+
