@@ -47,19 +47,6 @@ Inner function retain access to the variable.
     }
 </code>
 
-3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript. Rest operation, Spread
-
-* Rest Operator - Rest Operator 'collects' multiple elements into an array.
-<code> 
-function sum(...numbers) { return numbers.reduce((total, num) => total + num, 0); }
-console.log(sum(10, 20, 30, 40));
-</code>
-* Spread Operator - Spread operator is used to spread the content of an array.
-<code>
-    const arr1 = [1, 2, 3];
-    const arr2 = [...arr1, 4, 5, 6];
-    console.log(arr2);
-</code>
 * Classes - class is a blueprint for creating objects with properties and methods. 
 <code>
   class Person {
@@ -92,6 +79,21 @@ myPromise
   .then(result => console.log(result)) // Runs when promise is resolved
   .catch(error => console.log(error)); // Runs when promise is rejected
 </code>
+
+3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript. Rest operation, Spread
+
+* Rest Operator - Rest Operator 'collects' multiple elements into an array.
+<code> 
+function sum(...numbers) { return numbers.reduce((total, num) => total + num, 0); }
+console.log(sum(10, 20, 30, 40));
+</code>
+* Spread Operator - Spread operator is used to spread the content of an array.
+<code>
+    const arr1 = [1, 2, 3];
+    const arr2 = [...arr1, 4, 5, 6];
+    console.log(arr2);
+</code>
+
 
 * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
 <code>
