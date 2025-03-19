@@ -1,0 +1,251 @@
+/** JAVASCRIPT **/
+
+ES6
+<div>
+  SPREAD OPERATOR
+  function members(greeting, ...names) {
+    console.log(greeting, names);
+  }
+  members("Hello", "Alice", "Bob", "Charlie");
+  -------------
+  ARROW - An arrow function is a shorter syntax for writing functions in JavaScript. Introduced in ES6,
+</div>
+
+PROTOTYPE
+<div> 
+ What is prototype ? 
+Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function.
+<code>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    // Adding a method to the prototype
+    Person.prototype.sayHello = function() {
+        return `Hello, my name is ${this.name}`;
+    };
+    const person1 = new Person("Santosh", 30);
+    console.log(person1.sayHello()); // Output: Hello, my name is Santosh    
+</code>
+</div>
+
+CLOSURE 
+<div> 
+  Ans. A closure in JavaScript is a function that has access to variables in its parent scope. 
+  Inner function retain access to the variable.
+  <code>
+      function outerFunction() {
+          let count = 0;  // count is in the lexical scope of innerFunction
+      
+          function innerFunction() {
+              count++;  // innerFunction remembers 'count'
+              console.log(count);
+          }
+      
+          return innerFunction;  // Returns the inner function
+      }
+      
+      const counter = outerFunction();  // outerFunction executes and returns innerFunction
+      counter(); // Output: 1
+      counter(); // Output: 2
+      counter(); // Output: 3    
+  </code>
+</div>
+
+CLASSES 
+<div> 
+  * Classes - class is a blueprint for creating objects with properties and methods. 
+<code>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    greet() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+  }
+  const person1 = new Person("John", 25);
+  person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+</code>
+</div>
+
+MAP AND SET
+<div>
+  * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
+  <code>
+  let myArray = [1,2,3]
+  let obj = new set(myArray);
+  console.log(obj)
+  --------------------
+  let myMap=new Map();
+  myMap.set('name', 'Santosh');
+  console.log(myMap);
+  </code>
+</div>
+
+DESTRUCTURING
+<div>
+  Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
+  * Array Destructuring
+  const arr = [1, 2, 3];
+  const [a, b] = arr;
+  console.log(a); // 1
+  console.log(b); // 2
+  --------------------
+  Data Structural 
+JavaScript provides various data structures to handle different use cases.
+Array, Object, Map, Set, Data Types
+</div>
+
+ForEach
+<div>
+  ForEach method is used to iterate over arrays and execute a provided function once for each element.
+* ForEach is faster because it doesn’t create a new array.
+* map is slightly slower because it returns a new array.
+let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
+});
+console.log(sum);
+</div>
+
+EVENT 
+<div>
+  An event in JavaScript is an action in the browser, user clicking a button, typing in an input field, or scrolling a page. JavaScript can detect these events and execute functions accordingly.
+  <button onclick="alert('Button clicked!')">Click Me</button>
+--------------------
+<button id="btn">Click Me</button>
+<script>
+    document.getElementById("btn").addEventListener("click", function() {
+        alert("Button Clicked!");
+    });
+</script>
+--------------------
+<input type="text" id="textInput" placeholder="Type something...">
+<script>
+    let input = document.getElementById("textInput");
+
+    input.addEventListener("keydown", (event) => {
+        console.log("Key Pressed:", event.key);
+    });
+
+    input.addEventListener("keyup", () => {
+        console.log("Key Released");
+    });
+</script>
+</div>
+
+DOM
+<div>
+DOM allows JavaScript to interact with HTML dynamically.
+let heading = document.getElementById("heading");
+console.log(heading.textContent);  // Output: "Hello, World!"
+---------------------------------------
+let paragraphs = document.getElementsByClassName("text");
+console.log(paragraphs[0].textContent); // Output: "This is a paragraph."
+--------------------------------
+document.getElementById("heading").innerHTML = "<span style='color: red;'>Updated!</span>";
+</div>
+
+CURRYING 
+<div>
+  Transforming a function with multiple arguments into a sequence of functions.
+  function add(a) {
+    return function(b) {
+        return a + b;
+    };
+}
+console.log(add(5)(3)); // Output: 8
+</div>
+
+Debouncing & Throttling
+<div>
+Debouncing limits the execution of a function until after a certain delay.
+Throttling ensures a function runs at most once in a specified interval.
+</div>
+
+DEEP COPY AND SHALLOW COPY
+<div>
+  Shallow Copy – Creates a new object but copies references to nested objects.
+  Deep Copy – Creates a new object and recursively copies all values, ensuring no references remain.
+  -- Shallow copy examples
+        let obj1 = { name: "John", details: { age: 25 } };
+        let obj2 = obj1; // Copies reference
+        obj2.details.age = 30;
+        console.log(obj1.details.age); // Output: 30 (Changes reflect in obj1)
+  -- Deep copy
+        let obj1 = { name: "John", details: { age: 25 } };
+  let obj2 = structuredClone(obj1);
+  obj2.details.age = 30;
+  console.log(obj1.details.age); // Output: 25 (Unaffected)
+</div>
+=> Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
+
+OBJECT CLONE
+<div>
+  const personss = { first_name: "Santosh", last_name: "Kumar", age: 25 };
+  const clone1 = { ...persons };
+  console.log(clone1);  
+</div>
+
+ARRAY METHOD 
+<div>
+  / Filter
+
+const websantos = [2,3,4,5,6,7,8,9]
+const santo = websantos.filter((x) => x % 2 )
+console.log (santo); // output [ 3, 5, 7, 9 ] odd value
+
+const san = [2,3,4,5,6,7,8,9]
+const anjsanto = san.filter((y) => y % 2 === 0 )
+console.log (anjsanto); // output [ 2, 4, 6, 8 ] Eveb value
+
+// Reduce reduce an array to a single value by applying a function to each element and 
+// accumulating the result.
+
+const numbersss = [1, 2, 3, 4];
+
+const doubled = numbersss.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]
+
+const evens = numbersss.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4]
+
+let arraynumner = [10,24,3,4,55,6,7,8,9]
+const sum = arraynumner.reduce((a,b) => a + b)
+console.log(sum) // 126
+
+// Find
+
+//Sorting an Array  method sorts an array alphabetically
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort(); // output Apple, Banana, Mango, Orange
+
+// Ascending
+let array = [10,24,3,4,55,6,7,8,9]
+array.sort((a,b) => a - b)
+console.log(array) // 3,  4,  6,  7, 8, 9, 10, 24, 55
+
+//Descending
+let array1 = [10,24,3,4,55,6,7,8,9]
+array1.sort((a,b) => b - a)
+console.log(array1) // 55, 24, 10, 9, 8, 7,  6,  4, 3
+
+//MaxNumber
+let array2 = [10,24,3,4,55,6,7,8,9]
+array2.sort((a,b) => b - a)
+let maxnumber = array2[0]
+console.log(maxnumber) // 55
+
+
+//forEach forEach() method performs an action on every item in a list.
+
+let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
+});
+console.log(sum);
+</div>

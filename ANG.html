@@ -1,0 +1,370 @@
+/** JAVASCRIPT **/
+
+RxJS for observables over promises
+<div> 
+* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
+<code> let myPromise = new Promise((resolve, reject) => {
+  let success = true; // Change this to false to see the reject case
+  setTimeout(() => {
+    if (success) {
+      resolve("Operation Successful!");
+    } else {
+      reject("Something went wrong!");
+    }
+  }, 2000);
+});
+myPromise
+  .then(result => console.log(result)) // Runs when promise is resolved
+  .catch(error => console.log(error)); // Runs when promise is rejected
+</code>
+--------------------------------
+Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values.
+myObservable: Observable<number>;
+  ngOnInit() {
+    this.myObservable = new Observable(observer => {
+      let count = 1;
+      setInterval(() => {
+        observer.next(count++); // Emits a value every second
+      }, 1000);
+
+    });
+    this.myObservable.subscribe(value => {
+      console.log('Received:', value);
+    });
+  }
+</div>
+
+SPA
+<div>
+  -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
+  Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching
+  Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
+</div>
+OPTIMIZE ANGULAR PAGE 
+<div>
+ 1. Optimize Change Detection, 2. Lazy Loading,
+ 3. Reduce Bundle Size ( AOT AHEAD OF TIME )
+ 4. Optimize Third-Party Libraries
+ 5. Optimize CSS & Styles, Otimize http
+ 6. USE track by
+ <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
+</div>
+Angular Architecture
+<div>
+User Action (Click, Input, Navigation)
+    ↓
+Component (Handles UI + Logic)
+    ↓
+Service (Manages Data & API Calls)
+    ↓
+HTTP Client (Fetches Data)
+    ↓
+Backend Server (Database)
+</div>
+SSR 
+<div>
+SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
+</div>
+How to use multiple API in angular ? + AOT JIT
+<div>
+    Angular, We can use multiple APIs in different ways.
+    Using forkJoin (Parallel API Calls - Best for Independent APIs)
+    <script>
+        forkJoin([
+          this.http.get('https://api.example.com/users'),
+          this.http.get('https://api.example.com/posts')
+        ]).subscribe(([users, posts]) => {
+          console.log('Users:', users);
+          console.log('Posts:', posts);
+        });
+    </script>
+AOT - Ahead of time compilation at build time application runs. 
+JIT - Just in time
+</div>
+State Management in Angular
+<div>
+    State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
+</div>
+--------------------------------
+DATA BINDING
+<div>
+Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML).
+Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ), 
+Two-way Binding (<input [(ngModel)]="name">)
+examples - name = 'John';
+<input [(ngModel)]="name">
+<p>Hello, {{ name }}!</p>
+</div>
+DECORATOR 
+<div> 
+    Decorator is a function that add metadata to a class. @component, @directives, @ngModule 
+</div>
+DECORATIVE -----
+<div>
+Diretives is class that modifies the behaviour appearance of the elements
+@ViewChild -  Access a Child Component in the Parent Component
+@viewChildren - It is used to get multiple child components, directives.
+view child examples 
+<app-child></app-child>
+ <button (click)="callChildMethod()">Call Child Method</button>
+<p>{{ message }}</p>
+ts file 
+@ViewChild(ChildComponent) child!: ChildComponent;
+message = '';
+ngAfterViewInit() {
+  this.message = this.child.sayHello();
+}
+callChildMethod() {
+  this.message = this.child.sayHello();
+}
+</div>
+@input, @output
+<div>
+@Input and @Output are used for communication between parent and child components
+exampe child ts -  template: `<h3>Message from Parent: {{ message }}</h3>`,  @Input() message!: string;
+parent ts - parentMessage = 'Hello, Child!';
+@output examples - child ts -
+ @Output() messageEvent = new EventEmitter<string>();
+sendMessage() {
+      this.messageEvent.emit('Hello, Parent!'); // Sending data to parent
+}
+parent ts - 
+template: `
+    <app-child (messageEvent)="receiveMessage($event)"></app-child>
+    <p>Received Message: {{ receivedMessage }}</p>
+    ---------------
+    receivedMessage = '';
+    receiveMessage(message: string) {
+      this.receivedMessage = message; // Updating receivedMessage from child
+    }   
+</div>
+Ngfor, forloop
+<div>
+    ngfor 
+    employees = [
+    {
+    id: 1,
+    name: "Santosh Kumar",
+    age: 30,
+    department: "Human Resources",
+    salary: 5000000
+    },
+    <tr *ngFor="let employee of employees"> </tr>
+    ----------------------
+    isVisiable:boolean = false 
+    <h2 *ngIf="isVisiable"> Welcome to NgIf</h2>
+</div>
+
+CUSTOM DIRECTIVE 
+<div>
+    custom Directive Command - ng g d directive-name (cdirective)
+    @Input() color!:string;
+    constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
+    ngOnInit(): void { 
+    // this.el.nativeElement.style.backgroundColor = 'red';
+        this.el.nativeElement.style.backgroundColor = this.color;
+    }
+    <p cdirective color="red"> Form </p>
+-------------------------
+@Input() defaultColor: string = 'yellow'; // Default color
+@Input() highlightColor: string = 'red'; // Color on click
+private isHighlighted = false;
+
+onclick button 
+ ngOnInit(): void {
+    this.el.nativeElement.style.backgroundColor = this.defaultColor;
+  }
+
+@HostListener('click') onClick() {
+  this.isHighlighted = !this.isHighlighted; 
+  this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+  }
+
+<button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+</div>
+
+PIPE, CUSTOM PIPE, PURE, IMPURE
+<div>
+Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template.
+today: Date = new Date();
+<p>Full Date: {{ today | date:'fullDate' }}</p>
+pure - Only when input data changes	, Faster , Static data transformations	
+impure - On every change detection cycle, Slower 
+ custom Pipe, PipeTransform
+ transform(value: string, gender: string): string {
+    if(gender.toLowerCase()=="male")
+      return "Mr. "+value;
+      else
+      return "Miss. "+value
+    }   
+    {{employee.name | mypipe:employee.gender }}
+----- impure 
+An impure pipe in Angular executes on every change detection cycle, even if the input data hasn’t changed.
+pure: false
+transform(value: string, gender: string): string {
+    if (!value || !gender) return value;
+    if(gender.toLowerCase()=="male")
+      return "Mr. "+value;
+      else
+      return "Miss. "+value
+    }
+</div>
+
+SHARED SERVICES 
+<div>
+    genders = [
+    {"id": "male", "name": "Male"},
+    {"id": "female", "name": "Female"},
+    {"id": "other", "name": "Other"}
+  ]
+  <select>
+    <option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
+  </select>
+</div>
+
+API CALL 
+ngOnInit() {
+    this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+      this.user = resposne.user
+      console.log(resposne);
+    })
+  }
+
+8. Constructor - Constructor is a function that initialization an application component servcies and directives.
+
+8. Services Angular services is a resuable typescript class that provides data. Resuable 
+<code></code>
+
+9. @injectable
+@injectale is a decorator in angular that makes a class as a services.
+
+11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
+
+12. Store is a centralized state management solution that holds the application’s state  
+and provides mechanisms to update and access the state efficiently.
+
+--------------------------------
+10. In Angular 17, authentication involves:
+
+Login Page – User enters credentials.
+Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
+Dashboard Component – Accessible only after login.
+Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
+
+Lazy loading ondemand load 
+---------------------------------------
+
+1. Git pull automatically merges the fetched changes into the current branch, git fetch does no 
+2. Git Fetch a primary command used to download contents from a remote repository.
+3. Git stash git stash command takes your uncommitted changes and saves later use. 
+
+
+Learend
+Always check if ReactiveFormsModule is imported in the module.
+
+-----------------------------------
+
+<div> 
+
+<form [formGroup]="lead_form" (ngSubmit)="saveLead()">
+  <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  <div class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
+  Name is required. </div>
+  </form>
+
+  const routes: Routes = [
+  { path: '', component: HomeComponent },
+  ];
+
+  // services 
+  previousButton(){
+    if(sessionStorage.getItem('role') == "client"){
+      return false
+    }
+    return true
+  }
+
+ 
+------------- cUSTOM PIPE --------------------
+
+ng generate pipe reverseText
+@Pipe({
+  name: 'reverseText'
+})
+export class ReverseTextPipe implements PipeTransform {
+  transform(value: string): string {
+    return value.split('').reverse().join('');
+  }
+}
+without custom pipe
+today: Date = new Date();
+<p>Full Date: {{ today | date:'fullDate' }}</p>
+
+
+////////////////// CSS =================
+
+Relative - The element moves relative to its normal position.
+Absolute - The element is positioned relative to the nearest positioned ancestor 
+Fixed - The element is positioned relative to the viewport (browser window).
+CSS Box Model defines how an element’s size and spacing are calculated.
+
+// scss variable
+<code>
+$primary-color: blue;
+.button {
+  color: $primary-color;
+  padding: 10px;
+}
+</code>
+
+--------------------
+// nesting in scss  
+.navbar {
+    background: #333;
+    padding: 10px;
+  
+    .menu {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: inline-block;
+        margin-right: 10px;
+  
+        a {
+          text-decoration: none;
+          color: white;
+  
+          &:hover {
+            color: yellow;
+          }
+        }
+      }
+    }
+  }
+
+  //Mixins in SCSS
+
+  @mixin button-style {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn {
+    @include button-style;
+    background: blue;
+    color: white;
+  }
+  
+  .btn-danger {
+    @include button-style;
+    background: red;
+  }
+  
+//sass
+$primary-color: blue
+.button
+  color: $primary-color
+  padding: 10px
+
