@@ -1,6 +1,6 @@
 /** JAVASCRIPT **/
 
-RxJS for observables over promises
+RxJS for Reactive Programming (RxJS)
 <div> 
 * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
 <code> let myPromise = new Promise((resolve, reject) => {
@@ -30,6 +30,20 @@ myObservable: Observable<number>;
     });
     this.myObservable.subscribe(value => {
       console.log('Received:', value);
+    });
+  }
+
+*** RxJS Operators 
+<h3>Filtered Values: {{ values }}</h3>
+ngOnInit() {
+    const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+    numbers$.pipe(
+      filter(num => num % 2 === 0), // Filter even numbers
+      map(num => num * 10) // Multiply each by 10
+    )
+    .subscribe(result => {
+      this.values.push(result);
     });
   }
 </div>
