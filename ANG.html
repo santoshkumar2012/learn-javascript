@@ -46,21 +46,75 @@ ngOnInit() {
   }
 </div>
 
+RxJS SUBJECT
+<div>
+  Subject in RxJS is a special type of Observable that allows values to be multicasted to multiple subscribers. 
+  Create a Shared Service
+
+    private dataSubject = new Subject<string>(); // Create Subject
+    data$ = this.dataSubject.asObservable(); // Expose as Observable
+    sendData(message: string) {
+      this.dataSubject.next(message); // Send data
+    }
+
+    Send Data from Component 1 (Sender)
+    <button (click)="sendMessage()">Send Message</button>
+    constructor(private dataService: DataService) {}
+      sendMessage() {
+    this.dataService.sendData("Hello from Sender!");
+    }
+
+    Receive Data in Component 2 (Receiver)
+    <p>Received: {{ receivedMessage }}</p>
+    receivedMessage: string = "";
+  constructor(private dataService: DataService) {}
+  ngOnInit() {
+    this.dataService.data$.subscribe(message => {
+      this.receivedMessage = message; // Receive data
+    });
+  }
+
+</div>
+
+NgRx
+<div>
+  NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
+  Uses Actions, Reducers, Store, Effects, and Selectors.
+  ts Actions examples - 
+  export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
+export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>());
+</div>
+
 SPA
 <div>
   -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
   Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching
   Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
 </div>
+
 OPTIMIZE ANGULAR PAGE 
 <div>
  1. Optimize Change Detection, 2. Lazy Loading,
  3. Reduce Bundle Size ( AOT AHEAD OF TIME )
  4. Optimize Third-Party Libraries
  5. Optimize CSS & Styles, Otimize http
+ Minimize CSS & Use Critical CSS, CSS minification, Web Workers
  6. USE track by
  <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
+ this.http.get('https://api.example.com/data', { cache: 'force-cache' });
+ Accessibility (A11Y)
+Make your UI inclusive for everyone (including users with disabilities).
+✅ Best Practices:
+Add alt text for images.
+Use ARIA attributes for better screen reader support.
+Ensure high color contrast for readability
+Minify CSS, JS and enable Gzip compression.
+const routes: Routes = [
+  { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
+  { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
+];
 </div>
+
 Angular Architecture
 <div>
 User Action (Click, Input, Navigation)
@@ -73,10 +127,12 @@ HTTP Client (Fetches Data)
     ↓
 Backend Server (Database)
 </div>
+
 SSR 
 <div>
 SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
 </div>
+
 How to use multiple API in angular ? + AOT JIT
 <div>
     Angular, We can use multiple APIs in different ways.
@@ -93,6 +149,7 @@ How to use multiple API in angular ? + AOT JIT
 AOT - Ahead of time compilation at build time application runs. 
 JIT - Just in time
 </div>
+
 State Management in Angular
 <div>
     State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
@@ -111,6 +168,7 @@ DECORATOR
 <div> 
     Decorator is a function that add metadata to a class. @component, @directives, @ngModule 
 </div>
+
 DECORATIVE -----
 <div>
 Diretives is class that modifies the behaviour appearance of the elements
@@ -222,6 +280,16 @@ transform(value: string, gender: string): string {
     }
 </div>
 
+Using a Global Variable for data transfer
+<div> 
+  ts - let sharedData: any;
+  Sender - sendData() {
+    sharedData = "Data from Sender";
+  }
+  Receive - receivedData = sharedData;
+</div>
+
+
 SHARED SERVICES 
 <div>
     genders = [
@@ -235,12 +303,15 @@ SHARED SERVICES
 </div>
 
 API CALL 
-ngOnInit() {
-    this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
-      this.user = resposne.user
-      console.log(resposne);
-    })
-  }
+<div> 
+    ngOnInit() {
+        this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+          this.user = resposne.user
+          console.log(resposne);
+        })
+      }
+</div>
+
 
 8. Constructor - Constructor is a function that initialization an application component servcies and directives.
 
