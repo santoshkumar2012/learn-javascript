@@ -170,6 +170,7 @@ DEEP COPY AND SHALLOW COPY
 <div>
   Shallow Copy – Creates a new object but copies references to nested objects.
   Deep Copy – Creates a new object and recursively copies all values, ensuring no references remain.
+
   -- Shallow copy examples
         let obj1 = { name: "John", details: { age: 25 } };
         let obj2 = obj1; // Copies reference
@@ -181,6 +182,7 @@ DEEP COPY AND SHALLOW COPY
   obj2.details.age = 30;
   console.log(obj1.details.age); // Output: 25 (Unaffected)
 </div>
+
 => Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
 
 OBJECT CLONE
