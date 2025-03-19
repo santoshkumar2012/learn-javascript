@@ -22,7 +22,8 @@
     const first_name = "Nityansh" // We cann't declare name and value assign again. 
 
 
-a = 5;
+==, ===, Comparison
+
 console.log( 5 == "5" ) // True only check value in double equle
 console.log ( 5 === "5" ) // False check vallue and data type both
 

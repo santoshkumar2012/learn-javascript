@@ -1,5 +1,51 @@
 /** JAVASCRIPT **/
 
+<div>
+
+RxJS for observables over promises -------------
+
+* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
+
+<code> let myPromise = new Promise((resolve, reject) => {
+  let success = true; // Change this to false to see the reject case
+  setTimeout(() => {
+    if (success) {
+      resolve("Operation Successful!");
+    } else {
+      reject("Something went wrong!");
+    }
+  }, 2000);
+});
+
+myPromise
+  .then(result => console.log(result)) // Runs when promise is resolved
+  .catch(error => console.log(error)); // Runs when promise is rejected
+</code>
+
+--------------------------------
+Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values.
+
+myObservable: Observable<number>;
+
+  ngOnInit() {
+
+    this.myObservable = new Observable(observer => {
+      let count = 1;
+
+      setInterval(() => {
+        observer.next(count++); // Emits a value every second
+      }, 1000);
+
+    });
+
+    this.myObservable.subscribe(value => {
+      console.log('Received:', value);
+    });
+
+  }
+
+---------------------------------------------------------------------------
+
 1. What is prototype ? 
 Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function.
 
@@ -62,23 +108,7 @@ Inner function retain access to the variable.
   person1.greet(); // Output: Hello, my name is John and I am 25 years old.
 </code>
 
-* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
-<code> let myPromise = new Promise((resolve, reject) => {
-  let success = true; // Change this to false to see the reject case
 
-  setTimeout(() => {
-    if (success) {
-      resolve("Operation Successful!");
-    } else {
-      reject("Something went wrong!");
-    }
-  }, 2000);
-});
-
-myPromise
-  .then(result => console.log(result)) // Runs when promise is resolved
-  .catch(error => console.log(error)); // Runs when promise is rejected
-</code>
 
 3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript. Rest operation, Spread
 
@@ -114,16 +144,9 @@ const [a, b] = arr;
 console.log(a); // 1
 console.log(b); // 2
 
-5. Promise
-A promise is an object that my produce a single value some time in  the futrue. 
-
-6. Callback Function 
-Ans - A callback is a function passed as an argument to another function.
-
 7. Data Structural 
 JavaScript provides various data structures to handle different use cases.
 Array, Object, Map, Set, Data Types
-
 
 
 push() - Add one or more element to the end of the an array. array.push("Testing")
@@ -164,6 +187,8 @@ console.log(evens); // [2, 4]
 const sum = numbers.reduce((acc, num) => acc + num, 0);
 console.log(sum); // 10
 
+</div>
+
 ANGULAR 17 New Features
 ----------------------------------------------------------------------
 
@@ -197,7 +222,7 @@ angular.dev
 
 how to improve angular single page application ?
 Optimize Lazy Loading & Code Splitting
-Use Server-Side Rendering (SSR) 
+SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
 API Responses with Service Workers
 Lazy Loading Images
 Reduce Third-Party Dependencies
@@ -211,8 +236,6 @@ the core type of the RxJS library
 AOT - Ahead of time compilation at build time application runs. 
 JIT - Just in time
 --------------------------------
-rxjs 
-Observable - Angular, an observable is a data stream that can change over time.  It's a core part of reactive programming.
 
 1. How to use multiple API in angular ?
 Angular, We can use multiple APIs in different ways.
@@ -234,7 +257,6 @@ Local State
 Component State 
 Service State (App-Level State)
 
-SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
 
 4. Component there are the basic building block of and angular application contract html views.
 
@@ -281,19 +303,13 @@ Lazy loading ondemand load
 2. Git Fetch a primary command used to download contents from a remote repository.
 3. Git stash git stash command takes your uncommitted changes and saves later use. 
 
-Angular project
-Login page Validation Issues
-In one of my Angular projects, the login page validation was not working correctly. Even when users entered invalid credentials, the error messages were not displaying properly.
-
-Solution 
-I checked the form setup and realized i had forgotten to use Angular's FormGroup and FormControl properly.
-I updated the form using ReactiveForms Module and added Validation for required fields and incorrect credentials.
-Used this.loginForm.controls ["email"].errors to correctly display validation messages.
 
 Learend
 Always check if ReactiveFormsModule is imported in the module.
 
 -----------------------------------
+
+<div> 
 
 <form [formGroup]="lead_form" (ngSubmit)="saveLead()">
   <input type="text" class="form-control" placeholder="Name" formControlName="name">
@@ -374,4 +390,87 @@ onclick button
 
 <button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
 
+------------- cUSTOM PIPE --------------------
 
+ng generate pipe reverseText
+@Pipe({
+  name: 'reverseText'
+})
+export class ReverseTextPipe implements PipeTransform {
+  transform(value: string): string {
+    return value.split('').reverse().join('');
+  }
+}
+without custom pipe
+today: Date = new Date();
+<p>Full Date: {{ today | date:'fullDate' }}</p>
+
+
+////////////////// CSS =================
+
+Relative - The element moves relative to its normal position.
+Absolute - The element is positioned relative to the nearest positioned ancestor 
+Fixed - The element is positioned relative to the viewport (browser window).
+CSS Box Model defines how an element’s size and spacing are calculated.
+
+// scss variable
+<code>
+$primary-color: blue;
+.button {
+  color: $primary-color;
+  padding: 10px;
+}
+</code>
+
+--------------------
+// nesting in scss  
+.navbar {
+    background: #333;
+    padding: 10px;
+  
+    .menu {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: inline-block;
+        margin-right: 10px;
+  
+        a {
+          text-decoration: none;
+          color: white;
+  
+          &:hover {
+            color: yellow;
+          }
+        }
+      }
+    }
+  }
+
+  //Mixins in SCSS
+
+  @mixin button-style {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn {
+    @include button-style;
+    background: blue;
+    color: white;
+  }
+  
+  .btn-danger {
+    @include button-style;
+    background: red;
+  }
+  
+//sass
+$primary-color: blue
+.button
+  color: $primary-color
+  padding: 10px
+
+</div>
