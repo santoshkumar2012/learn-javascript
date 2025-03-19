@@ -10,34 +10,35 @@
     <div class="container p-5">
 
     Max Number
-    
-    function findMax(arr) {
-      let max = arr[0]; // Assume first element is the max
-      for (let i = 1; i < arr.length; i++) {
-        if (arr[i] > max) {
-          max = arr[i]; // Update max if a bigger number is found
+    <div> 
+      function findMax(arr) {
+        let max = arr[0]; // Assume first element is the max
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > max) {
+            max = arr[i]; // Update max if a bigger number is found
+          }
         }
+        return max;
       }
-      return max;
-    }
-    
-    console.log(findMax([10, 5, 20, 8, 30])); // Output: 30
+      
+      console.log(findMax([10, 5, 20, 8, 30])); // Output: 30
+    </div>
 
-    <h5 class="mt-3"> Array Map ( Array every elements calculation with 2) </h5>
-    <code>
-        let a = [2,4,5,6,8,4]
-    let b = a.map((x) => x*2 )
-    console.log (b)
-    </code>
-    <script>
-    let a = [2,4,5,6,8,4]
-    let b = a.map((x) => x*2 )
-    console.log (b)
-    </script>
+  Sum Number  
+	<div>
+    let number = 45678123465;
+    let numStr = number.toString();
+    let sum = 0;
+    for (let i = 0; i < numStr.length; i++) {
+        sum += Number(numStr[i]);
+    }
+    console.log(sum)
+  </div>
+
 
 <h5 class="mt-3"> Array Filter ( Find odd number and Even Number ) </h5>
-
-<code>
+<div>
+  <code>
     a = [2,4,5,8,9,7,5,4]
     let k = a.filter((y) => y%2 )
     console.log (k)
@@ -48,46 +49,51 @@
     let k = a.filter((y) => y%2 === 0 )
     console.log (k)
 </script>
+ </div>
+
 
 <h5 class="mt-3"> Find Sum (  ) </h5>
-
-<script>
-const findsum = [2,5,43,76,10]
-const totalFind = (findsum) => {
-  let sum = 0 ;
-  for(let i=0; i<findsum.length; i++){
-    sum += findsum[i]
-  }
-  return sum
-}
-console.log(totalFind(findsum));
-</script>
+<div>
+  <script>
+    const findsum = [2,5,43,76,10]
+    const totalFind = (findsum) => {
+      let sum = 0 ;
+      for(let i=0; i<findsum.length; i++){
+        sum += findsum[i]
+      }
+      return sum
+    }
+    console.log(totalFind(findsum));
+    </script>
+</div>
 
 <h5 class="mt-3">  Dublicte Number Delete From Array </h5>
-
-<script>
-numbers = [96,7,18,7,26,10,7,45,26,18]
-remove_duplicate_number(numbers)
-function remove_duplicate_number(data){
-  let numbers = data
-  for(let i=0; i <= data.length-1; i++ ){ 
-    counter = 0
-    for(let j=0; j<= i; j++ ){
-      if(data[i] == data[j]){
-        counter += 1
+<div>
+  <script>
+    numbers = [96,7,18,7,26,10,7,45,26,18]
+    remove_duplicate_number(numbers)
+    function remove_duplicate_number(data){
+      let numbers = data
+      for(let i=0; i <= data.length-1; i++ ){ 
+        counter = 0
+        for(let j=0; j<= i; j++ ){
+          if(data[i] == data[j]){
+            counter += 1
+          }
+        }
+        if (counter >= 2){
+          numbers[i] = 0
+        }
       }
+      numbers = numbers.filter(Number)
+      console.log('New--->', numbers);
     }
-    if (counter >= 2){
-      numbers[i] = 0
-    }
-  }
-  numbers = numbers.filter(Number)
-  console.log('New--->', numbers);
-}
-</script>
+    </script>
+</div>
 
 <h5> Traingle Pattern Left Angled Triangle </h5>
-<script>
+<div>
+  <script>
     let n = 5; // Number of rows
       for (let i = 1; i <= n; i++) {
     let row = "";
@@ -97,6 +103,7 @@ function remove_duplicate_number(data){
     console.log(row);
 }
 </script>
+</div>
 
 <h5 class="mt-3">  4. Inverted Right-Angled
    Triangle </h5>
@@ -188,7 +195,9 @@ function sumOfSquares(n) {
 console.log(HappyNumbers(1));
 </script>
 
+
 <h5 class="mt-3"> Palindrome Swapper "kayak" (swap 'y' and 'a') </h5>
+
 <script>
     function PalindromeSwapper(str) {
   // Helper function to check if a string is a palindrome
@@ -295,7 +304,7 @@ console.log(bubbleSort([5, 3, 8, 1, 2])); // Output: [1, 2, 3, 5, 8]
   console.log (reverseStrss)
 </script>
 
-</div>
+
 
 </body>
 </html>
