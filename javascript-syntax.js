@@ -45,19 +45,24 @@ c += 5
 console.log(c) // output 15
 
 //Spread Operator it is used to expand the elements. 
-const array = [1,2]
-const newArr = [...array, 3,4]
-console.log(newArr)
+let array = [10, 12, 13];
+console.log(...array, 14, 15, 16);
 
 //Rest Operator it is used to collect the elements.
+//function customSum(...numbers) {
+    //let sum = 0;
+   // for (let i = 0; i < numbers.length; i++) {
+        //sum += numbers[i]; // Manually summing up values
+    //}
+    //console.log("Total Sum:", sum);
+//}
+//customSum(5, 10, 15);
 
-const num1 = [1,2,3];
-const num2 = [4,5,6];
-
-function sum(...arr){
-	return arr
+function members(greeting, ...names) {
+  console.log(greeting, names);
 }
-console.log(sum(num1, num2))
+members("Hello", "Alice", "Bob", "Charlie");
+
 
 /********************************** */
  FUNCTION 
@@ -102,6 +107,30 @@ console.log("Callback Function - A callback is a function passed as an argument 
 // const result = calc(15, 50, addition)
 // console.log(result)
 
+console.log( "Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes. ")
+greet(); // Output: Hello, World!
+function greet() {
+  console.log("Hello, World!");
+}
+
+//console.log(addition(25,65))
+//function addition (num1, num2){
+ //return num1 + num2
+//}
+
+console.log("Closure - A closure in JavaScript is a function that has access to variables in its parent scope. ")
+
+// function outerFunction(){
+//     let name = "Santosh"
+//     function innerFunction(){
+//       console.log(name)
+//     }
+//     return innerFunction
+//   }
+//   let inner = outerFunction()
+//   inner()
+
+
 console.log("Promises - Promise is for eventual completion of task. It is and object in JS")
 // Thre possible state - Pending, Resolved, Rejected
 
@@ -125,19 +154,6 @@ myPromises.finally(() => console.log("Promise completed"));
 //     .then(result => console.log(result))  // Runs if resolved
 //     .catch(error => console.log(error))  // Runs if rejected
 //     .finally(() => console.log("Promise completed"));
-
-
-console.log("Closure - A closure in JavaScript is a function that has access to variables in its parent scope. ")
-
-function outerFunction(){
-    let name = "Santosh"
-    function innerFunction(){
-      console.log(name)
-    }
-    return innerFunction
-  }
-  let inner = outerFunction()
-  inner()
 
 
 /********************************** */
@@ -167,6 +183,12 @@ const family_members = [
     for (let i=0; i<family_members.length; i++){
         console.log( family_members[i].first_name )
     }
+
+// clone for below object
+
+const personss = { first_name: "Santosh", last_name: "Kumar", age: 25 };
+const clone1 = { ...persons };
+console.log(clone1);  
     
 /********************************** */
 ARRAY // Collection of data 
@@ -234,8 +256,9 @@ console.log(doubled); // [2, 4, 6, 8]
 const evens = numbersss.filter(num => num % 2 === 0);
 console.log(evens); // [2, 4]
 
-const sum = numbersss.reduce((acc, num) => acc + num, 0);
-console.log(sum); // 10
+let arraynumner = [10,24,3,4,55,6,7,8,9]
+const sum = arraynumner.reduce((a,b) => a + b)
+console.log(sum) // 126
 
 // Find
 
@@ -243,12 +266,31 @@ console.log(sum); // 10
 const fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.sort(); // output Apple, Banana, Mango, Orange
 
+// Ascending
+let array = [10,24,3,4,55,6,7,8,9]
+array.sort((a,b) => a - b)
+console.log(array) // 3,  4,  6,  7, 8, 9, 10, 24, 55
+
+//Descending
+let array1 = [10,24,3,4,55,6,7,8,9]
+array1.sort((a,b) => b - a)
+console.log(array1) // 55, 24, 10, 9, 8, 7,  6,  4, 3
+
+//MaxNumber
+let array2 = [10,24,3,4,55,6,7,8,9]
+array2.sort((a,b) => b - a)
+let maxnumber = array2[0]
+console.log(maxnumber) // 55
+
+
 //forEach forEach() method performs an action on every item in a list.
 
-let numberssss = [10, 20, 30, 40];
-numberssss.forEach(function(num) {
-    console.log(num); // output 10,20,30,40
+let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
 });
+console.log(sum);
 
 
 /********************************** */
