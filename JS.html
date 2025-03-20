@@ -3,12 +3,93 @@
 ES6
 <div>
   SPREAD OPERATOR
+  REST OPERATOR
   function members(greeting, ...names) {
     console.log(greeting, names);
   }
   members("Hello", "Alice", "Bob", "Charlie");
   -------------
-  ARROW - An arrow function is a shorter syntax for writing functions in JavaScript. Introduced in ES6,
+  ARROW FUNCTION - An arrow function is a shorter syntax for writing functions in JavaScript. Introduced in ES6,
+  Default - Uses function keyword, Defined by how function is called, Works correctly inside objects, Refers to the element, use with Hoisting
+  Arrow - Uses =>, Lexically inherited from the surrounding scope, 	Does NOT work inside objects, Refers to the global object
+  --------------------
+  DESTRUCTURING, Promises, Classes, for...of Loop ( Iterates over iterable objects ), Modules, (Imports/exports functions between files)
+  for...of Loop examples
+  const numbers = [10, 20, 30];
+    for (let num of numbers) {
+      console.log(num); // 10, 20, 30
+    }
+  - Generators , Dfault Parameter
+</div>
+
+DEFAULT PARAMETER
+<div>
+  Assigns default values to function parameters
+  function greet(name = "Guest") {
+    console.log(`Hello, ${name}!`);
+  }
+  greet(); // Hello, Guest!
+</div>
+
+GENERATORS 
+<div>
+  Functions that can pause and resume execution
+  Generator Examples 
+  function* generator() {
+    yield 1;
+    yield 2;
+    yield 3;
+  }
+  const gen = generator();
+  console.log(gen.next().value); // 1
+  console.log(gen.next().value); // 2
+  console.log(gen.next().value); // 3
+</div>
+
+DESTRUCTURING
+<div>
+  Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
+  * Array Destructuring
+  const arr = [1, 2, 3];
+  const [a, b] = arr;
+  console.log(a); // 1
+  console.log(b); // 2
+  --------------------
+  Data Structural 
+JavaScript provides various data structures to handle different use cases.
+Array, Object, Map, Set, Data Types
+</div>
+
+CLASSES 
+<div> 
+  * Classes - class is a blueprint for creating objects with properties and methods. 
+<code>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    greet() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+  }
+  const person1 = new Person("John", 25);
+  person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+</code>
+</div>
+
+MAP AND SET
+<div>
+  * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
+  <code>
+    let myMap=new Map();
+    myMap.set('name', 'Santosh');
+    console.log(myMap);
+  --------------------
+  let myArray = [1,2,3]
+  let obj = new set(myArray);
+  console.log(obj)
+  </code>
 </div>
 
 PROTOTYPE
@@ -50,52 +131,6 @@ CLOSURE
       counter(); // Output: 2
       counter(); // Output: 3    
   </code>
-</div>
-
-CLASSES 
-<div> 
-  * Classes - class is a blueprint for creating objects with properties and methods. 
-<code>
-  class Person {
-    constructor(name, age) {
-      this.name = name;
-      this.age = age;
-    }
-    greet() {
-      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
-    }
-  }
-  const person1 = new Person("John", 25);
-  person1.greet(); // Output: Hello, my name is John and I am 25 years old.
-</code>
-</div>
-
-MAP AND SET
-<div>
-  * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
-  <code>
-  let myArray = [1,2,3]
-  let obj = new set(myArray);
-  console.log(obj)
-  --------------------
-  let myMap=new Map();
-  myMap.set('name', 'Santosh');
-  console.log(myMap);
-  </code>
-</div>
-
-DESTRUCTURING
-<div>
-  Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
-  * Array Destructuring
-  const arr = [1, 2, 3];
-  const [a, b] = arr;
-  console.log(a); // 1
-  console.log(b); // 2
-  --------------------
-  Data Structural 
-JavaScript provides various data structures to handle different use cases.
-Array, Object, Map, Set, Data Types
 </div>
 
 ForEach
@@ -170,6 +205,10 @@ DEEP COPY AND SHALLOW COPY
 <div>
   Shallow Copy – Creates a new object but copies references to nested objects.
   Deep Copy – Creates a new object and recursively copies all values, ensuring no references remain.
+  Difference - sh - References copied (not duplicated), deep - Entire structure duplicated
+  sh - Changes in the copy affect the original, deep - Changes in the copy do NOT affect the original
+  sh - Faster (less memory used)	, deep - Slower (more memory used)
+
   -- Shallow copy examples
         let obj1 = { name: "John", details: { age: 25 } };
         let obj2 = obj1; // Copies reference
@@ -181,6 +220,7 @@ DEEP COPY AND SHALLOW COPY
   obj2.details.age = 30;
   console.log(obj1.details.age); // Output: 25 (Unaffected)
 </div>
+
 => Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
 
 OBJECT CLONE
@@ -249,3 +289,77 @@ numbers.forEach(num => {
 });
 console.log(sum);
 </div>
+
+INFINITY LOOP 
+<div>
+  while (true) {
+    console.log("This will run forever!");
+  }
+  stop Loop
+  let count = 0;
+while (true) {
+  console.log(count);
+  if (count >= 5) break; // Stops after 5 iterations
+  count++;
+}
+</div>
+
+LOGICAL PROGRAMMING --------------------
+
+
+LARGEST NUMBER
+<div>
+  numbers = [3,4,5,6,2,34,54,23,63,18,46]
+  argest = numbers[0]
+  for(let i = 1; i < numbers.length; i++) {
+  if(numbers[i] > largest){
+  largest = numbers[i]
+   }
+  }
+  console.log(largest);
+</div>
+DUPLICATE NUMBER
+<div> 
+<div>
+  function findDuplicates(arr) {
+    arr.sort((a, b) => a - b);
+    let duplicates = [];
+  
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] === arr[i + 1] && !duplicates.includes(arr[i])) {
+        duplicates.push(arr[i]);
+      }
+    }
+  
+    return duplicates;
+  }
+  // Example
+  console.log(findDuplicates([1, 2, 3, 4, 2, 5, 6, 3, 8, 1])); // [1, 2, 3]  
+</div>
+</div>
+FIND SUM NUMBER
+<div>
+  <div>
+    <script>
+      const findsum = [2,5,43,76,10]
+      const totalFind = (findsum) => {
+        let sum = 0 ;
+        for(let i=0; i<findsum.length; i++){
+          sum += findsum[i]
+        }
+        return sum
+      }
+      console.log(totalFind(findsum));
+      </script>
+  </div>
+</div>
+Sum Number 
+<div>
+  let number = 45678123465;
+  let numStr = number.toString();
+  let sum = 0;
+  for (let i = 0; i < numStr.length; i++) {
+      sum += Number(numStr[i]);
+  }
+  console.log(sum)
+</div> 

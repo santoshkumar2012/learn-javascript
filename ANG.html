@@ -1,5 +1,16 @@
 RxJS for Reactive Programming (RxJS)
 <div> 
+Different between -- 
+Promise -- 
+Promise excute immediately when create promises. 
+Pomise emit single value. Promise don't have operator . 
+Promise cann't be cancel 
+-----
+Observable does not start untill subscription.
+Observable emit multiple value.
+Observable operator like map, filter, reduce.
+Observable can be cancel using unscribe method 
+----- 
 * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
 <code> let myPromise = new Promise((resolve, reject) => {
   let success = true; // Change this to false to see the reject case
@@ -35,7 +46,6 @@ myObservable: Observable<number>;
 <h3>Filtered Values: {{ values }}</h3>
 ngOnInit() {
     const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
     numbers$.pipe(
       filter(num => num % 2 === 0), // Filter even numbers
       map(num => num * 10) // Multiply each by 10
@@ -44,6 +54,56 @@ ngOnInit() {
       this.values.push(result);
     });
   }
+  <!-- let observable = new Observable((observer) => {
+    setTimeout(() => {
+      observer.next("observable is working");
+      observer.complete();
+    }, 1000)
+    })
+    
+    observable.subscribe({
+      next: (result) => console.log(result),
+      complete: () => console.log("Observable completed")
+    }) -->
+    Example: Converting Promise to Observable
+  <div>
+    const promise = new Promise((resolve) => {
+      setTimeout(() => resolve('Promise resolved!'), 2000);
+    });
+    // Convert Promise to Observable
+    const observable$ = from(promise);
+    observable$.subscribe(value => console.log(value));
+  </div>
+  Handling HTTP Request with Observable vs Promise
+  <div>
+    getData(): void {
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+    }    
+  </div>
+  Observable with Multiple Values
+  <div>
+    const myObservable = new Observable(observer => {
+      observer.next('Value 1');
+      observer.next('Value 2');
+      setTimeout(() => {
+        observer.next('Value 3 (after delay)');
+        observer.complete(); // Ends the stream
+      }, 2000);
+    });
+    myObservable.subscribe(value => console.log(value));
+  </div>
+  Cancelling an Observable
+  <div> 
+    const observable$ = interval(1000); // Emits values every second
+    const subscription: Subscription = observable$.subscribe(value => console.log(value));
+    setTimeout(() => {
+      console.log('Unsubscribing...');
+      subscription.unsubscribe(); // Stops emissions
+    }, 5000);
+  </div>
 </div>
 
 RxJS SUBJECT
@@ -85,6 +145,33 @@ NgRx
 export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>());
 </div>
 
+SIGNALS
+<div>
+Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables.
+Examples :- 
+<h2>Counter: {{ count() }}</h2>
+<button (click)="increment()">Increment</button>
+<button (click)="decrement()">Decrement</button>
+TS - 
+count: Signal<number> = signal(0);
+increment() { this.count.set(this.count() + 1); }
+decrement() { this.count.set(this.count() - 1); }
+</div>
+
+LIFE CYCLE 
+<div>
+  Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle
+  constructor - for variable initialization 
+  ngonInit(){} - Called once after component initialization
+  ngOnChanges() - Called when input properties change
+  ngDoCheck() - Called during every change detection cycle
+  ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
+  ngAfterContentChecked()	- Called after projected content is checked
+  ngAfterViewInit()	- Called after the component's view and child views are initialized
+  ngAfterViewChecked()	- Called after the component’s and child views are checked
+  ngOnDestroy()	 - Called just before the component is destroyed
+</div>
+
 SPA
 <div>
   -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
@@ -102,6 +189,7 @@ OPTIMIZE ANGULAR PAGE
  6. USE track by
  <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
  this.http.get('https://api.example.com/data', { cache: 'force-cache' });
+
  Accessibility (A11Y)
 Make your UI inclusive for everyone (including users with disabilities).
 ✅ Best Practices:
@@ -113,6 +201,41 @@ const routes: Routes = [
   { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
   { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
 ];
+</div>
+
+Lazy Loading
+<div>
+  Lazy Loading is an optimization technique in Angular that loads modules or components only when they are needed, instead of loading everything upfront.
+  These modules are loaded dynamically only when the user navigates to them.
+  ==> path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) 
+  Lazy Loading with Child Components
+  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
+  { path: '', redirectTo: 'products', pathMatch: 'full' } 
+</div>
+
+CHANGE DETECTION 
+<div>
+  Change Detection in Angular is the process of updating the DOM when the application state changes. Angular automatically detects changes and updates the UI accordingly.
+  1. Default Change Detection, 2. OnPush Change Detection
+  Default Change Detection Examples :- 
+  <h2>Count: {{ count }}</h2> <button (click)="increment()">Increment</button>
+  count = 0;
+  increment() {
+    this.count++;
+  }
+  OnPush Change Detection Examples :- 
+  import ChangeDetectionStrategy, Input 
+  <h2>{{ data }}</h2> 
+  @component({ changeDetection: ChangeDetectionStrategy.OnPush})
+  @Input() data: string;
+  --------------------------------
+  <app-onpush [data]="message"></app-onpush>
+  <button (click)="updateMessage()">Update Message</button>
+  Ts 
+  message = 'Hello';
+  updateMessage() {
+    this.message = 'Hello, Angular!';
+  }
 </div>
 
 Angular Architecture
@@ -128,9 +251,43 @@ HTTP Client (Fetches Data)
 Backend Server (Database)
 </div>
 
+Micro Frontend
+<div>
+  Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications.
+Why Use Micro Frontend in Angular?
+Scalability: Large applications can be split into smaller manageable parts.
+Independent Deployment: Each micro frontend can be developed, tested, and deployed independently.
+Technology Agnostic: Different teams can use different frameworks (Angular, React, Vue) if needed.
+Better Maintainability: Smaller codebases are easier to maintain.
+Steps to Implement Micro Frontend in Angular
+-------------------------------------------
+Let's assume we have:
+Shell App (Host Application) → Main container that loads micro frontends.
+Remote App 1 (Micro App 1)
+Remote App 2 (Micro App 2)
+</div>
+
 SSR 
 <div>
 SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
+</div>
+
+@VIEW Child
+<div> 
+  @ViewChild is a decorator in Angular that allows us to access and interact with child components, directives,
+
+<h2 #heading>Welcome to Angular!</h2>
+<button (click)="changeText()">Change Text</button>
+
+@ViewChild('heading') headingElement!: ElementRef;
+ngAfterViewInit() {
+  console.log('Text content:', this.headingElement.nativeElement.textContent);
+}
+changeText() {
+  this.headingElement.nativeElement.textContent = 'Text Changed!';
+  this.headingElement.nativeElement.style.color = 'red';
+}
+
 </div>
 
 How to use multiple API in angular ? + AOT JIT
@@ -188,6 +345,7 @@ callChildMethod() {
   this.message = this.child.sayHello();
 }
 </div>
+
 @input, @output
 <div>
 @Input and @Output are used for communication between parent and child components
@@ -208,6 +366,7 @@ template: `
       this.receivedMessage = message; // Updating receivedMessage from child
     }   
 </div>
+
 Ngfor, forloop
 <div>
     ngfor 
@@ -236,30 +395,62 @@ CUSTOM DIRECTIVE
     }
     <p cdirective color="red"> Form </p>
 -------------------------
-@Input() defaultColor: string = 'yellow'; // Default color
-@Input() highlightColor: string = 'red'; // Color on click
-private isHighlighted = false;
 
-onclick button 
- ngOnInit(): void {
-    this.el.nativeElement.style.backgroundColor = this.defaultColor;
+<div> @Input() defaultColor: string = 'yellow'; // Default color
+  @Input() highlightColor: string = 'red'; // Color on click
+  private isHighlighted = false;
+  
+  onclick button 
+   ngOnInit(): void {
+      this.el.nativeElement.style.backgroundColor = this.defaultColor;
+    }
+  
+  @HostListener('click') onClick() {
+    this.isHighlighted = !this.isHighlighted; 
+    this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+    } 
+  <button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+</div>
+
+SCROLLTOP
+<div>
+  private showClass = 'show-scroll-button';
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  ngOnInit() {
+    this.renderer.addClass(this.el.nativeElement, 'scroll-to-top');
   }
-
-@HostListener('click') onClick() {
-  this.isHighlighted = !this.isHighlighted; 
-  this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+  @HostListener('window:scroll', [])
+  onWindowScroll(){
+    if(window.scrollY > 200){
+      this.renderer.addClass(this.el.nativeElement, this.showClass);
+    } else {
+      this.renderer.removeClass(this.el.nativeElement, this.showClass);
+    }
   }
+  @HostListener('click') onclick(){
+    window.scrollTo({ top:0, behavior: 'smooth'});
+  }
+</div>
 
-<button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+---------
+structural directive and attribute directive 
+isVisiable = true
+<div *ngIf="isVisiable"> Welcome </div>
+<button (click)="isVisiable = !isVisiable"> click </button>
+--------------
+<p [ngClass]="{'active': isActive, 'inactive': !isActive}">Styled Text</p>
+<button [ngStyle]="{'background-color': isActive ? 'green' : 'red'}">Click Me</button>
 </div>
 
 PIPE, CUSTOM PIPE, PURE, IMPURE
 <div>
 Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template.
+Uppercase: {{ 'hello world' | uppercase }}
 today: Date = new Date();
 <p>Full Date: {{ today | date:'fullDate' }}</p>
 pure - Only when input data changes	, Faster , Static data transformations	
 impure - On every change detection cycle, Slower 
+
  custom Pipe, PipeTransform
  transform(value: string, gender: string): string {
     if(gender.toLowerCase()=="male")
@@ -268,7 +459,9 @@ impure - On every change detection cycle, Slower
       return "Miss. "+value
     }   
     {{employee.name | mypipe:employee.gender }}
+
 ----- impure 
+
 An impure pipe in Angular executes on every change detection cycle, even if the input data hasn’t changed.
 pure: false
 transform(value: string, gender: string): string {
@@ -278,6 +471,25 @@ transform(value: string, gender: string): string {
       else
       return "Miss. "+value
     }
+
+FILTER IMPURE PIPE EXAMPLES 
+
+pure: false
+transform(items: any[], searchText: string): any[] {
+  if (!items || !searchText) return items;
+  return items.filter(item => item.toLowerCase().includes(searchText.toLowerCase()));
+}
+HTML (use the pipe in components ) -- 
+<input type="text" [(ngModel)]="searchText" placeholder="Search items">
+<button (click)="addItem()">Add Item</button>
+<ul>
+  <li *ngFor="let item of items | impureFilter:searchText">{{ item }}</li>
+</ul>
+searchText = '';
+  items = ['Apple', 'Banana', 'Cherry'];
+  addItem() {
+    this.items.push('New Fruit ' + (this.items.length + 1)); // Updates the array
+  }
 </div>
 
 Using a Global Variable for data transfer
@@ -311,6 +523,38 @@ API CALL
       }
 </div>
 
+TYPESCRIPT 
+<div>
+  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
+  Differences between TypeScript and JavaScript
+
+  TypeScript - 
+  Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	
+  JavaScript -----
+  Dynamically typed
+  No compilation needed
+  Limited support
+
+  Interface in TypeScript defines a contract for an object’s structure.
+  interface User {
+    name: string;
+    age: number;
+    email?: string; // Optional property
+  }
+  const user: User = { name: "John", age: 25 };
+</div>
+
+CHART IMPLEMENTS 
+<div>
+  Bar chart and Pie chart Installation
+  ng2-charts - v4 support with angular 15
+  npm install according to doc
+  Global configuration
+  providers
+  ngcharconfiguration in module
+  code copy markup and ts code
+  using dependancy --legacy-peer-deps
+</div>
 
 8. Constructor - Constructor is a function that initialization an application component servcies and directives.
 
@@ -381,72 +625,99 @@ export class ReverseTextPipe implements PipeTransform {
 without custom pipe
 today: Date = new Date();
 <p>Full Date: {{ today | date:'fullDate' }}</p>
+------------------------------------------------- 
 
+HTML AND CSS 
+<div>
 
-////////////////// CSS =================
+Semantic elements in HTML clearly describe their meaning to both the browser and developers.
+GRID AND FLEX BOX - 
+GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap
+FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing
+Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child())
 
-Relative - The element moves relative to its normal position.
-Absolute - The element is positioned relative to the nearest positioned ancestor 
-Fixed - The element is positioned relative to the viewport (browser window).
-CSS Box Model defines how an element’s size and spacing are calculated.
+  ////////////////// CSS =================
 
-// scss variable
-<code>
-$primary-color: blue;
-.button {
-  color: $primary-color;
-  padding: 10px;
-}
-</code>
+  Relative - The element moves relative to its normal position.
+  Absolute - The element is positioned relative to the nearest positioned ancestor 
+  Fixed - The element is positioned relative to the viewport (browser window).
 
---------------------
-// nesting in scss  
-.navbar {
-    background: #333;
+  CSS Box Model defines how an element’s size and spacing are calculated.
+------------------------ 
+  Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions. 
+  
+  // scss variable
+  <code>
+  $primary-color: blue;
+  .button {
+    color: $primary-color;
     padding: 10px;
+  }
+  </code>
   
-    .menu {
-      list-style: none;
-      padding: 0;
-  
-      li {
-        display: inline-block;
-        margin-right: 10px;
-  
-        a {
-          text-decoration: none;
-          color: white;
-  
-          &:hover {
-            color: yellow;
+  --------------------
+  // nesting in scss  
+  .navbar {
+      background: #333;
+      padding: 10px;
+    
+      .menu {
+        list-style: none;
+        padding: 0;
+    
+        li {
+          display: inline-block;
+          margin-right: 10px;
+    
+          a {
+            text-decoration: none;
+            color: white;
+    
+            &:hover {
+              color: yellow;
+            }
           }
         }
       }
     }
-  }
-
-  //Mixins in SCSS
-
-  @mixin button-style {
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-  }
   
-  .btn {
-    @include button-style;
-    background: blue;
-    color: white;
-  }
+    //Mixins in SCSS
   
-  .btn-danger {
-    @include button-style;
-    background: red;
-  }
+    @mixin button-style {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    .btn {
+      @include button-style;
+      background: blue;
+      color: white;
+    }
+    
+    .btn-danger {
+      @include button-style;
+      background: red;
+    }
+    
+  //sass
+  $primary-color: blue
+  .button
+    color: $primary-color
+    padding: 10px
   
-//sass
-$primary-color: blue
-.button
-  color: $primary-color
-  padding: 10px
+    //loop 
+    @each $size, $padding in (small: 5px 10px, medium: 10px 20px, large: 15px 30px) {
+      .button--#{$size} {
+        padding: $padding;
+      }
+    }
 
+    ----------------- 
+    
+    Variables ($primary-color, $secondary-color)
+    ✅ Mixins (@mixin button-style($bg-color))
+    ✅ Nesting (&:hover)
+    ✅ Loops (@each for button sizes)
+
+</div>
