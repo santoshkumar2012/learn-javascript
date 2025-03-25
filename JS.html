@@ -20,6 +20,24 @@ ES6
       console.log(num); // 10, 20, 30
     }
   - Generators , Dfault Parameter
+  -------------------------
+  ES2022
+  * await - const data = await fetch("https://api.example.com/data").then(res => res.json());
+  console.log(data);
+  ------- 
+  * Class Fields & Private Methods ( # )
+  ------------------- 
+  Array.prototype.findLast() & findLastIndex() (ES2023)
+  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(numbers.findLast(n => n % 2 === 0)); // 8
+console.log(numbers.findLastIndex(n => n % 2 === 0)); // 7
+--------------------------------  
+Array.prototype.toSorted(), toSpliced(), toReversed() (ES2023)
+const arr = [3, 1, 4, 2];
+console.log(arr.toSorted()); // [1, 2, 3, 4] (original array unchanged)
+console.log(arr.toReversed()); // [2, 4, 1, 3]
+console.log(arr.toSpliced(1, 2, 99)); // [3, 99, 2]
+console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
 </div>
 
 DEFAULT PARAMETER

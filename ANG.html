@@ -253,7 +253,7 @@ Backend Server (Database)
 
 Micro Frontend
 <div>
-  Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications.
+Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications.
 Why Use Micro Frontend in Angular?
 Scalability: Large applications can be split into smaller manageable parts.
 Independent Deployment: Each micro frontend can be developed, tested, and deployed independently.
@@ -321,6 +321,7 @@ examples - name = 'John';
 <input [(ngModel)]="name">
 <p>Hello, {{ name }}!</p>
 </div>
+
 DECORATOR 
 <div> 
     Decorator is a function that add metadata to a class. @component, @directives, @ngModule 
@@ -446,6 +447,7 @@ PIPE, CUSTOM PIPE, PURE, IMPURE
 <div>
 Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template.
 Uppercase: {{ 'hello world' | uppercase }}
+
 today: Date = new Date();
 <p>Full Date: {{ today | date:'fullDate' }}</p>
 pure - Only when input data changes	, Faster , Static data transformations	
@@ -480,6 +482,7 @@ transform(items: any[], searchText: string): any[] {
   return items.filter(item => item.toLowerCase().includes(searchText.toLowerCase()));
 }
 HTML (use the pipe in components ) -- 
+
 <input type="text" [(ngModel)]="searchText" placeholder="Search items">
 <button (click)="addItem()">Add Item</button>
 <ul>
@@ -610,7 +613,7 @@ Always check if ReactiveFormsModule is imported in the module.
     return true
   }
 
- 
+
 ------------- cUSTOM PIPE --------------------
 
 ng generate pipe reverseText
@@ -626,6 +629,8 @@ without custom pipe
 today: Date = new Date();
 <p>Full Date: {{ today | date:'fullDate' }}</p>
 ------------------------------------------------- 
+
+I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable.
 
 HTML AND CSS 
 <div>

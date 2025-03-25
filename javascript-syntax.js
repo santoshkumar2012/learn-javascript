@@ -58,10 +58,14 @@ console.log(...array, 14, 15, 16);
 //}
 //customSum(5, 10, 15);
 
-function members(greeting, ...names) {
-  console.log(greeting, names);
+function persons(greeting, ...names) {
+    return { greeting, names };
 }
-members("Hello", "Alice", "Bob", "Charlie");
+console.log(persons("Hello", "Ram", "Shyam", "Laxman"));
+//{
+  greeting: "Hello",
+  names: ["Ram", "Shyam", "Laxman"]
+}
 
 
 /********************************** */
@@ -128,7 +132,6 @@ console.log("Closure - A closure in JavaScript is a function that has access to 
 //     return innerFunction
 //   }
 //   let inner = outerFunction()
-//   inner()
 
 
 console.log("Promises - Promise is for eventual completion of task. It is and object in JS")
