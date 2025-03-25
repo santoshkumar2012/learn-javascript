@@ -131,7 +131,7 @@ console.log("Closure - A closure in JavaScript is a function that has access to 
 //     }
 //     return innerFunction
 //   }
-//   let inner = outerFunction()
+//   outerFunction()
 
 
 console.log("Promises - Promise is for eventual completion of task. It is and object in JS")
