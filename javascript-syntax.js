@@ -135,7 +135,7 @@ console.log("Closure - A closure in JavaScript is a function that has access to 
 
 
 console.log("Promises - Promise is for eventual completion of task. It is and object in JS")
-// Thre possible state - Pending, Resolved, Rejected
+// Three possible state - Pending, Resolved, Rejected
 
 let myPromises = new Promise((resolve, reject) => {
 	let success = true;
