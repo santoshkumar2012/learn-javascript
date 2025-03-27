@@ -89,6 +89,70 @@ export class ApiService {
     <p>{{ post.body }}</p>
   </li>
 </ul> -->
+
+FORM validation - 
+
+<!-- 
+lead_form!: FormGroup
+lead_fields = {
+  name     : ['', Validators.required],
+  email    : ['', Validators.required],
+}
+constructor( private _fb    : FormBuilder ){
+  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
+}
+ngOnInit(){this.initializeForm()}
+initializeForm(){
+  this.lead_form = this._fb.group(this.lead_fields)
+  this.getLeads()
+}
+getLeads(){
+  let params = [{"key": "tenant_id", "value": this.tenant_id},{"key": "limit", "value": 100}]
+  this._http.get('leads/leads/', params).subscribe((response:any) => {
+    this.leads = response;
+    this.action = "Add"
+  },(error: any) => {this.errorMessage(error)})
+} -->
+CRUD 
+<div> 
+  CREATE 
+  <!-- createLead(){
+    this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
+      this.afterAction("Lead Saved")
+    },(error: any) => {this.errorMessage(error)})
+  } -->
+  
+  EDIT
+  setPayloadForEdit(form: any){
+    <!-- return {
+      "name"     : form.name,
+      "email"    : form.email,
+    } -->
+  }
+  editLead(){
+    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}] -->
+    <!-- const payload = this.setPayloadForEdit(this.lead_form.value) -->
+    // delete payload.tenant_id
+    <!-- this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
+      this.afterAction("Lead Update")
+    },(error: any) => {this.errorMessage(error)}) -->
+  }
+  updateLead(){
+    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    const payload = this.setPayloadForEdit(this.lead_form.value)
+    // delete payload.tenant_id
+    this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
+      this.afterAction("Lead Update")
+    },(error: any) => {this.errorMessage(error)}) -->
+  }
+  deleteLead(){
+    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    this._http.delete('leads/leads/'+this.lead_id, params).subscribe((response:any) => {
+      this.afterAction("Lead Deleted")
+    },(error: any) => {this.errorMessage(error)}) -->
+  }
+   
+</div>
 </div>
 
 RxJS for Reactive Programming (RxJS)
@@ -251,7 +315,7 @@ RxJS SUBJECT //Create a Shared Service
 
 </div>
 
-NgRx
+NgRx (Redux for Angular)
 <div>
   NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
   Uses Actions, Reducers, Store, Effects, and Selectors.
@@ -259,6 +323,34 @@ NgRx
   TS Actions examples - 
   <!-- export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
   export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>()); -->
+  STATE OF STRUCTURE 
+  <!-- export const initialState = { count: 0 };
+  export const counterReducer = createReducer(
+  initialState,
+  on(increment, (state) => ({ count: state.count + 1 })),
+  on(decrement, (state) => ({ count: state.count - 1 }))
+); -->
+NGXS (Simpler alternative to NgRx)
+  <!-- @State<number>({ name: 'counter', defaults: 0 })
+    export class CounterState {
+      @Action(Increment)
+      increment(ctx: StateContext<number>) {
+        const state = ctx.getState();
+        ctx.setState(state + 1);
+      }
+    } -->
+SignalStore
+Introduced in Angular 17 as a lightweight, reactive state management solution.
+Uses signals instead of Observables.
+<!-- count = signal(0);
+  increment() {
+    this.count.set(this.count() + 1);
+  } -->
+</div>
+
+State Management in Angular
+<div>
+    State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
 </div>
 
 SIGNALS
@@ -422,10 +514,6 @@ AOT - Ahead of time compilation at build time application runs.
 JIT - Just in time
 </div>
 
-State Management in Angular
-<div>
-    State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
-</div>
 
 --------------------------------
 DATA BINDING
@@ -567,6 +655,23 @@ SCROLLTOP
   }
 </div>
 
+ADD AND REMOVE CLASS 
+<DIV>
+  @HostListener('click') onClick() {
+    this.isHighlighted = !this.isHighlighted;
+
+    if (this.isHighlighted) {
+      // Add class to clicked element
+      this.renderer.addClass(this.el.nativeElement, 'active');
+
+      // Remove class from other elements
+      this.removeClassFromOtherElements();
+    } else {
+      // Remove class from this element
+      this.renderer.removeClass(this.el.nativeElement, 'active');
+    }
+  }
+</DIV>
 ---------
 structural directive and attribute directive 
 isVisiable = true
@@ -613,24 +718,24 @@ transform(value: string, gender: string): string {
     }
 
 FILTER IMPURE PIPE EXAMPLES 
-
-pure: false
-<!-- transform(items: any[], searchText: string): any[] {
-  if (!items || !searchText) return items;
-  return items.filter(item => item.toLowerCase().includes(searchText.toLowerCase()));
-} -->
-HTML (use the pipe in components ) -- 
-
-<input type="text" [(ngModel)]="searchText" placeholder="Search items">
-<button (click)="addItem()">Add Item</button>
-<ul>
-  <li *ngFor="let item of items | impureFilter:searchText">{{ item }}</li>
-</ul>
-<!-- searchText = '';
-  items = ['Apple', 'Banana', 'Cherry'];
-  addItem() {
-    this.items.push('New Fruit ' + (this.items.length + 1)); // Updates the array
-  } -->
+<!-- pure: false
+transform(items: any[], searchText: string): any[] {
+  if (!items || !searchText) {
+    return items;
+  }
+  return items.filter(item =>
+    item.toLowerCase().includes(searchText.toLowerCase())
+  ); -->
+  use in component 
+  <!-- searchText: string = '';
+  items: string[] = ['Angular', 'React', 'Vue', 'Svelte']; -->
+  use in template 
+  <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search..." />
+  <ul>
+    <li *ngFor="let item of items | filterItems:searchText">
+      {{ item }}
+    </li>
+  </ul> -->
 </div>
 
 Using a Global Variable for data transfer
