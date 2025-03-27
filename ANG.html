@@ -903,7 +903,6 @@ export class AppComponent implements OnInit {
 <!-- Pagination Controls -->
 <div class="pagination">
   <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-
   <button *ngFor="let page of [].constructor(totalPages); let i = index"
           (click)="goToPage(i + 1)"
           [class.active]="currentPage === i + 1">
