@@ -1,5 +1,58 @@
 /** JAVASCRIPT **/
 
+WHAT IS THE JAVASCRIPT?
+<div>
+  JavaScript (JS) is a high-level, interpreted programming language used to create interactive and dynamic web pages. It is the core language of the web, allowing developers to manipulate HTML, CSS.
+  * HOW WORK ON BROWSER 
+  When a user opens a web page, the browser loads HTML, CSS, and JavaScript. The JavaScript Engine inside the browser processes JavaScript code.
+  <h1 id="message">Hello, World!</h1>
+  <script>
+    <code>
+        document.getElementById('message').innerHTML = 'Hello from JavaScript!';
+    </code>
+  </script>
+</div>
+
+D3.js and Canvas Rendering
+<div>
+D3.js (Data-Driven Documents) is a powerful JavaScript library used for creating dynamic and interactive data visualizations in web browsers. It leverages SVG (Scalable Vector Graphics) and Canvas for rendering charts, graphs, and complex visualizations.
+->  Data binding (connects data with DOM elements)
+-> Transitions and animations
+-> Scalability with SVG & Canvas
+-> Works with various data formats (JSON, CSV, etc.)
+
+** SVG vs. Canvas Rendering
+D3.js primarily uses SVG but can also work with Canvas for better performance.
+
+** Canvas is better for performance-intensive rendering.
+** Canvas (HTML5)
+-> Uses pixel-based rendering
+-> Fast for large datasets
+-> Manual event handling required
+-> Large datasets, real-time rendering
+
+** Using D3 with Canvas
+<!-- 
+const canvas = d3.select("body")
+  .append("canvas")
+  .attr("width", 500)
+  .attr("height", 300)
+  .node();
+
+const ctx = canvas.getContext("2d");
+
+// Draw a circle
+ctx.beginPath();
+ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+ctx.fillStyle = "blue";
+ctx.fill(); -->
+</div>
+
+What is MS SQL?
+<div>
+  Microsoft SQL Server (MS SQL) is a relational database management system (RDBMS) developed by Microsoft. It is used to store, manage, and retrieve structured data efficiently.
+</div>
+
 ES6
 <div>
   SPREAD OPERATOR
@@ -322,8 +375,70 @@ while (true) {
 }
 </div>
 
-LOGICAL PROGRAMMING --------------------
 
+HASH FUNCTION IN JAVASCRIPT
+<div>
+  -- A hash function in JavaScript is a function that takes an input (string, number, or object) and returns a fixed-size string or number (hash). Hash functions are commonly used for hashing passwords.
+<script>
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0; // Convert to 32-bit integer
+  }
+  return hash;
+}
+console.log(simpleHash("hello")); // Example output: 99162322
+
+//Custom Hash Function for Objects (Key-Value Hashing)
+//hash objects (since objects don’t have a native hash function), you can convert them into strings and then hash the string.
+
+function objectHash(obj) {
+return simpleHash(JSON.stringify(obj));
+}
+console.log(objectHash({ name: "John", age: 30 })); // Example output: -487240083
+  </script>
+</div>
+
+Decode the string "2a[3c]" => acccaccc
+<div>
+  To decode the string "2a[3c]" into "acccaccc", follow these steps:
+
+Step-by-Step Decoding Process
+Identify the repeating patterns:
+
+<!-- "2a" → Means "a" repeats 2 times → "aa"
+
+"[3c]" → Means "c" repeats 3 times → "ccc" -->
+
+Expand the expression:
+
+<!-- Replace "[3c]" with "ccc" → "2a ccc"
+
+"2a" means "a" repeats 2 times → "aa" -->
+
+So, replace "2a" with "aa"
+
+Combine everything:
+
+<!-- "aa" + "ccc" → "accc"
+
+"accc" repeats 2 times → "acccaccc" -->
+
+Final Decoded String:
+✅ "acccaccc"
+</div>
+
+HOISTING 
+<div>
+ "Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes.
+<!-- greet(); // Output: Hello, World!
+function greet() {
+  console.log("Hello, World!");
+} -->
+</div>
+
+LOGICAL PROGRAMMING --------------------
 
 LARGEST NUMBER
 <div>
@@ -373,11 +488,27 @@ FIND SUM NUMBER
 </div>
 Sum Number 
 <div>
-  let number = 45678123465;
+  <script> 
+let number = 45678123465;
   let numStr = number.toString();
   let sum = 0;
   for (let i = 0; i < numStr.length; i++) {
       sum += Number(numStr[i]);
   }
   console.log(sum)
+  </script>
 </div> 
+
+<h5> count Word Fequency in a string </h5>
+<script>
+    function wordCount(str) {
+    let words = str.split(' ');
+    let map = {};
+    for (let word of words) {
+        map[word] = (map[word] || 0) + 1;
+    }
+    return map;
+}
+console.log(wordCount("the quick brown fox jumps over the lazy dog the")); 
+
+</script>

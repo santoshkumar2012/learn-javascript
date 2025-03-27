@@ -1,18 +1,115 @@
+/** Angular **/
+
+SPA and CHALLENGING WORK / SHARED SERVICES
+<div>
+  <!-- -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
+  Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching -->
+  Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
+----------------- 
+<!-- I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. -->
+
+SHARED SERVICES 
+<div>
+    <!-- genders = [
+    {"id": "male", "name": "Male"},
+    {"id": "female", "name": "Female"},
+    {"id": "other", "name": "Other"}
+  ] -->
+  <select>
+    <option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
+  </select>
+</div>
+
+</div>
+
+Angular Architecture
+<div>
+Angular is a TypeScript-based front-end framework developed by Google for building single-page applications (SPAs). It follows a component-based architecture and is structured in a modular way.
+<!-- User Action (Click, Input, Navigation)
+    ↓
+Modules , Component (Handles UI + Logic)
+    ↓
+Service (Manages Data & API Calls)
+    ↓
+HTTP Client (Fetches Data)
+    ↓
+Backend Server (Database) -->
+-------------------------- 
+</div>
+
+API CALL RESTful APIs -- API serives 
+<div> 
+-- Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs.
+
+    <!-- ngOnInit() {
+        this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+          this.user = resposne.user
+          console.log(resposne);
+        })
+      } -->
+<script>
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
+  private apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Sample API
+
+  constructor(private http: HttpClient) {}
+
+  // Get all posts
+  getPosts(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+
+  // Get post by ID
+  getPostById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  // Create a new post
+  createPost(postData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, postData);
+  }
+
+  // Update a post
+  updatePost(id: number, postData: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, postData);
+  }
+
+  // Delete a post
+  deletePost(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+}
+ </script>    
+<!-- <ul>
+  <li *ngFor="let post of posts">
+    <strong>{{ post.title }}</strong>
+    <p>{{ post.body }}</p>
+  </li>
+</ul> -->
+</div>
+
 RxJS for Reactive Programming (RxJS)
 <div> 
 Different between -- 
+<script> 
 Promise -- 
-Promise excute immediately when create promises. 
-Pomise emit single value. Promise don't have operator . 
-Promise cann't be cancel 
+// Promise excute immediately when create promises. 
+// Pomise emit single value. Promise don't have operator . 
+// Promise cann't be cancel 
 -----
-Observable does not start untill subscription.
-Observable emit multiple value.
-Observable operator like map, filter, reduce.
-Observable can be cancel using unscribe method 
+// Observable does not start untill subscription.
+// Observable emit multiple value.
+// Observable operator like map, filter, reduce.
+// Observable can be cancel using unscribe method 
 ----- 
+</script>
+
 * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
-<code> let myPromise = new Promise((resolve, reject) => {
+<code> 
+  <!-- let myPromise = new Promise((resolve, reject) => {
   let success = true; // Change this to false to see the reject case
   setTimeout(() => {
     if (success) {
@@ -24,11 +121,12 @@ Observable can be cancel using unscribe method
 });
 myPromise
   .then(result => console.log(result)) // Runs when promise is resolved
-  .catch(error => console.log(error)); // Runs when promise is rejected
+  .catch(error => console.log(error)); // Runs when promise is rejected -->
 </code>
 --------------------------------
 Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values.
-myObservable: Observable<number>;
+
+<!-- myObservable: Observable<number>;
   ngOnInit() {
     this.myObservable = new Observable(observer => {
       let count = 1;
@@ -40,11 +138,12 @@ myObservable: Observable<number>;
     this.myObservable.subscribe(value => {
       console.log('Received:', value);
     });
-  }
+  } -->
 
 *** RxJS Operators 
 <h3>Filtered Values: {{ values }}</h3>
-ngOnInit() {
+
+<!-- ngOnInit() {
     const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     numbers$.pipe(
       filter(num => num % 2 === 0), // Filter even numbers
@@ -53,7 +152,8 @@ ngOnInit() {
     .subscribe(result => {
       this.values.push(result);
     });
-  }
+  } -->
+
   <!-- let observable = new Observable((observer) => {
     setTimeout(() => {
       observer.next("observable is working");
@@ -65,26 +165,31 @@ ngOnInit() {
       next: (result) => console.log(result),
       complete: () => console.log("Observable completed")
     }) -->
-    Example: Converting Promise to Observable
-  <div>
+
+  Example: Converting Promise to Observable
+  <script>
     const promise = new Promise((resolve) => {
       setTimeout(() => resolve('Promise resolved!'), 2000);
     });
+
     // Convert Promise to Observable
+
     const observable$ = from(promise);
     observable$.subscribe(value => console.log(value));
-  </div>
+  </script>
+
   Handling HTTP Request with Observable vs Promise
-  <div>
+  <script>
     getData(): void {
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
     }    
-  </div>
+  </script>
+
   Observable with Multiple Values
-  <div>
+  <script>
     const myObservable = new Observable(observer => {
       observer.next('Value 1');
       observer.next('Value 2');
@@ -94,21 +199,24 @@ ngOnInit() {
       }, 2000);
     });
     myObservable.subscribe(value => console.log(value));
-  </div>
+  </script>
+
   Cancelling an Observable
-  <div> 
+  <script> 
     const observable$ = interval(1000); // Emits values every second
     const subscription: Subscription = observable$.subscribe(value => console.log(value));
     setTimeout(() => {
       console.log('Unsubscribing...');
       subscription.unsubscribe(); // Stops emissions
     }, 5000);
-  </div>
+  </script>
+
 </div>
 
-RxJS SUBJECT
+RxJS SUBJECT //Create a Shared Service
 <div>
   Subject in RxJS is a special type of Observable that allows values to be multicasted to multiple subscribers. 
+
   Create a Shared Service
 
     private dataSubject = new Subject<string>(); // Create Subject
@@ -117,17 +225,24 @@ RxJS SUBJECT
       this.dataSubject.next(message); // Send data
     }
 
-    Send Data from Component 1 (Sender)
+    <!-- Send Data from Component 1 (Sender) -->
+    
     <button (click)="sendMessage()">Send Message</button>
+
     constructor(private dataService: DataService) {}
-      sendMessage() {
+
+    sendMessage() {
     this.dataService.sendData("Hello from Sender!");
     }
 
-    Receive Data in Component 2 (Receiver)
+    <!-- Receive Data in Component 2 (Receiver) -->
+
     <p>Received: {{ receivedMessage }}</p>
-    receivedMessage: string = "";
+
+  receivedMessage: string = "";
+
   constructor(private dataService: DataService) {}
+
   ngOnInit() {
     this.dataService.data$.subscribe(message => {
       this.receivedMessage = message; // Receive data
@@ -140,43 +255,42 @@ NgRx
 <div>
   NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
   Uses Actions, Reducers, Store, Effects, and Selectors.
-  ts Actions examples - 
-  export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
-export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>());
+
+  TS Actions examples - 
+  <!-- export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
+  export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>()); -->
 </div>
 
 SIGNALS
 <div>
 Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables.
 Examples :- 
+
 <h2>Counter: {{ count() }}</h2>
+
 <button (click)="increment()">Increment</button>
 <button (click)="decrement()">Decrement</button>
+
 TS - 
 count: Signal<number> = signal(0);
 increment() { this.count.set(this.count() + 1); }
 decrement() { this.count.set(this.count() - 1); }
+
 </div>
 
 LIFE CYCLE 
 <div>
-  Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle
+  Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle.
+
   constructor - for variable initialization 
-  ngonInit(){} - Called once after component initialization
-  ngOnChanges() - Called when input properties change
-  ngDoCheck() - Called during every change detection cycle
+  <!-- ngonInit(){} - Called once after component initialization -->
+  <!-- ngOnChanges() - Called when input properties change -->
+  <!-- ngDoCheck() - Called during every change detection cycle -->
   ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
   ngAfterContentChecked()	- Called after projected content is checked
   ngAfterViewInit()	- Called after the component's view and child views are initialized
   ngAfterViewChecked()	- Called after the component’s and child views are checked
-  ngOnDestroy()	 - Called just before the component is destroyed
-</div>
-
-SPA
-<div>
-  -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
-  Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching
-  Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
+  <!-- ngOnDestroy()	 - Called just before the component is destroyed -->
 </div>
 
 OPTIMIZE ANGULAR PAGE 
@@ -187,20 +301,25 @@ OPTIMIZE ANGULAR PAGE
  5. Optimize CSS & Styles, Otimize http
  Minimize CSS & Use Critical CSS, CSS minification, Web Workers
  6. USE track by
- <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
- this.http.get('https://api.example.com/data', { cache: 'force-cache' });
 
- Accessibility (A11Y)
+ <!-- <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
+
+ this.http.get('https://api.example.com/data', { cache: 'force-cache' }); -->
+
+Accessibility (A11Y)
+
 Make your UI inclusive for everyone (including users with disabilities).
-✅ Best Practices:
+
 Add alt text for images.
+
 Use ARIA attributes for better screen reader support.
 Ensure high color contrast for readability
 Minify CSS, JS and enable Gzip compression.
-const routes: Routes = [
+
+<!-- const routes: Routes = [
   { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
   { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
-];
+]; -->
 </div>
 
 Lazy Loading
@@ -217,18 +336,26 @@ CHANGE DETECTION
 <div>
   Change Detection in Angular is the process of updating the DOM when the application state changes. Angular automatically detects changes and updates the UI accordingly.
   1. Default Change Detection, 2. OnPush Change Detection
+
   Default Change Detection Examples :- 
-  <h2>Count: {{ count }}</h2> <button (click)="increment()">Increment</button>
-  count = 0;
+
+  <h2>Count: {{ count }}</h2> 
+  <button (click)="increment()">Increment</button>
+
+  <!-- count = 0;
   increment() {
     this.count++;
-  }
+  } -->
+
   OnPush Change Detection Examples :- 
+
   import ChangeDetectionStrategy, Input 
   <h2>{{ data }}</h2> 
   @component({ changeDetection: ChangeDetectionStrategy.OnPush})
   @Input() data: string;
+
   --------------------------------
+  
   <app-onpush [data]="message"></app-onpush>
   <button (click)="updateMessage()">Update Message</button>
   Ts 
@@ -236,19 +363,6 @@ CHANGE DETECTION
   updateMessage() {
     this.message = 'Hello, Angular!';
   }
-</div>
-
-Angular Architecture
-<div>
-User Action (Click, Input, Navigation)
-    ↓
-Component (Handles UI + Logic)
-    ↓
-Service (Manages Data & API Calls)
-    ↓
-HTTP Client (Fetches Data)
-    ↓
-Backend Server (Database)
 </div>
 
 Micro Frontend
@@ -274,20 +388,21 @@ SSR - server-side rendering (SSR) is a process that involves rendering pages on 
 
 @VIEW Child
 <div> 
-  @ViewChild is a decorator in Angular that allows us to access and interact with child components, directives,
+@ViewChild is a decorator in Angular that allows us to access and interact with child components, directives,
 
 <h2 #heading>Welcome to Angular!</h2>
 <button (click)="changeText()">Change Text</button>
 
 @ViewChild('heading') headingElement!: ElementRef;
+
 ngAfterViewInit() {
   console.log('Text content:', this.headingElement.nativeElement.textContent);
 }
+
 changeText() {
   this.headingElement.nativeElement.textContent = 'Text Changed!';
   this.headingElement.nativeElement.style.color = 'red';
 }
-
 </div>
 
 How to use multiple API in angular ? + AOT JIT
@@ -311,11 +426,15 @@ State Management in Angular
 <div>
     State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
 </div>
+
 --------------------------------
 DATA BINDING
+--------------------------------
 <div>
 Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML).
+
 Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ), 
+
 Two-way Binding (<input [(ngModel)]="name">)
 examples - name = 'John';
 <input [(ngModel)]="name">
@@ -330,13 +449,17 @@ DECORATOR
 DECORATIVE -----
 <div>
 Diretives is class that modifies the behaviour appearance of the elements
+
 @ViewChild -  Access a Child Component in the Parent Component
 @viewChildren - It is used to get multiple child components, directives.
+
 view child examples 
 <app-child></app-child>
  <button (click)="callChildMethod()">Call Child Method</button>
 <p>{{ message }}</p>
-ts file 
+
+TS file 
+
 @ViewChild(ChildComponent) child!: ChildComponent;
 message = '';
 ngAfterViewInit() {
@@ -347,17 +470,26 @@ callChildMethod() {
 }
 </div>
 
-@input, @output
+@Input, @output
 <div>
 @Input and @Output are used for communication between parent and child components
-exampe child ts -  template: `<h3>Message from Parent: {{ message }}</h3>`,  @Input() message!: string;
-parent ts - parentMessage = 'Hello, Child!';
+
+exampe child ts -  @Input() message!: string; 
+template: `<h3>Message from Parent: {{ message }}</h3>`,  
+
+parent ts - 
+parentMessage = 'Hello, Child!';
+-------------------------------------------
+
 @output examples - child ts -
  @Output() messageEvent = new EventEmitter<string>();
+
 sendMessage() {
       this.messageEvent.emit('Hello, Parent!'); // Sending data to parent
 }
-parent ts - 
+
+Parent ts - 
+
 template: `
     <app-child (messageEvent)="receiveMessage($event)"></app-child>
     <p>Received Message: {{ receivedMessage }}</p>
@@ -389,7 +521,9 @@ CUSTOM DIRECTIVE
 <div>
     custom Directive Command - ng g d directive-name (cdirective)
     @Input() color!:string;
+
     constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
+
     ngOnInit(): void { 
     // this.el.nativeElement.style.backgroundColor = 'red';
         this.el.nativeElement.style.backgroundColor = this.color;
@@ -445,6 +579,10 @@ isVisiable = true
 
 PIPE, CUSTOM PIPE, PURE, IMPURE
 <div>
+  <!-- What is the difference between a Pipe and a Directive?
+  Pipes transform data in templates (date, uppercase).
+  Directives modify the behavior of DOM elements (ngIf, ngFor). -->
+
 Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template.
 Uppercase: {{ 'hello world' | uppercase }}
 
@@ -454,12 +592,12 @@ pure - Only when input data changes	, Faster , Static data transformations
 impure - On every change detection cycle, Slower 
 
  custom Pipe, PipeTransform
- transform(value: string, gender: string): string {
+ <!-- transform(value: string, gender: string): string {
     if(gender.toLowerCase()=="male")
       return "Mr. "+value;
       else
       return "Miss. "+value
-    }   
+    }    -->
     {{employee.name | mypipe:employee.gender }}
 
 ----- impure 
@@ -467,7 +605,7 @@ impure - On every change detection cycle, Slower
 An impure pipe in Angular executes on every change detection cycle, even if the input data hasn’t changed.
 pure: false
 transform(value: string, gender: string): string {
-    if (!value || !gender) return value;
+    <!-- if (!value || !gender) return value; -->
     if(gender.toLowerCase()=="male")
       return "Mr. "+value;
       else
@@ -477,10 +615,10 @@ transform(value: string, gender: string): string {
 FILTER IMPURE PIPE EXAMPLES 
 
 pure: false
-transform(items: any[], searchText: string): any[] {
+<!-- transform(items: any[], searchText: string): any[] {
   if (!items || !searchText) return items;
   return items.filter(item => item.toLowerCase().includes(searchText.toLowerCase()));
-}
+} -->
 HTML (use the pipe in components ) -- 
 
 <input type="text" [(ngModel)]="searchText" placeholder="Search items">
@@ -488,11 +626,11 @@ HTML (use the pipe in components ) --
 <ul>
   <li *ngFor="let item of items | impureFilter:searchText">{{ item }}</li>
 </ul>
-searchText = '';
+<!-- searchText = '';
   items = ['Apple', 'Banana', 'Cherry'];
   addItem() {
     this.items.push('New Fruit ' + (this.items.length + 1)); // Updates the array
-  }
+  } -->
 </div>
 
 Using a Global Variable for data transfer
@@ -504,27 +642,27 @@ Using a Global Variable for data transfer
   Receive - receivedData = sharedData;
 </div>
 
-SHARED SERVICES 
+Spying on a Method in Angular (Jasmine & SpyOn)
 <div>
-    genders = [
-    {"id": "male", "name": "Male"},
-    {"id": "female", "name": "Female"},
-    {"id": "other", "name": "Other"}
-  ]
-  <select>
-    <option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
-  </select>
+  In Angular unit testing, spying on methods is a common practice to track method calls, prevent actual execution, and return mock values. This is done using Jasmine’s spyOn function.
+
+  export class MyComponent {
+    myMethod() {
+      console.log('Original method executed');
+    }
+  
+    anotherMethod() {
+      this.myMethod(); // Calls myMethod internally
+    }
+  }  
+
+ -- Spy on an Observable	
+ spyOn(service, 'methodName').and.returnValue(of(fakeData))
+
+ --Spy on a service method
+ spyOn(service, 'methodName')
 </div>
 
-API CALL 
-<div> 
-    ngOnInit() {
-        this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
-          this.user = resposne.user
-          console.log(resposne);
-        })
-      }
-</div>
 
 TYPESCRIPT 
 <div>
@@ -559,6 +697,118 @@ CHART IMPLEMENTS
   using dependancy --legacy-peer-deps
 </div>
 
+Standalone Components in Angular
+<div>
+Angular introduced Standalone Components in Angular 14 to eliminate the need for NgModule.
+Before Angular 14: Every component needed to be declared in an NgModule.
+Now (Angular 14+): Components can work independently without NgModul
+</div>
+
+Route Guards in Angular
+<div>
+  Guards protect routes by controlling access based on conditions like authentication, roles, etc.
+  CanActivate, 
+  <script>
+constructor(private router: Router) {}
+canActivate(): boolean {
+  const isLoggedIn = !!localStorage.getItem('user');
+  if (!isLoggedIn) {
+    this.router.navigate(['/login']); // Redirect to login if not authenticated
+    return false;
+  }
+  return true;
+}
+  </script>
+  Applying Route Guard to Routes
+  <!-- const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+]; -->
+</div>
+
+Dependency Injection (DI) in Angular
+<div>
+  DI is a design pattern in Angular used for managing dependencies (services, components, etc.).
+  * Instead of creating objects manually, Angular injects them automatically.
+  * Uses @Injectable() decorator for services.
+  => Create Serives 
+  getData() {
+    return ['Angular', 'React', 'Vue'];
+  }
+  => Inject the Service into a Component
+  frameworks: string[];
+  constructor(private dataService: DataService) {  // 🔹 Inject Service Here
+    this.frameworks = this.dataService.getData();
+  }
+  <h1>{{ frameworks }}</h1>
+</div>
+
+FILTER
+<div>
+ng generate pipe filter
+name: 'filter'
+<!-- transform(items: any[], searchText: string): any[] {
+  if (!items || !searchText) return items;
+  searchText = searchText.toLowerCase();
+  return items.filter(item => item.toLowerCase().includes(searchText));
+} -->
+<input type="text" [(ngModel)]="searchText" placeholder="Search items..." />
+<div *ngFor="let item of items | filter:searchText | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+  {{ item }}
+</div>
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
+</div>
+
+PAGINATION 
+<div>
+export class AppComponent implements OnInit {
+
+  <!-- items: string[] = [];  // Store 100 items
+  pagedItems: string[] = []; // Store items for current page
+  pageSize = 10; // Number of items per page
+  currentPage = 1; // Current active page
+  totalPages = 0; // Total number of pages -->
+
+  ngOnInit() {
+    // Generating 100 sample items
+    <!-- this.items = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+    this.totalPages = Math.ceil(this.items.length / this.pageSize);
+    this.updatePage(); -->
+  }
+
+  // Function to update items for the current page
+  updatePage() {
+    <!-- const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.pagedItems = this.items.slice(startIndex, endIndex); -->
+  }
+
+  // Function to change page
+  goToPage(page: number) {
+    <!-- if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePage();
+    } -->
+  }
+}
+-------------------------- 
+<div *ngFor="let item of pagedItems">
+  {{ item }}
+</div>
+<!-- Pagination Controls -->
+<div class="pagination">
+  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+
+  <button *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="goToPage(i + 1)"
+          [class.active]="currentPage === i + 1">
+    {{ i + 1 }}
+  </button>
+  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+</div>
+
 8. Constructor - Constructor is a function that initialization an application component servcies and directives.
 
 8. Services Angular services is a resuable typescript class that provides data. Resuable 
@@ -566,8 +816,6 @@ CHART IMPLEMENTS
 
 9. @injectable
 @injectale is a decorator in angular that makes a class as a services.
-
-11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
 
 12. Store is a centralized state management solution that holds the application’s state  
 and provides mechanisms to update and access the state efficiently.
@@ -614,7 +862,7 @@ Always check if ReactiveFormsModule is imported in the module.
   }
 
 
-------------- cUSTOM PIPE --------------------
+------------- CUSTOM PIPE --------------------
 
 ng generate pipe reverseText
 @Pipe({
@@ -630,18 +878,18 @@ today: Date = new Date();
 <p>Full Date: {{ today | date:'fullDate' }}</p>
 ------------------------------------------------- 
 
-I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable.
-
 HTML AND CSS 
 <div>
 
 Semantic elements in HTML clearly describe their meaning to both the browser and developers.
 GRID AND FLEX BOX - 
-GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap
-FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing
+<!-- GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap
+FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing -->
 Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child())
 
   ////////////////// CSS =================
+  <!-- Use relative when you want to adjust an element without removing it from the document flow.
+  Use absolute when you want to detach an element and position it within a specific container. -->
 
   Relative - The element moves relative to its normal position.
   Absolute - The element is positioned relative to the nearest positioned ancestor 
