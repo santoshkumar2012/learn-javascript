@@ -1,0 +1,476 @@
+/** JAVASCRIPT **/
+
+<div>
+
+RxJS for observables over promises -------------
+
+* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
+
+<code> let myPromise = new Promise((resolve, reject) => {
+  let success = true; // Change this to false to see the reject case
+  setTimeout(() => {
+    if (success) {
+      resolve("Operation Successful!");
+    } else {
+      reject("Something went wrong!");
+    }
+  }, 2000);
+});
+
+myPromise
+  .then(result => console.log(result)) // Runs when promise is resolved
+  .catch(error => console.log(error)); // Runs when promise is rejected
+</code>
+
+--------------------------------
+Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values.
+
+myObservable: Observable<number>;
+
+  ngOnInit() {
+
+    this.myObservable = new Observable(observer => {
+      let count = 1;
+
+      setInterval(() => {
+        observer.next(count++); // Emits a value every second
+      }, 1000);
+
+    });
+
+    this.myObservable.subscribe(value => {
+      console.log('Received:', value);
+    });
+
+  }
+
+---------------------------------------------------------------------------
+
+1. What is prototype ? 
+Ans. A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function.
+
+<code>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // Adding a method to the prototype
+    Person.prototype.sayHello = function() {
+        return `Hello, my name is ${this.name}`;
+    };
+    
+    const person1 = new Person("Santosh", 30);
+    console.log(person1.sayHello()); // Output: Hello, my name is Santosh    
+</code>
+2. Closure ?
+Ans. A closure in JavaScript is a function that has access to variables in its parent scope. 
+Inner function retain access to the variable.
+<code>
+    function outerFunction() {
+        let count = 0;  // count is in the lexical scope of innerFunction
+    
+        function innerFunction() {
+            count++;  // innerFunction remembers 'count'
+            console.log(count);
+        }
+    
+        return innerFunction;  // Returns the inner function
+    }
+    
+    const counter = outerFunction();  // outerFunction executes and returns innerFunction
+    counter(); // Output: 1
+    counter(); // Output: 2
+    counter(); // Output: 3    
+</code>
+
+8. Hoisting is JavaScript's default behavior of moving declarations to the top.
+<code>
+    getName();
+    var = 5
+    function getName(){
+        console.log("santosh")
+    }
+</code>
+
+* Classes - class is a blueprint for creating objects with properties and methods. 
+<code>
+  class Person {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+    greet() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+  }
+  const person1 = new Person("John", 25);
+  person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+</code>
+
+
+
+3. ES6 (also known as ECMAScript 2015) introduced several new features and improvements to JavaScript. Rest operation, Spread
+
+* Rest Operator - Rest Operator 'collects' multiple elements into an array.
+<code> 
+function sum(...numbers) { return numbers.reduce((total, num) => total + num, 0); }
+console.log(sum(10, 20, 30, 40));
+</code>
+* Spread Operator - Spread operator is used to spread the content of an array.
+<code>
+    const arr1 = [1, 2, 3];
+    const arr2 = [...arr1, 4, 5, 6];
+    console.log(arr2);
+</code>
+
+
+* Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. )
+<code>
+let myArray = [1,2,3]
+let obj = new set(myArray);
+console.log(obj)
+--------------------
+let myMap=new Map();
+myMap.set('name', 'Santosh');
+console.log(myMap);
+</code>
+
+4. Destructuring 
+Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
+* Array Destructuring
+const arr = [1, 2, 3];
+const [a, b] = arr;
+console.log(a); // 1
+console.log(b); // 2
+
+7. Data Structural 
+JavaScript provides various data structures to handle different use cases.
+Array, Object, Map, Set, Data Types
+
+
+push() - Add one or more element to the end of the an array. array.push("Testing")
+pop() - Remove the last elements. array.pop()
+shift() - Remove the first element of the array.
+unshift() - Add new element to the begining of an array.
+slice() - Extracts a portian of an array without modifying the orginal.
+splice() - Adds, remove or replace element in an array. - array.splice (2,0, 30)
+map() - Create a new array by applying a function to every elements. const santk = pragya.map((x) => x*2)
+
+=> Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
+
+Undefined that has been declared but not yet assigned a value.
+
+Null is an assignment value meaning that a varriable has been declared and given the value of null.
+
+ForEach method is used to iterate over arrays and execute a provided function once for each element.
+* ForEach is faster because it doesn’t create a new array.
+* map is slightly slower because it returns a new array.
+
+
+Currying
+Transforming a function with multiple arguments into a sequence of functions.
+
+Debouncing & Throttling
+Debouncing limits the execution of a function until after a certain delay.
+
+Throttling ensures a function runs at most once in a specified interval.
+
+const numbers = [1, 2, 3, 4];
+
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]
+
+const evens = numbers.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4]
+
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // 10
+
+</div>
+
+ANGULAR 17 New Features
+----------------------------------------------------------------------
+
+How Angular Works?
+AppModule bootstraps the app.
+AppComponent loads and displays the UI.
+Routing manages navigation.
+Services fetch data and provide logic.
+Components render UI dynamically.
+Directives & Pipes manipulate the DOM.
+
+Angular Architecture :--
+      User Action (Click, Input, Navigation)
+                     ↓
+        Component (Handles UI + Logic)
+                     ↓
+        Service (Manages Data & API Calls)
+                     ↓
+        HTTP Client (Fetches Data)
+                     ↓
+        Backend Server (Database)
+
+angular.dev
+-Standalone by default - No Need for NgModules – Simplifies component structure., Faster Bootstrap, Better Lazy Loading
+-Improved SSR Support
+-Signals are Stable now
+-Cotrol Flow
+*ngIf - @if
+*ngFor - @for
+*ngSwitch - @switch
+
+how to improve angular single page application ?
+Optimize Lazy Loading & Code Splitting
+SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
+API Responses with Service Workers
+Lazy Loading Images
+Reduce Third-Party Dependencies
+-----------------------------------------
+
+AngularJS is a JavaScript framework developed by Google for building dynamic single-page applications (SPAs). 
+It extends HTML with additional attributes and binds data to the UI dynamically.
+
+the core type of the RxJS library
+
+AOT - Ahead of time compilation at build time application runs. 
+JIT - Just in time
+--------------------------------
+
+1. How to use multiple API in angular ?
+Angular, We can use multiple APIs in different ways.
+Using forkJoin (Parallel API Calls - Best for Independent APIs)
+
+<script>
+    forkJoin([
+      this.http.get('https://api.example.com/users'),
+      this.http.get('https://api.example.com/posts')
+    ]).subscribe(([users, posts]) => {
+      console.log('Users:', users);
+      console.log('Posts:', posts);
+    });
+</script>
+
+2. State Management in Angular
+State management in Angular is the process of handling application data efficiently across components, services, and routes. 
+Local State
+Component State 
+Service State (App-Level State)
+
+
+4. Component there are the basic building block of and angular application contract html views.
+
+5. Modules -  Modules is a container group related component directives, pipes and services @ngModule
+
+6. Decorator - Decorator is a function that add metadata to a class.
+@component, @directives, @ngModule
+
+7. @ViewChild and @ViewChildren are decorators used to access child components,
+   @ViewChild - It is used to get a single child component, directive.
+   @viewChildren - It is used to get multiple child components, directives.
+
+7. directives
+Diretives is class that modifies the behaviour appearance of the elements
+Structural directives
+attributes directives
+custom directives
+
+8. Constructor - Constructor is a function that initialization an application component servcies and directives.
+
+8. Services Angular services is a resuable typescript class that provides data. Resuable 
+<code></code>
+
+9. @injectable
+@injectale is a decorator in angular that makes a class as a services.
+
+11. Dependancy injectable is used to inject services into components/classes. It makes code reusable testable and maintainable.
+
+12. Store is a centralized state management solution that holds the application’s state  
+and provides mechanisms to update and access the state efficiently.
+
+--------------------------------
+10. In Angular 17, authentication involves:
+
+Login Page – User enters credentials.
+Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
+Dashboard Component – Accessible only after login.
+Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
+
+Lazy loading ondemand load 
+---------------------------------------
+
+1. Git pull automatically merges the fetched changes into the current branch, git fetch does no 
+2. Git Fetch a primary command used to download contents from a remote repository.
+3. Git stash git stash command takes your uncommitted changes and saves later use. 
+
+
+Learend
+Always check if ReactiveFormsModule is imported in the module.
+
+-----------------------------------
+
+<div> 
+
+<form [formGroup]="lead_form" (ngSubmit)="saveLead()">
+  <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  <div class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
+  Name is required. </div>
+  </form>
+
+  const routes: Routes = [
+  { path: '', component: HomeComponent },
+  ];
+
+  // services 
+  previousButton(){
+    if(sessionStorage.getItem('role') == "client"){
+      return false
+    }
+    return true
+  }
+
+  //api call
+  ngOnInit() {
+    this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+      this.user = resposne.user
+      console.log(resposne);
+    })
+  }
+--------------------------------------------
+Directive
+
+ngfor 
+employees = [
+{
+id: 1,
+name: "Santosh Kumar",
+age: 30,
+department: "Human Resources",
+salary: 5000000
+},
+<tr *ngFor="let employee of employees"> </tr>
+
+----------------------
+
+isVisiable:boolean = false 
+<h2 *ngIf="isVisiable"> Welcome to NgIf</h2>
+
+----------------------
+
+  // custom directive
+
+custom Directive Command - ng g d directive-name (cdirective)
+
+@Input() color!:string;
+
+constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
+
+ngOnInit(): void { 
+// this.el.nativeElement.style.backgroundColor = 'red';
+    this.el.nativeElement.style.backgroundColor = this.color;
+}
+
+<p cdirective color="red"> Form </p>
+
+--------------------------------------------------
+
+@Input() defaultColor: string = 'yellow'; // Default color
+@Input() highlightColor: string = 'red'; // Color on click
+private isHighlighted = false;
+
+onclick button 
+ ngOnInit(): void {
+    this.el.nativeElement.style.backgroundColor = this.defaultColor;
+  }
+
+@HostListener('click') onClick() {
+  this.isHighlighted = !this.isHighlighted; 
+  this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+  }
+
+<button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+
+------------- cUSTOM PIPE --------------------
+
+ng generate pipe reverseText
+@Pipe({
+  name: 'reverseText'
+})
+export class ReverseTextPipe implements PipeTransform {
+  transform(value: string): string {
+    return value.split('').reverse().join('');
+  }
+}
+without custom pipe
+today: Date = new Date();
+<p>Full Date: {{ today | date:'fullDate' }}</p>
+
+
+////////////////// CSS =================
+
+Relative - The element moves relative to its normal position.
+Absolute - The element is positioned relative to the nearest positioned ancestor 
+Fixed - The element is positioned relative to the viewport (browser window).
+CSS Box Model defines how an element’s size and spacing are calculated.
+
+// scss variable
+<code>
+$primary-color: blue;
+.button {
+  color: $primary-color;
+  padding: 10px;
+}
+</code>
+
+--------------------
+// nesting in scss  
+.navbar {
+    background: #333;
+    padding: 10px;
+  
+    .menu {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        display: inline-block;
+        margin-right: 10px;
+  
+        a {
+          text-decoration: none;
+          color: white;
+  
+          &:hover {
+            color: yellow;
+          }
+        }
+      }
+    }
+  }
+
+  //Mixins in SCSS
+
+  @mixin button-style {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .btn {
+    @include button-style;
+    background: blue;
+    color: white;
+  }
+  
+  .btn-danger {
+    @include button-style;
+    background: red;
+  }
+  
+//sass
+$primary-color: blue
+.button
+  color: $primary-color
+  padding: 10px
+
+</div>

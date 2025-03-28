@@ -1,4 +1,4 @@
-/** JAVASCRIPT **/
+/** Angular **/
 
 BASIC
 <div>
@@ -449,6 +449,22 @@ decrement() { this.count.set(this.count() - 1); }
 
 </div>
 
+TEMPLATES
+<div>
+  In Angular, a template is the HTML part of an Angular component that defines the structure and layout of the view. It tells Angular how to render the component on the screen. Templates can include standard HTML, Angular directives, and bindings.
+  @Component({
+    selector: 'app-inline',
+    template: `<h2>Welcome to Angular Templates!</h2>
+               <p>This is an inline template example.</p>`,
+    styles: [`h2 { color: blue; }`]
+  })
+
+  Template Features in Angular
+  Interpolation ({{}})
+  message = "Hello, Angular!";
+  <h2>{{ message }}</h2>
+</div>
+
 LIFE CYCLE 
 <div>
   Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle.
@@ -593,6 +609,10 @@ AOT - Ahead of time compilation at build time application runs.
 JIT - Just in time
 </div>
 
+BOOTSTRAP MODULE 
+<div>
+  In Angular, the bootstrap property is used in the root module (AppModule) to specify the main component that should be loaded when the application starts. This is different from Bootstrap (CSS framework).
+</div>
 
 --------------------------------
 DATA BINDING
