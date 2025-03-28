@@ -1,5 +1,84 @@
 /** JAVASCRIPT **/
 
+BASIC
+<div>
+ MVC and MVVM (Model-View-ViewModel) 
+ <code>
+ ** MVC (Model-View-Controller) is a design pattern that separates an application into three main components:
+      1. Model: Represents data and business logic (e.g., database, API).
+      2. View: The UI layer that displays data to the user.
+      3. Controller: Manages user inputs and updates the Model or View.
+  ** HOW WORK MVC 
+      1. The Controller receives user input (e.g., a button click).
+      2. The Controller updates the Model (business logic).
+      3. The Model notifies the View, and the View updates accordingly.
+ ** MVVM
+      MVVM (Model-View-ViewModel) is a software architectural pattern that is commonly used in Angular applications, providing a clean separation of concerns between different components of an application.
+      Model - Represents the application’s data and logic, It is the part of the application that manages the state, and it can be composed of services, APIs,
+      View :- Represents the UI (user interface) elements that the user interacts with, such as buttons, inputs, forms, etc. | View is typically defined using HTML and CSS, and it’s tied to the template of a component.
+      ViewModel :- ViewModel holds the data and logic needed to present the Model’s data in a way that the View can easily display.
+      It is represented by the component in Angular, which binds the data and defines the behavior that will be reflected in the view.
+      two-way data binding (via ngModel) allows the ViewModel.
+ </code>
+ COMPONENTS 
+ <code>
+  Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. 
+  @Component({
+    selector: 'app-root',
+    standalone: true,
+    imports: [RouterOutlet],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
+  })
+  @Component: A decorator used to convert a normal Typescript class to Angular Component.
+  <app-root></app-root>
+  app-root: It is the selector/name of the component and it is specified using selector meta data of the component's decorator.
+  app.component.html: It is the HTML template document associated with the component.
+  AppComponent: Its property (title) is used in the HTML template to set the title of the application.
+ </code>
+ TEMPLATE 
+ <div> 
+  Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements.
+  Template can be categorised into two items :- Data binding {{ title }}, Directives *ngIf="canShow"
+ </div>
+ MODULES
+ <div>
+  Angular Module is basically a collection of related features/functionality. It groups multiple components and services under a single context.
+  <code>
+    import { BrowserModule } from '@angular/platform-browser'; 
+    import { NgModule } from '@angular/core'; 
+    import { AppComponent } from './app.component'; @NgModule({ 
+    declarations: [ 
+      AppComponent 
+     ], 
+     imports: [ 
+      BrowserModule 
+     ], 
+     providers: [], 
+     bootstrap: [AppComponent] 
+     }) 
+     export class AppModule { }
+  </code>
+    1. NgModule decorator is used to convert a plain Typescript/JavaScript class into Angular module.
+    2. declarations: [AppComponent] - Declarations option is used to include components into the AppModulemodule.
+    3. bootstrap: [AppComponent], Bootstrap option is used to set the root component of the AppModulemodule.
+    4. providers: [], Providers option is used to include the services for the AppModulemodule.
+    5. import{} imports option is used to import other modules into the AppModulemodule.
+ </div>
+ SERVICES
+ <div>
+  Services are plain Typescript/JavaScript class providing a very specific functionality. They will do a single task and do it best. The main purpose of the service is to make a certain feature reusable.
+ </div>
+ METADATA 
+ <div> Angular, metadata is used to provide additional information about a class, component, or service. </div>
+ RUN ANGULAR 
+ <div>
+  When we run an Angular application, index.html is the first file that is loaded on the browser. Then, browser looks for the main TypeScript file, i.e. src/main.ts which is the entry point of Angular application.
+  Now, this file bootstraps the AppComponent (src/app.component.ts), the root component of every Angular application.
+  The AppComponent renders its template (src/app.component.html) and uses the corresponding styles (src/app.component.css). AppComponent name, i.e., app-root is used inside the src/index.html so that view of the angular application can be rendered.
+ </div>
+</div>
+
 SPA and CHALLENGING WORK / SHARED SERVICES
 <div>
   <!-- -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
