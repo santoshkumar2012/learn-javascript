@@ -56,6 +56,7 @@ What is MS SQL?
 
 ES6
 <div>
+(  ES6 (2015) - let, const, Arrow Function, Destructuring, spread and rest operator, class, promise )
   SPREAD OPERATOR
   REST OPERATOR
   function members(greeting, ...names) {
@@ -83,8 +84,8 @@ ES6
   ------------------- 
   Array.prototype.findLast() & findLastIndex() (ES2023)
   const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-console.log(numbers.findLast(n => n % 2 === 0)); // 8
-console.log(numbers.findLastIndex(n => n % 2 === 0)); // 7
+  console.log(numbers.findLast(n => n % 2 === 0)); // 8
+  console.log(numbers.findLastIndex(n => n % 2 === 0)); // 7
 --------------------------------  
 Array.prototype.toSorted(), toSpliced(), toReversed() (ES2023)
 const arr = [3, 1, 4, 2];
@@ -92,6 +93,11 @@ console.log(arr.toSorted()); // [1, 2, 3, 4] (original array unchanged)
 console.log(arr.toReversed()); // [2, 4, 1, 3]
 console.log(arr.toSpliced(1, 2, 99)); // [3, 99, 2]
 console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
+------------------------
+ES 2024 
+Object.groupBy()
+Map.groupBy()
+Temporal.PlainDate()
 </div>
 
 DEFAULT PARAMETER
@@ -159,7 +165,7 @@ MAP AND SET
     console.log(myMap);
   --------------------
   let myArray = [1,2,3]
-  let obj = new set(myArray);
+  let obj = new Set(myArray);
   console.log(obj)
   </code>
 </div>
@@ -271,12 +277,52 @@ Debouncing & Throttling
 <div>
 Debouncing limits the execution of a function until after a certain delay.
 Throttling ensures a function runs at most once in a specified interval.
+<script>
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+// Function to be executed
+function searchQuery(e) {
+  console.log("Searching for:", e.target.value);
+}
+
+// Applying debounce to input event
+const input = document.getElementById("search");
+input.addEventListener("keyup", debounce(searchQuery, 500));
+</script>
+<script>
+  function throttle(func, interval) {
+  let lastExecutedTime = 0;
+  return function (...args) {
+    let now = Date.now();
+    if (now - lastExecutedTime >= interval) {
+      func.apply(this, args);
+      lastExecutedTime = now;
+    }
+  };
+}
+
+// Function to be executed
+function handleScroll() {
+  console.log("Scroll event triggered:", new Date().toLocaleTimeString());
+}
+
+// Applying throttle to scroll event
+window.addEventListener("scroll", throttle(handleScroll, 1000));
+
+</script>
 </div>
 
 DEEP COPY AND SHALLOW COPY
 <div>
   Shallow Copy – Creates a new object but copies references to nested objects.
   Deep Copy – Creates a new object and recursively copies all values, ensuring no references remain.
+
   Difference - sh - References copied (not duplicated), deep - Entire structure duplicated
   sh - Changes in the copy affect the original, deep - Changes in the copy do NOT affect the original
   sh - Faster (less memory used)	, deep - Slower (more memory used)
@@ -286,11 +332,13 @@ DEEP COPY AND SHALLOW COPY
         let obj2 = obj1; // Copies reference
         obj2.details.age = 30;
         console.log(obj1.details.age); // Output: 30 (Changes reflect in obj1)
+
   -- Deep copy
         let obj1 = { name: "John", details: { age: 25 } };
   let obj2 = structuredClone(obj1);
   obj2.details.age = 30;
   console.log(obj1.details.age); // Output: 25 (Unaffected)
+
 </div>
 
 => Box Model - box that wraps around every HTML element. It consists of: content, padding, borders and margins.
@@ -375,7 +423,6 @@ while (true) {
   count++;
 }
 </div>
-
 
 HASH FUNCTION IN JAVASCRIPT
 <div>

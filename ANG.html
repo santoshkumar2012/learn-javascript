@@ -1,5 +1,4 @@
 /** Angular **/
-
 BASIC
 <div>
  MVC and MVVM (Model-View-ViewModel) 
@@ -692,13 +691,12 @@ DATA BINDING
 --------------------------------
 <div>
 Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML).
-
 Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ), 
 
-Two-way Binding (<input [(ngModel)]="name">)
-examples - name = 'John';
-<input [(ngModel)]="name">
-<p>Hello, {{ name }}!</p>
+Two-way Binding Example
+userInput: string = '';  // Model property
+<input type="text" [(ngModel)]="userInput" placeholder="Type something..." />
+<p>You typed: {{ userInput }}</p>
 </div>
 
 DECORATOR 
@@ -1130,10 +1128,16 @@ export class AppComponent implements OnInit {
   totalPages = 0; // Total number of pages -->
 
   ngOnInit() {
-    // Generating 100 sample items
-    <!-- this.items = Array.from({ length: 100 }, (_, i) => `Item ${i + 1}`);
+    this.createItemsList();
+  }
+
+  createItemsList(){
+    for(let i=1; i<=100; i++){
+      this.items.push("Item" +' '+ i)
+    }
+    <!-- console.log('Check', this.items); -->
     this.totalPages = Math.ceil(this.items.length / this.pageSize);
-    this.updatePage(); -->
+    this.updatePage();
   }
 
   // Function to update items for the current page
@@ -1176,6 +1180,7 @@ and provides mechanisms to update and access the state efficiently.
 
 Login Page – User enters credentials.
 Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
+
 Dashboard Component – Accessible only after login.
 Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
 
@@ -1324,4 +1329,71 @@ Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nt
     ✅ Nesting (&:hover)
     ✅ Loops (@each for button sizes)
 
+</div>
+
+LOGIN PAGE STEP 
+<div>
+ng generate component pages/login
+ng generate component pages/dashboard
+ng generate service services/auth
+Auth Guard: Prevents unauthorized users from accessing Dashboard
+-----------------
+Create Authentication Service ( auth.service.ts)
+<script>
+  constructor(private router: Router) {}
+
+login(username: string, password: string): boolean {
+  if (username === 'admin' && password === 'password') {
+    localStorage.setItem('isLoggedIn', 'true');
+    this.router.navigate(['/dashboard']);
+    return true;
+  }
+  return false;
+}
+
+logout() {
+  localStorage.removeItem('isLoggedIn');
+  this.router.navigate(['/login']);
+}
+
+isAuthenticated(): boolean {
+  return localStorage.getItem('isLoggedIn') === 'true';
+}
+</script>
+login.component.ts
+<script>
+  username: string = '';
+  password: string = '';
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService) {}
+
+  login() {
+    if (!this.authService.login(this.username, this.password)) {
+      this.errorMessage = 'Invalid credentials!';
+    }
+  }
+</script>
+login.component.html
+<div class="login-container">
+  <h2>Login</h2>
+  <input type="text" placeholder="Username" [(ngModel)]="username" />
+  <input type="password" placeholder="Password" [(ngModel)]="password" />
+  <button (click)="login()">Login</button>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</div>
+dashboard.component.ts:
+<script>
+  constructor(private authService: AuthService) {}
+  logout() {
+    this.authService.logout();
+  }
+</script>
+dashboard.html 
+<script>
+  <div class="dashboard-container">
+  <h2>Welcome to Dashboard</h2>
+  <button (click)="logout()">Logout</button>
+</div>
+</script>
 </div>
