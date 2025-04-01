@@ -91,6 +91,10 @@ ANGULAR CLI
  <div>
   Angular CLI (Command Line Interface) is a powerful tool that helps automate and streamline the development process for Angular applications. It provides a set of commands for creating, managing, and building Angular projects.
  </div>
+ Controllers in Angular
+<div>
+  In AngularJS (Angular 1.x), controllers were used to manage the application's logic and data binding. However, in modern Angular (2+), controllers are replaced by components.
+</div>
 </div>
 
 SPA and CHALLENGING WORK / SHARED SERVICES
@@ -164,7 +168,7 @@ LIFE CYCLE
 <div>
   Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle.
   constructor - for variable initialization 
-  <!-- ngonInit(){} - Called once after component initialization -->
+  <!-- ngOnInit(){} - Called once after component initialization -->
   <!-- ngDoCheck() - Called during every change detection cycle -->
   ngOnChanges()
   <div> 
@@ -189,6 +193,10 @@ LIFE CYCLE
     <button click="fun()"> click me </button>
  -->
   </div>
+
+  => ngAfterViewInit()
+  This hook is called after Angular has fully initialized the component's view 
+  (i.e., after the HTML template is rendered and child components are loaded).
 
   ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
   ngAfterContentChecked()	- Called after projected content is checked
@@ -341,6 +349,17 @@ CRUD
     },(error: any) => {this.errorMessage(error)}) -->
   }
    
+</div>
+
+GRAPHQL 
+<div>
+  GraphQL is a powerful alternative to REST for querying and mutating data in Angular applications. It allows clients to request exactly the data they need, reducing over-fetching and improving performance.
+  npm install @apollo/client graphql
+  Benefits of Using GraphQL in Angular
+  ✅ Fetch only the data you need
+  ✅ Reduce API calls with a single query
+  ✅ Strongly typed schema
+  ✅ Real-time updates with subscriptions
 </div>
 </div>
 
@@ -554,6 +573,75 @@ Uses signals instead of Observables.
   increment() {
     this.count.set(this.count() + 1);
   } -->
+
+=> ngRx Store?
+ngRx Store is a state management library for Angular applications. It is based on Redux and helps manage application state in a predictable way using actions, reducers, and selectors.
+1️⃣ Actions – Define what happens in the app (e.g., "Add Product", "Delete User").
+2️⃣ Reducers – Handle state changes based on actions.
+3️⃣ State – The single source of truth for the app.
+4️⃣ Selectors – Retrieve specific data from the store.
+5️⃣ Effects – Handle asynchronous operations like API calls.
+
+<script>
+  Installation
+ng add @ngrx/store
+ng add @ngrx/effects
+
+* Actions
+import { createAction } from '@ngrx/store';
+export const increment = createAction('[Counter] Increment');
+export const decrement = createAction('[Counter] Decrement');
+export const reset = createAction('[Counter] Reset');
+
+* Create Reducer
+import { createReducer, on } from '@ngrx/store';
+import { increment, decrement, reset } from './counter.actions';
+export const initialState = 0;
+export const counterReducer = createReducer(
+  initialState,
+  on(increment, (state) => state + 1),
+  on(decrement, (state) => state - 1),
+  on(reset, () => 0)
+);
+
+* Register Store
+  import { StoreModule } from '@ngrx/store';
+  import { counterReducer } from './counter.reducer';
+  imports: [
+  StoreModule.forRoot({ count: counterReducer }) // Register reducer
+  ],
+
+* Store in Components
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { increment, decrement, reset } from './counter.actions';
+
+@Component({
+  selector: 'app-counter',
+  template: `
+    <h1>Counter: {{ count$ | async }}</h1>
+    <button (click)="increment()">Increment</button>
+    <button (click)="decrement()">Decrement</button>
+    <button (click)="reset()">Reset</button>
+  `
+})
+export class CounterComponent {
+  count$ = this.store.select('count'); // Select state
+
+  constructor(private store: Store<{ count: number }>) {}
+
+  increment() { this.store.dispatch(increment()); }
+  decrement() { this.store.dispatch(decrement()); }
+  reset() { this.store.dispatch(reset()); }
+}
+</script>
+
+----- 
+ngRx Store helps manage global state in Angular apps.
+It follows Redux principles with actions, reducers, and selectors.
+Effects handle async operations like API calls.
+Improves scalability, performance, and debugging.
+
 </div>
 
 State Management in Angular
@@ -582,6 +670,7 @@ Lazy Loading
 <div>
   Lazy Loading is an optimization technique in Angular that loads modules or components only when they are needed, instead of loading everything upfront.
   These modules are loaded dynamically only when the user navigates to them.
+
   ==> path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) 
   Lazy Loading with Child Components
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
@@ -658,7 +747,7 @@ How to use multiple API in angular ? + AOT JIT
 AOT - Ahead of time compilation at build time application runs. 
 JIT - Just in time
 
-** Different --
+** Different AOT AND JIT --
 <script>
 JIT (Just-in-Time) Compilation:
 
@@ -691,8 +780,31 @@ changeText() {
   this.headingElement.nativeElement.textContent = 'Text Changed!';
   this.headingElement.nativeElement.style.color = 'red';
 }
-</div>
 
+----------------- 
+@ViewChildren (Multiple Element or Component References)
+=> child.component.ts 
+   <p>Child Component</p>
+   greet() {
+    return 'Hello from Child Component!';
+  }
+
+=> parent.component.ts
+<app-child></app-child>
+<app-child></app-child>
+<app-child></app-child>
+<button (click)="callChildrenMethods()">Call All Child Methods</button>
+ts
+@ViewChildren(ChildComponent) children!: QueryList<ChildComponent>;
+  ngAfterViewInit() {
+    this.children.forEach((child, index) => {
+      console.log(`Child ${index + 1}: ` + child.greet());
+    });
+  }
+  callChildrenMethods() {
+    this.children.forEach((child) => alert(child.greet()));
+  }
+</div>
 --------------------------------
 DATA BINDING
 --------------------------------
@@ -718,6 +830,7 @@ Diretives is class that modifies the behaviour appearance of the elements
 @viewChildren - It is used to get multiple child components, directives.
 
 view child examples 
+<div> 
 <app-child></app-child>
  <button (click)="callChildMethod()">Call Child Method</button>
 <p>{{ message }}</p>
@@ -732,7 +845,7 @@ ngAfterViewInit() {
 callChildMethod() {
   this.message = this.child.sayHello();
 }
-
+</div>
 -------------
 
 @Input, @output
@@ -755,7 +868,7 @@ sendMessage() {
 
 Parent ts - 
 
-template: `
+template : `
     <app-child (messageEvent)="receiveMessage($event)"></app-child>
     <p>Received Message: {{ receivedMessage }}</p>
     ---------------
@@ -768,6 +881,7 @@ template: `
 Ngfor, forloop
 <div>
     ngfor 
+
     employees = [
     {
     id: 1,
@@ -810,6 +924,21 @@ CUSTOM DIRECTIVE
     this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
     } 
   <button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
+  ---------------- 
+  @Directive({
+    selector: '[websanto]', // Custom attribute selector
+  })
+
+  @Input() color: string = ''; // Input property for color
+
+  constructor(private el: ElementRef) {}
+
+  ngOnInit() {
+    this.el.nativeElement.style.backgroundColor = this.color; // Apply color
+  }
+in HTML 
+<button websanto color="red">Submit</button>
+</div>
 </div>
 
 SCROLLTOP
@@ -928,6 +1057,10 @@ Using a Global Variable for data transfer
 
 Spying on a Method in Angular (Jasmine & SpyOn)
 <div>
+  jASMINE - 
+  Jasmine is a behavior-driven development (BDD) framework for testing JavaScript applications.
+  It does not depend on any external libraries and is commonly used for unit testing in Angular.
+
   In Angular unit testing, spying on methods is a common practice to track method calls, prevent actual execution, and return mock values. This is done using Jasmine’s spyOn function.
 
   export class MyComponent {
@@ -1042,6 +1175,35 @@ FORMS
   Synchronous
   Complex forms
   Immutable data model  
+
+  <div>
+    lead_form!: FormGroup
+    lead_fields = {
+    name     : ['', Validators.required],
+    email    : ['', Validators.required],
+    }
+    constructor( private _fb    : FormBuilder ){
+  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
+  }
+  ngOnInit(){this.initializeForm()}
+  initializeForm(){
+  this.lead_form = this._fb.group(this.lead_fields)
+  this.getLeads()
+  }
+  saveForm() {
+    if (this.myForm.invalid) {
+      alert('Please fill in all required fields!');
+      return;
+    }
+  </div>
+
+  HTML 
+  <form [formGroup]="lead_form" (ngSubmit)="saveForm()">
+  <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  <span class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
+  Name is required. </span>
+  </form>
+
 </div>
 
 LOCALSTORAGE AND SESSIONSTORAGE 
