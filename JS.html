@@ -560,3 +560,30 @@ let number = 45678123465;
 console.log(wordCount("the quick brown fox jumps over the lazy dog the")); 
 
 </script>
+
+VOWEL 
+<script>
+  let str = "Hey JS you are AMAZING"
+const vowels = ['a','e','i','o','u']
+
+function countVowels(data){
+let count = 0;
+data.toLowerCase().split("").forEach((ch) => {
+  vowels.includes(ch) && count++;
+})
+return count;
+}
+
+const numOfVowels = countVowels(str)
+console.log(numOfVowels)
+</script>
+
+SUM
+<script>
+  let array = [2,3,5,6,5]
+  let sum = 0
+  for (let i = 0; i < array.length; i++){
+       sum += array[i]
+  }
+  console.log(sum)
+</script>
