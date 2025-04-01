@@ -190,6 +190,10 @@ LIFE CYCLE
  -->
   </div>
 
+  => ngAfterViewInit()
+  This hook is called after Angular has fully initialized the component's view 
+  (i.e., after the HTML template is rendered and child components are loaded).
+
   ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
   ngAfterContentChecked()	- Called after projected content is checked
   ngAfterViewInit()	- Called after the component's view and child views are initialized
@@ -341,6 +345,17 @@ CRUD
     },(error: any) => {this.errorMessage(error)}) -->
   }
    
+</div>
+
+GRAPHQL 
+<div>
+  GraphQL is a powerful alternative to REST for querying and mutating data in Angular applications. It allows clients to request exactly the data they need, reducing over-fetching and improving performance.
+  npm install @apollo/client graphql
+  Benefits of Using GraphQL in Angular
+  ✅ Fetch only the data you need
+  ✅ Reduce API calls with a single query
+  ✅ Strongly typed schema
+  ✅ Real-time updates with subscriptions
 </div>
 </div>
 
@@ -554,6 +569,75 @@ Uses signals instead of Observables.
   increment() {
     this.count.set(this.count() + 1);
   } -->
+
+=> ngRx Store?
+ngRx Store is a state management library for Angular applications. It is based on Redux and helps manage application state in a predictable way using actions, reducers, and selectors.
+1️⃣ Actions – Define what happens in the app (e.g., "Add Product", "Delete User").
+2️⃣ Reducers – Handle state changes based on actions.
+3️⃣ State – The single source of truth for the app.
+4️⃣ Selectors – Retrieve specific data from the store.
+5️⃣ Effects – Handle asynchronous operations like API calls.
+
+<script>
+  Installation
+ng add @ngrx/store
+ng add @ngrx/effects
+
+* Actions
+import { createAction } from '@ngrx/store';
+export const increment = createAction('[Counter] Increment');
+export const decrement = createAction('[Counter] Decrement');
+export const reset = createAction('[Counter] Reset');
+
+* Create Reducer
+import { createReducer, on } from '@ngrx/store';
+import { increment, decrement, reset } from './counter.actions';
+export const initialState = 0;
+export const counterReducer = createReducer(
+  initialState,
+  on(increment, (state) => state + 1),
+  on(decrement, (state) => state - 1),
+  on(reset, () => 0)
+);
+
+* Register Store
+  import { StoreModule } from '@ngrx/store';
+  import { counterReducer } from './counter.reducer';
+  imports: [
+  StoreModule.forRoot({ count: counterReducer }) // Register reducer
+  ],
+
+* Store in Components
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { increment, decrement, reset } from './counter.actions';
+
+@Component({
+  selector: 'app-counter',
+  template: `
+    <h1>Counter: {{ count$ | async }}</h1>
+    <button (click)="increment()">Increment</button>
+    <button (click)="decrement()">Decrement</button>
+    <button (click)="reset()">Reset</button>
+  `
+})
+export class CounterComponent {
+  count$ = this.store.select('count'); // Select state
+
+  constructor(private store: Store<{ count: number }>) {}
+
+  increment() { this.store.dispatch(increment()); }
+  decrement() { this.store.dispatch(decrement()); }
+  reset() { this.store.dispatch(reset()); }
+}
+</script>
+
+----- 
+ngRx Store helps manage global state in Angular apps.
+It follows Redux principles with actions, reducers, and selectors.
+Effects handle async operations like API calls.
+Improves scalability, performance, and debugging.
+
 </div>
 
 State Management in Angular
@@ -582,6 +666,7 @@ Lazy Loading
 <div>
   Lazy Loading is an optimization technique in Angular that loads modules or components only when they are needed, instead of loading everything upfront.
   These modules are loaded dynamically only when the user navigates to them.
+
   ==> path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) 
   Lazy Loading with Child Components
   { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
@@ -928,6 +1013,10 @@ Using a Global Variable for data transfer
 
 Spying on a Method in Angular (Jasmine & SpyOn)
 <div>
+  jASMINE - 
+  Jasmine is a behavior-driven development (BDD) framework for testing JavaScript applications.
+  It does not depend on any external libraries and is commonly used for unit testing in Angular.
+
   In Angular unit testing, spying on methods is a common practice to track method calls, prevent actual execution, and return mock values. This is done using Jasmine’s spyOn function.
 
   export class MyComponent {
