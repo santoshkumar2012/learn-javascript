@@ -9,6 +9,11 @@
 // Let - We can assign value again, We can not declare name again.
 // Const - We can declare only one time name and value, don't use again
 
+var = Function Scoped
+let = Block-scoped, Reassignable
+const = Block-scoped, Not Reassignable 
+
+
     var first_name = "Santosh"
     var first_name = "Kumar"
 
