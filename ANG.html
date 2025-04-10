@@ -224,6 +224,25 @@ ANGULAR AND angular JS between difference
   Both support dependency injection, but Angular has a more powerful and flexible DI system compared to AngularJS.
 </div>
 
+How to upload angular application on server 
+<div>
+= > Build the Angular App
+Before uploading, you need to compile your Angular app into static files.
+ng build --prod
+
+= >  Hosting Method
+FTP/SFTP server, Shared hosting (like cPanel, Hostinger, GoDaddy)
+
+= >  Upload Files to the Server
+Using FTP (FileZilla, cPanel, etc.)
+Open your FTP client (e.g., FileZilla).
+Connect to your server.
+Navigate to your website's root directory (like /public_html).
+Upload everything from dist/your-project-name/ into that folder.
+
+= >  Test It!
+</div>
+
 </div>
 
 /******************************
@@ -1474,6 +1493,41 @@ export class AppComponent implements OnInit {
   <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
 </div>
 
+</div>
+
+GIT 
+<div>
+  Git is a version control system that helps you track changes in your code, collaborate with others, and manage your project history. Think of it as a "time machine" for your code.
+
+  1. Initialize a Git Repository
+  go to your project folder and run - git init
+ 
+  2. Check the Status of Your Project
+  git status
+
+  3. Add Files to Staging Area
+  git add .
+
+  4. Commit Changes 
+  git commit -m "Your commit message here"
+
+  5. Connect to a Remote Repository
+  git remote add origin https://github.com/your-username/your-repo.git
+
+  6. Push Changes to Remote Repository
+  git push -u origin main
+
+  7. Pull Changes from Remote Repository
+  git pull origin main
+
+  <script>
+    cd my-angular-app
+    git init
+    git add .
+    git commit -m "Initial commit"
+    git remote add origin https://github.com/yourname/my-angular-app.git
+    git push -u origin main
+  </script>
 </div>
 
 12. Store is a centralized state management solution that holds the application’s state  
