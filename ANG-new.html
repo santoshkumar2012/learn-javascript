@@ -1,55 +1,117 @@
-/** Angular **/
-<div>
-  As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked extensively with Angular to build reusable components, implement routing, handle state management, and integrate APIs efficiently. I collaborated closely with designers and backend developers to ensure a seamless and high-performing user experience.
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title> Angular </title>
+    <style>
+      #toTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  display: none; /* Hidden by default */
+  transition: background-color 0.3s;
+  width: 30px;
+  height: 30px;
+}
+
+#toTopBtn:hover {
+  background-color: #555;
+}
+h2 { font-size: 18px; font-weight: 600;}
+
+    </style>
+  </head>
+  <body>
+   <div class="container">
+
+    <ul class="index">
+      <li> <a href="#component"> abc </a> </li>
+    </ul>
+
+ <h2>INTRO</h2>   
+<div class="box shadow p-2 mb-3">
+As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked extensively with Angular to build reusable components, implement routing, handle state management, and integrate APIs efficiently. I collaborated closely with designers and backend developers to ensure a seamless and high-performing user experience.
 In addition to frontend development, I have strong design skills and experience working with Figma and Photoshop. I have designed UI layouts, website templates, and even complete dashboards for admin panels, ensuring intuitive and user-friendly interfaces.
 I was responsible for creating and maintaining UI architectures, optimizing application performance, and ensuring cross-browser compatibility. I also implemented custom Angular directives, pipes, and services to enhance code reusability and maintainability.
 Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility. I also mentored junior developers, conducted code reviews.
 </div>
-BASIC
-<div>
- MVC and MVVM (Model-View-ViewModel) 
- <code>
- ** MVC (Model-View-Controller) is a design pattern that separates an application into three main components:
-      1. Model: Represents data and business logic (e.g., database, API).
-      2. View: The UI layer that displays data to the user.
-      3. Controller: Manages user inputs and updates the Model or View.
-  ** HOW WORK MVC 
-      1. The Controller receives user input (e.g., a button click).
-      2. The Controller updates the Model (business logic).
-      3. The Model notifies the View, and the View updates accordingly.
- ** MVVM
-      MVVM (Model-View-ViewModel) is a software architectural pattern that is commonly used in Angular applications, providing a clean separation of concerns between different components of an application.
-      Model - Represents the application’s data and logic, It is the part of the application that manages the state, and it can be composed of services, APIs,
-      View :- Represents the UI (user interface) elements that the user interacts with, such as buttons, inputs, forms, etc. | View is typically defined using HTML and CSS, and it’s tied to the template of a component.
-      ViewModel :- ViewModel holds the data and logic needed to present the Model’s data in a way that the View can easily display.
-      It is represented by the component in Angular, which binds the data and defines the behavior that will be reflected in the view.
-      two-way data binding (via ngModel) allows the ViewModel.
- </code>
- COMPONENTS 
- <code>
-  Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. 
-  @Component({
-    selector: 'app-root',
-    standalone: true,
-    imports: [RouterOutlet],
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
-  })
-  @Component: A decorator used to convert a normal Typescript class to Angular Component.
-  <app-root></app-root>
-  app-root: It is the selector/name of the component and it is specified using selector meta data of the component's decorator.
-  app.component.html: It is the HTML template document associated with the component.
-  AppComponent: Its property (title) is used in the HTML template to set the title of the application.
- </code>
- TEMPLATE 
- <div> 
-  Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements.
-  Template can be categorised into two items :- 
-  Data binding {{ title }}, Directives *ngIf="canShow"
- </div>
- MODULES, Bootstrap
- <div>
-  Angular Module is basically a collection of related features/functionality. It groups multiple components and services under a single context.
+
+
+
+<h2> ANGULAR BASIC </h2>
+<div class="box shadow p-2 mb-3" id="mvc">
+<p><strong>  MVC and MVVM (Model-View-ViewModel)  </strong></p>
+<p> ** MVC (Model-View-Controller) is a design pattern that separates an application into three main components:
+  <ol>
+    <li> <strong> Model: </strong> Represents data and business logic (e.g., database, API). </li>
+    <li> <strong> View: </strong> The UI layer that displays data to the user. </li>
+    <li> <strong> Controller: </strong> Manages user inputs and updates the Model or View. </li>
+  </ol>
+</p>
+<p> ** <strong> HOW WORK MVC  </strong>
+  1. The Controller receives user input (e.g., a button click).
+  2. The Controller updates the Model (business logic).
+  3. The Model notifies the View, and the View updates accordingly. 
+</p>
+<p>
+      <strong> MVVM </strong> 
+     <p> <strong> MVVM (Model-View-ViewModel) </strong> is a software architectural pattern that is commonly used in Angular applications, providing a clean separation of concerns between different components of an application. </p> 
+     <p> <strong> Model -  </strong>Represents the application’s data and logic, It is the part of the application that manages the state, and it can be composed of services, APIs, </p>
+     <p> <strong>View :- </strong> Represents the UI (user interface) elements that the user interacts with, such as buttons, inputs, forms, etc. | View is typically defined using HTML and CSS, and it’s tied to the template of a component. </p> 
+     <p> <strong> ViewModel :- </strong> ViewModel holds the data and logic needed to present the Model’s data in a way that the View can easily display.  It is represented by the component in Angular, which binds the data and defines the behavior that will be reflected in the view. two-way data binding (via ngModel) allows the ViewModel. </p> 
+</p>
+</div>   
+
+
+<h2 id="component"> COMPONENTS </h2>
+<div class="box shadow p-2 mb-3" id="mvc">
+<p> Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. </p>
+<pre><code> @Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+}) </code> </pre>
+<p> @Component: A decorator used to convert a normal Typescript class to Angular Component.
+</p>
+</div>
+
+
+<h2 id="root"> app-root <app-root></app-root> </h2>
+<div class="box shadow p-2 mb-3" id="mvc">
+<p> <strong> app-root: </strong> It is the selector/name of the component and it is specified using selector meta data of the component's decorator. </p>  
+ <p> <strong> app.component.html: </strong> It is the HTML template document associated with the component. </p> 
+ <p> <strong> AppComponent: </strong> Its property (title) is used in the HTML template to set the title of the application. </p> 
+</div>
+
+
+
+<div class="box shadow p-2 mb-3" id="template">
+<h2> TEMPLATE </h2>
+<p>   Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements. <br> 
+<strong> Template can be categorised into two items :- </strong> <br> 
+  Data binding {{ title }}, Directives *ngIf="canShow" </p>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="modules">
+<h2>  MODULES, Bootstrap </h2>
+<p> Angular Module is basically a collection of related features/functionality. It groups multiple components and services under a single context. </p>
+<pre>
   <code>
     import { BrowserModule } from '@angular/platform-browser'; 
     import { NgModule } from '@angular/core'; 
@@ -65,231 +127,204 @@ BASIC
      }) 
      export class AppModule { }
   </code>
-    1. NgModule decorator is used to convert a plain Typescript/JavaScript class into Angular module.
-    2. declarations: [AppComponent] - Declarations option is used to include components into the AppModulemodule.
-    3. bootstrap: [AppComponent], Bootstrap option is used to set the root component of the AppModulemodule.
-    4. providers: [], Providers option is used to include the services for the AppModulemodule.
-    5. import{} imports option is used to import other modules into the AppModulemodule.
- </div>
- SERVICES
- <div>
-  Services are plain Typescript/JavaScript class providing a very specific functionality. They will do a single task and do it best. The main purpose of the service is to make a certain feature reusable.
- </div>
- METADATA 
- <div> 
-  <p> Angular, metadata is used to provide additional information about a class, component, or service. </p>  
-</div>
- RUN ANGULAR 
- <div>
-  When we run an Angular application, index.html is the first file that is loaded on the browser. Then, 
-  browser looks for the main TypeScript file, i.e. src/main.ts which is the entry point of Angular application.
-  Now, this file bootstraps the AppComponent (src/app.component.ts), the root component of every Angular application.
-  The AppComponent renders its template (src/app.component.html) and uses the corresponding styles (src/app.component.css). AppComponent name, i.e., app-root is used inside the src/index.html so that view of the angular application can be rendered.
- </div>
-ANGULAR CLI
- <div>
-  Angular CLI (Command Line Interface) is a powerful tool that helps automate and streamline the development process for Angular applications. It provides a set of commands for creating, managing, and building Angular projects.
- </div>
- Controllers in Angular
-<div>
-  In AngularJS (Angular 1.x), controllers were used to manage the application's logic and data binding. However, in modern Angular (2+), controllers are replaced by components.
-</div>
+</pre>
+<ol>
+  <li> <strong> NgModule </strong> decorator is used to convert a plain Typescript/JavaScript class into Angular module. </li>
+  <li> <strong> declarations: [AppComponent] </strong> - Declarations option is used to include components into the AppModulemodule. </li>
+  <li> <strong> bootstrap: </strong> [AppComponent], Bootstrap option is used to set the root component of the AppModulemodule. </li>
+  <li> <strong> providers: [], </strong> Providers option is used to include the services for the AppModulemodule. </li>
+  <li> <strong> import{} </strong> imports option is used to import other modules into the AppModulemodule. </li>
+  </ol>
 </div>
 
-SPA and CHALLENGING WORK / SHARED SERVICES
-<div>
-  <!-- -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
-  Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching -->
-  Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
------------------ 
-<!-- I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. -->
-
-SHARED SERVICES 
-<div>
-    <!-- genders = [
-    {"id": "male", "name": "Male"},
-    {"id": "female", "name": "Female"},
-    {"id": "other", "name": "Other"}
-  ] -->
-  <select>
-    <option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
-  </select>
+<div class="box shadow p-2 mb-3" id="services">
+<h2>  SERVICES </h2>
+<p>   Services are plain Typescript/JavaScript class providing a very specific functionality. They will do a single task and do it best. The main purpose of the service is to make a certain feature reusable. </p>
 </div>
 
-</div>
-
- Angular Architecture
-<div>
-  Angular is a front-end framework developed by Google for building dynamic single-page applications (SPAs). It follows a component-based architecture where the entire application is structured into modular, reusable components. At its core, Angular applications are made up of modules, components, templates, directives, services, and dependency injection. The root module, typically named AppModule, acts as the entry point of the application and can include multiple feature modules to organize different functionalities. These modules help in maintaining scalability by dividing the application into separate logical parts.
-
-  A component in Angular is the fundamental building block of the UI. Each component consists of three parts: an HTML template that defines the structure, a TypeScript class that contains business logic, and a CSS file that handles styling. 
-  
-  To enhance the functionality of templates, Angular provides directives. Structural directives, such as *ngIf and *ngFor, modify the DOM by adding or removing elements dynamically, while attribute directives, such as [ngClass] and [ngStyle], change the appearance or behavior of elements. Additionally, pipes are used to transform and format data within templates.
-  
- Services are singleton objects that can be injected into multiple components using Angular’s dependency injection (DI) system. This ensures better code reusability and separation of concerns. For handling HTTP requests.
-  
-  One of Angular’s most powerful features is routing, which enables navigation between different views without requiring a full page reload. The RouterModule manages the application’s routes and allows users to define URL-based navigation paths for different components.
-  
-  Under the hood, Angular’s change detection mechanism optimizes performance by updating only the necessary parts of the UI when data changes. It employs a unidirectional data flow with the ability to detect and update changes efficiently. 
-  
-  Overall, Angular’s structured approach, modularity, and built-in functionalities make it an ideal choice for developing large-scale enterprise applications. 
-</div>
-
-NEW FEATURES IN ANGULAR 
-<div>
-<code>
-  => New Features and Updates in Angular 15
-  1. Standalone API – No Need for NgModules
-  2. Directive Composition API – Reuse Logic Easily
-     * Allows directives to be combined into a single component easily.
-  3. Improved Performance with Better Tree Shaking
-  4. Enhanced Router Features
-     * Lazy loading components directly (without NgModule).
-     const routes: Routes = [
-     { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }];
-  5. Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance.
-  6. Better Material UI Components
-
-  => New Features and Updates in Angular 19
-  ​Angular 19, released in November 2024,
-  1. Standalone Components by Default
-  2. Incremental Hydration (Developer Preview)
-     * This feature enhances server-side rendering by allowing developers to incrementally hydrate parts of their application. Using the @ defer syntax
-  3. Route-Level Render Mode (Developer Preview)
-     * Angular 19 introduces the ability to control the rendering strategy of individual routes
-  4. Enhanced Reactivity with linkedSignal and resource()
-  5. Angular Material: New Time Picker Component
-  6. Two-Dimensional Drag & Drop in CDK
-</code>
-</div>
-
-LIFE CYCLE 
-<div>
-  Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle.
-  constructor - for variable initialization 
-  <!-- ngOnInit(){} - Called once after component initialization -->
-  <!-- ngDoCheck() - Called during every change detection cycle -->
-  ngOnChanges()
-  <div> 
-    <!-- 
- ngOnChanges() - Called when input properties change 
- // Examples 
- => Child component --- 
-    @Input() item: any;
-    ngOnChanges(){
-    alert("Data has been updated by parent component...")
-    }
-    HTML -- 
-    <h1>{{item}}</h1>
-
- => PARENT COMPONENT
-    name = 'coding'
-    fun(){
-     this.name = "Value has been chaged"
-     }
-    HTML --- 
-    <app-child item={{name}}></app-child>
-    <button click="fun()"> click me </button>
- -->
+<div class="box shadow p-2 mb-3" id="metadata">
+  <h2>  METADATA </h2>
+  <p>  Angular, metadata is used to provide additional information about a class, component, or service. </p>
   </div>
 
-  => ngAfterViewInit()
-  This hook is called after Angular has fully initialized the component's view 
-  (i.e., after the HTML template is rendered and child components are loaded).
 
-  ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
-  ngAfterContentChecked()	- Called after projected content is checked
-  ngAfterViewInit()	- Called after the component's view and child views are initialized
-  ngAfterViewChecked()	- Called after the component’s and child views are checked
-  <!-- ngOnDestroy()	 - Called just before the component is destroyed -->
-</div>
+  <div class="box shadow p-2 mb-3" id="angularrun">
+    <h2>  How to run angular Project ? </h2>
+    <p> When we run an Angular application, index.html is the first file that is loaded on the browser. Then, <br> 
+      <strong> Browser </strong> looks for the main <strong> TypeScript file, i.e. src/main.ts </strong> <br> 
+      Which is the entry point of Angular application. <br>
+      <strong> Now, </strong> this file bootstraps the <strong> AppComponent (src/app.component.ts), </strong> the root component of every Angular application. <br> 
+      The AppComponent renders its template (src/app.component.html) and uses the corresponding styles (src/app.component.css). <br> 
+      <strong> AppComponent </strong> name, i.e., app-root is used inside the <strong> src/index.html </strong> so that view of the angular application can be rendered. </p>
+  </div>
 
-OPTIMIZE ANGULAR PAGE 
-<div>
- 1. Optimize Change Detection, 2. Lazy Loading,
- 3. Reduce Bundle Size ( AOT AHEAD OF TIME )
- 4. Optimize Third-Party Libraries
- 5. Optimize CSS & Styles, Otimize http
- Minimize CSS & Use Critical CSS, CSS minification, Web Workers
- 6. USE track by
 
- <!-- <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
+  <div class="box shadow p-2 mb-3" id="angularcli">
+    <h2>  ANGULAR CLI </h2>
+    <p>   Angular CLI (Command Line Interface) is a powerful tool that helps automate and streamline the development process for Angular applications. It provides a set of commands for creating, managing, and building Angular projects. </p>
+  </div>
 
- this.http.get('https://api.example.com/data', { cache: 'force-cache' }); -->
+  <div class="box shadow p-2 mb-3" id="angularcontroller">
+    <h2>  Controllers in Angular </h2>
+    <p> In AngularJS (Angular 1.x), controllers were used to manage the application's logic and data binding. However, in modern Angular (2+), controllers are replaced by components. </p>
+  </div>
 
-Accessibility (A11Y)
+  <div class="box shadow p-2 mb-3" id="angularspa">
+    <h2>  SPA and CHALLENGING WORK / SHARED SERVICES </h2>
+    <p>  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
+      Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching <strong> Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER </strong> </p>
+    <h2> CHALLENGING WORK </h2>
+      <p> I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. </p>
 
-Make your UI inclusive for everyone (including users with disabilities).
+    <h2> SHARED SERVICES  </h2>
+    <pre>
+      <code>
+        genders = [
+            {"id": "male", "name": "Male"},
+            {"id": "female", "name": "Female"},
+            {"id": "other", "name": "Other"}
+          ]
 
-Add alt text for images.
+        select 
+        option -  *ngFor="let gender of genders" value="{{gender.id}}" ,  {{gender.name}}
+          
+      </code>
+    </pre>
+  </div>
 
-Use ARIA attributes for better screen reader support.
-Ensure high color contrast for readability
-Minify CSS, JS and enable Gzip compression.
 
-<!-- const routes: Routes = [
-  { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
-  { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
-]; -->
-</div>
+  <div class="box shadow p-2 mb-3" id="architecture">
+    <h2> Angular Architecture </h2>
+    <p>   Angular is a front-end framework developed by Google for building dynamic single-page applications (SPAs). <br> It follows a component-based architecture where the entire application is structured into modular, reusable components. <br> At its core, Angular applications are made up of modules, components, templates, directives, services, and dependency injection.<br> The root module, typically named AppModule, acts as the entry point of the application and can include multiple feature modules to organize different functionalities. These modules help in maintaining scalability by dividing the application into separate logical parts. </p>
+    <p>  A component in Angular is the fundamental building block of the UI. <br> Each component consists of three parts: an HTML template that defines the structure, a TypeScript class that contains business logic, and a CSS file that handles styling.  </p>
+    <p>  To enhance the functionality of templates, Angular provides directives. Structural directives, such as *ngIf and *ngFor, modify the DOM by adding or removing elements dynamically, while attribute directives, such as [ngClass] and [ngStyle], change the appearance or behavior of elements. Additionally, pipes are used to transform and format data within templates. </p>
+    <p>  Services are singleton objects that can be injected into multiple components using Angular’s dependency injection (DI) system. This ensures better code reusability and separation of concerns. For handling HTTP requests. </p>
+    <p>  One of Angular’s most powerful features is routing, which enables navigation between different views without requiring a full page reload. The RouterModule manages the application’s routes and allows users to define URL-based navigation paths for different components. </p>
+    <p> Under the hood, Angular’s change detection mechanism optimizes performance by updating only the necessary parts of the UI when data changes. It employs a unidirectional data flow with the ability to detect and update changes efficiently.  </p>
+    <p> Overall, Angular’s structured approach, modularity, and built-in functionalities make it an ideal choice for developing large-scale enterprise applications.  </p>
+  </div>
 
-API CALL RESTful APIs -- API serives 
-<div> 
--- Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs.
 
-    <!-- ngOnInit() {
-        this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
-          this.user = resposne.user
-          console.log(resposne);
-        })
-      } -->
-<script>
+  <div class="box shadow p-2 mb-3" id="newfeaturs">
+    <h2> NEW FEATURES IN ANGULAR  </h2>
+    <p> <strong> => New Features and Updates in Angular 15 </strong></p> 
+    <ol>
+      <li>Standalone API – No Need for NgModules</li>
+      <li> Directive Composition API – Reuse Logic Easily <br> 
+        * Allows directives to be combined into a single component easily.  </li>
+        <li> Improved Performance with Better Tree Shaking </li>
+        <li> <strong> Enhanced Router Features </strong> <br> </li>
+        <li> * <strong> Lazy loading components directly (without NgModule). </strong>
+          const routes: Routes = [
+          { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }]; </li>
+        <li> Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance. </li>
+        <li> Better Material UI Components </li>
+    </ol>
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ApiService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Sample API
+    <p> <strong> => New Features and Updates in Angular 19 </strong></p> 
+    <p>  ​Angular 19, released in November 2024, </p>
+    <ol>
+      
+      <li> Standalone Components by Default </li>
+      <li> Incremental Hydration (Developer Preview) <br>
+        * This feature enhances server-side rendering by allowing developers to incrementally hydrate parts of their application. Using the @ defer syntax </li>
+      <li> Route-Level Render Mode (Developer Preview) <br> * Angular 19 introduces the ability to control the rendering strategy of individual routes </li>
+      <li> Enhanced Reactivity with linkedSignal and resource() </li>
+      <li> Angular Material: New Time Picker Component </li>
+      <li> Two-Dimensional Drag & Drop in CDK </li>
+    </ol>
+    </div>
 
-  constructor(private http: HttpClient) {}
 
-  // Get all posts
-  getPosts(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
-  }
+    <div class="box shadow p-2 mb-3" id="life-cycle">
+      <h2> LIFE CYCLE </h2>
+      <p> <strong> Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle. </strong></p>
 
-  // Get post by ID
-  getPostById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
+      <p> <strong> constructor </strong> - for variable initialization </p>
+      <p> <strong> ngOnInit(){}  </strong> - Called once after component initialization </p>
+      <p> <strong> ngDoCheck() </strong> - Called during every change detection cycle </p>
+      <p> <strong> ngOnChanges() </strong> -  Called when input properties change  </p>
+      <pre>
+        <code>
+          Examples - 
+          => Child component --- 
+          @Input() item: any;
+          ngOnChanges(){
+          alert("Data has been updated by parent component...")
+          }
+          HTML -- 
+          {{item}}
+      
+       => PARENT COMPONENT
+          name = 'coding'
+          fun(){
+           this.name = "Value has been chaged"
+           }
+          HTML --- 
+          app-child item={{name}}> app-child
+          button click="fun()"> click me button
+        </code>
+      </pre>
 
-  // Create a new post
-  createPost(postData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, postData);
-  }
+      <p><strong> ngAfterContentInit() </strong> - Called after content projection (<ng-content>) is initialized </p>
+      <p> <strong> ngAfterContentChecked()</strong> - Called after projected content is checked </p>
+      <p> <strong> ngAfterViewInit() </strong> -  This hook is called after Angular has fully initialized the component's view <br> 
+        (i.e., after the HTML template is rendered and child components are loaded).  </p>
+      <p> <strong> ngAfterViewChecked() </strong>	- Called after the component’s and child views are checked </p>
+      <p> <strong> ngOnDestroy() </strong> Called just before the component is destroyed </p>
+      </div>
 
-  // Update a post
-  updatePost(id: number, postData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, postData);
-  }
 
-  // Delete a post
-  deletePost(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
-  }
-}
- </script>    
-<!-- <ul>
-  <li *ngFor="let post of posts">
-    <strong>{{ post.title }}</strong>
-    <p>{{ post.body }}</p>
-  </li>
-</ul> -->
+      <div class="box shadow p-2 mb-3" id="optimize">
+        <h2> OPTIMIZE ANGULAR PAGE </h2>
+        <ol>
+          <li> Optimize Change Detection </li>
+          <li> Lazy Loading </li>
+          <li> Reduce Bundle Size ( AOT AHEAD OF TIME ) </li>
+          <li> Optimize Third-Party Libraries </li>
+          <li> Optimize CSS & Styles, Otimize http, Minimize CSS & Use Critical CSS, CSS minification, Web Workers </li>
+          <li> USE track by </li>
+        </ol>
+        <pre>
+          <code>
+            *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}
+              this.http.get('https://api.example.com/data', { cache: 'force-cache' });
+          </code>
+        </pre>
+        </div>
 
-FORM validation - 
 
-<!-- 
-lead_form!: FormGroup
+        <div class="box shadow p-2 mb-3" id="accessibility">
+          <h2> Accessibility (A11Y) </h2>
+          <p> Make your UI inclusive for everyone (including users with disabilities). </p>
+          <p> Add alt text for images. </p>
+          <p> Use ARIA attributes for better screen reader support. </p>
+          <p> Ensure high color contrast for readability </p>
+          <p> Minify CSS, JS and enable Gzip compression. </p>
+          <pre><code> const routes: Routes = [
+            { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
+            { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
+          ]; </code></pre>
+         </div>
+
+
+         <div class="box shadow p-2 mb-3" id="apiservices">
+          <h2> API CALL RESTful APIs -- API serives  </h2>
+          <p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
+          <pre><code>
+            ngOnInit() {
+              this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+                this.user = resposne.user
+                console.log(resposne);
+              })
+            }
+          </code></pre>
+          </div>
+
+
+          <div class="box shadow p-2 mb-3" id="validation">
+            <pre><code>
+              lead_form!: FormGroup
 lead_fields = {
   name     : ['', Validators.required],
   email    : ['', Validators.required],
@@ -308,132 +343,139 @@ getLeads(){
     this.leads = response;
     this.action = "Add"
   },(error: any) => {this.errorMessage(error)})
-} -->
-CRUD 
-<div> 
+}
+            </code></pre>
+          </div>
+
+
+          <div class="box shadow p-2 mb-3" id="crud">
+  <h2> CRUD </h2>
   CREATE 
-  <!-- createLead(){
+  <pre><code>
+    
+  createLead(){
     this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
       this.afterAction("Lead Saved")
     },(error: any) => {this.errorMessage(error)})
-  } -->
+  }
   
   EDIT
   setPayloadForEdit(form: any){
-    <!-- return {
+    return {
       "name"     : form.name,
       "email"    : form.email,
-    } -->
+    }
   }
   editLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}] -->
-    <!-- const payload = this.setPayloadForEdit(this.lead_form.value) -->
+    let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    const payload = this.setPayloadForEdit(this.lead_form.value)
+
     // delete payload.tenant_id
-    <!-- this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
+    this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
       this.afterAction("Lead Update")
-    },(error: any) => {this.errorMessage(error)}) -->
+    },(error: any) => {this.errorMessage(error)})
   }
+
+
   updateLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    let params = [{"key": "tenant_id", "value": this.tenant_id}]
     const payload = this.setPayloadForEdit(this.lead_form.value)
     // delete payload.tenant_id
     this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
       this.afterAction("Lead Update")
-    },(error: any) => {this.errorMessage(error)}) -->
+    },(error: any) => {this.errorMessage(error)})
   }
+
   deleteLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    let params = [{"key": "tenant_id", "value": this.tenant_id}]
     this._http.delete('leads/leads/'+this.lead_id, params).subscribe((response:any) => {
       this.afterAction("Lead Deleted")
-    },(error: any) => {this.errorMessage(error)}) -->
+    },(error: any) => {this.errorMessage(error)})
   }
-   
+  </code></pre>
 </div>
 
-GRAPHQL 
-<div>
-  GraphQL is a powerful alternative to REST for querying and mutating data in Angular applications. It allows clients to request exactly the data they need, reducing over-fetching and improving performance.
-  npm install @apollo/client graphql
-  Benefits of Using GraphQL in Angular
-  ✅ Fetch only the data you need
-  ✅ Reduce API calls with a single query
-  ✅ Strongly typed schema
-  ✅ Real-time updates with subscriptions
-</div>
-</div>
 
-HOW TO UPGRADE OLD VERSION TO NEW VERSION
+
+<div class="box shadow p-2 mb-3" id="upgrade">
+<h2> HOW TO UPGRADE OLD VERSION TO NEW VERSION </h2>  
 <div>
 => Always backup your project before upgrading.
 => Use Git commits to track changes at each step.
-1. Check the Current Angular Version
+1. Check the Current Angular Version <br>
 ng version
-2. Update Angular CLI Globally
-npm install -g @angular/cli
-3. ng update @angular/core@16 @angular/cli@16
-4. Update Other Dependencies
+2. Update Angular CLI Globally <br>
+npm install -g @angular/cli 
+3. ng update @angular/core@16 @angular/cli@16 <br>
+4. Update Other Dependencies <br>
 ng update
 -------------
 You should upgrade step by step from Angular 15 → 16 → 17 → 18 → 19 rather than jumping directly from Angular 15 to Angular 19.
-If You Try Directly Updating from 15 to 19?
-1. dependency conflicts and errors.
-2. Some configurations (like angular.json) might break due to missing intermediate updates.
-3. Third-party libraries might not support Angular 19
+If You Try Directly Updating from 15 to 19? <br>
+1. dependency conflicts and errors. <br>
+2. Some configurations (like angular.json) might break due to missing intermediate updates. <br>
+3. Third-party libraries might not support Angular 19 <br>
+</div>
 </div>
 
-RxJS for Reactive Programming (RxJS)
-<div> 
-Different between -- 
-<script> 
-Promise -- 
-// Promise excute immediately when create promises. 
-// Pomise emit single value. Promise don't have operator . 
-// Promise cann't be cancel 
------
-// Observable does not start untill subscription.
-// Observable emit multiple value.
-// Observable operator like map, filter, reduce.
-// Observable can be cancel using unscribe method 
------ 
-</script>
 
-* Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never.
-<code> 
-  <!-- let myPromise = new Promise((resolve, reject) => {
-  let success = true; // Change this to false to see the reject case
-  setTimeout(() => {
-    if (success) {
-      resolve("Operation Successful!");
-    } else {
-      reject("Something went wrong!");
+<div class="box shadow p-2 mb-3" id="rxjs">
+  <h2> RxJS for Reactive Programming (RxJS) </h2>
+ 
+<p> Difference between </p>  
+
+ <strong> Promise -- </strong>  
+// Promise excute immediately when create promises. <br>
+// Pomise emit single value. Promise don't have operator . <br>
+// Promise cann't be cancel  <br>
+<strong> Observable -- </strong> 
+// Observable does not start untill subscription. <br> 
+// Observable emit multiple value.<br>
+// Observable operator like map, filter, reduce. <br>
+// Observable can be cancel using unscribe method <br>
+
+<h2 class="mt-4"> * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never. </h2>
+<pre>
+  <code>
+    let myPromise = new Promise((resolve, reject) => {
+      let success = true; // Change this to false to see the reject case
+      setTimeout(() => {
+        if (success) {
+          resolve("Operation Successful!");
+        } else {
+          reject("Something went wrong!");
+        }
+      }, 2000);
+    });
+    myPromise
+      .then(result => console.log(result)) // Runs when promise is resolved
+      .catch(error => console.log(error)); // Runs when promise is rejected  
+  </code>
+</pre>
+
+<p> <strong> Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values. </strong></p>
+
+<pre><code>
+  myObservable: Observable<number>;
+    ngOnInit() {
+      this.myObservable = new Observable(observer => {
+        let count = 1;
+        setInterval(() => {
+          observer.next(count++); // Emits a value every second
+        }, 1000);
+  
+      });
+      this.myObservable.subscribe(value => {
+        console.log('Received:', value);
+      });
     }
-  }, 2000);
-});
-myPromise
-  .then(result => console.log(result)) // Runs when promise is resolved
-  .catch(error => console.log(error)); // Runs when promise is rejected -->
-</code>
---------------------------------
-Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values.
+</code></pre>
 
-<!-- myObservable: Observable<number>;
+<h2> RxJS Operators </h2>
+<p><strong> Filtered Values: {{ values }} </strong></p>
+
+<pre><code>
   ngOnInit() {
-    this.myObservable = new Observable(observer => {
-      let count = 1;
-      setInterval(() => {
-        observer.next(count++); // Emits a value every second
-      }, 1000);
-
-    });
-    this.myObservable.subscribe(value => {
-      console.log('Received:', value);
-    });
-  } -->
-
-*** RxJS Operators 
-<h3>Filtered Values: {{ values }}</h3>
-
-<!-- ngOnInit() {
     const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     numbers$.pipe(
       filter(num => num % 2 === 0), // Filter even numbers
@@ -442,44 +484,52 @@ Observable is a stream of data that can emit multiple values over time. You can 
     .subscribe(result => {
       this.values.push(result);
     });
-  } -->
+  }
+</code></pre>
 
-  <!-- let observable = new Observable((observer) => {
-    setTimeout(() => {
-      observer.next("observable is working");
-      observer.complete();
-    }, 1000)
-    })
-    
-    observable.subscribe({
-      next: (result) => console.log(result),
-      complete: () => console.log("Observable completed")
-    }) -->
+<pre>
+  <code>
+    let observable = new Observable((observer) => {
+      setTimeout(() => {
+        observer.next("observable is working");
+        observer.complete();
+      }, 1000)
+      })
+      
+      observable.subscribe({
+        next: (result) => console.log(result),
+        complete: () => console.log("Observable completed")
+      })
+  </code>
+</pre>
 
-  Example: Converting Promise to Observable
-  <script>
-    const promise = new Promise((resolve) => {
-      setTimeout(() => resolve('Promise resolved!'), 2000);
-    });
+<h2> Example: Converting Promise to Observable </h2>
+<pre><code>
+  const promise = new Promise((resolve) => {
+    setTimeout(() => resolve('Promise resolved!'), 2000);
+  });
 
-    // Convert Promise to Observable
+  // Convert Promise to Observable
 
-    const observable$ = from(promise);
-    observable$.subscribe(value => console.log(value));
-  </script>
+  const observable$ = from(promise);
+  observable$.subscribe(value => console.log(value));
+</code></pre>
 
-  Handling HTTP Request with Observable vs Promise
-  <script>
+<h2> Handling HTTP Request with Observable vs Promise </h2>
+<pre>
+  <code>
     getData(): void {
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
-    }    
-  </script>
+    } 
+  </code>
+</pre>
 
-  Observable with Multiple Values
-  <script>
+<h2> Observable with Multiple Values </h2>
+<pre>
+  <code>
     const myObservable = new Observable(observer => {
       observer.next('Value 1');
       observer.next('Value 2');
@@ -489,57 +539,62 @@ Observable is a stream of data that can emit multiple values over time. You can 
       }, 2000);
     });
     myObservable.subscribe(value => console.log(value));
-  </script>
+  </code>
+</pre>
 
-  Cancelling an Observable
-  <script> 
-    const observable$ = interval(1000); // Emits values every second
-    const subscription: Subscription = observable$.subscribe(value => console.log(value));
-    setTimeout(() => {
-      console.log('Unsubscribing...');
-      subscription.unsubscribe(); // Stops emissions
-    }, 5000);
-  </script>
+<h2>  Cancelling an Observable </h2>
+<pre><code>
+  const observable$ = interval(1000); // Emits values every second
+  const subscription: Subscription = observable$.subscribe(value => console.log(value));
+  setTimeout(() => {
+    console.log('Unsubscribing...');
+    subscription.unsubscribe(); // Stops emissions
+  }, 5000);
+</code></pre>
 
 </div>
 
-RxJS SUBJECT //Create a Shared Service
-<div>
-  Subject in RxJS is a special type of Observable that allows values to be multicasted to multiple subscribers. 
 
-  Create a Shared Service
-
+<div class="box shadow p-2 mb-3" id="rxjssubject">
+  <h2> RxJS SUBJECT //Create a Shared Service </h2>
+  <p>  Subject in RxJS is a special type of Observable that allows values to be multicasted to multiple subscribers. </p>
+<p> <strong>  Create a Shared Service </strong></p>
+<pre>
+  <code>
     private dataSubject = new Subject<string>(); // Create Subject
-    data$ = this.dataSubject.asObservable(); // Expose as Observable
-    sendData(message: string) {
-      this.dataSubject.next(message); // Send data
-    }
-
-    <!-- Send Data from Component 1 (Sender) -->
-    
-    <button (click)="sendMessage()">Send Message</button>
-
+      data$ = this.dataSubject.asObservable(); // Expose as Observable
+      sendData(message: string) {
+        this.dataSubject.next(message); // Send data
+      }
+  
+     <strong> Send Data from Component 1 (Sender)  </strong> 
+      
+      button (click)="sendMessage()">Send Message button
+  
+      constructor(private dataService: DataService) {}
+  
+      sendMessage() {
+      this.dataService.sendData("Hello from Sender!");
+      }
+  
+      <strong> Receive Data in Component 2 (Receiver) </strong> 
+  
+      <p>Received: {{ receivedMessage }}</p>
+  
+    receivedMessage: string = "";
+  
     constructor(private dataService: DataService) {}
-
-    sendMessage() {
-    this.dataService.sendData("Hello from Sender!");
+  
+    ngOnInit() {
+      this.dataService.data$.subscribe(message => {
+        this.receivedMessage = message; // Receive data
+      });
     }
-
-    <!-- Receive Data in Component 2 (Receiver) -->
-
-    <p>Received: {{ receivedMessage }}</p>
-
-  receivedMessage: string = "";
-
-  constructor(private dataService: DataService) {}
-
-  ngOnInit() {
-    this.dataService.data$.subscribe(message => {
-      this.receivedMessage = message; // Receive data
-    });
-  }
-
+  
+  </code>
+</pre>
 </div>
+
 
 NgRx (Redux for Angular)
 <div>
@@ -1043,8 +1098,9 @@ transform(items: any[], searchText: string): any[] {
   </ul> -->
 </div>
 
-</div>
 
+<div>
+  
 Using a Global Variable for data transfer
 <div> 
   ts - let sharedData: any;
@@ -1565,3 +1621,13 @@ dashboard.html
 </div>
 </script>
 </div>
+
+</div>
+</div>
+
+</div>
+
+<button id="toTopBtn" title="Go to top">↑</button>
+<script src="script.js"></script>
+  </body>
+</html>
