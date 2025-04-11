@@ -49,9 +49,45 @@ ctx.fillStyle = "blue";
 ctx.fill(); -->
 </div>
 
-What is MS SQL?
+What is async/await? ASYNC / AWAIT 
 <div>
-  Microsoft SQL Server (MS SQL) is a relational database management system (RDBMS) developed by Microsoft. It is used to store, manage, and retrieve structured data efficiently.
+  Async and await are syntax sugar built on top of Promises, introduced in ES2017 (ES8). They allow you to write asynchronous code that looks and behaves like synchronous code,
+  <script>
+        Always returns a Promise.
+        async function sayHello() {
+      return "Hello!";
+    }
+    sayHello().then(console.log); // Output: Hello!
+
+    => await Keyword
+    Can only be used inside an async function.
+
+    async function fetchData() {
+  let response = await fetch('https://api.example.com/data');
+  let data = await response.json();
+  console.log(data);
+}
+  </script>
+  Traditional Promise vs async/await
+  <script>
+    with promise 
+    fetch('https://api.example.com/data')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+  ------------
+  With async/await
+  async function getData() {
+  try {
+    let response = await fetch('https://api.example.com/data');
+    let data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+getData();
+  </script>
 </div>
 
 ES6
