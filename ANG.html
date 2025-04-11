@@ -10,7 +10,9 @@ BASIC
 
   Angular Architecture
   <div>
-    Angular is a front-end framework developed by Google for building dynamic single-page applications (SPAs). It follows a component-based architecture where the entire application is structured into modular, reusable components. At its core, Angular applications are made up of modules, components, templates, directives, services, and dependency injection. The root module, typically named AppModule, acts as the entry point of the application and can include multiple feature modules to organize different functionalities. These modules help in maintaining scalability by dividing the application into separate logical parts.
+    Angular is a front-end framework developed by Google for building dynamic single-page applications (SPAs). 
+    It follows a component-based architecture where the entire application is structured into modular, reusable components. 
+    At its core, Angular applications are made up of modules, components, templates, directives, services, and dependency injection. The root module, typically named AppModule, acts as the entry point of the application and can include multiple feature modules to organize different functionalities. These modules help in maintaining scalability by dividing the application into separate logical parts.
   
     A component in Angular is the fundamental building block of the UI. Each component consists of three parts: an HTML template that defines the structure, a TypeScript class that contains business logic, and a CSS file that handles styling. 
     
@@ -241,6 +243,30 @@ Navigate to your website's root directory (like /public_html).
 Upload everything from dist/your-project-name/ into that folder.
 
 = >  Test It!
+</div>
+
+Route Guards in Angular
+<div>
+  Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include:
+
+  CanActivate:  if a route can be activated.
+  CanDeactivate: Checks if a route can be deactivated.
+  CanLoad: Determines if a module can be loaded lazily.
+  <script>
+constructor(private router: Router) {}
+canActivate(): boolean {
+  const isLoggedIn = !!localStorage.getItem('user');
+  if (!isLoggedIn) {
+    this.router.navigate(['/login']); // Redirect to login if not authenticated
+    return false;
+  }
+  return true;
+}
+  </script>
+  Applying Route Guard to Routes
+  <!-- const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+]; -->
 </div>
 
 </div>
@@ -631,7 +657,7 @@ Improves scalability, performance, and debugging.
 
 NEW FEATURES IN ANGULAR 
 <div>
-<code>
+<div>
   => New Features and Updates in Angular 15
   1. Standalone API – No Need for NgModules
   2. Directive Composition API – Reuse Logic Easily
@@ -644,6 +670,13 @@ NEW FEATURES IN ANGULAR
   5. Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance.
   6. Better Material UI Components
 
+  => Angular 17, released in November 2023, brought a major set of improvements to performance
+  1. New Declarative Control Flow Syntax - @if, @for, @switch
+  2. Deferrable Views with @defer
+  3. Built-in Control Flow Enabled by Default
+  4. Standalone component the Default, removing the need for NgModules
+  5. Performance Improvements
+
   => New Features and Updates in Angular 19
   ​Angular 19, released in November 2024,
   1. Standalone Components by Default
@@ -654,7 +687,7 @@ NEW FEATURES IN ANGULAR
   4. Enhanced Reactivity with linkedSignal and resource()
   5. Angular Material: New Time Picker Component
   6. Two-Dimensional Drag & Drop in CDK
-</code>
+</div>
 </div>
 
 LIFE CYCLE 
@@ -1058,7 +1091,6 @@ isVisiable = true
 <button [ngStyle]="{'background-color': isActive ? 'green' : 'red'}">Click Me</button>
 </div>
 
---------------- End DIRECTIVE ------ 
 
 PIPE, CUSTOM PIPE, PURE, IMPURE
 <div>
@@ -1118,7 +1150,7 @@ transform(items: any[], searchText: string): any[] {
 
 </div>
 
----- data binding End
+--------------- End Databinding ------ 
 
 Using a Global Variable for data transfer
 <div> 
@@ -1174,29 +1206,6 @@ Before Angular 14: Every component needed to be declared in an NgModule.
 Now (Angular 14+): Components can work independently without NgModul
 </div>
 
-Route Guards in Angular
-<div>
-  Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include:
-
-  CanActivate: Determines if a route can be activated.
-  CanDeactivate: Checks if a route can be deactivated.
-  CanLoad: Determines if a module can be loaded lazily.
-  <script>
-constructor(private router: Router) {}
-canActivate(): boolean {
-  const isLoggedIn = !!localStorage.getItem('user');
-  if (!isLoggedIn) {
-    this.router.navigate(['/login']); // Redirect to login if not authenticated
-    return false;
-  }
-  return true;
-}
-  </script>
-  Applying Route Guard to Routes
-  <!-- const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
-]; -->
-</div>
 
 Dependency Injection (DI) in Angular
 <div>
@@ -1213,6 +1222,53 @@ Dependency Injection (DI) in Angular
     this.frameworks = this.dataService.getData();
   }
   <h1>{{ frameworks }}</h1>
+</div>
+
+FORMS
+<div>
+  FormGroup is a fundamental building block for reactive forms, used to group and manage multiple form controls (like FormControl) 
+  
+  What is the difference between Template-driven and Reactive Forms?
+  Template-driven
+  Structure Based on directives
+  Validation Asynchronous
+  Simple forms
+  Two-way data binding
+  ----------------------
+  Reactive Forms
+  Structure Based on explicit creation
+  Synchronous
+  Complex forms
+  Immutable data model  
+
+  <div>
+    lead_form!: FormGroup
+    lead_fields = {
+    name     : ['', Validators.required],
+    email    : ['', Validators.required],
+    }
+    constructor( private _fb    : FormBuilder ){
+  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
+  }
+  ngOnInit(){this.initializeForm()}
+  initializeForm(){
+  this.lead_form = this._fb.group(this.lead_fields)
+  this.getLeads()
+  }
+  saveForm() {
+    if (this.myForm.invalid) {
+      alert('Please fill in all required fields!');
+      return;
+    }
+  </div>
+
+  HTML 
+  <form [formGroup]="lead_form" (ngSubmit)="saveForm()">
+  <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  <span class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
+  Name is required. </span>
+  </form>
+
 </div>
 
 
@@ -1313,51 +1369,6 @@ If You Try Directly Updating from 15 to 19?
 3. Third-party libraries might not support Angular 19
 </div>
 
-
-FORMS
-<div>
-  What is the difference between Template-driven and Reactive Forms?
-  Template-driven
-  Structure Based on directives
-  Validation Asynchronous
-  Simple forms
-  Two-way data binding
-  ----------------------
-  Reactive Forms
-  Structure Based on explicit creation
-  Synchronous
-  Complex forms
-  Immutable data model  
-
-  <div>
-    lead_form!: FormGroup
-    lead_fields = {
-    name     : ['', Validators.required],
-    email    : ['', Validators.required],
-    }
-    constructor( private _fb    : FormBuilder ){
-  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
-  }
-  ngOnInit(){this.initializeForm()}
-  initializeForm(){
-  this.lead_form = this._fb.group(this.lead_fields)
-  this.getLeads()
-  }
-  saveForm() {
-    if (this.myForm.invalid) {
-      alert('Please fill in all required fields!');
-      return;
-    }
-  </div>
-
-  HTML 
-  <form [formGroup]="lead_form" (ngSubmit)="saveForm()">
-  <input type="text" class="form-control" placeholder="Name" formControlName="name">
-  <span class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
-  Name is required. </span>
-  </form>
-
-</div>
 
 LOCALSTORAGE AND SESSIONSTORAGE 
 <div>
@@ -1530,6 +1541,35 @@ GIT
     git remote add origin https://github.com/yourname/my-angular-app.git
     git push -u origin main
   </script>
+</div>
+
+Azure DevOps
+<div>
+  Azure DevOps is a cloud-based DevOps platform from Microsoft that provides a set of development tools for the entire software development lifecycle—from planning and coding to building, testing, and deploying applications.
+
+  Azure Repos
+
+Git repositories for version control.
+Supports pull requests, code reviews, and branching strategies.
+
+1. Azure Boards
+Agile project management: track work with Kanban boards, backlogs, and sprints.
+Integrates tightly with code and pipelines.
+
+2. Azure Pipelines
+CI/CD (Continuous Integration / Continuous Deployment) pipelines.
+Automates building, testing, and deploying code.
+Works with GitHub, Azure Repos, Bitbucket, etc.
+Supports multi-platform (Windows, Linux, macOS) and multiple languages.
+
+3. Azure Test Plans
+Tools for manual and exploratory testing.
+Track test cases, record bugs, and improve software quality.
+
+4. Azure Artifacts
+Host and manage packages like NuGet, npm, Maven, or Python.
+Share packages across teams.
+
 </div>
 
 12. Store is a centralized state management solution that holds the application’s state  
