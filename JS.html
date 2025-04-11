@@ -88,6 +88,29 @@ What is async/await? ASYNC / AWAIT
 }
 getData();
   </script>
+  Error Handling
+  use try...catch to handle errors in async functions.
+  <script>
+    async function example() {
+  try {
+    let result = await someAsyncTask();
+    console.log(result);
+  } catch (err) {
+    console.error('Error:', err);
+  }
+}
+  </script>
+  Combining with Promise.all
+  You can still use Promise.all with async/await for parallel async operations:
+  <script>
+    async function loadMultiple() {
+  const [user, posts] = await Promise.all([
+        fetch('/api/user').then(res => res.json()),
+        fetch('/api/posts').then(res => res.json())
+      ]);
+      console.log(user, posts);
+    }
+  </script>
 </div>
 
 ES6
