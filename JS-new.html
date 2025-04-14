@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title> JS </title>
+    <style>
+      #toTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  display: none; /* Hidden by default */
+  transition: background-color 0.3s;
+  width: 30px;
+  height: 30px;
+}
+
+#toTopBtn:hover {
+  background-color: #555;
+}
+h2 { font-size: 18px; font-weight: 600;}
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: auto;
+    font-size: .875em;
+    background: #eeeeee;
+}
+.index { padding: 0; margin: 0;}
+.index li {     
+    list-style: none;
+    display: inline-block;
+    border: #ccc solid 1px;
+    padding: 0px 5px;
+    margin: 3px 0; 
+  }
+.index li a {     text-decoration: none;
+    color: #000;
+    font-weight: 600; 
+    text-transform: capitalize;
+  }
+  .borderline { display: block; width: 100%; border: none !important;} 
+  .borderline li { border: none;}
+    </style>
+  </head>
+  <body>
+   <div class="container">
+
+    <ul class="index">
+      <li> <a href="#js"> javascript </a> </li>
+      <li> <a href="#d3"> D3, canvas, svg </a> </li>
+      <li> <a href="#es6"> Es6 </a> </li>
+      <li> <a href="#async"> Async </a> </li>
+      <li> <a href="#default"> Default Paramerter </a> </li>
+      <li> <a href="#generators"> Generators </a> </li>
+      <li> <a href="#destructruing"> Destructruing </a> </li>
+      <li> <a href="#classes"> classes </a> </li>
+      <li> <a href="#map"> map and set </a> </li>
+      <li> <a href="#prototype"> prototype </a> </li>
+      <li> <a href="#closure"> closure </a> </li>
+      <li> <a href="#foreach"> foreach </a> </li>
+      <li> <a href="#event"> event </a> </li>
+      <li> <a href="#dom"> dom </a> </li>
+      <li> <a href="#currying"> currying </a> </li>
+      <li> <a href="#debounce"> debounce </a> </li>
+      <li> <a href="#deep"> Deep copy and shallow copy </a> </li>
+      <li> <a href="#objectclone"> Object Clone </a> </li>
+      <li> <a href="#arraymethod"> Array Method </a> </li>
+      <li> <a href="#infinityloop"> Infinity Loop </a> </li>
+      <li> <a href="#hash"> hash </a> </li>
+      <li> <a href="#hoisting"> hoisting </a> </li>
+      <li class="borderline"> <a href="#hoisting"> </a> </li>
+      <li> <a href="#largestnumber"> largestnumber </a> </li>
+      <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
+      <li> <a href="#find"> find sum number </a> </li>
+      <li> <a href="#sum"> sum - 123456 </a> </li>
+      <li> <a href="#count"> word count </a> </li>
+      <li> <a href="#vowel"> Vowel </a> </li>
+      <li> <a href="#sumnumber"> sumnumber </a> </li>
+    </ul>
+
+
+<div class="box shadow p-2 mb-3" id="js">
+ <h2 id="component"> WHAT IS THE JAVASCRIPT? </h2>
+<p> JavaScript (JS) is a high-level, interpreted programming language used to create interactive and dynamic web pages. It is the core language of the web, allowing developers to manipulate HTML, CSS. </p>
+<h2> HOW WORK ON BROWSER  </h2>
+<p> When a user opens a web page, the browser loads HTML, CSS, and JavaScript. The JavaScript Engine inside the browser processes JavaScript code.  </p>
+<pre>
+    <code>
+        h1 id="message">Hello, World! h1
+        document.getElementById('message').innerHTML = 'Hello from JavaScript!';
+    </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="d3">
+    <h2 id="component"> D3.js and Canvas Rendering </h2>
+<p> D3.js (Data-Driven Documents) is a powerful JavaScript library used for creating dynamic and interactive data visualizations in web browsers. It leverages SVG (Scalable Vector Graphics) and Canvas for rendering charts, graphs, and complex visualizations. </p>
+<ol>
+    <li> Data binding (connects data with DOM elements) </li>
+    <li> Transitions and animations </li>
+    <li> Scalability with SVG & Canvas </li>
+    <li> Works with various data formats (JSON, CSV, etc.) </li>
+    <li> Dashboard UI </li>
+</ol>
+<h2>  SVG vs. Canvas Rendering </h2>
+<p> D3.js primarily uses SVG but can also work with Canvas for better performance. </p>
+<p> ** Canvas is better for performance-intensive rendering. </p>
+<p> ** Canvas (HTML5) </p>
+<ol>
+    <li> Uses pixel-based rendering </li>
+    <li> Fast for large datasets </li>
+    <li> Manual event handling required </li>
+    <li> Large datasets, real-time rendering </li>
+</ol>
+<h2> Using D3 with Canvas </h2>
+<pre>
+    <code>
+  const canvas = d3.select("body")
+  .append("canvas")
+  .attr("width", 500)
+  .attr("height", 300)
+  .node();
+
+const ctx = canvas.getContext("2d");
+
+// Draw a circle
+ctx.beginPath();
+ctx.arc(100, 100, 50, 0, 2 * Math.PI);
+ctx.fillStyle = "blue";
+ctx.fill(); 
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="es6">
+<h2> ES6 2015 </h2>
+<p> <strong> let, const, Arrow Function, Destructuring, spread and rest operator, class, promise </strong></p>
+<p> <strong> ARROW FUNCTION </strong> - An arrow function is a shorter syntax for writing functions in JavaScript. Introduced in ES6, </p>
+<p> <strong> Destructuring </strong></p>
+<pre>
+    <code>
+        for loop examples 
+        const numbers = [10, 20, 30];
+    for (let num of numbers) {
+      console.log(num); // 10, 20, 30
+    }
+    </code>
+</pre>
+<h2> ES2022 </h2>
+<p> <strong> await , Class Fields & Private Methods ( # ), </strong> </p>
+<pre>
+    <code>
+        const data = await fetch("https://api.example.com/data").then(res => res.json());
+        console.log(data);
+    </code>
+</pre>
+<h2> ES2023 </h2>
+<p><strong>  Array.prototype.findLast() & findLastIndex() </strong></p>
+<pre>
+    <code>
+            const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+            console.log(numbers.findLast(n => n % 2 === 0)); // 8
+            console.log(numbers.findLastIndex(n => n % 2 === 0)); // 7
+    </code>
+</pre>
+<p> <strong> Array.prototype.toSorted(), toSpliced(), toReversed() (ES2023) </strong></p>
+<pre>
+    <code>
+const arr = [3, 1, 4, 2];
+console.log(arr.toSorted()); // [1, 2, 3, 4] (original array unchanged)
+console.log(arr.toReversed()); // [2, 4, 1, 3]
+console.log(arr.toSpliced(1, 2, 99)); // [3, 99, 2]
+console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
+    </code>
+</pre>
+  
+<p> <strong> ES 2024  </strong></p>
+<pre>
+    <code>
+    Object.groupBy()
+    Map.groupBy()
+    Temporal.PlainDate()
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="async">
+<h2> What is Async / Await </h2>
+<p>   Async and await are syntax sugar built on top of Promises, introduced in ES2017 (ES8). They allow you to write asynchronous code that looks and behaves like synchronous code,
+</p>
+<pre>
+    <code>
+        Always returns a Promise.
+        async function sayHello() {
+      return "Hello!";
+    }
+    sayHello().then(console.log); // Output: Hello!
+
+    => await Keyword
+    Can only be used inside an async function.
+
+    async function fetchData() {
+  let response = await fetch('https://api.example.com/data');
+  let data = await response.json();
+  console.log(data);
+}
+    </code>
+</pre>
+<h2> Traditional Promise vs async/await </h2>
+<pre>
+    <code>
+        with promise 
+    fetch('https://api.example.com/data')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+    </code>
+</pre>
+<h2> With async/await </h2>
+<pre>
+    <code>
+        async function getData() {
+            try {
+              let response = await fetch('https://api.example.com/data');
+              let data = await response.json();
+              console.log(data);
+            } catch (error) {
+              console.error(error);
+            }
+          }
+          getData();
+    </code>
+</pre>
+<h2> Error Handling <br> use try...catch to handle errors in async functions. </h2>
+<pre>
+    <code>
+        async function example() {
+            try {
+              let result = await someAsyncTask();
+              console.log(result);
+            } catch (err) {
+              console.error('Error:', err);
+            }
+          }
+    </code>
+</pre>
+  
+<h2> Combining with Promise.all <br> You can still use Promise.all with async/await for parallel async operations: </h2>
+<pre>
+    <code>
+        async function loadMultiple() {
+            const [user, posts] = await Promise.all([
+                  fetch('/api/user').then(res => res.json()),
+                  fetch('/api/posts').then(res => res.json())
+                ]);
+                console.log(user, posts);
+              }
+    </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="default">
+<h2> DEFAULT PARAMETER </h2>
+<p> Assigns default values to function parameters </p>
+<pre>
+    <code>
+        function greet(name = "Guest") {
+            console.log(`Hello, ${name}!`);
+          }
+          greet(); // Hello, Guest!
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="generators">
+<h2> GENERATORS </h2>
+<p> Functions that can pause and resume execution <br>
+    Generator Examples </p>
+<pre>
+    <code>
+        function* generator() {
+            yield 1;
+            yield 2;
+            yield 3;
+          }
+          const gen = generator();
+          console.log(gen.next().value); // 1
+          console.log(gen.next().value); // 2
+          console.log(gen.next().value); // 3
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="destructruing">
+<h2> DESTRUCTURING </h2>
+<p> <strong>   Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
+</strong></p>
+<strong> Array Destructuring </strong>
+<pre>
+    <code>
+        const arr = [1, 2, 3];
+        const [a, b] = arr;
+        console.log(a); // 1
+        console.log(b); // 2
+    </code>
+</pre>
+
+<h2> Data Structural </h2>
+<p> JavaScript provides various data structures to handle different use cases.
+    Array, Object, Map, Set, Data Types </p>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="classes">
+<h2> CLASSES </h2>
+<p> Classes - class is a blueprint for creating objects with properties and methods. </p>
+<pre><code>
+    class Person {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+        greet() {
+          console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+        }
+      }
+      const person1 = new Person("John", 25);
+      person1.greet(); // Output: Hello, my name is John and I am 25 years old.
+</code></pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="map">
+<h2> Map and Set  </h2>
+<p> * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. ) </p>
+<pre>
+    <code>
+        let myMap=new Map();
+    myMap.set('name', 'Santosh');
+    console.log(myMap);
+  --------------------
+  let myArray = [1,2,3]
+  let obj = new Set(myArray);
+  console.log(obj)
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="prototype">
+<h2> PROTOTYPE  </h2>
+<p> A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function. </p>
+<pre>
+    <code>
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        // Adding a method to the prototype
+        Person.prototype.sayHello = function() {
+            return `Hello, my name is ${this.name}`;
+        };
+        const person1 = new Person("Santosh", 30);
+        console.log(person1.sayHello()); // Output: Hello, my name is Santosh   
+    </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="closure">
+<h2> CLOSURE  </h2>
+<p> A closure in JavaScript is a function that has access to variables in its parent scope. 
+    Inner function retain access to the variable. </p>
+<pre>
+    <code>
+        function outerFunction() {
+            let count = 0;  // count is in the lexical scope of innerFunction
+        
+            function innerFunction() {
+                count++;  // innerFunction remembers 'count'
+                console.log(count);
+            }
+        
+            return innerFunction;  // Returns the inner function
+        }
+        
+        const counter = outerFunction();  // outerFunction executes and returns innerFunction
+        counter(); // Output: 1
+        counter(); // Output: 2
+        counter(); // Output: 3    
+    </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="foreach">
+<h2> ForEach  </h2>
+<p> ForEach method is used to iterate over arrays and execute a provided function once for each element. </p>
+<p> ForEach is faster because it doesn’t create a new array. </p>
+<p> map is slightly slower because it returns a new array. </p>
+<pre>
+    <code>
+        let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
+});
+console.log(sum);
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="event">
+<h2> Event  </h2>
+<p> An event in JavaScript is an action in the browser, user clicking a button, typing in an input field, or scrolling a page. JavaScript can detect these events and execute functions accordingly. </p>
+<pre>
+    <code>
+button onclick="alert('Button clicked!')" Click Me button
+--------------------
+button id="btn">Click Me button
+script
+    document.getElementById("btn").addEventListener("click", function() {
+        alert("Button Clicked!");
+    });
+script
+--------------------
+input type="text" id="textInput" placeholder="Type something...">
+
+ script -   let input = document.getElementById("textInput");
+
+    input.addEventListener("keydown", (event) => {
+        console.log("Key Pressed:", event.key);
+    });
+
+    input.addEventListener("keyup", () => {
+        console.log("Key Released");
+    });
+
+    </code>
+</pre>
+
+<h2> Event Loop </h2>
+<p> JavaScript executes code in a single thread, meaning it can only do one thing at a time. However, JavaScript can handle asynchronous operations (e.g., network requests, timers) without freezing the main thread. The event loop is what makes this possible.
+</p>
+<h2> Key Components </h2>
+1. Call Stack
+2. Web APIs / Node APIs
+3. Callback Queue (or Task Queue)
+4. Event Loop
+<strong> Examples </strong>
+<pre><code>
+    console.log("Start");
+
+setTimeout(() => {
+  console.log("Callback");
+}, 0);
+
+console.log("End");
+
+</code></pre>
+output 
+Start
+End
+Callback
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="dom">
+<h2> DOM </h2>
+<P> DOM allows JavaScript to interact with HTML dynamically. </P>
+<pre>
+    <code>
+        let heading = document.getElementById("heading");
+        console.log(heading.textContent);  // Output: "Hello, World!"
+
+        ---------------------------------------
+let paragraphs = document.getElementsByClassName("text");
+console.log(paragraphs[0].textContent); // Output: "This is a paragraph."
+--------------------------------
+document.getElementById("heading").innerHTML = "span style='color: red;'>Updated! span";
+
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="currying">
+<h2> CURRYING </h2>
+<p>   Transforming a function with multiple arguments into a sequence of functions. </p>
+<pre>
+    <code>
+        function add(a) {
+            return function(b) {
+                return a + b;
+            };
+        }
+        console.log(add(5)(3)); // Output: 8
+    </code>
+</pre>
+</div>
+
+ 
+<div class="box shadow p-2 mb-3" id="debounce">
+<h2> Debouncing & Throttling </h2>
+<p> Debouncing limits the execution of a function until after a certain delay. <br> 
+    Throttling ensures a function runs at most once in a specified interval. </p>
+<pre>
+    <code>
+        function debounce(func, delay) {
+            let timer;
+            return function (...args) {
+              clearTimeout(timer);
+              timer = setTimeout(() => func.apply(this, args), delay);
+            };
+          }
+          
+          // Function to be executed
+          function searchQuery(e) {
+            console.log("Searching for:", e.target.value);
+          }
+          
+          // Applying debounce to input event
+          const input = document.getElementById("search");
+          input.addEventListener("keyup", debounce(searchQuery, 500));
+    </code>
+</pre>
+
+<h2> Trhotting Examples </h2>
+<pre><code>
+    function throttle(func, interval) {
+        let lastExecutedTime = 0;
+        return function (...args) {
+          let now = Date.now();
+          if (now - lastExecutedTime >= interval) {
+            func.apply(this, args);
+            lastExecutedTime = now;
+          }
+        };
+      }
+      
+      // Function to be executed
+      function handleScroll() {
+        console.log("Scroll event triggered:", new Date().toLocaleTimeString());
+      }
+      
+      // Applying throttle to scroll event
+      window.addEventListener("scroll", throttle(handleScroll, 1000));
+</code></pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="deep">
+<h2> DEEP COPY AND SHALLOW COPY </h2>
+<p> Shallow Copy – Creates a new object but copies references to nested objects. <br>
+Deep Copy – Creates a new object and recursively copies all values, ensuring no references remain. </p>
+Difference
+<p> sh - References copied (not duplicated), deep - Entire structure duplicated </p>
+<p> sh - Changes in the copy affect the original, deep - Changes in the copy do NOT affect the original </p>
+<p>  sh - Faster (less memory used)	, deep - Slower (more memory used) </p>
+<p> <strong> shallow examples </strong></p>
+<pre><code>  let obj1 = { name: "John", details: { age: 25 } };
+    let obj2 = obj1; // Copies reference
+    obj2.details.age = 30;
+    console.log(obj1.details.age); // Output: 30 (Changes reflect in obj1) </code></pre>
+
+<p> <strong> Deep examples </strong></p>
+<pre>
+    <code>
+        let obj1 = { name: "John", details: { age: 25 } };
+        let obj2 = structuredClone(obj1);
+        obj2.details.age = 30;
+        console.log(obj1.details.age); // Output: 25 (Unaffected)
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="objectclone">
+<h2> OBJECT CLONE </h2>
+<pre>
+    <code>   
+        const personss = { first_name: "Santosh", last_name: "Kumar", age: 25 };
+        const clone1 = { ...persons };
+        console.log(clone1); 
+    </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="arraymethod">
+<h2> ARRAY METHOD  </h2>
+
+<pre>
+    <code>
+        / Filter
+
+const websantos = [2,3,4,5,6,7,8,9]
+const santo = websantos.filter((x) => x % 2 )
+console.log (santo); // output [ 3, 5, 7, 9 ] odd value
+
+const san = [2,3,4,5,6,7,8,9]
+const anjsanto = san.filter((y) => y % 2 === 0 )
+console.log (anjsanto); // output [ 2, 4, 6, 8 ] Eveb value
+
+// Reduce reduce an array to a single value by applying a function to each element and 
+// accumulating the result.
+
+const numbersss = [1, 2, 3, 4];
+
+const doubled = numbersss.map(num => num * 2);
+console.log(doubled); // [2, 4, 6, 8]
+
+const evens = numbersss.filter(num => num % 2 === 0);
+console.log(evens); // [2, 4]
+
+let arraynumner = [10,24,3,4,55,6,7,8,9]
+const sum = arraynumner.reduce((a,b) => a + b)
+console.log(sum) // 126
+
+// Find
+
+//Sorting an Array  method sorts an array alphabetically
+const fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.sort(); // output Apple, Banana, Mango, Orange
+
+// Ascending
+let array = [10,24,3,4,55,6,7,8,9]
+array.sort((a,b) => a - b)
+console.log(array) // 3,  4,  6,  7, 8, 9, 10, 24, 55
+
+//Descending
+let array1 = [10,24,3,4,55,6,7,8,9]
+array1.sort((a,b) => b - a)
+console.log(array1) // 55, 24, 10, 9, 8, 7,  6,  4, 3
+
+//MaxNumber
+let array2 = [10,24,3,4,55,6,7,8,9]
+array2.sort((a,b) => b - a)
+let maxnumber = array2[0]
+console.log(maxnumber) // 55
+
+
+//forEach forEach() method performs an action on every item in a list.
+
+let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
+});
+console.log(sum);
+    </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="infinityloop">
+<h2> INFINITY LOOP  </h2>
+<pre>
+    <code>
+        while (true) {
+            console.log("This will run forever!");
+          }
+          stop Loop
+          let count = 0;
+        while (true) {
+          console.log(count);
+          if (count >= 5) break; // Stops after 5 iterations
+          count++;
+        }
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="hash">
+<h2> HASH FUNCTION IN JAVASCRIPT  </h2>
+<p>  -- A hash function in JavaScript is a function that takes an input (string, number, or object) and returns a fixed-size string or number (hash). Hash functions are commonly used for hashing passwords. </p>
+<pre>
+    <code>
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash << 5) - hash + str.charCodeAt(i);
+                hash |= 0; // Convert to 32-bit integer
+            }
+            return hash;
+          }
+          console.log(simpleHash("hello")); // Example output: 99162322
+          
+    </code>
+</pre>
+<p>Custom Hash Function for Objects (Key-Value Hashing) </p>
+<p>hash objects (since objects don’t have a native hash function), you can convert them into strings and then hash the string. </p>
+<pre>
+    <code>
+        function objectHash(obj) {
+            return simpleHash(JSON.stringify(obj));
+            }
+            console.log(objectHash({ name: "John", age: 30 })); // Example output: -487240083
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="hoisting">
+<h2> HOISTING </h2>
+<p> "Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes. </p>
+<pre>
+    <code>
+        greet(); // Output: Hello, World!
+function greet() {
+  console.log("Hello, World!");
+}
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="largestnumber">
+<h2> LARGEST NUMBER </h2>
+<pre>
+    <code>
+    numbers = [3,4,5,6,2,34,54,23,63,18,46]
+    argest = numbers[0]
+    for(let i = 1; i < numbers.length; i++) {
+    if(numbers[i] > largest){
+    largest = numbers[i]
+     }
+    }
+    console.log(largest);
+</code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="duplicatenumber">
+    <h2> DUPLICATE NUMBER</h2>
+    <pre>
+        <code>
+        function findDuplicates(arr) {
+            arr.sort((a, b) => a - b);
+            let duplicates = [];
+          
+            for (let i = 0; i < arr.length - 1; i++) {
+              if (arr[i] === arr[i + 1] && !duplicates.includes(arr[i])) {
+                duplicates.push(arr[i]);
+              }
+            }
+          
+            return duplicates;
+          }
+          // Example
+          console.log(findDuplicates([1, 2, 3, 4, 2, 5, 6, 3, 8, 1])); // [1, 2, 3]  
+    </code>
+</pre>
+    </div>
+
+    <div class="box shadow p-2 mb-3" id="find">
+        <h2> FIND SUM NUMBER </h2>
+        <pre>
+            <code>
+            const findsum = [2,5,43,76,10]
+            const totalFind = (findsum) => {
+                let sum = 0 ;
+                for(let i=0; i < findsum.length; i++){
+                sum += findsum[i]
+                }
+                return sum
+            }
+            console.log(totalFind(findsum))
+
+        </code>
+    </pre>
+   </div>
+
+
+   <div class="box shadow p-2 mb-3" id="sum">
+    <h2> Sum Number  </h2>
+    <pre>
+        <code>
+            let number = 45678123465;
+            let numStr = number.toString();
+            let sum = 0;
+            for (let i = 0; i < numStr.length; i++) {
+                sum += Number(numStr[i]);
+            }
+            console.log(sum)
+        </code>
+    </pre>
+    </div>
+
+<div class="box shadow p-2 mb-3" id="count">
+<h2> count Word Fequency in a string  </h2>
+<pre>
+    <code>
+        function wordCount(str) {
+            let words = str.split(' ');
+            let map = {};
+            for (let word of words) {
+                map[word] = (map[word] || 0) + 1;
+            }
+            return map;
+        }
+        console.log(wordCount("the quick brown fox jumps over the lazy dog the")); 
+    </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="vowel">
+<h2> VOWEL </h2>
+<pre>
+    <code>
+        let str = "Hey JS you are AMAZING"
+const vowels = ['a','e','i','o','u']
+
+function countVowels(data){
+let count = 0;
+data.toLowerCase().split("").forEach((ch) => {
+  vowels.includes(ch) && count++;
+})
+return count;
+}
+
+const numOfVowels = countVowels(str)
+console.log(numOfVowels)
+    </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="sumnumber">
+    <h2> SUM NUMBER </h2>
+    <pre>
+        <code>
+            let array = [2,3,5,6,5]
+            let sum = 0
+            for (let i = 0; i < array.length; i++){
+                 sum += array[i]
+            }
+            console.log(sum)
+        </code>
+    </pre>
+    </div>
+
+</div>
+
+<button id="toTopBtn" title="Go to top">↑</button>
+<script src="script.js"></script>
+  </body>
+</html>

@@ -31,14 +31,97 @@
   background-color: #555;
 }
 h2 { font-size: 18px; font-weight: 600;}
-
+pre {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    overflow: auto;
+    font-size: .875em;
+    background: #eeeeee;
+}
+.index { padding: 0; margin: 0;}
+.index li {     
+    list-style: none;
+    display: inline-block;
+    border: #ccc solid 1px;
+    padding: 0px 5px;
+    margin: 3px 0; 
+  }
+.index li a {     text-decoration: none;
+    color: #000;
+    font-weight: 600; 
+    text-transform: capitalize;
+  }
+  .borderline { display: block; width: 100%; border: none !important;} 
+  .borderline li { border: none;}
     </style>
   </head>
   <body>
    <div class="container">
 
     <ul class="index">
-      <li> <a href="#component"> abc </a> </li>
+      <li> <a href="#angularrun"> angular Run </a> </li>
+      <li> <a href="#architecture"> architecture </a> </li>
+      <li> <a href="#shared"> shared, Challenging </a> </li>
+      <li> <a href="#angularspa"> spa </a> </li>
+      <li> <a href="#mvc"> mvc </a> </li>
+      <li> <a href="#root"> root </a> </li>
+      <li> <a href="#component"> components </a> </li>
+      <li> <a href="#template"> template </a> </li>
+      <li> <a href="#modules"> modules, bootstrap </a> </li>
+      <li> <a href="#metadata"> metadata </a> </li>
+      <li> <a href="#angularcli"> angular cli </a> </li>
+      <li> <a href="#angularcontroller"> controllers </a> </li>
+      <li> <a href="#ssr"> ssr </a> </li>
+      <li> <a href="#optimize"> optimization </a> </li>
+      <li> <a href="#lazy"> lazy loading </a> </li>
+      <li> <a href="#change"> Change Detection </a> </li>
+      <li> <a href="#accessibility"> accessibility </a> </li>
+      <li> <a href="#newfeatures"> new featurs </a> </li>
+      <li> <a href="#routeguards"> routeguards </a> </li>
+      <li> <a href="#spa"> spa </a> </li>
+      <li> <a href="#state"> state </a> </li>
+      <li class="borderline"><a href="#">  </a></li>
+      <li> <a href="#databinding"> databinding </a> </li>
+      <li> <a href="#decorator"> decorator </a> </li>
+      <li> <a href="#directive"> directive </a> </li>
+      <li> <a href="#input"> input </a> </li>
+      <li> <a href="#ngfor"> ngfor </a> </li>
+      <li> <a href="#pipe"> pipe, pure, impure </a> </li>
+      <li> <a href="#viewchild"> viewchild </a> </li>
+      <li class="borderline"><a href="#">  </a></li>
+      <li> <a href="#services"> services </a> </li>
+      <li> <a href="#di"> dependancy injection </a> </li>
+      
+      <li> <a href="#global-variable"> global-variable </a> </li>
+      <li> <a href="#life-cycle"> life-cycle </a> </li>
+      <li> <a href="#rxjs"> rxjs </a> </li>
+      <li> <a href="#rxjssubject"> rxjs subject </a> </li>
+      <li> <a href="#ngrx"> ngrx </a> </li>
+      <li> <a href="#apiservices"> api </a> </li>
+      <li> <a href="#validation"> form validation </a> </li>
+      <li> <a href="#crud"> crud </a> </li>
+      <li> <a href="#upgrade"> upgrade </a> </li>
+      <li> <a href="#signals"> signals </a> </li>     
+      <li> <a href="#microfronted"> Microfronted </a> </li>
+      <li> <a href="#aot"> aot </a> </li>
+      <li> <a href="#scrolltop"> scrolltop </a> </li>
+      <li> <a href="#add-remove"> add remove </a> </li>
+      <li> <a href="#spying"> spying </a> </li>
+      <li> <a href="#typescript"> typescript </a> </li>
+      <li> <a href="#chart"> chart </a> </li>
+      <li> <a href="#form"> form, reactiveform </a> </li>
+      <li> <a href="#form-crud"> form validation, crud </a> </li>
+      <li> <a href="#graphql"> graphql </a> </li>
+      <li> <a href="#vresion-upgrade"> how to upgrade </a> </li>
+      <li> <a href="#storage"> storage </a> </li>
+      <li> <a href="#filter"> filter </a> </li>
+      <li> <a href="#pagination"> pagination </a> </li>
+      <li> <a href="#login-setup"> login-setup </a> </li>
+      <li> <a href="#material"> Angular Material </a> </li>
+      <li> <a href="#prime"> PrimeNg </a> </li>
+      <li> <a href="#json"> json </a> </li>
+      <li> <a href="#html"> html </a> </li>
     </ul>
 
  <h2>INTRO</h2>   
@@ -77,7 +160,7 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
 
 
 <h2 id="component"> COMPONENTS </h2>
-<div class="box shadow p-2 mb-3" id="mvc">
+<div class="box shadow p-2 mb-3" id="component">
 <p> Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. </p>
 <pre><code> @Component({
   selector: 'app-root',
@@ -91,8 +174,8 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
 </div>
 
 
-<h2 id="root"> app-root <app-root></app-root> </h2>
-<div class="box shadow p-2 mb-3" id="mvc">
+
+<div class="box shadow p-2 mb-3" id="root">
 <p> <strong> app-root: </strong> It is the selector/name of the component and it is specified using selector meta data of the component's decorator. </p>  
  <p> <strong> app.component.html: </strong> It is the HTML template document associated with the component. </p> 
  <p> <strong> AppComponent: </strong> Its property (title) is used in the HTML template to set the title of the application. </p> 
@@ -204,48 +287,25 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
     <p> Overall, Angular’s structured approach, modularity, and built-in functionalities make it an ideal choice for developing large-scale enterprise applications.  </p>
   </div>
 
-
-  <div class="box shadow p-2 mb-3" id="newfeaturs">
-    <h2> NEW FEATURES IN ANGULAR  </h2>
-    <p> <strong> => New Features and Updates in Angular 15 </strong></p> 
-    <ol>
-      <li>Standalone API – No Need for NgModules</li>
-      <li> Directive Composition API – Reuse Logic Easily <br> 
-        * Allows directives to be combined into a single component easily.  </li>
-        <li> Improved Performance with Better Tree Shaking </li>
-        <li> <strong> Enhanced Router Features </strong> <br> </li>
-        <li> * <strong> Lazy loading components directly (without NgModule). </strong>
-          const routes: Routes = [
-          { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }]; </li>
-        <li> Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance. </li>
-        <li> Better Material UI Components </li>
-    </ol>
-
-    <p> <strong> => New Features and Updates in Angular 19 </strong></p> 
-    <p>  ​Angular 19, released in November 2024, </p>
-    <ol>
-      
-      <li> Standalone Components by Default </li>
-      <li> Incremental Hydration (Developer Preview) <br>
-        * This feature enhances server-side rendering by allowing developers to incrementally hydrate parts of their application. Using the @ defer syntax </li>
-      <li> Route-Level Render Mode (Developer Preview) <br> * Angular 19 introduces the ability to control the rendering strategy of individual routes </li>
-      <li> Enhanced Reactivity with linkedSignal and resource() </li>
-      <li> Angular Material: New Time Picker Component </li>
-      <li> Two-Dimensional Drag & Drop in CDK </li>
-    </ol>
-    </div>
-
-
     <div class="box shadow p-2 mb-3" id="life-cycle">
       <h2> LIFE CYCLE </h2>
       <p> <strong> Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle. </strong></p>
 
-      <p> <strong> constructor </strong> - for variable initialization </p>
-      <p> <strong> ngOnInit(){}  </strong> - Called once after component initialization </p>
-      <p> <strong> ngDoCheck() </strong> - Called during every change detection cycle </p>
-      <p> <strong> ngOnChanges() </strong> -  Called when input properties change  </p>
+      <ol>
+        <li> <strong> constructor </strong> - for variable initialization </li>
+        <li> <strong> ngOnChanges() </strong> -  Called when input properties change </li>
+        <li> <strong> ngOnInit(){}  </strong> - Called once after component initialization </li>
+        <li> <strong> ngDoCheck() </strong> - Called during every change detection cycle </li>
+        <li> <strong> ngAfterContentInit() </strong> - Called after content projection (<ng-content>) is initialized </li>
+        <li> <strong> ngAfterContentChecked()</strong> - Called after projected content is checked </li>
+        <li> <strong> ngAfterViewInit() </strong> -  This hook is called after Angular has fully initialized the component's view <br> 
+          (i.e., after the HTML template is rendered and child components are loaded). </li>
+        <li> <strong> ngAfterViewChecked() </strong>	- Called after the component’s and child views are checked </li>
+        <li> <strong> ngOnDestroy() </strong> Called just before the component is destroyed </li>
+      </ol>
       <pre>
         <code>
+          <h2> ngOnChanges() </h2>
           Examples - 
           => Child component --- 
           @Input() item: any;
@@ -265,13 +325,6 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
           button click="fun()"> click me button
         </code>
       </pre>
-
-      <p><strong> ngAfterContentInit() </strong> - Called after content projection (<ng-content>) is initialized </p>
-      <p> <strong> ngAfterContentChecked()</strong> - Called after projected content is checked </p>
-      <p> <strong> ngAfterViewInit() </strong> -  This hook is called after Angular has fully initialized the component's view <br> 
-        (i.e., after the HTML template is rendered and child components are loaded).  </p>
-      <p> <strong> ngAfterViewChecked() </strong>	- Called after the component’s and child views are checked </p>
-      <p> <strong> ngOnDestroy() </strong> Called just before the component is destroyed </p>
       </div>
 
 
@@ -596,58 +649,82 @@ If You Try Directly Updating from 15 to 19? <br>
 </div>
 
 
-NgRx (Redux for Angular)
-<div>
-  NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
-  Uses Actions, Reducers, Store, Effects, and Selectors.
 
-  TS Actions examples - 
-  <!-- export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
-  export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>()); -->
-  STATE OF STRUCTURE 
-  <!-- export const initialState = { count: 0 };
-  export const counterReducer = createReducer(
-  initialState,
-  on(increment, (state) => ({ count: state.count + 1 })),
-  on(decrement, (state) => ({ count: state.count - 1 }))
-); -->
-NGXS (Simpler alternative to NgRx)
-  <!-- @State<number>({ name: 'counter', defaults: 0 })
-    export class CounterState {
-      @Action(Increment)
-      increment(ctx: StateContext<number>) {
-        const state = ctx.getState();
-        ctx.setState(state + 1);
-      }
-    } -->
-SignalStore
-Introduced in Angular 17 as a lightweight, reactive state management solution.
-Uses signals instead of Observables.
-<!-- count = signal(0);
-  increment() {
-    this.count.set(this.count() + 1);
-  } -->
+<div class="box shadow p-2 mb-3" id="ngrx">
+  <h2> NgRx (Redux for Angular) </h2>
+  <p><strong>  NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
+    Uses Actions, Reducers, Store, Effects, and Selectors. </strong></p>
+    <strong> TS Actions examples -  </strong>
+    <pre>
+      <code>
+        export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
+        export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>());
+      </code>
+    </pre>
+    <h2> STATE OF STRUCTURE </h2>
+    <pre>
+      <code>
+          export const initialState = { count: 0 };
+          export const counterReducer = createReducer(
+          initialState,
+          on(increment, (state) => ({ count: state.count + 1 })),
+          on(decrement, (state) => ({ count: state.count - 1 }))
+        );
+      </code>
+    </pre>
+    <h2> NGXS (Simpler alternative to NgRx) </h2>
+    <pre>
+      <code>
+        @State<number>({ name: 'counter', defaults: 0 })
+          export class CounterState {
+            @Action(Increment)
+            increment(ctx: StateContext<number>) {
+              const state = ctx.getState();
+              ctx.setState(state + 1);
+            }
+          }
+      </code>
+    </pre>
+    <h2> SignalStore </h2>
+    <p> Introduced in Angular 17 as a lightweight, reactive state management solution. Uses signals instead of Observables. </p>
+    <pre>
+      <code>
+        count = signal(0);
+        increment() {
+          this.count.set(this.count() + 1);
+        }
+      </code>
+    </pre>
+    <h2 class="mt-2"> ngRx Store? </h2>
+    <p> ngRx Store is a state management library for Angular applications. It is based on Redux and helps manage application state in a predictable way using actions, reducers, and selectors. </p>
+    <p><strong>
+      ngRx Store helps manage global state in Angular apps.
+      It follows Redux principles with actions, reducers, and selectors.
+      Effects handle async operations like API calls.
+      Improves scalability, performance, and debugging.
+    </strong></p>
+    <ol>
+      <li> <strong> Actions –  </strong>Define what happens in the app (e.g., "Add Product", "Delete User"). </li>
+      <li> <strong> Reducers – </strong> Handle state changes based on actions. </li>
+      <li> <strong> State – </strong> The single source of truth for the app. </li>
+      <li> <strong> Selectors – </strong> Retrieve specific data from the store. </li>
+      <li> <strong> Effects – </strong> Handle asynchronous operations like API calls. </li>
+    </ol>
+    <pre>
+      <code>
+        <strong>
+          Installation <br>
+          ng add @ngrx/store <br>
+          ng add @ngrx/effects <br>
+        </strong>
 
-=> ngRx Store?
-ngRx Store is a state management library for Angular applications. It is based on Redux and helps manage application state in a predictable way using actions, reducers, and selectors.
-1️⃣ Actions – Define what happens in the app (e.g., "Add Product", "Delete User").
-2️⃣ Reducers – Handle state changes based on actions.
-3️⃣ State – The single source of truth for the app.
-4️⃣ Selectors – Retrieve specific data from the store.
-5️⃣ Effects – Handle asynchronous operations like API calls.
-
-<script>
-  Installation
-ng add @ngrx/store
-ng add @ngrx/effects
-
-* Actions
+ <strong> * Actions </strong>       
 import { createAction } from '@ngrx/store';
 export const increment = createAction('[Counter] Increment');
 export const decrement = createAction('[Counter] Decrement');
 export const reset = createAction('[Counter] Reset');
 
-* Create Reducer
+<strong> * Create Reducer </strong>
 import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset } from './counter.actions';
 export const initialState = 0;
@@ -658,14 +735,15 @@ export const counterReducer = createReducer(
   on(reset, () => 0)
 );
 
-* Register Store
+<strong> * Register Store </strong>
+
   import { StoreModule } from '@ngrx/store';
   import { counterReducer } from './counter.reducer';
   imports: [
   StoreModule.forRoot({ count: counterReducer }) // Register reducer
   ],
 
-* Store in Components
+  <strong> * Store in Components </strong>
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { increment, decrement, reset } from './counter.actions';
@@ -673,435 +751,429 @@ import { increment, decrement, reset } from './counter.actions';
 @Component({
   selector: 'app-counter',
   template: `
-    <h1>Counter: {{ count$ | async }}</h1>
-    <button (click)="increment()">Increment</button>
-    <button (click)="decrement()">Decrement</button>
-    <button (click)="reset()">Reset</button>
+    <p><strong> Counter: {{ count$ | async }} </strong> </p>
+    button (click)="increment()">Increment</button>
+    button (click)="decrement()">Decrement</button>
+    button (click)="reset()">Reset</button>
   `
 })
 export class CounterComponent {
   count$ = this.store.select('count'); // Select state
-
   constructor(private store: Store<{ count: number }>) {}
-
   increment() { this.store.dispatch(increment()); }
   decrement() { this.store.dispatch(decrement()); }
   reset() { this.store.dispatch(reset()); }
 }
-</script>
 
------ 
-ngRx Store helps manage global state in Angular apps.
-It follows Redux principles with actions, reducers, and selectors.
-Effects handle async operations like API calls.
-Improves scalability, performance, and debugging.
-
+      </code>
+    </pre>
 </div>
 
-SPA and CHALLENGING WORK / SHARED SERVICES
-<div>
-  <!-- -  Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
-  Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching -->
-  Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER
------------------ 
-<!-- I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. -->
 
-SHARED SERVICES 
-<div>
-    <!-- genders = [
+<div class="box shadow p-2 mb-3" id="spa">
+  <h2> SPA </h2>
+  <p> Single Page Application (SPA) is a web application that dynamically updates content without reloading the entire page. 
+    Faster Page Loads ,  Smooth User Experience, Efficient Data Fetching 
+    Examples - GMAIL, FACEBOOK, NETFLIX, TWITTER </p>
+</div>
+
+<div class="box shadow p-2 mb-3" id="shared">
+  <h2> CHALLENGING WORK / SHARED SERVICES </h2>
+  <p> I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. </p>
+  <h2> Shared Servcies </h2>
+<pre>
+  <code>
+    genders = [
     {"id": "male", "name": "Male"},
     {"id": "female", "name": "Female"},
     {"id": "other", "name": "Other"}
-  ] -->
-  <select>
-    <option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
-  </select>
+  ]
+  select>
+    option *ngFor="let gender of genders" value="{{gender.id}}"> {{gender.name}} </option>
+  select>
+  </code>
+</pre>
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="newfeatures">
+  <h2> NEW FEATURES IN ANGULAR  </h2>
+  <p> <strong>  => New Features and Updates in Angular 15 </strong></p>
+  <ol>
+    <li> Standalone API – No Need for NgModules </li>
+    <li> Directive Composition API – Reuse Logic Easily
+      * Allows directives to be combined into a single component easily. </li>
+    <li> Improved Performance with Better Tree Shaking </li>
+    <li> Enhanced Router Features
+      * Lazy loading components directly (without NgModule).
+      <pre>
+        <code>
+          const routes: Routes = [
+          { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }];
+        </code>
+      </pre>
+      </li>
+      <li> Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance. </li>
+      <li> Better Material UI Components </li>
+  </ol>
+
+  <p> <strong>  => Angular 17, released in November 2023, brought a major set of improvements to performance </strong></p>
+  <ol>
+    <li> New Declarative Control Flow Syntax - @-if, @-for, @-switch  </li>
+    <li> Deferrable Views with @-defer </li>
+    <li> Built-in Control Flow Enabled by Default </li>
+    <li> Standalone component the Default, removing the need for NgModules </li>
+    <li> Performance Improvements </li>
+  </ol>
+
+  <p> <strong>  => New Features and Updates in Angular 19 <br>  ​Angular 19, released in November 2024 </strong></p>
+  <ol>
+    <li> Standalone Components by Default </li>
+    <li> Incremental Hydration (Developer Preview) <br> 
+      * This feature enhances server-side rendering by allowing developers to incrementally hydrate parts of their application. Using the @ defer syntax </li>
+      <li>  Route-Level Render Mode (Developer Preview) <br> 
+        * Angular 19 introduces the ability to control the rendering strategy of individual routes </li>
+      <li> Enhanced Reactivity with linkedSignal and resource() </li>
+      <li> Angular Material: New Time Picker Component </li>
+      <li> Two-Dimensional Drag & Drop in CDK </li>
+  </ol>
 </div>
 
- Angular Architecture
-<div>
-  Angular is a front-end framework developed by Google for building dynamic single-page applications (SPAs). It follows a component-based architecture where the entire application is structured into modular, reusable components. At its core, Angular applications are made up of modules, components, templates, directives, services, and dependency injection. The root module, typically named AppModule, acts as the entry point of the application and can include multiple feature modules to organize different functionalities. These modules help in maintaining scalability by dividing the application into separate logical parts.
-
-  A component in Angular is the fundamental building block of the UI. Each component consists of three parts: an HTML template that defines the structure, a TypeScript class that contains business logic, and a CSS file that handles styling. 
-  
-  To enhance the functionality of templates, Angular provides directives. Structural directives, such as *ngIf and *ngFor, modify the DOM by adding or removing elements dynamically, while attribute directives, such as [ngClass] and [ngStyle], change the appearance or behavior of elements. Additionally, pipes are used to transform and format data within templates.
-  
- Services are singleton objects that can be injected into multiple components using Angular’s dependency injection (DI) system. This ensures better code reusability and separation of concerns. For handling HTTP requests.
-  
-  One of Angular’s most powerful features is routing, which enables navigation between different views without requiring a full page reload. The RouterModule manages the application’s routes and allows users to define URL-based navigation paths for different components.
-  
-  Under the hood, Angular’s change detection mechanism optimizes performance by updating only the necessary parts of the UI when data changes. It employs a unidirectional data flow with the ability to detect and update changes efficiently. 
-  
-  Overall, Angular’s structured approach, modularity, and built-in functionalities make it an ideal choice for developing large-scale enterprise applications. 
-</div>
-
-NEW FEATURES IN ANGULAR 
-<div>
-<code>
-  => New Features and Updates in Angular 15
-  1. Standalone API – No Need for NgModules
-  2. Directive Composition API – Reuse Logic Easily
-     * Allows directives to be combined into a single component easily.
-  3. Improved Performance with Better Tree Shaking
-  4. Enhanced Router Features
-     * Lazy loading components directly (without NgModule).
-     const routes: Routes = [
-     { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }];
-  5. Stable Image Directive (NgOptimizedImage) - NgOptimizedImage improves image performance.
-  6. Better Material UI Components
-
-  => New Features and Updates in Angular 19
-  ​Angular 19, released in November 2024,
-  1. Standalone Components by Default
-  2. Incremental Hydration (Developer Preview)
-     * This feature enhances server-side rendering by allowing developers to incrementally hydrate parts of their application. Using the @ defer syntax
-  3. Route-Level Render Mode (Developer Preview)
-     * Angular 19 introduces the ability to control the rendering strategy of individual routes
-  4. Enhanced Reactivity with linkedSignal and resource()
-  5. Angular Material: New Time Picker Component
-  6. Two-Dimensional Drag & Drop in CDK
-</code>
-</div>
-
-LIFE CYCLE 
-<div>
-  Lifecycle hooks in Angular are special methods that get called at different stages of a component’s lifecycle.
-  constructor - for variable initialization 
-  <!-- ngOnInit(){} - Called once after component initialization -->
-  <!-- ngDoCheck() - Called during every change detection cycle -->
-  ngOnChanges()
-  <div> 
-    <!-- 
- ngOnChanges() - Called when input properties change 
- // Examples 
- => Child component --- 
-    @Input() item: any;
-    ngOnChanges(){
-    alert("Data has been updated by parent component...")
-    }
-    HTML -- 
-    <h1>{{item}}</h1>
-
- => PARENT COMPONENT
-    name = 'coding'
-    fun(){
-     this.name = "Value has been chaged"
-     }
-    HTML --- 
-    <app-child item={{name}}></app-child>
-    <button click="fun()"> click me </button>
- -->
+<div class="box shadow p-2 mb-3" id="state">
+  <h2> State Management in Angular </h2>
+  <p> State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State) </p>
   </div>
 
-  => ngAfterViewInit()
-  This hook is called after Angular has fully initialized the component's view 
-  (i.e., after the HTML template is rendered and child components are loaded).
 
-  ngAfterContentInit() - Called after content projection (<ng-content>) is initialized
-  ngAfterContentChecked()	- Called after projected content is checked
-  ngAfterViewInit()	- Called after the component's view and child views are initialized
-  ngAfterViewChecked()	- Called after the component’s and child views are checked
-  <!-- ngOnDestroy()	 - Called just before the component is destroyed -->
-</div>
+  <div class="box shadow p-2 mb-3" id="signals">
+    <h2> SIGNALS </h2>
+    <p> Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables. </p>
+    <pre>
+      <code>
+        <h2>Counter: {{ count() }}</h2>
 
-OPTIMIZE ANGULAR PAGE 
-<div>
- 1. Optimize Change Detection, 2. Lazy Loading,
- 3. Reduce Bundle Size ( AOT AHEAD OF TIME )
- 4. Optimize Third-Party Libraries
- 5. Optimize CSS & Styles, Otimize http
- Minimize CSS & Use Critical CSS, CSS minification, Web Workers
- 6. USE track by
-
- <!-- <li *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</li>
-
- this.http.get('https://api.example.com/data', { cache: 'force-cache' }); -->
-
-Accessibility (A11Y)
-
-Make your UI inclusive for everyone (including users with disabilities).
-
-Add alt text for images.
-
-Use ARIA attributes for better screen reader support.
-Ensure high color contrast for readability
-Minify CSS, JS and enable Gzip compression.
-
-<!-- const routes: Routes = [
-  { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
-  { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
-]; -->
-</div>
-
-State Management in Angular
-<div>
-    State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State)
-</div>
-
-SIGNALS
-<div>
-Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables.
-Examples :- 
-
-<h2>Counter: {{ count() }}</h2>
-
-<button (click)="increment()">Increment</button>
-<button (click)="decrement()">Decrement</button>
+button (click)="increment()">Increment</button>
+button (click)="decrement()">Decrement</button>
 
 TS - 
 count: Signal<number> = signal(0);
 increment() { this.count.set(this.count() + 1); }
 decrement() { this.count.set(this.count() - 1); }
+      </code>
+    </pre>
+    </div>
 
+    <div class="box shadow p-2 mb-3" id="lazy">
+      <h2> Lazy Loading </h2>
+     <p> Lazy loading in Angular is a design pattern that improves the performance of an application by loading feature modules only when they are needed. Instead of loading all modules during the initial load of the application, Angular delays the loading of certain modules until the user navigates to a route associated with that module. This reduces the initial bundle size, resulting in faster application load times and a more responsive user experience. </p>
+     <p>  To implement lazy loading, you define your feature modules with their own routing configuration and set them up in the main routing file using the loadChildren property. This property tells Angular to load the module dynamically. For example, in your app-routing.module.ts, you might add a route like this: </p>
+     <pre>
+      <code>
+        {
+          path: 'admin',
+          loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+        }
+      </code>
+     </pre>
+      <p>    In this example, the AdminModule will only be loaded when the user navigates to the /admin path. The AdminModule itself contains its own routing module (AdminRoutingModule) that defines the routes specific to the admin section of the app. </p>
+      <p> Lazy loading is especially beneficial in large-scale applications with many feature modules. By splitting the code into smaller chunks and loading them on demand, Angular ensures efficient use of resources and better application performance. </p>
+      </div>
+
+      <div class="box shadow p-2 mb-3" id="change">
+        <h2> CHANGE DETECTION  </h2>
+        <p>  Change Detection in Angular is the process of updating the DOM when the application state changes. Angular automatically detects changes and updates the UI accordingly. </p>
+        <ol>
+          <li> Default Change Detection </li>
+          <li> OnPush Change Detection </li>
+        </ol>
+        <p> <strong> Default Change Detection Examples :-  </strong></p>
+        <pre>
+          <code> 
+            count = 0;
+            increment() {
+              this.count++;
+            }
+          </code>
+          Count: {{ count }}
+          button (click)="increment()">Increment</button>
+        </pre>
+       
+        <h2>  OnPush Change Detection Examples </h2>
+        <pre>
+          <code>
+            import ChangeDetectionStrategy, Input 
+            {{ data }}
+            @component({ changeDetection: ChangeDetectionStrategy.OnPush})
+            @Input() data: string;
+          </code>
+        </pre>
+
+        <h2> Onpush </h2>
+        <pre>
+          <code>
+            app-onpush [data]="message"></app-onpush>
+            button (click)="updateMessage()">Update Message</button>
+            Ts 
+            message = 'Hello';
+            updateMessage() {
+              this.message = 'Hello, Angular!';
+            }
+        </code>
+      </pre>
+        </div>
+
+        <div class="box shadow p-2 mb-3" id="microfronted">
+          <h2> Micro Frontend </h2>
+          <p> Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications. </p>
+          <p> <strong> Why Use Micro Frontend in Angular? </strong></p>
+          <p> Scalability: Large applications can be split into smaller manageable parts. </p>
+          <p> Independent Deployment: Each micro frontend can be developed, tested, and deployed independently. </p>
+          <p> Technology Agnostic: Different teams can use different frameworks (Angular, React, Vue) if needed. </p>
+          <p> Better Maintainability: Smaller codebases are easier to maintain. </p>
+          <h2> Steps to Implement Micro Frontend in Angular </h2>
+          <p> Let's assume we have: </p>
+          Shell App (Host Application) → Main container that loads micro frontends. <br>
+          Remote App 1 (Micro App 1) <br>
+          Remote App 2 (Micro App 2) <br>
+          </div>
+
+          <div class="box shadow p-2 mb-3" id="ssr">
+            <h2> SSR </h2>
+            <p> SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state.  </p>
+          </div>
+
+
+<div class="box shadow p-2 mb-3" id="aot">
+            <h2> How to use multiple API in angular ? + AOT JIT </h2>
+            <p> Angular, We can use multiple APIs in different ways.
+              Using forkJoin (Parallel API Calls - Best for Independent APIs) </p>
+              <pre>
+                <code>
+                  forkJoin([
+                  this.http.get('https://api.example.com/users'),
+                  this.http.get('https://api.example.com/posts')
+                ]).subscribe(([users, posts]) => {
+                  console.log('Users:', users);
+                  console.log('Posts:', posts);
+                });
+                </code>
+              </pre>
+<p> AOT - Ahead of time compilation at build time application runs.  <br>
+  JIT - Just in time </p>
+
+<h2>  Different AOT AND JIT </h2>
+<ol>
+  <li> JIT (Just-in-Time) Compilation: </li>
+  <li> Happens at runtime in the browser. </li>
+  <li> Compiles the Angular application in the browser as it loads. </li>
+  <li> Faster development builds but slower performance in production. </li>
+</ol>
+
+<ol>
+  <li> AOT (Ahead-of-Time) Compilation: </li>
+  <li> Happens during the build phase before the application is run. </li>
+  <li> Compiles the application into efficient JavaScript code ahead of time, which leads to faster loading and better performance. </li>
+  <li> Recommended for production builds. </li>
+</ol>
 </div>
 
-Lazy Loading
-<div>
-  Lazy Loading is an optimization technique in Angular that loads modules or components only when they are needed, instead of loading everything upfront.
-  These modules are loaded dynamically only when the user navigates to them.
 
-  ==> path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) 
+<div class="box shadow p-2 mb-3" id="viewchild">
+<h2> @VIEW Child </h2>
+<p> @ViewChild is a decorator in Angular that allows us to access and interact with child components, directives, </p>
+<h2> @view child examples </h2>
+<pre>
+  <code>
+    @ViewChild('heading') headingElement!: ElementRef;
+    ngAfterViewInit() {
+      console.log('Text content:', this.headingElement.nativeElement.textContent);
+    }
+    changeText() {
+      this.headingElement.nativeElement.textContent = 'Text Changed!';
+      this.headingElement.nativeElement.style.color = 'red';
+    }
 
-  Lazy Loading with Child Components
-  { path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule) },
-  { path: '', redirectTo: 'products', pathMatch: 'full' } 
-</div>
+    ------- HTML ------ 
 
-CHANGE DETECTION 
-<div>
-  Change Detection in Angular is the process of updating the DOM when the application state changes. Angular automatically detects changes and updates the UI accordingly.
-  1. Default Change Detection, 2. OnPush Change Detection
+    h2 #heading>Welcome to Angular!</h2>
+    button (click)="changeText()">Change Text</button>
 
-  Default Change Detection Examples :- 
+  </code>
+</pre>
 
-  <h2>Count: {{ count }}</h2> 
-  <button (click)="increment()">Increment</button>
+<H2>@ViewChildren (Multiple Element or Component References) </H2>
+<p><strong> child.component.ts  </strong></p>
+<pre>
+  <code>
+    greet() {
+      return 'Hello from Child Component!';
+    }
+  </code>
+</pre>
 
-  <!-- count = 0;
-  increment() {
-    this.count++;
-  } -->
+<p><strong> parent.component  </strong></p>
+app-child></app-child> <br>
+app-child></app-child> <br>
+app-child></app-child> <br>
+button (click)="callChildrenMethods()">Call All Child Methods</button>
 
-  OnPush Change Detection Examples :- 
-
-  import ChangeDetectionStrategy, Input 
-  <h2>{{ data }}</h2> 
-  @component({ changeDetection: ChangeDetectionStrategy.OnPush})
-  @Input() data: string;
-
-  --------------------------------
-  
-  <app-onpush [data]="message"></app-onpush>
-  <button (click)="updateMessage()">Update Message</button>
-  Ts 
-  message = 'Hello';
-  updateMessage() {
-    this.message = 'Hello, Angular!';
-  }
-</div>
-
-Micro Frontend
-<div>
-Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications.
-Why Use Micro Frontend in Angular?
-Scalability: Large applications can be split into smaller manageable parts.
-Independent Deployment: Each micro frontend can be developed, tested, and deployed independently.
-Technology Agnostic: Different teams can use different frameworks (Angular, React, Vue) if needed.
-Better Maintainability: Smaller codebases are easier to maintain.
-Steps to Implement Micro Frontend in Angular
--------------------------------------------
-Let's assume we have:
-Shell App (Host Application) → Main container that loads micro frontends.
-Remote App 1 (Micro App 1)
-Remote App 2 (Micro App 2)
-</div>
-
-SSR 
-<div>
-SSR - server-side rendering (SSR) is a process that involves rendering pages on the server, resulting in initial HTML content which contains initial page state. 
-</div>
-
-How to use multiple API in angular ? + AOT JIT
-<div>
-    Angular, We can use multiple APIs in different ways.
-    Using forkJoin (Parallel API Calls - Best for Independent APIs)
-    <script>
-        forkJoin([
-          this.http.get('https://api.example.com/users'),
-          this.http.get('https://api.example.com/posts')
-        ]).subscribe(([users, posts]) => {
-          console.log('Users:', users);
-          console.log('Posts:', posts);
+<p><strong> parent.component ts  </strong></p>
+<pre>
+  <code>
+    @ViewChildren(ChildComponent) children!: QueryList<ChildComponent>;
+      ngAfterViewInit() {
+        this.children.forEach((child, index) => {
+          console.log(`Child ${index + 1}: ` + child.greet());
         });
-    </script>
-AOT - Ahead of time compilation at build time application runs. 
-JIT - Just in time
+      }
+      callChildrenMethods() {
+        this.children.forEach((child) => alert(child.greet()));
+      }
+  </code>
+</pre>
 
-** Different AOT AND JIT --
-<script>
-JIT (Just-in-Time) Compilation:
-
-Happens at runtime in the browser.
-Compiles the Angular application in the browser as it loads.
-Faster development builds but slower performance in production.
-
-AOT (Ahead-of-Time) Compilation:
-
-Happens during the build phase before the application is run.
-Compiles the application into efficient JavaScript code ahead of time, which leads to faster loading and better performance.
-Recommended for production builds.
-</script>
 </div>
 
-@VIEW Child
-<div> 
-@ViewChild is a decorator in Angular that allows us to access and interact with child components, directives,
 
-<h2 #heading>Welcome to Angular!</h2>
-<button (click)="changeText()">Change Text</button>
+<div class="box shadow p-2 mb-3" id="databinding">
+  <h2> DATA BINDING </h2>
+  <p> Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML). </p>
+  <p> <strong> Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ) </strong></p>
+  <h2> Two-way Binding Example </h2>
+  <pre>
+    <code>
+      userInput: string = '';  // Model property
+      input type="text" [(ngModel)]="userInput" placeholder="Type something..." />
+      p>You typed: {{ userInput }}</p>
+    </code>
+  </pre>
+  </div>
 
-@ViewChild('heading') headingElement!: ElementRef;
+  <div class="box shadow p-2 mb-3" id="decorator">
+    <h2> DECORATOR </h2>
+    <p> Decorator is a function that add metadata to a class. @component, @directives, @ngModule  </p>
+  </div>
 
-ngAfterViewInit() {
-  console.log('Text content:', this.headingElement.nativeElement.textContent);
-}
+  <div class="box shadow p-2 mb-3" id="directive">
+    <h2> Directive </h2>
+    <p>  Directives in Angular are special instructions in the DOM that Angular interprets and applies behavior to elements. They help extend HTML capabilities. </p>
+    <ol>
+      <li> Component Directives (Most Common) <br> Technically, components are a type of directive with a template. </li>
+      <li> <strong> Structural Directives (Modify the DOM Structure) </strong> <br> 
+        <p> Structural directives change the DOM by adding, removing, or manipulating elements. </p>
+        *ngIf → Condition-based rendering. <br> 
+        *ngFor → Loops over collections. <br>
+        *ngSwitch → Switch-case logic. <br>
+      </li>
+      <li> <strong> Attribute Directives </strong> (Modify the appearance or behavior of elements) 
+      
+     <p> Attribute directives change the styling or behavior of elements without altering the structure. </p>
+     <pre>
+      <code>
+        constructor(private el: ElementRef) {
+          el.nativeElement.style.backgroundColor = 'yellow';
+        }
+        p appHighlight>This text will have a yellow background.</p>
+      </code>
+     </pre>
+      </li>
+    </ol>
 
-changeText() {
-  this.headingElement.nativeElement.textContent = 'Text Changed!';
-  this.headingElement.nativeElement.style.color = 'red';
-}
+    <ol>
+      <li> ElementRef → Direct access to the DOM element. </li>
+      <li> Renderer2 → Safe way to modify the DOM. </li>
+      <li> @HostListener → Handles events inside directives. </li>
+      <li> @HostBinding → Binds properties to the host element. </li>
+      <li> @Input() → Passes values into the directive. </li>
+    </ol>
 
------------------ 
-@ViewChildren (Multiple Element or Component References)
-=> child.component.ts 
-   <p>Child Component</p>
-   greet() {
-    return 'Hello from Child Component!';
-  }
+    <h2> Custom Directive </h2>
 
-=> parent.component.ts
-<app-child></app-child>
-<app-child></app-child>
-<app-child></app-child>
-<button (click)="callChildrenMethods()">Call All Child Methods</button>
-ts
-@ViewChildren(ChildComponent) children!: QueryList<ChildComponent>;
-  ngAfterViewInit() {
-    this.children.forEach((child, index) => {
-      console.log(`Child ${index + 1}: ` + child.greet());
-    });
-  }
-  callChildrenMethods() {
-    this.children.forEach((child) => alert(child.greet()));
-  }
-</div>
+    <pre>
+      <code>
+        custom Directive Command - ng g d directive-name (cdirective)
+        @Input() color!:string;
+    
+        constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
+    
+        ngOnInit(): void { 
+        // this.el.nativeElement.style.backgroundColor = 'red';
+            this.el.nativeElement.style.backgroundColor = this.color;
+        }
+        &lt;p cdirective color="red"&gt; Form &lt;/p&gt;
+    -------------------------
+    
+      @Input() defaultColor: string = 'yellow'; // Default color
+      @Input() highlightColor: string = 'red'; // Color on click
+      private isHighlighted = false;
+      
+      onclick button 
+       ngOnInit(): void {
+          this.el.nativeElement.style.backgroundColor = this.defaultColor;
+        }
+      
+      @HostListener('click') onClick() {
+        this.isHighlighted = !this.isHighlighted; 
+        this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
+        } 
+        &lt;button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"p&gt; Click Me &lt;/buttonp&gt;
+      ---------------- 
+      @Directive({
+        selector: '[websanto]', // Custom attribute selector
+      })
+    
+      @Input() color: string = ''; // Input property for color
+    
+      constructor(private el: ElementRef) {}
+    
+      ngOnInit() {
+        this.el.nativeElement.style.backgroundColor = this.color; // Apply color
+      }
+    in HTML 
+    &lt;button websanto color="red">Submit&lt;/buttonp&gt;
+      </code>
+    </pre>
 
---------------------------------
-DATA BINDING
---------------------------------
-<div>
+  </div>
 
-<div>
-Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML).
-Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ), 
+  <div class="box shadow p-2 mb-3" id="input">
+    <h2> @Input, @output </h2>
+    <p> @Input and @Output are used for communication between parent and child components </p>
+    <p> <strong> example child ts </strong></p>
+    <pre>
+      <code class="whitespace-pre! language-html">
+        @Input() message!: string; 
+        template: `&lt;p&gt; Message from Parent: {{ message }} &lt;/p&gt; `,  
+      </code>
+    </pre>
+    <p> <strong> parent ts </strong></p>
+    <pre><code> parentMessage = 'Hello, Child!'; </code></pre>
 
-Two-way Binding Example
-userInput: string = '';  // Model property
-<input type="text" [(ngModel)]="userInput" placeholder="Type something..." />
-<p>You typed: {{ userInput }}</p>
-</div>
-
-DECORATOR 
-<div> 
-    Decorator is a function that add metadata to a class. @component, @directives, @ngModule 
-</div>
-
-DIRECTIVE -----
-<div>
-=> Directives in Angular are special instructions in the DOM that Angular interprets and applies behavior to elements. They help extend HTML capabilities.
-
-1. Component Directives (Most Common)
-Technically, components are a type of directive with a template.
-
-2. Structural Directives (Modify the DOM Structure)
-Structural directives change the DOM by adding, removing, or manipulating elements.
-*ngIf → Condition-based rendering.
-*ngFor → Loops over collections.
-*ngSwitch → Switch-case logic.
-
-3. Attribute Directives (Modify the appearance or behavior of elements)
-Attribute directives change the styling or behavior of elements without altering the structure.
-constructor(private el: ElementRef) {
-  el.nativeElement.style.backgroundColor = 'yellow';
-}
-<p appHighlight>This text will have a yellow background.</p>
-ElementRef → Direct access to the DOM element.
-Renderer2 → Safe way to modify the DOM.
-@HostListener → Handles events inside directives.
-@HostBinding → Binds properties to the host element.
-@Input() → Passes values into the directive.
-
-----------------------------
-Diretives is class that modifies the behaviour appearance of the elements
-@ViewChild -  Access a Child Component in the Parent Component
-@viewChildren - It is used to get multiple child components, directives.
-
-view child examples 
-<div> 
-<app-child></app-child>
- <button (click)="callChildMethod()">Call Child Method</button>
-<p>{{ message }}</p>
-
-TS file 
-
-@ViewChild(ChildComponent) child!: ChildComponent;
-message = '';
-ngAfterViewInit() {
-  this.message = this.child.sayHello();
-}
-callChildMethod() {
-  this.message = this.child.sayHello();
-}
-</div>
--------------
-
-@Input, @output
-<div>
-@Input and @Output are used for communication between parent and child components
-
-exampe child ts -  @Input() message!: string; 
-template: `<h3>Message from Parent: {{ message }}</h3>`,  
-
-parent ts - 
-parentMessage = 'Hello, Child!';
--------------------------------------------
-
-@output examples - child ts -
- @Output() messageEvent = new EventEmitter<string>();
-
-sendMessage() {
-      this.messageEvent.emit('Hello, Parent!'); // Sending data to parent
-}
-
-Parent ts - 
-
+  <p> <strong>   @output examples - child ts - </strong></p> 
+     @Output() messageEvent = new EventEmitter<string>();
+    sendMessage() {
+          this.messageEvent.emit('Hello, Parent!'); // Sending data to parent
+    }
+<p> <strong> Parent ts -  </strong></p>
 template : `
-    <app-child (messageEvent)="receiveMessage($event)"></app-child>
+    app-child (messageEvent)="receiveMessage($event)"> - app-child
     <p>Received Message: {{ receivedMessage }}</p>
-    ---------------
-    receivedMessage = '';
+    <pre>
+      <code>
+        receivedMessage = ''; <br>
     receiveMessage(message: string) {
       this.receivedMessage = message; // Updating receivedMessage from child
-    }   
-</div>
+    }  
+      </code>
+    </pre>
+  </div>
 
-Ngfor, forloop
-<div>
-    ngfor 
 
-    employees = [
+  <div class="box shadow p-2 mb-3" id="ngfor">
+    <h2> Ngfor, forloop </h2>
+    <pre>
+      <code>
+        employees = [
     {
     id: 1,
     name: "Santosh Kumar",
@@ -1109,60 +1181,20 @@ Ngfor, forloop
     department: "Human Resources",
     salary: 5000000
     },
-    <tr *ngFor="let employee of employees"> </tr>
+    &lt;tr *ngFor="let employee of employees"&gt;  &lt;tr&gt;
     ----------------------
     isVisiable:boolean = false 
-    <h2 *ngIf="isVisiable"> Welcome to NgIf</h2>
-</div>
+    &lt;h2 *ngIf="isVisiable"&gt; Welcome to NgIf &lt; h2 &gt;
+      </code>
+    </pre>
+  </div>
 
-CUSTOM DIRECTIVE 
-<div>
-    custom Directive Command - ng g d directive-name (cdirective)
-    @Input() color!:string;
 
-    constructor(private el: ElementRef) {} //Refrence DOM elements, //void is a type that represents the absence of a value
-
-    ngOnInit(): void { 
-    // this.el.nativeElement.style.backgroundColor = 'red';
-        this.el.nativeElement.style.backgroundColor = this.color;
-    }
-    <p cdirective color="red"> Form </p>
--------------------------
-
-<div> @Input() defaultColor: string = 'yellow'; // Default color
-  @Input() highlightColor: string = 'red'; // Color on click
-  private isHighlighted = false;
-  
-  onclick button 
-   ngOnInit(): void {
-      this.el.nativeElement.style.backgroundColor = this.defaultColor;
-    }
-  
-  @HostListener('click') onClick() {
-    this.isHighlighted = !this.isHighlighted; 
-    this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
-    } 
-  <button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"> Click Me </button>
-  ---------------- 
-  @Directive({
-    selector: '[websanto]', // Custom attribute selector
-  })
-
-  @Input() color: string = ''; // Input property for color
-
-  constructor(private el: ElementRef) {}
-
-  ngOnInit() {
-    this.el.nativeElement.style.backgroundColor = this.color; // Apply color
-  }
-in HTML 
-<button websanto color="red">Submit</button>
-</div>
-</div>
-
-SCROLLTOP
-<div>
-  private showClass = 'show-scroll-button';
+  <div class="box shadow p-2 mb-3" id="scrolltop">
+    <h2> SCROLLTOP</h2>
+    <pre>
+      <code>
+        private showClass = 'show-scroll-button';
   constructor(private el: ElementRef, private renderer: Renderer2) {}
   ngOnInit() {
     this.renderer.addClass(this.el.nativeElement, 'scroll-to-top');
@@ -1178,377 +1210,251 @@ SCROLLTOP
   @HostListener('click') onclick(){
     window.scrollTo({ top:0, behavior: 'smooth'});
   }
-</div>
+      </code>
+    </pre>
+  </div>
 
-ADD AND REMOVE CLASS 
-<DIV>
-  @HostListener('click') onClick() {
-    this.isHighlighted = !this.isHighlighted;
-
-    if (this.isHighlighted) {
-      // Add class to clicked element
-      this.renderer.addClass(this.el.nativeElement, 'active');
-
-      // Remove class from other elements
-      this.removeClassFromOtherElements();
-    } else {
-      // Remove class from this element
-      this.renderer.removeClass(this.el.nativeElement, 'active');
+  <div class="box shadow p-2 mb-3" id="add-remove">
+    <h2> ADD AND REMOVE CLASS  </h2>
+<pre>
+  <code>
+    @HostListener('click') onClick() {
+      this.isHighlighted = !this.isHighlighted;
+  
+      if (this.isHighlighted) {
+        // Add class to clicked element
+        this.renderer.addClass(this.el.nativeElement, 'active');
+  
+        // Remove class from other elements
+        this.removeClassFromOtherElements();
+      } else {
+        // Remove class from this element
+        this.renderer.removeClass(this.el.nativeElement, 'active');
+      }
     }
-  }
-</DIV>
----------
-structural directive and attribute directive 
-isVisiable = true
-<div *ngIf="isVisiable"> Welcome </div>
-<button (click)="isVisiable = !isVisiable"> click </button>
---------------
-<p [ngClass]="{'active': isActive, 'inactive': !isActive}">Styled Text</p>
-<button [ngStyle]="{'background-color': isActive ? 'green' : 'red'}">Click Me</button>
+  </code>
+</pre>
 </div>
 
---------------- End DIRECTIVE ------ 
 
-PIPE, CUSTOM PIPE, PURE, IMPURE
-<div>
-  <!-- What is the difference between a Pipe and a Directive?
-  Pipes transform data in templates (date, uppercase).
-  Directives modify the behavior of DOM elements (ngIf, ngFor). -->
+<div class="box shadow p-2 mb-3" id="pipe">
+  <h2> PIPE, CUSTOM PIPE, PURE, IMPURE </h2>
 
-Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template.
-Uppercase: {{ 'hello world' | uppercase }}
+  <p> 
+    What is the difference between a Pipe and a Directive? <br>
+    Pipes transform data in templates (date, uppercase). <br>
+    Directives modify the behavior of DOM elements (ngIf, ngFor). 
+  </p>
+  <p> <strong> Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template. </strong></p>
+
+  <pre>
+    <code>
+      Uppercase: {{ 'hello world' | uppercase }}
 
 today: Date = new Date();
-<p>Full Date: {{ today | date:'fullDate' }}</p>
-pure - Only when input data changes	, Faster , Static data transformations	
-impure - On every change detection cycle, Slower 
+&lt;p&gt;Full Date: {{ today | date:'fullDate' }}&lt;/p&gt;
 
- custom Pipe, PipeTransform
- <!-- transform(value: string, gender: string): string {
+<p> <strong> pure - Only when input data changes	, Faster , Static data transformations	 </strong></p>
+<p> <strong> impure - On every change detection cycle, Slower  </strong></p>
+
+ <strong> custom Pipe, PipeTransform </strong>
+
+  transform(value: string, gender: string): string {
     if(gender.toLowerCase()=="male")
       return "Mr. "+value;
       else
       return "Miss. "+value
-    }    -->
+    } 
     {{employee.name | mypipe:employee.gender }}
 
------ impure 
-
-An impure pipe in Angular executes on every change detection cycle, even if the input data hasn’t changed.
-pure: false
-transform(value: string, gender: string): string {
-    <!-- if (!value || !gender) return value; -->
-    if(gender.toLowerCase()=="male")
-      return "Mr. "+value;
-      else
-      return "Miss. "+value
-    }
-
-FILTER IMPURE PIPE EXAMPLES 
-<!-- pure: false
-transform(items: any[], searchText: string): any[] {
-  if (!items || !searchText) {
-    return items;
-  }
-  return items.filter(item =>
-    item.toLowerCase().includes(searchText.toLowerCase())
-  ); -->
-  use in component 
-  <!-- searchText: string = '';
-  items: string[] = ['Angular', 'React', 'Vue', 'Svelte']; -->
-  use in template 
-  <!-- <input type="text" [(ngModel)]="searchText" placeholder="Search..." />
-  <ul>
-    <li *ngFor="let item of items | filterItems:searchText">
-      {{ item }}
-    </li>
-  </ul> -->
-</div>
+    </code>
+  </pre>
 
 
-<div>
-  
-Using a Global Variable for data transfer
-<div> 
-  ts - let sharedData: any;
-  Sender - sendData() {
-    sharedData = "Data from Sender";
-  }
-  Receive - receivedData = sharedData;
-</div>
+  <p> <strong> FILTER IMPURE PIPE EXAMPLES </strong></p>
+  <pre>
+    <code>
+      pure: false
+      transform(items: any[], searchText: string): any[] {
+        if (!items || !searchText) {
+          return items;
+        }
+        return items.filter(item =>
+          item.toLowerCase().includes(searchText.toLowerCase())
+        );
 
-Spying on a Method in Angular (Jasmine & SpyOn)
-<div>
-  jASMINE - 
-  Jasmine is a behavior-driven development (BDD) framework for testing JavaScript applications.
-  It does not depend on any external libraries and is commonly used for unit testing in Angular.
+        <strong>   use in component </strong>
+        searchText: string = '';
+        i     tems: string[] = ['Angular', 'React', 'Vue', 'Svelte'];
+        <strong> use in template </strong>
+        input type="text" [(ngModel)]="searchText" placeholder="Search..." />
+        ul>
+          li *ngFor="let item of items | filterItems:searchText">
+            {{ item }}
+          /li>
+        /ul>
+    </code>
+  </pre>
 
+  </div>
+
+
+  <div class="box shadow p-2 mb-3" id="global-variable">
+    <h2> Using a Global Variable for data transfer </h2>
+    <pre>
+      <code>
+        ts - let sharedData: any;
+        Sender - sendData() {
+          sharedData = "Data from Sender";
+        }
+        Receive - receivedData = sharedData;
+      </code>
+    </pre>
+    </div>
+
+
+<div class="box shadow p-2 mb-3" id="spying">
+<h2> Spying on a Method in Angular (Jasmine & SpyOn) </h2>
+<p>
+  <p> <strong> jASMINE -  </strong></p>
+  Jasmine is a behavior-driven development (BDD) framework for testing JavaScript applications. <br> 
+  It does not depend on any external libraries and is commonly used for unit testing in Angular. <br>
   In Angular unit testing, spying on methods is a common practice to track method calls, prevent actual execution, and return mock values. This is done using Jasmine’s spyOn function.
+</p>
+  <pre>
+    <code>
+      export class MyComponent {
+        myMethod() {
+          console.log('Original method executed');
+        }
+      
+        anotherMethod() {
+          this.myMethod(); // Calls myMethod internally
+        }
+      }  
+    
+     -- Spy on an Observable	
+     spyOn(service, 'methodName').and.returnValue(of(fakeData))
+    
+     --Spy on a service method
+     spyOn(service, 'methodName')
 
-  export class MyComponent {
-    myMethod() {
-      console.log('Original method executed');
-    }
-  
-    anotherMethod() {
-      this.myMethod(); // Calls myMethod internally
-    }
-  }  
-
- -- Spy on an Observable	
- spyOn(service, 'methodName').and.returnValue(of(fakeData))
-
- --Spy on a service method
- spyOn(service, 'methodName')
+    </code>
+  </pre>
 </div>
 
-TYPESCRIPT 
-<div>
-  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
-  Differences between TypeScript and JavaScript
 
+<div class="box shadow p-2 mb-3" id="typescript">
+  <h2> TYPESCRIPT </h2>
+<p>  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
+  Differences between TypeScript and JavaScript </p>
+
+<p>
   TypeScript - 
-  Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	
-  JavaScript -----
-  Dynamically typed
-  No compilation needed
-  Limited support
-
-  Interface in TypeScript defines a contract for an object’s structure.
+  Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	<br>
+  
+  JavaScript ----- <br>
+  Dynamically typed <br>
+  No compilation needed <br>
+  Limited support <br>
+  <br>
+  Interface in TypeScript defines a contract for an object’s structure.<br>
   interface User {
     name: string;
     age: number;
     email?: string; // Optional property
-  }
+  }<br>
   const user: User = { name: "John", age: 25 };
-</div>
-
-CHART IMPLEMENTS 
-<div>
-  Bar chart and Pie chart Installation
-  ng2-charts - v4 support with angular 15
-  npm install according to doc
-  Global configuration
-  providers
-  ngcharconfiguration in module
-  code copy markup and ts code
-  using dependancy --legacy-peer-deps
-</div>
-
-Standalone Components in Angular
-<div>
-Angular introduced Standalone Components in Angular 14 to eliminate the need for NgModule.
-Before Angular 14: Every component needed to be declared in an NgModule.
-Now (Angular 14+): Components can work independently without NgModul
-</div>
-
-Route Guards in Angular
-<div>
-  Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include:
-
-  CanActivate: Determines if a route can be activated.
-  CanDeactivate: Checks if a route can be deactivated.
-  CanLoad: Determines if a module can be loaded lazily.
-  <script>
-constructor(private router: Router) {}
-canActivate(): boolean {
-  const isLoggedIn = !!localStorage.getItem('user');
-  if (!isLoggedIn) {
-    this.router.navigate(['/login']); // Redirect to login if not authenticated
-    return false;
-  }
-  return true;
-}
-  </script>
-  Applying Route Guard to Routes
-  <!-- const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
-]; -->
-</div>
-
-Dependency Injection (DI) in Angular
-<div>
-  DI is a design pattern in Angular used for managing dependencies (services, components, etc.).
-  * Instead of creating objects manually, Angular injects them automatically.
-  * Uses @Injectable() decorator for services.
-  => Create Serives 
-  getData() {
-    return ['Angular', 'React', 'Vue'];
-  }
-  => Inject the Service into a Component
-  frameworks: string[];
-  constructor(private dataService: DataService) {  // 🔹 Inject Service Here
-    this.frameworks = this.dataService.getData();
-  }
-  <h1>{{ frameworks }}</h1>
+</p>
 </div>
 
 
-API CALL RESTful APIs -- API serives 
-<div> 
--- Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs.
-
-    <!-- ngOnInit() {
-        this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
-          this.user = resposne.user
-          console.log(resposne);
-        })
-      } -->
-<script>
-
-@Injectable({
-  providedIn: 'root',
-})
-export class ApiService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Sample API
-
-  constructor(private http: HttpClient) {}
-
-  // Get all posts
-  getPosts(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
-  }
-
-  // Get post by ID
-  getPostById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
-  // Create a new post
-  createPost(postData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, postData);
-  }
-
-  // Update a post
-  updatePost(id: number, postData: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, postData);
-  }
-
-  // Delete a post
-  deletePost(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
-  }
-}
- </script>    
-<!-- <ul>
-  <li *ngFor="let post of posts">
-    <strong>{{ post.title }}</strong>
-    <p>{{ post.body }}</p>
-  </li>
-</ul> -->
-
-FORM validation - 
-
-<!-- 
-lead_form!: FormGroup
-lead_fields = {
-  name     : ['', Validators.required],
-  email    : ['', Validators.required],
-}
-constructor( private _fb    : FormBuilder ){
-  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
-}
-ngOnInit(){this.initializeForm()}
-initializeForm(){
-  this.lead_form = this._fb.group(this.lead_fields)
-  this.getLeads()
-}
-getLeads(){
-  let params = [{"key": "tenant_id", "value": this.tenant_id},{"key": "limit", "value": 100}]
-  this._http.get('leads/leads/', params).subscribe((response:any) => {
-    this.leads = response;
-    this.action = "Add"
-  },(error: any) => {this.errorMessage(error)})
-} -->
-CRUD 
-<div> 
-  CREATE 
-  <!-- createLead(){
-    this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
-      this.afterAction("Lead Saved")
-    },(error: any) => {this.errorMessage(error)})
-  } -->
-  
-  EDIT
-  setPayloadForEdit(form: any){
-    <!-- return {
-      "name"     : form.name,
-      "email"    : form.email,
-    } -->
-  }
-  editLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}] -->
-    <!-- const payload = this.setPayloadForEdit(this.lead_form.value) -->
-    // delete payload.tenant_id
-    <!-- this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
-      this.afterAction("Lead Update")
-    },(error: any) => {this.errorMessage(error)}) -->
-  }
-  updateLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
-    const payload = this.setPayloadForEdit(this.lead_form.value)
-    // delete payload.tenant_id
-    this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
-      this.afterAction("Lead Update")
-    },(error: any) => {this.errorMessage(error)}) -->
-  }
-  deleteLead(){
-    <!-- let params = [{"key": "tenant_id", "value": this.tenant_id}]
-    this._http.delete('leads/leads/'+this.lead_id, params).subscribe((response:any) => {
-      this.afterAction("Lead Deleted")
-    },(error: any) => {this.errorMessage(error)}) -->
-  }
-   
-</div>
-
-GRAPHQL 
-<div>
-  GraphQL is a powerful alternative to REST for querying and mutating data in Angular applications. It allows clients to request exactly the data they need, reducing over-fetching and improving performance.
-  npm install @apollo/client graphql
-  Benefits of Using GraphQL in Angular
-  ✅ Fetch only the data you need
-  ✅ Reduce API calls with a single query
-  ✅ Strongly typed schema
-  ✅ Real-time updates with subscriptions
-</div>
-</div>
-
-HOW TO UPGRADE OLD VERSION TO NEW VERSION
-<div>
-=> Always backup your project before upgrading.
-=> Use Git commits to track changes at each step.
-1. Check the Current Angular Version
-ng version
-2. Update Angular CLI Globally
-npm install -g @angular/cli
-3. ng update @angular/core@16 @angular/cli@16
-4. Update Other Dependencies
-ng update
--------------
-You should upgrade step by step from Angular 15 → 16 → 17 → 18 → 19 rather than jumping directly from Angular 15 to Angular 19.
-If You Try Directly Updating from 15 to 19?
-1. dependency conflicts and errors.
-2. Some configurations (like angular.json) might break due to missing intermediate updates.
-3. Third-party libraries might not support Angular 19
-</div>
-
-
-FORMS
-<div>
-  What is the difference between Template-driven and Reactive Forms?
-  Template-driven
-  Structure Based on directives
-  Validation Asynchronous
-  Simple forms
-  Two-way data binding
-  ----------------------
-  Reactive Forms
-  Structure Based on explicit creation
-  Synchronous
-  Complex forms
-  Immutable data model  
-
+<div class="box shadow p-2 mb-3" id="chart">
+  <h2> CHART IMPLEMENTS  </h2>
   <div>
+      <p> <strong> Bar chart and Pie chart Installation </strong></p>
+      <p> <strong> ng2-charts - v4 support with angular 15 </strong> </p>
+      <p> <strong> npm install according to doc </strong></p>
+        <p> <strong> Global configuration </strong></p>
+          <p> <strong> providers </strong></p>
+            <p> <strong> ngcharconfiguration in module </strong></p>
+              <p> <strong> code copy markup and ts code </strong> </p>
+                <p> <strong> using dependancy --legacy-peer-deps </strong></p>
+  </div>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="routeguards">
+  <h2> Route Guards in Angular  </h2>
+  <p> Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include: </p>
+  <ul>
+    <li> CanActivate:  if a route can be activated.</li>
+    <li> CanDeactivate: Checks if a route can be deactivated.</li>
+    <li> CanLoad: Determines if a module can be loaded lazily. </li>
+  </ul>
+  <pre>
+    <code>
+      constructor(private router: Router) {}
+      canActivate(): boolean {
+        const isLoggedIn = !!localStorage.getItem('user');
+        if (!isLoggedIn) {
+          this.router.navigate(['/login']); // Redirect to login if not authenticated
+          return false;
+        }
+        return true;
+      }
+    </code>
+  </pre>
+  <p> <strong> Applying Route Guard to Routes </strong></p>
+  <pre>
+    <code>
+      const routes: Routes = [
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
+  ];
+    </code>
+  </pre>
+  </div>
+
+
+  <div class="box shadow p-2 mb-3" id="di">
+    <h2> Dependency Injection (DI) in Angular  </h2>
+    <p>  DI is a design pattern in Angular used for managing dependencies (services, components, etc.). <br>
+      * Instead of creating objects manually, Angular injects them automatically. <br>
+      * Uses @Injectable() decorator for services. <br>
+      <strong> => Create Serives  </strong>
+      <pre><code>
+      getData() {
+        return ['Angular', 'React', 'Vue'];
+      }
+      <strong> => Inject the Service into a Component </strong>
+      frameworks: string[];
+      constructor(private dataService: DataService) {  // 🔹 Inject Service Here
+        this.frameworks = this.dataService.getData();
+      }
+      {{ frameworks }}
+    </code></pre>
+    </div>
+
+<div class="box shadow p-2 mb-3" id="form">
+<h2> FORMS </h2>
+<p><strong> Difference between Template-driven and Reactive Forms? </strong></p>
+<ul>
+  <li><strong> Template-driven </strong></li>
+  <li> Structure Based on directives </li>
+  <li> Validation Asynchronous </li>
+  <li> Simple forms </li>
+  <li> Two-way data binding </li>
+</ul>
+<ul>
+  <li><strong>  Reactive Forms </strong></li>
+  <li>   Structure Based on explicit creation </li>
+  <li> Synchronous </li>
+  <li>   Complex forms </li>
+  <li> Immutable data model </li>
+</ul>
+
+<pre>
+  <code>
     lead_form!: FormGroup
     lead_fields = {
     name     : ['', Validators.required],
@@ -1567,45 +1473,176 @@ FORMS
       alert('Please fill in all required fields!');
       return;
     }
-  </div>
-
-  HTML 
-  <form [formGroup]="lead_form" (ngSubmit)="saveForm()">
-  <input type="text" class="form-control" placeholder="Name" formControlName="name">
-  <span class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
-  Name is required. </span>
-  </form>
-
+  </code>
+</pre>
 </div>
 
-LOCALSTORAGE AND SESSIONSTORAGE 
-<div>
-Local Storage - 
-- Data remains even after closing/reopening the browser	
-- Available across all tabs/windows of the same origin	
-- Storage limit Around 5MB per origin	
-- Store user preferences, theme settings, authentication tokens, etc.	
-SessionStorage  
-- Data is cleared when the browser/tab is closed
-- Available only within the same tab
-- Store temporary data like form input, session-based UI state, etc.
-<script>
-// Store data
-localStorage.setItem('username', 'Santosh');
-// Retrieve data
-const username = localStorage.getItem('username');
-console.log(username); // Output: Santosh
-// Remove data
-localStorage.removeItem('username');
-// Clear all data
-localStorage.clear();
-</script>
-USING SESSION STORAGE
-<script> 
+
+<div class="box shadow p-2 mb-3" id="form-crud">
+<h2> FORM validation </h2>
+<pre>
+  <code>
+    lead_form!: FormGroup
+lead_fields = {
+  name     : ['', Validators.required],
+  email    : ['', Validators.required],
+}
+constructor( private _fb    : FormBuilder ){
+  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
+}
+ngOnInit(){this.initializeForm()}
+initializeForm(){
+  this.lead_form = this._fb.group(this.lead_fields)
+  this.getLeads()
+}
+getLeads(){
+  let params = [{"key": "tenant_id", "value": this.tenant_id},{"key": "limit", "value": 100}]
+  this._http.get('leads/leads/', params).subscribe((response:any) => {
+    this.leads = response;
+    this.action = "Add"
+  },(error: any) => {this.errorMessage(error)})
+} 
+  </code>
+</pre>
+
+<h2> crud </h2>
+<p> <strong> Create </strong></p>
+<pre><code>
+  createLead(){
+    this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
+      this.afterAction("Lead Saved")
+    },(error: any) => {this.errorMessage(error)})
+  }
+</code>
+</pre>
+
+<p> <strong> setpayLoad </strong></p>
+<pre>
+  <code>
+    setPayloadForEdit(form: any){
+      return {
+        "name"     : form.name,
+        "email"    : form.email,
+      }
+    }
+  </code>
+</pre>
+
+<p> <strong> Edit </strong></p>
+
+<pre> 
+  <code> 
+  editLead(){
+    let params = [{"key": "tenant_id", "value": this.tenant_id}]
+    const payload = this.setPayloadForEdit(this.lead_form.value)
+    this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
+      this.afterAction("Lead Update")
+    },(error: any) => {this.errorMessage(error)}) 
+  }
+</code>
+</pre>
+
+<p> <strong> Updated Crud </strong></p>
+<pre>
+  <code>
+    updateLead(){
+      let params = [{"key": "tenant_id", "value": this.tenant_id}]
+      const payload = this.setPayloadForEdit(this.lead_form.value)
+      this._http.put('leads/leads/'+this.lead_id, payload, params).subscribe((response: any) => {
+        this.afterAction("Lead Update")
+      },(error: any) => {this.errorMessage(error)}) 
+    }
+  </code>
+</pre>
+
+<p> <strong> Delete Crud </strong></p>
+<pre>
+  <code>
+    deleteLead(){
+      let params = [{"key": "tenant_id", "value": this.tenant_id}]
+      this._http.delete('leads/leads/'+this.lead_id, params).subscribe((response:any) => {
+        this.afterAction("Lead Deleted")
+      },(error: any) => {this.errorMessage(error)})
+    }
+  </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="graphql">
+  <h2> GRAPHQL </h2>
+<p> GraphQL is a powerful alternative to REST for querying and mutating data in Angular applications. It allows clients to request exactly the data they need, reducing over-fetching and improving performance.
+ </p>
+ <p>  npm install @apollo/client graphql </p>
+<p> Benefits of Using GraphQL in Angular </p>
+<ul>
+  <li> Fetch only the data you need </li>
+  <li> Reduce API calls with a single query </li>
+  <li> Strongly typed schema </li>
+  <li> Real-time updates with subscriptions </li>
+</ul>
+  </div>
+
+
+  <div class="box shadow p-2 mb-3" id="vresion-upgrade">
+    <h2> HOW TO UPGRADE OLD VERSION TO NEW VERSION </h2>
+    <div>
+      => Always backup your project before upgrading. <br>
+      => Use Git commits to track changes at each step.<br>
+      1. Check the Current Angular Version<br>
+      ng version<br>
+      2. Update Angular CLI Globally<br>
+      npm install -g @angular/cli<br>
+      3. ng update @angular/core@16 @angular/cli@16<br>
+      4. Update Other Dependencies<br>
+      ng update<br>
+      -------------
+      You should upgrade step by step from Angular 15 → 16 → 17 → 18 → 19 rather than jumping directly from Angular 15 to Angular 19.<br>
+      If You Try Directly Updating from 15 to 19?<br>
+      1. dependency conflicts and errors.<br>
+      2. Some configurations (like angular.json) might break due to missing intermediate updates.<br>
+      3. Third-party libraries might not support Angular 19<br>
+    </div>
+    </div>
+
+
+<div class="box shadow p-2 mb-3" id="storage">
+<h2> Local Storage </h2>
+ <ul>
+  <li> Data remains even after closing/reopening the browser </li>
+  <li> Available across all tabs/windows of the same origin </li>
+  <li> Storage limit Around 5MB per origin	 </li>
+  <li> Store user preferences, theme settings, authentication tokens, etc.	 </li>
+ </ul>
+ <h2> SessionStorage  </h2>
+ <ul>
+  <li> Data is cleared when the browser/tab is closed </li>
+  <li> Available only within the same tab </li>
+  <li> Store temporary data like form input, session-based UI state, etc.	 </li>
+ </ul>
+
+ <pre>
+  <code>
+    // Store data
+    localStorage.setItem('username', 'Santosh');
+    // Retrieve data
+    const username = localStorage.getItem('username');
+    console.log(username); // Output: Santosh
+    // Remove data
+    localStorage.removeItem('username');
+    // Clear all data
+    localStorage.clear();
+  </code>
+ </pre>
+
+ <h2> USING SESSION STORAGE </h2>
+ <pre><code>
   sessionStorage.setItem('sessionUser', 'JohnDoe');
-</script>
+ </code></pre>
+
 Using the Service in a Component
-<script>
+<pre>
+  <code> 
   saveData() {
     this.storageService.setLocalStorage('user', { name: 'Santosh', role: 'Admin' });
     this.storageService.setSessionStorage('sessionUser', { name: 'Guest' });
@@ -1620,220 +1657,268 @@ Using the Service in a Component
     this.storageService.clearLocalStorage();
     this.storageService.clearSessionStorage();
   }
-</script>
-<button (click)="saveData()">Save Data</button>
+</code>
+</pre>
+button (click)="saveData()">Save Data</button>
 </div>
 
-Authentication in Angular
-<div>
-  Authentication is the process of verifying who someone is.
-  Authorization is the process of determining what an authenticated user is allowed to do.
+<div class="box shadow p-2 mb-3" id="filter"> 
+<h2> Filter </h2>
 
-  Authentication can be implemented using JWT tokens, Angular guards, and interceptors to manage login and secure routes.
-  <script>
-    import { Injectable } from '@angular/core';
-@Injectable({
-    providedIn: 'root'
-})
-export class AuthService {
-    constructor() { }
-    isLoggedIn(): boolean {
-        return !!localStorage.getItem('userToken');
-    }
-}
-  </script>
-</div>
+<pre><code>
+  ng generate pipe filter
+  name: 'filter'
+  transform(items: any[], searchText: string): any[] {
+    if (!items || !searchText) return items;
+    searchText = searchText.toLowerCase();
+    return items.filter(item => item.toLowerCase().includes(searchText));
+  }
 
-FILTER
-<div>
-ng generate pipe filter
-name: 'filter'
-<!-- transform(items: any[], searchText: string): any[] {
-  if (!items || !searchText) return items;
-  searchText = searchText.toLowerCase();
-  return items.filter(item => item.toLowerCase().includes(searchText));
-} -->
-<input type="text" [(ngModel)]="searchText" placeholder="Search items..." />
-<div *ngFor="let item of items | filter:searchText | paginate: { itemsPerPage: 10, currentPage: currentPage }">
+  -------------
+  input type="text" [(ngModel)]="searchText" placeholder="Search items..." />
+div *ngFor="let item of items | filter:searchText | paginate: { itemsPerPage: 10, currentPage: currentPage }">
   {{ item }}
-</div>
-<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
+pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+
+</code>
+</pre>
 
 </div>
 
-PAGINATION 
-<div>
-export class AppComponent implements OnInit {
-
-  <!-- items: string[] = [];  // Store 100 items
-  pagedItems: string[] = []; // Store items for current page
-  pageSize = 10; // Number of items per page
-  currentPage = 1; // Current active page
-  totalPages = 0; // Total number of pages -->
-
-  ngOnInit() {
-    this.createItemsList();
-  }
-
-  createItemsList(){
-    for(let i=1; i<=100; i++){
-      this.items.push("Item" +' '+ i)
-    }
-    <!-- console.log('Check', this.items); -->
-    this.totalPages = Math.ceil(this.items.length / this.pageSize);
-    this.updatePage();
-  }
-
-  // Function to update items for the current page
-  updatePage() {
-    <!-- const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.pagedItems = this.items.slice(startIndex, endIndex); -->
-  }
-
-  // Function to change page
-  goToPage(page: number) {
-    <!-- if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.updatePage();
-    } -->
-  }
-}
--------------------------- 
-<div *ngFor="let item of pagedItems">
-  {{ item }}
-</div>
-<!-- Pagination Controls -->
-<div class="pagination">
-  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
-  <button *ngFor="let page of [].constructor(totalPages); let i = index"
-          (click)="goToPage(i + 1)"
-          [class.active]="currentPage === i + 1">
-    {{ i + 1 }}
-  </button>
-  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
-</div>
-
-</div>
-
-12. Store is a centralized state management solution that holds the application’s state  
-and provides mechanisms to update and access the state efficiently.
-
---------------------------------
-10. In Angular 17, authentication involves:
-
-Login Page – User enters credentials.
-Auth Service – Handles authentication & token storage. ( dedicated service within your application that handles all user authentication logic, including login, logout )
-
-Dashboard Component – Accessible only after login.
-Auth Guard – Protects routes from unauthorized access. ( Auth Guard is a mechanism that controls access to routes based on user authentication. )
-
-Lazy loading ondemand load 
----------------------------------------
-
-1. Git pull automatically merges the fetched changes into the current branch, git fetch does no 
-2. Git Fetch a primary command used to download contents from a remote repository.
-3. Git stash git stash command takes your uncommitted changes and saves later use. 
-
-
-Learend
-Always check if ReactiveFormsModule is imported in the module.
-
------------------------------------
-
-<div> 
-
-<form [formGroup]="lead_form" (ngSubmit)="saveLead()">
-  <input type="text" class="form-control" placeholder="Name" formControlName="name">
-  <div class="error-message" *ngIf="lead_form.get('name')?.touched && lead_form.get('name')?.hasError('required')">
-  Name is required. </div>
-  </form>
-
-  const routes: Routes = [
-  { path: '', component: HomeComponent },
-  ];
-
-  // services 
-  previousButton(){
-    if(sessionStorage.getItem('role') == "client"){
-      return false
-    }
-    return true
-  }
-
-
-------------- CUSTOM PIPE --------------------
-
-ng generate pipe reverseText
-@Pipe({
-  name: 'reverseText'
-})
-export class ReverseTextPipe implements PipeTransform {
-  transform(value: string): string {
-    return value.split('').reverse().join('');
-  }
-}
-without custom pipe
-today: Date = new Date();
-<p>Full Date: {{ today | date:'fullDate' }}</p>
-------------------------------------------------- 
-
-HTML AND CSS 
-<div>
-
-Semantic elements in HTML clearly describe their meaning to both the browser and developers.
-GRID AND FLEX BOX - 
-<!-- GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap
-FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing -->
-Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child())
-
-  ////////////////// CSS =================
-  <!-- Use relative when you want to adjust an element without removing it from the document flow.
-  Use absolute when you want to detach an element and position it within a specific container. -->
-
-  Relative - The element moves relative to its normal position.
-  Absolute - The element is positioned relative to the nearest positioned ancestor 
-  Fixed - The element is positioned relative to the viewport (browser window).
-
-  CSS Box Model defines how an element’s size and spacing are calculated.
------------------------- 
-  Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions. 
-  
-  // scss variable
+<div class="box shadow p-2 mb-3" id="pagination">
+<h2> Pagination </h2>
+<pre>
   <code>
-  $primary-color: blue;
+    export class AppComponent implements OnInit {
+
+      items: string[] = [];  // Store 100 items
+      pagedItems: string[] = []; // Store items for current page
+      pageSize = 10; // Number of items per page
+      currentPage = 1; // Current active page
+      totalPages = 0; // Total number of pages
+    
+      ngOnInit() {
+        this.createItemsList();
+      }
+    
+      createItemsList(){
+        for(let i=1; i<=100; i++){
+          this.items.push("Item" +' '+ i)
+        }
+        <!-- console.log('Check', this.items); -->
+        this.totalPages = Math.ceil(this.items.length / this.pageSize);
+        this.updatePage();
+      }
+    
+      // Function to update items for the current page
+      updatePage() {
+        const startIndex = (this.currentPage - 1) * this.pageSize;
+        const endIndex = startIndex + this.pageSize;
+        this.pagedItems = this.items.slice(startIndex, endIndex);
+      }
+    
+      // Function to change page
+      goToPage(page: number) {
+        if (page >= 1 && page <= this.totalPages) {
+          this.currentPage = page;
+          this.updatePage();
+        }
+      }
+    }
+
+    --------- 
+
+    div *ngFor="let item of pagedItems">
+      {{ item }}
+    div
+    div class="pagination">
+      button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      button *ngFor="let page of [].constructor(totalPages); let i = index"
+              (click)="goToPage(i + 1)"
+              [class.active]="currentPage === i + 1">
+        {{ i + 1 }}
+      </button>
+      button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+    div
+
+  </code>
+</pre>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="login-setup">
+<h2> Login page Setup </h2>
+<div>
+  ng generate component pages/login
+  ng generate component pages/dashboard
+  ng generate service services/auth
+  Auth Guard: Prevents unauthorized users from accessing Dashboard
+  -----------------
+  Create Authentication Service ( auth.service.ts)
+  <pre>
+    <code>
+      constructor(private router: Router) {}
+  
+  login(username: string, password: string): boolean {
+    if (username === 'admin' && password === 'password') {
+      localStorage.setItem('isLoggedIn', 'true');
+      this.router.navigate(['/dashboard']);
+      return true;
+    }
+    return false;
+  }
+  
+  logout() {
+    localStorage.removeItem('isLoggedIn');
+    this.router.navigate(['/login']);
+  }
+  
+  isAuthenticated(): boolean {
+    return localStorage.getItem('isLoggedIn') === 'true';
+  }
+    </code>
+  </pre>
+
+  <h2> login.component.ts </h2>
+
+<pre>
+  <code>
+    username: string = '';
+    password: string = '';
+    errorMessage: string = '';
+    constructor(private authService: AuthService) {}
+    login() {
+      if (!this.authService.login(this.username, this.password)) {
+        this.errorMessage = 'Invalid credentials!';
+      }
+    }
+  </code>
+</pre>
+
+<h2>  login.component.html </h2>
+<pre>
+  <code>
+    input type="text" placeholder="Username" [(ngModel)]="username" />
+    input type="password" placeholder="Password" [(ngModel)]="password" />
+    button (click)="login()">Login</button>
+    p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </code>
+</pre>
+ 
+<h2> dashboard.component.ts: </h2>    
+<pre>
+  <code>
+    constructor(private authService: AuthService) {}
+    logout() {
+      this.authService.logout();
+    }
+  </code>
+</pre>
+  <h2> dashboard.html  </h2>
+  <pre>
+    <code>
+      <div class="dashboard-container">
+        <h2>Welcome to Dashboard</h2>
+        button (click)="logout()">Logout</button>
+      </div>
+    </code>
+  </pre>
+
+</div>
+</div>
+
+<div class="box shadow p-2 mb-3" id="material">
+  <h2> Angular Material </h2>
+  <p> Angular Material is a User Interface (UI) component library that we can use in their Angular projects to speed up the development of  consistent user interfaces.</p>
+  <p> Angular Material offers you reusable and beautiful UI components like Cards, Inputs, Data Tables, Datepickers, </p>
+  <pre>
+    <code>
+      mat-card>
+        mat-card-title>SVG Line Reveal Animation /mat-card-title>
+        mat-card-content>
+        sfdgsdfg
+        /mat-card-content>
+      /mat-card>
+      
+    </code>
+  </pre>
+  </div>
+
+  <div class="box shadow p-2 mb-3" id="json">
+    <h2> Angular Material </h2>
+    <p> JSON stands for JavaScript Object Notation. It’s a lightweight data format used to store and exchange data. Super common in web development, especially for APIs.</p>
+    </div>
+
+    <div class="box shadow p-2 mb-3" id="prime">
+      <h2> PrimeNg </h2>
+      <p> PrimeNG is a UI component library for Angular. It gives you a bunch of pre-made, beautiful, and customizable UI components—so you don’t have to build everything from scratch. </p>
+      <p> <strong> What kind of components does PrimeNG have? </strong></p>
+      Buttons, checkboxes, sliders, inputs <br>
+      Data tables (super powerful) <br>
+      Dialogs, tooltips, modals <br>
+      Calendars and dropdowns <br>
+      Charts and progress bars <br>
+      File upload, drag-and-drop, and more <br>
+      </div>
+
+
+<div class="box shadow p-2 mb-3" id="html">
+<h2> HTML AND CSS </h2>
+
+<strong> GRID AND FLEX BOX  </strong>
+<p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
+<p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
+
+<p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
+<p> <strong> CSS </strong></p>
+<p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
+<p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
+<p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
+<p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
+<p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
+<pre>
+  <code>
+    // scss variable
+    $primary-color: blue;
   .button {
     color: $primary-color;
     padding: 10px;
   }
   </code>
-  
-  --------------------
-  // nesting in scss  
-  .navbar {
-      background: #333;
-      padding: 10px;
-    
-      .menu {
-        list-style: none;
-        padding: 0;
-    
-        li {
-          display: inline-block;
-          margin-right: 10px;
-    
-          a {
-            text-decoration: none;
-            color: white;
-    
-            &:hover {
-              color: yellow;
+</pre>
+
+<pre>
+  <code>
+    // nesting in scss  
+    .navbar {
+        background: #333;
+        padding: 10px;
+      
+        .menu {
+          list-style: none;
+          padding: 0;
+      
+          li {
+            display: inline-block;
+            margin-right: 10px;
+      
+            a {
+              text-decoration: none;
+              color: white;
+      
+              &:hover {
+                color: yellow;
+              }
             }
           }
         }
       }
-    }
-  
+  </code>
+</pre>
+
+<pre>
+  <code>
     //Mixins in SCSS
   
     @mixin button-style {
@@ -1852,8 +1937,12 @@ Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nt
       @include button-style;
       background: red;
     }
-    
-  //sass
+  </code>
+</pre>
+
+<pre>
+  <code>
+    //sass
   $primary-color: blue
   .button
     color: $primary-color
@@ -1866,86 +1955,10 @@ Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nt
       }
     }
 
-    ----------------- 
-    
-    Variables ($primary-color, $secondary-color)
-    ✅ Mixins (@mixin button-style($bg-color))
-    ✅ Nesting (&:hover)
-    ✅ Loops (@each for button sizes)
-
+  </code>
+</pre>
 </div>
 
-LOGIN PAGE STEP 
-<div>
-ng generate component pages/login
-ng generate component pages/dashboard
-ng generate service services/auth
-Auth Guard: Prevents unauthorized users from accessing Dashboard
------------------
-Create Authentication Service ( auth.service.ts)
-<script>
-  constructor(private router: Router) {}
-
-login(username: string, password: string): boolean {
-  if (username === 'admin' && password === 'password') {
-    localStorage.setItem('isLoggedIn', 'true');
-    this.router.navigate(['/dashboard']);
-    return true;
-  }
-  return false;
-}
-
-logout() {
-  localStorage.removeItem('isLoggedIn');
-  this.router.navigate(['/login']);
-}
-
-isAuthenticated(): boolean {
-  return localStorage.getItem('isLoggedIn') === 'true';
-}
-</script>
-login.component.ts
-<script>
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
-
-  constructor(private authService: AuthService) {}
-
-  login() {
-    if (!this.authService.login(this.username, this.password)) {
-      this.errorMessage = 'Invalid credentials!';
-    }
-  }
-</script>
-login.component.html
-<div class="login-container">
-  <h2>Login</h2>
-  <input type="text" placeholder="Username" [(ngModel)]="username" />
-  <input type="password" placeholder="Password" [(ngModel)]="password" />
-  <button (click)="login()">Login</button>
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</div>
-dashboard.component.ts:
-<script>
-  constructor(private authService: AuthService) {}
-  logout() {
-    this.authService.logout();
-  }
-</script>
-dashboard.html 
-<script>
-  <div class="dashboard-container">
-  <h2>Welcome to Dashboard</h2>
-  <button (click)="logout()">Logout</button>
-</div>
-</script>
-</div>
-
-</div>
-</div>
-
-</div>
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>
