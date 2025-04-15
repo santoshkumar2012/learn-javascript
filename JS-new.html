@@ -90,10 +90,14 @@ pre {
       <li> <a href="#count"> word count </a> </li>
       <li> <a href="#vowel"> Vowel </a> </li>
       <li> <a href="#sumnumber"> sumnumber </a> </li>
+      <li> <a href="#triangle"> Triangle Pattern </a> </li>
+      <li> <a href="#palindrome"> Palindrome </a> </li>
+      <li> <a href="#booble"> Booble sort </a> </li>
+      <li> <a href="#reverse"> Reverse </a> </li>
     </ul>
 
 
-<div class="box shadow p-2 mb-3" id="js">
+<div class="box shadow p-2 mb-3 mt-4" id="js">
  <h2 id="component"> WHAT IS THE JAVASCRIPT? </h2>
 <p> JavaScript (JS) is a high-level, interpreted programming language used to create interactive and dynamic web pages. It is the core language of the web, allowing developers to manipulate HTML, CSS. </p>
 <h2> HOW WORK ON BROWSER  </h2>
@@ -859,6 +863,122 @@ console.log(numOfVowels)
         </code>
     </pre>
     </div>
+
+    <div class="box shadow p-2 mb-3" id="triangle">
+        <h2>  Triangle Pattern </h2>
+        <pre>
+            <code>
+                let n = 5; // Number of rows
+                for (let i = 1; i <= n; i++) {
+              let row = "";
+              for (let j = 1; j <= i; j++) {
+                  row += "* ";
+              }
+              console.log(row);
+          }
+            </code>
+        </pre>
+        </div>
+
+        <div class="box shadow p-2 mb-3" id="palindrome">
+            <h2> Palindrome </h2>
+            <pre>
+                <code>
+                    function isPalindrome(str) {
+                        const reversed = str.split('').reverse().join('');
+                        return str === reversed;
+                      }
+                      
+                      // Test it
+                      console.log(isPalindrome("madam"));    // true
+                      console.log(isPalindrome("hello"));    // false                      
+                </code>
+            </pre>
+            <pre>
+                <code>
+                    function PalindromeSwapper(str) {
+                        // Helper function to check if a string is a palindrome
+                        function isPalindrome(s) {
+                          return s === s.split('').reverse().join('');
+                        }
+                        // If the string is already a palindrome, return it
+                        if (isPalindrome(str)) {
+                          return str;
+                        }
+                        let arr = str.split('');
+                          console.log(arr)
+                        // Try swapping each pair of characters to check if it becomes a palindrome
+                        for (let i = 0; i < arr.length; i++) {
+                          for (let j = i + 1; j < arr.length; j++) {
+                            // Swap characters
+                            [arr[i], arr[j]] = [arr[j], arr[i]];
+                            // Check if the swapped string is a palindrome
+                            if (isPalindrome(arr.join(''))) {
+                              return arr.join('');
+                            }
+                            // Swap back to restore original string
+                            [arr[i], arr[j]] = [arr[j], arr[i]];
+                          }
+                        }
+                        // If no valid swap makes it a palindrome, return the original string
+                        return str;
+                      }
+                      // Test cases
+                      console.log(PalindromeSwapper("anna"));  // Output: "anna" (already a palindrome)
+                      console.log(PalindromeSwapper("kyaak")); // Output: "kayak" (swap 'y' and 'a')
+                </code>
+            </pre>
+            </div>
+
+            <div class="box shadow p-2 mb-3" id="booble">
+                <h2>  Booble sort </h2>
+                <pre>
+                    <code>
+                        function bubbleSort(arr) {
+                            let n = arr.length;
+                            for (let i = 0; i < n - 1; i++) {
+                                for (let j = 0; j < n - i - 1; j++) {
+                                    if (arr[j] > arr[j + 1]) {
+                                        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                                    }
+                                }
+                            }
+                            return arr;
+                        }
+                        console.log(bubbleSort([5, 3, 8, 1, 2])); // Output: [1, 2, 3, 5, 8]
+                        
+                    </code>
+                </pre>
+                </div>
+
+                <div class="box shadow p-2 mb-3" id="reverse">
+                    <h2>  REVERSE  </h2>
+
+                    <pre>
+                        <code>
+                            let str ="LOVE"
+                            let totalstr = ""
+                          
+                            for (let i=str.length-1; i>=0; i--){
+                              totalstr += str[i]
+                            }
+                          
+                            console.log (totalstr)
+
+                            -------------- 
+
+                            let strs = [1,2,3]
+  stroess = strs.reverse();
+  console.log(stroess)
+
+  -------------- 
+
+  let strss = "LOVE"
+  let reverseStrss = strss.split("").reverse("").join("");
+  console.log (reverseStrss)
+                        </code>
+                    </pre>
+                    </div>
 
 </div>
 

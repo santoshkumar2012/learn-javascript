@@ -61,6 +61,7 @@ pre {
 
     <ul class="index">
       <li> <a href="#angularrun"> angular Run </a> </li>
+	  <li> <a href="#why"> why angular </a> </li>
       <li> <a href="#architecture"> architecture </a> </li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
       <li> <a href="#angularspa"> spa </a> </li>
@@ -80,7 +81,9 @@ pre {
       <li> <a href="#newfeatures"> new featurs </a> </li>
       <li> <a href="#routeguards"> routeguards </a> </li>
       <li> <a href="#spa"> spa </a> </li>
-      <li> <a href="#state"> state </a> </li>
+      <li> <a href="#state"> state management </a> </li>
+      <li> <a href="#scope"> Scope </a> </li>
+
       <li class="borderline"><a href="#">  </a></li>
       <li> <a href="#databinding"> databinding </a> </li>
       <li> <a href="#decorator"> decorator </a> </li>
@@ -92,7 +95,6 @@ pre {
       <li class="borderline"><a href="#">  </a></li>
       <li> <a href="#services"> services </a> </li>
       <li> <a href="#di"> dependancy injection </a> </li>
-      
       <li> <a href="#global-variable"> global-variable </a> </li>
       <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#rxjs"> rxjs </a> </li>
@@ -122,9 +124,16 @@ pre {
       <li> <a href="#prime"> PrimeNg </a> </li>
       <li> <a href="#json"> json </a> </li>
       <li> <a href="#html"> html </a> </li>
+      <li> <a href="dom"> DOM Manipulation </a></li>
+	  <li> <a href="#angular-react"> Angular and React </a> </li>
+    <li> <a href="#test"> Angular Test casing  </a> </li>
+    <li> <a href="#git"> GIT AND GITHUB </a> </li>
+    <li> <a href="#web"> Web Optimization? </a></li>
+    <li> <a href="#google"> Google Cloud </a></li>
+    <li> <a href="#azile"> Azile Methodology </a></li>
     </ul>
 
- <h2>INTRO</h2>   
+ <h2 class="mt-4">INTRO</h2>   
 <div class="box shadow p-2 mb-3">
 As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked extensively with Angular to build reusable components, implement routing, handle state management, and integrate APIs efficiently. I collaborated closely with designers and backend developers to ensure a seamless and high-performing user experience.
 In addition to frontend development, I have strong design skills and experience working with Figma and Photoshop. I have designed UI layouts, website templates, and even complete dashboards for admin panels, ensuring intuitive and user-friendly interfaces.
@@ -134,8 +143,9 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
 
 
 
-<h2> ANGULAR BASIC </h2>
+
 <div class="box shadow p-2 mb-3" id="mvc">
+  <h2> ANGULAR BASIC </h2>
 <p><strong>  MVC and MVVM (Model-View-ViewModel)  </strong></p>
 <p> ** MVC (Model-View-Controller) is a design pattern that separates an application into three main components:
   <ol>
@@ -156,8 +166,31 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
      <p> <strong>View :- </strong> Represents the UI (user interface) elements that the user interacts with, such as buttons, inputs, forms, etc. | View is typically defined using HTML and CSS, and it’s tied to the template of a component. </p> 
      <p> <strong> ViewModel :- </strong> ViewModel holds the data and logic needed to present the Model’s data in a way that the View can easily display.  It is represented by the component in Angular, which binds the data and defines the behavior that will be reflected in the view. two-way data binding (via ngModel) allows the ViewModel. </p> 
 </p>
-</div>   
+</div> 
 
+<div class="box shadow p-2 mb-3" id="why">
+<h2 id="component"> What are some of the advantages of Angular over other frameworks? </h2>
+<ul>
+  <li> <strong> Features that are provided out of the box - </strong> Angular provides a number of built-in features like routing, state management, rxjs library and http servicesstraight out of the box. This means that one does not need to look for the above-stated features separately. They are all provided with angular. </li>
+  <li><strong>  Declarative UI -</strong> Angular uses HTML to render the UI of an application. HTML is a declarative language and is much easier to use than JavaScript. </li>
+  <li> <strong> Long-term Google support - </strong> Google announced Long-term support for Angular. This means that Google plans to stick with Angular and further scale up its ecosystem. </li>
+</ul>
+</div>
+  
+<div class="box shadow p-2 mb-3" id="angular-react">
+<h2 id="component"> Angular and React difference </h2>
+Angular
+<p> Full-fledged framework	 </p>
+<p> Uses TypeScript by default	 </p>
+<p> Architectural - MVC-style, services, DI, etc	 </p>
+<p> Built-in services & RxJS </p> 
+React 
+<p> Just a library for UI </p>
+<p>  Uses JavaScript (TS optional) </p>
+<p> Easier to start – more flexible </p>
+<p> Flexible – you choose tools & structure
+ </p> 
+</div>
 
 <h2 id="component"> COMPONENTS </h2>
 <div class="box shadow p-2 mb-3" id="component">
@@ -181,7 +214,11 @@ Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstra
  <p> <strong> AppComponent: </strong> Its property (title) is used in the HTML template to set the title of the application. </p> 
 </div>
 
+<div class="box shadow p-2 mb-3" id="scope">
+  <h2> SCOPE </h2>
+<p> In Angular, a scope is an object that refers to the application model. It is a context in which expressions can be executed. These scopes are grouped hierarchically, comparable to the DOM structure of the application. A scope aids in the propagation of various events and the monitoring of expressions. </p>
 
+</div> 
 
 <div class="box shadow p-2 mb-3" id="template">
 <h2> TEMPLATE </h2>
@@ -1037,7 +1074,10 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 
 <div class="box shadow p-2 mb-3" id="databinding">
   <h2> DATA BINDING </h2>
-  <p> Data Binding in Angular is a technique that synchronizes data between the component ang the view (HTML). </p>
+  <P> Data binding is one of the most elements for creating communication between the DOM and the component. </P>
+  <p> <strong> Property Binding </strong> connect a DOM element's property </p>
+  <p> <strong> Event Binding </strong> respond to DOM events like button clicks and mouse movements </p>
+
   <p> <strong> Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ) </strong></p>
   <h2> Two-way Binding Example </h2>
   <pre>
@@ -1240,12 +1280,21 @@ template : `
 <div class="box shadow p-2 mb-3" id="pipe">
   <h2> PIPE, CUSTOM PIPE, PURE, IMPURE </h2>
 
-  <p> 
-    What is the difference between a Pipe and a Directive? <br>
-    Pipes transform data in templates (date, uppercase). <br>
-    Directives modify the behavior of DOM elements (ngIf, ngFor). 
-  </p>
   <p> <strong> Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template. </strong></p>
+  <h2> What is the difference between a Pipe and a Directive? </h2>
+  <p> <strong> Pipes </strong> transform data in templates (date, uppercase). <br>
+   <strong> Directives </strong>  modify the behavior of DOM elements (ngIf, ngFor). 
+  </p>
+  <h2> What are pure Pipes? </h2>
+  <p> Pure pipes are executed only when a "pure change" is detected in the input value. <br> By default, all pipelines are pure </p>
+  <h2> What are Impure Pipes? </h2>
+  <p> Angular calls an impure pipe for each change detection cycle, independent of the change in the input fields. For each of these pipes, several pipe instances are produced.  </p>
+
+  <p> <strong> pure - Only when input data changes	, Faster , Static data transformations	 </strong></p>
+<p> <strong> impure - On every change detection cycle, Slower  </strong></p>
+
+<h2> What is Pipe transform Interface in Angular? </h2>
+<p> An interface used by pipes to accomplish a transformation. Angular calls the transform function with the value of a binding as the first argument and any arguments as the second parameter in list form. This interface is used to implement custom pipes. </p>
 
   <pre>
     <code>
@@ -1254,8 +1303,20 @@ template : `
 today: Date = new Date();
 &lt;p&gt;Full Date: {{ today | date:'fullDate' }}&lt;/p&gt;
 
-<p> <strong> pure - Only when input data changes	, Faster , Static data transformations	 </strong></p>
-<p> <strong> impure - On every change detection cycle, Slower  </strong></p>
+<pre>
+  <code>
+    import { Pipe, PipeTransform } from '@angular/core';
+ @Pipe({
+  name: 'tranformpipe'
+})
+export class TranformpipePipe implements PipeTransform {
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return null;
+  }
+}
+
+  </code>
+</pre>
 
  <strong> custom Pipe, PipeTransform </strong>
 
@@ -1865,17 +1926,35 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 
 <div class="box shadow p-2 mb-3" id="html">
 <h2> HTML AND CSS </h2>
+Hyper Text markup Language
 
-<strong> GRID AND FLEX BOX  </strong>
+<h2> GRID AND FLEX BOX  </h2>
 <p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
 <p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
 
+<h2> Semantic HTML elements </h2>
+<p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
+<pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
+<h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
+Improved SEO, Enhanced Accessibility, Clearer Structure
+
+<h2 class="mt-4"> Non-semantic HTML elements </h2>
+do not provide information about the content <br> like div> div> and span> span>
+<hr>
+
+<h2> P and span tag difference </h2>
+<p> p Block element, Paragraph, Starts on a new line	</p>
+<p> span Inline element, No semantic meaning, Styling small parts, Stays inline </p>
+
+<h2> CSS </h2>
+<p> <strong> css selector </strong> - CSS selector is a pattern used to select HTML elements , like - id, .class, element.class, Parent child, element:hover </p>
 <p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
-<p> <strong> CSS </strong></p>
 <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
 <p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
 <p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
 <p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
+
+<h2> Less, Sass, and SCSS </h2>
 <p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
 <pre>
   <code>
@@ -1958,6 +2037,182 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
   </code>
 </pre>
 </div>
+
+<div class="box shadow p-2 mb-3" id="dom">
+  <h2 id="component"> DOM Manipulation </h2>
+  Document Object Model
+  <p> <strong> What is DOM Manipulation? </strong></p>
+  <p> DOM Manipulation means changing elements, structure, or content of a webpage using JavaScript (or frameworks like Angular, React, etc.).
+  </p>
+  <p> <strong> For example, changing text, styles, adding/removing elements, etc. </strong></p>
+  <pre><code>
+    // Select an element
+let heading = document.getElementById("title");
+
+// Change text
+heading.innerText = "New Title";
+
+// Change style
+heading.style.color = "blue";
+
+// Create new element
+let newPara = document.createElement("p");
+newPara.textContent = "This is new!";
+document.body.appendChild(newPara);
+
+// Remove element
+heading.remove();
+
+  </code></pre>
+
+  <h2> DOM Manipulation in Angular: </h2>
+  <ul>
+    <li> Data binding to update DOM automatically </li>
+    <li> Structural directives like *ngIf, *ngFor to add/remove content </li>
+    <li> Renderer2 for safe DOM access (used in services or advanced use cases) </li>
+  </ul>
+
+  </div>
+
+  <div class="box shadow p-2 mb-3" id="test">
+    <h2> Angular Test Casing  What is Jasmine? </h2>
+   <p> Jasmine is a behavior-driven testing framework for JavaScript.
+    and Karma Test Runner and watch
+   </p>
+
+   <ul>
+    <li> <strong> describe() – </strong>  defines a test suite (group of tests) </li>
+    <li> <strong> it() –  </strong>defines a single test/spec </li>
+    <li> <strong> expect() – </strong> assertion to test result </li>
+   </ul>
+
+   <h2> Common Function </h2>
+    <strong> describe() </strong>	Groups related test specs <br>
+    <strong> it() </strong>	Defines a single test case <br>
+    <strong> beforeEach() </strong>	Runs before each test <br>
+    <strong> expect() </strong>	Makes an assertion <br>
+    <strong> toBe() </strong>	Checks strict equality (===) <br>
+    <strong> toEqual() </strong>	Checks deep equality (objects) <br>
+    <strong> toContain() </strong>	Checks if a string/array contains <br>
+
+    <pre>
+      <code>
+        num1 = 0;
+        num2 = 0;
+
+        result = 0;
+
+        onAdd(){
+          this.result = Number(this.num1) + Number(this.num2);
+        }
+
+        in - spec.ts 
+        it("should get result onAdd", () => {
+          component.num1 = 4;
+          component.num2 = 5;
+          component.onAdd();
+          except(component.result).toBe(9)
+        })
+
+      </code>
+    </pre>
+    </div>
+  
+
+    <div class="box shadow p-2 mb-3" id="git">
+      <h2> GIT And GITHUB </h2>
+
+      <h2> What is Git? </h2>
+      <p> Git is a version control system that helps developers track changes in their code, collaborate with others, and manage different versions of a project. </p>
+
+      <h2> What is GitHub? </h2>
+     <p> GitHub is a cloud platform built on top of Git. It allows you to: </p> 
+     <p> Store your Git repositories online </p>
+     <p> Collaborate with teams </p>
+     <p> Create pull requests, issues, etc. </p>
+
+     <h2> What is Branching in Git? </h2>
+     <p> A branch is like a separate copy of your code where you can make changes without affecting the main project. </p>
+
+     <h2> What is Merging in Git? </h2>
+     <p> Merging is the process of combining changes from one branch into another. </p>
+     git checkout main <br> 
+      git merge feature/login-page
+
+      <h2> GIT Workflow </h2>
+      <ul>
+        <li>git clone – Copy repo from GitHub </li>
+        <li> git checkout -b new-feature – Create a branch </li>
+        <li> Make your changes and git add, git commit </li>
+        <li> git push origin new-feature – Push to GitHub </li>
+        <li> Open a Pull Request (PR) on GitHub </li>
+        <li> Review & merge into main </li>
+      </ul>
+      </div>
+
+      <div class="box shadow p-2 mb-3" id="web">
+        <h2> What is Web Optimization? </h2>
+        <p> Web Optimization is the process of improving a website’s performance, speed, user experience, and searchability (SEO). </p>
+
+        <ol>
+          <li> Performance Optimization <br> Minify HTML, CSS, JS, Use GZIP compression, Load critical CSS first, Avoid large JS bundles </li>
+          <li> Image Optimization, Compress images (TinyPNG, ImageMagick, etc.), Use Lazy Loading </li>
+          <li> Caching </li>
+          <li> Responsive Design ,  use medi query </li>
+          <li> Reduce HTTP Requests , CSS sprites </li>
+          <li> use cdn </li>
+          <li> <strong> TOOLS </strong></li>
+          <li><strong> GTmetrix , Google PageSpeed Insights</strong></li>
+        </ol>
+        </div>
+
+        
+      <div class="box shadow p-2 mb-3" id="google">
+        <h2> Google Cloud </h2>
+        <p> Google Cloud = A powerful platform to run apps, store data, analyze information </p>
+
+      <h2> Common Use Cases </h2>  
+      <ul> 
+        <li> Hosting websites & web apps </li>
+        <li> Running backend APIs </li>
+        <li> Storing and analyzing big data </li>
+        <li> Deploying machine learning models </li>
+        <li> Running containers with Kubernetes (GKE) </li>
+      </ul>
+
+      <h2> Why Use Google Cloud? </h2>
+      <p> Fast & Scalable , Secure , Integrates well with Angular, Firebase, and other Google tools </p>
+
+      <h2> Services Does Google Cloud Offer? </h2>
+      <p> Storage, Security, Networking, Developer Tools, </p>
+        </div>
+
+
+        <div class="box shadow p-2 mb-3" id="azile">
+          <h2> Azile Methodology </h2>
+          <p> Agile = Delivering software in small, usable pieces — fast, flexible, and with constant feedback. </p>
+          <h2>  Agile Workflow </h2>
+          <ul>
+            <li> Step-by-step Agile Process: </li>
+            <li> Product Backlog – List of all features/tasks (To-Do list) </li>
+            <li> Sprint Planning – Pick tasks for the next sprint (usually 1–2 weeks) </li>
+            <li> Sprint – The team builds and tests features </li>
+            <li> Daily Stand-up – Quick daily meeting to track progress </li>
+            <li> Sprint Review – Demo the completed work </li>
+            <li> Sprint Retrospective – Discuss what went well & what to improve </li>
+          </ul>
+          
+      <h2> Just like todo app: </h2>    
+
+        <ul>
+        <li> Build the "Add Task" feature</li>
+        <li> Add "Edit & Delete" </li>
+        <li> Add filtering and UI improvements </li>
+        </ul>
+
+          </div>
+
+
 
 
 <button id="toTopBtn" title="Go to top">↑</button>
