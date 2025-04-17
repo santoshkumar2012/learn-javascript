@@ -206,10 +206,23 @@ console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
 
 <div class="box shadow p-2 mb-3" id="async">
 <h2> What is Async / Await </h2>
-<p>   Async and await are syntax sugar built on top of Promises, introduced in ES2017 (ES8). They allow you to write asynchronous code that looks and behaves like synchronous code,
+<p>  Async is used to declare a function that returns a Promise. await is used inside a function wait for promise.
 </p>
 <pre>
     <code>
+	async function myDisplay() {
+  let myPromise = new Promise(function(resolve, reject) {
+    resolve("Promise is resolved");
+  });
+
+  let result = await myPromise;
+  console.log(result);
+}
+myDisplay();
+	
+	...................
+	
+	
         Always returns a Promise.
         async function sayHello() {
       return "Hello!";
@@ -463,7 +476,8 @@ input type="text" id="textInput" placeholder="Type something...">
 </pre>
 
 <h2> Event Loop </h2>
-<p> JavaScript executes code in a single thread, meaning it can only do one thing at a time. However, JavaScript can handle asynchronous operations (e.g., network requests, timers) without freezing the main thread. The event loop is what makes this possible.
+<p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and processing events. <br>
+It uses background Web APIs and task queues.
 </p>
 <h2> Key Components </h2>
 1. Call Stack
