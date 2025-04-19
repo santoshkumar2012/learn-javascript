@@ -57,7 +57,7 @@ pre {
     </style>
   </head>
   <body>
-   <div class="container">
+   <div class="container-fluid">
 
     <ul class="index">
       <li> <a href="#angularrun"> angular Run </a> </li>
@@ -79,22 +79,27 @@ pre {
       <li> <a href="#change"> Change Detection </a> </li>
       <li> <a href="#accessibility"> accessibility </a> </li>
       <li> <a href="#newfeatures"> new featurs </a> </li>
-      <li> <a href="#routeguards"> routeguards </a> </li>
+      <li> <a href="#routeguards"> routeguards, Dynamic Menu </a> </li>
       <li> <a href="#spa"> SPA </a> </li>
       <li> <a href="#state"> state management </a> </li>
       <li> <a href="#scope"> Scope </a> </li>
 	   <li> <a href="#angular-react"> Angular and React </a> </li>
      <li> <a href="#server"> Upload Angular Project </a> </li>
+     <li> <a href="#storage"> Local Storage </a> </li>
+     <li> <a href="#packages"> packages.json, angular.json </a> </li>
      
       <li class="borderline"><a href="#">  </a></li>
-      <li> <a href="#databinding"> databinding </a> </li>
+      <li> <a href="#databinding"> Data Binding </a> </li>
       <li> <a href="#decorator"> decorator </a> </li>
       <li> <a href="#directive"> directive </a> </li>
-      <li> <a href="#input"> input </a> </li>
-      <li> <a href="#ngfor"> ngfor </a> </li>
+      <li> <a href="#input"> @input() </a> </li>
+      <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle  </a> </li>
       <li> <a href="#pipe"> pipe, pure, impure </a> </li>
       <li> <a href="#viewchild"> viewchild </a> </li>
 	  <li> <a href="#global-variable"> global-variable </a> </li>
+    <li> <a href="#form"> Form, reactiveform </a> </li>
+    <li> <a href="#crud"> crud </a> </li>
+    <li> <a href="#form-crud"> form validation, crud </a> </li>
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
@@ -103,21 +108,15 @@ pre {
       <li> <a href="#services"> Services </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
       <li> <a href="#typescript"> typescript </a> </li>
-       <li> <a href="#storage"> Local Storage </a> </li>
+       
       <li> <a href="#apiservices"> API </a> </li>
       <li> <a href="#aot"> AOT </a> </li>
       <li> <a href="#signals"> signals </a> </li>   
 		<li> <a href="#graphql"> graphql </a> </li>	  
       <li> <a href="#vresion-upgrade"> how to upgrade </a> </li>
 	   <li class="borderline"><a href="#">  </a></li>
-	   
-	  <li> <a href="#validation"> form validation </a> </li>
-      <li> <a href="#crud"> crud </a> </li>
-	  <li> <a href="#chart"> chart </a> </li>
-      <li> <a href="#form"> form, reactiveform </a> </li>
-      <li> <a href="#form-crud"> form validation, crud </a> </li>
-     
-	  <li class="borderline"><a href="#">  </a></li>
+
+        <li> <a href="#chart"> chart </a> </li>
 	  <li> <a href="#microfronted"> Microfronted </a> </li>
 	  <li> <a href="#material"> Angular Material </a> </li> 
 	  <li> <a href="#prime"> PrimeNg </a> </li>
@@ -139,10 +138,10 @@ pre {
 
  <h2 class="mt-4">INTRO</h2>   
 <div class="box shadow p-2 mb-3">
-As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked extensively with Angular to build reusable components, implement routing, handle state management, and integrate APIs efficiently. I collaborated closely with designers and backend developers to ensure a seamless and high-performing user experience.
-In addition to frontend development, I have strong design skills and experience working with Figma and Photoshop. I have designed UI layouts, website templates, and even complete dashboards for admin panels, ensuring intuitive and user-friendly interfaces.
+As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked with Angular to build reusable components, implement routing, handle state management, and integrate APIs. <br>
+In addition to frontend development, I have strong design skills and experience working with Figma and Photoshop. I have designed UI layouts, website templates, and even complete dashboards for admin panels, ensuring intuitive and user-friendly interfaces. <br>
 I was responsible for creating and maintaining UI architectures, optimizing application performance, and ensuring cross-browser compatibility. I also implemented custom Angular directives, pipes, and services to enhance code reusability and maintainability.
-Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility. I also mentored junior developers, conducted code reviews.
+Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility.
 </div>
 
 
@@ -1143,11 +1142,76 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 
 <div class="box shadow p-2 mb-3" id="databinding">
   <h2> DATA BINDING </h2>
-  <P> Data binding is one of the most elements for creating communication between the DOM and the component. </P>
-  <p> <strong> Property Binding </strong> connect a DOM element's property </p>
-  <p> <strong> Event Binding </strong> respond to DOM events like button clicks and mouse movements </p>
 
-  <p> <strong> Interpolation({{ title }}), Property Binding, Event Binding ((click)="showAlert()">Click</button> ) </strong></p>
+<h2> Event Binding </h2>
+<p><strong> Event binding is the process of targeting an event in a HTML element. </strong></p>
+<pre><code>
+  TS
+  clickEvent(){
+    console.log("event binding")
+  }
+  clickEvent2(val:string){
+    console.log(val)
+  }
+-------
+  HTML 
+  button type="button" (click)="clickEvent()"> Event Binding </button>
+  input type="text" #box (keyup)="clickEvent2(box.value)" placeholder="Event Keyup">
+</code>
+</pre>
+<h2> Property Binding </h2>
+<pre>
+  <code>
+    TS 
+    isDisabled = true
+    defaultName = "santosh"
+    imgUrl = "assets/imags/icon.png"
+
+    HTML
+    input type="text" [disabled]="isDisabled">
+    input type="text" [value]="defaultName">
+    img [src]="imgUrl" alt="">
+  </code>
+</pre>
+<h2> Attribute Binding </h2>
+<pre>
+  <code>
+    TS 
+    columnSpan = 3
+    placeholder1 = "First Name"
+
+    HTML
+    td [attr.colspan]="columnSpan">Content</td>
+    input type="text" [attr.placeholder]="placeholder1" name="username" required>
+  </code>
+</pre>
+<h2> Class Binding </h2>
+<pre>
+  <code>
+    TS
+    isActive = true
+    isSuccess = true;
+    isError = false;
+
+    HTML
+    div [class.active]="isActive"> Hello /div>
+    div [ngClass]="['class-one', true ? 'class-two' : false]"> Box /div>
+    div [ngClass]="{'success': isSuccess, 'error': isError}"> Status /div>
+  </code>
+</pre>
+
+<h2> Style Binding </h2>
+<pre>
+  <code>
+    TS
+    bgColor = 'yellow'
+
+    HTML 
+    div [style.backgroundColor]="bgColor"> Santosh </div>
+  </code>
+</pre>
+
+  <P> Data binding is one of the most elements for creating communication between the DOM and the component. </P>
   <h2> Two-way Binding Example </h2>
   <pre>
     <code>
@@ -1156,7 +1220,6 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
       p>You typed: {{ userInput }}</p>
     </code>
   </pre>
-  </div>
 
   <div class="box shadow p-2 mb-3" id="decorator">
     <h2> DECORATOR </h2>
@@ -1294,8 +1357,53 @@ template : `
     ----------------------
     isVisiable:boolean = false 
     &lt;h2 *ngIf="isVisiable"&gt; Welcome to NgIf &lt; h2 &gt;
+    ----------------------
       </code>
     </pre>
+
+    <h2> Ngfor and NgIf </h2>
+    <pre>
+      <code>
+        TS 
+        public staffs = [
+        { staff_name: "Rakesh", age:35, salary:50000, },
+        { staff_name: "Mohan", age:35, salary:100000, },
+        { staff_name: "Sohan", age:35, salary:30000, },
+        { staff_name: "Jhannu", age:35, salary:100000, },
+        { staff_name: "Pradeep", age:35, salary:50000, },
+        { staff_name: "Kailash", age:35, salary:100000, },
+        { staff_name: "Jhunjhunwala", age:35, salary:100000, }
+      ]
+
+      HTML 
+
+      li *ngFor="let staff of staffs"> 
+        ng-container *ngIf="staff.salary < 50000; else highsalary">
+            {{staff.staff_name}} {{staff.salary}}
+        /ng-container>
+        ng-template #highsalary>
+          div style="background-color: #ececec;">   {{staff.staff_name}} {{staff.salary}} div>
+        /ng-template>
+    /li>
+
+    -------------- 
+
+    <h2> Toggle </h2>
+    TS
+    isVisiable = true
+    toggleButton(){
+      this.isVisiable = !this.isVisiable
+        } 
+
+    HTML 
+    div *ngIf="isVisiable" class="mt-10"> This message for isVisiable /div>
+    button type="button" (click)="toggleButton()"> Show and Hide /button>
+
+      </code>
+    </pre>
+
+
+
   </div>
 
 
@@ -1543,6 +1651,73 @@ export class TranformpipePipe implements PipeTransform {
   ];
     </code>
   </pre>
+
+  <h2> Dynamic Menu </h2>
+
+  <pre>
+    <code>
+      TS
+      role = 'admin'; // or 'client'
+
+menus_list = [
+  {
+    title: 'Admin Dashboard',
+    icon: 'bx bx-user',
+    link: '/admin-dashboard',
+    role: 'admin'
+  },
+  {
+    title: 'User details',
+    icon: 'bx bx-user',
+    link: '/user-details',
+    role: 'admin'
+  },
+  {
+    title: 'Services Manage',
+    icon: 'bx bx-user',
+    link: '/services-manage',
+    role: 'admin'
+  },
+  {
+    title: 'Client Dashboard',
+    icon: 'bx bx-user',
+    link: '/client-dashboard',
+    role: 'client'
+  },
+  {
+    title: 'Profile',
+    icon: 'bx bx-user',
+    link: '/profile',
+    role: 'client'
+  },
+  {
+    title: 'Client Leads',
+    icon: 'bx bx-user',
+    link: '/client-leads',
+    role: 'client'
+  }
+];
+
+// Filtered menu based on role
+get filteredMenus() {
+  return this.menus_list.filter(item => item.role === this.role);
+}
+
+
+HTML 
+
+ul>
+  li *ngFor="let menu of filteredMenus">
+    a [routerLink]="menu.link">
+      <i [class]="menu.icon"></i> {{ menu.title }}
+    /a>
+  /li>
+/ul>
+
+    </code>
+  </pre>
+
+
   </div>
 
 
@@ -1585,6 +1760,7 @@ export class TranformpipePipe implements PipeTransform {
 
 <pre>
   <code>
+    TS
     lead_form!: FormGroup
     lead_fields = {
     name     : ['', Validators.required],
@@ -1603,6 +1779,17 @@ export class TranformpipePipe implements PipeTransform {
       alert('Please fill in all required fields!');
       return;
     }
+
+    HTML 
+
+    form [formGroup]="user_details_form" (ngSubmit)="saveForm()">
+      label class="form-label">First Name /label>
+      input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
+      div class="error-message"
+        *ngIf="user_details_form.get('first_name')?.touched && user_details_form.get('first_name')?.hasError('required')">
+        First Name is required.
+        button [disabled]="!loginForm.valid" type="submit" class="btn btn-light">Login button
+    </form>
   </code>
 </pre>
 </div>
@@ -1998,9 +2185,7 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 Hyper Text markup Language <br>
 
 <h2> HTML 5 CANVAS </h2>
-<P> HTML5 <canvas> element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
-
-
+<P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
 <h2> GRID AND FLEX BOX  </h2>
 <p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
 <p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
@@ -2291,8 +2476,35 @@ heading.remove();
             Zip the contents of dist/your-project-name/.
             </div>
 
-
-
+            <div class="box shadow p-2 mb-3" id="packages">
+              <h2> package.json, package-lock.json and angular.json </h2>
+              <h2> package.json </h2>
+              <p> Lists of libraries in app needs (dependencies, devDependencies) Declares project name, version, </p>
+              <p> script - "start": "ng serve",
+                "build": "ng build" </p>
+                <h2> package-lock.json </h2>
+                <p> Automatically created/updated by npm when installing packages</p>
+                <h2> angular.json </h2>
+                <p> Project structure, Build options </p>
+                <p> File paths (e.g. index.html, styles, assets) </p>
+                <pre>
+                  <code>
+                    "projects": {
+                      "my-angular-app": {
+                        "architect": {
+                          "build": {
+                            "options": {
+                              "outputPath": "dist/",
+                              "index": "src/index.html",
+                              "styles": ["src/styles.css"]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  </code>
+                </pre>
+              </div>
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>
