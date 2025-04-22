@@ -87,6 +87,7 @@ pre {
      <li> <a href="#server"> Upload Angular Project </a> </li>
      <li> <a href="#storage"> Local Storage </a> </li>
      <li> <a href="#packages"> packages.json, angular.json </a> </li>
+     <li> <a href="#async"> Async, Async pipe, promise </a> </li>
      
       <li class="borderline"><a href="#">  </a></li>
       <li> <a href="#databinding"> Data Binding </a> </li>
@@ -689,6 +690,69 @@ observable.subscribe({
 
 
 <div class="box shadow p-2 mb-3" id="rxjssubject">
+ <h2> SUBJECT </h2>
+  <p> Subjects are a special type of Observable it allows values multicasted to many observers. 
+  <br> it is Observable and observer also on same time. I can subscribe and emmit both in subject </p> 
+  <p> <strong> Multicasted </strong> - Which we will start subscribe after then we get data. we can not get subscribe before data. just like Live stream.   </p>
+  
+  <h2> Behavior SUBJECT </h2>
+  <p> BehaviorSubject is a special type of Subject. A Behavior Subject holds one value. When it is subscribed it emits the value immediately. </p>
+
+  <pre>
+    <code>
+      import { BehaviorSubject } from 'rxjs';
+      behaviorSubject = new BehaviorSubject<number>(0); // initial value is 0
+      ngOnInit() {
+      behaviorSubject.subscribe(value => console.log('Subscriber 1:', value)); // Subscriber 1: 0
+      behaviorSubject.next(1); // Subscriber 1: 1
+      behaviorSubject.subscribe(value => console.log('Subscriber 2:', value)); // Subscriber 2: 1
+      behaviorSubject.next(2); 
+      // Subscriber 1: 2
+      // Subscriber 2: 2
+      }
+    </code>
+  </pre>
+
+  <h2> Replay Subject </h2>
+  <p> Replay subject is a variant of subject. It emits old value adn emit those value to new subscribe. </p>
+<pre>
+  <code>
+    import { ReplaySubject } from 'rxjs';
+    replaySubject = new ReplaySubject(2); // buffer size = 2
+    ngOnInit() {
+      this.replaySubject.next(1);
+      this.replaySubject.next(2);
+      this.replaySubject.next(3);
+      this.replaySubject.subscribe(value => console.log('Subscriber:', value));
+    }
+  </code>
+</pre>
+
+
+  <h2> Async Subject </h2>
+  <p> Emits last value after completion </p>
+  
+  <pre>
+    <code>
+      asyncSubject = new AsyncSubject()
+
+      ngOnInit() {
+     
+        this.asyncSubject.next(1);
+        this.asyncSubject.next(2);
+        this.asyncSubject.next(3);
+
+        this.asyncSubject.subscribe(value => console.log('Subscriber 1:', value));
+
+        this.asyncSubject.subscribe(value => console.log('Subscriber 2:', value));
+
+        this.asyncSubject.next(4);
+        this.asyncSubject.complete(); // Now it emits 4 to both
+      }
+
+    </code>
+  </pre>
+
 <p> <strong>BehaviorSubject is a type of RxJS Subject </strong> </p>
 <ul>
 <li> Always stores the latest value it has emitted. </li>
@@ -1213,6 +1277,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 
   <P> Data binding is one of the most elements for creating communication between the DOM and the component. </P>
   <h2> Two-way Binding Example </h2>
+  <p>  when the data in the model changes, the changes are reflected in the view and when the data in the view changes it is reflected in the model - [(ngModel)]</p>
   <pre>
     <code>
       userInput: string = '';  // Model property
@@ -1823,6 +1888,126 @@ getLeads(){
 </pre>
 
 <h2> crud </h2>
+
+<p> Full Crud Operation </p>
+
+<pre>
+  <code>
+    export class CmsComponent {
+
+      @ViewChild('close') closed!: ElementRef
+      @ViewChild('close1') close1!: ElementRef
+      
+      pages: any
+      cms_form!: FormGroup
+      page: any
+      action: string = "Add"
+    
+        cms_fields = {
+        title   : ['', Validators.required],
+        slug    : ['', Validators.required] ,
+        content : ['', Validators.required]
+        }
+    
+      constructor(
+        private _http: HttpSharedService,
+        private _fb: FormBuilder,
+      ){ this.initializeForm() }
+    
+      ngOnInit(){this.getPages()}
+    
+      resetForm(){
+        this.action = "Add"
+        this.initializeForm()
+      }
+    
+      initializeForm(){this.cms_form = this._fb.group(this.cms_fields)}
+    
+      getPages(){
+        this._http.get('cms').subscribe((response: any) => {
+          this.pages = response; 
+        }, (error) => {
+           console.log(error.messages)
+        })
+      }
+    
+      setPage(page: any, action: string){
+        this._http.get('cms/'+page.id).subscribe((response:any) => {
+          this.page = response;
+          this.checkAction(action)
+        }, (error) => {
+           console.log(error)
+        })
+      }
+    
+      addNew(){
+        this.resetForm()
+      }
+    
+      checkAction(action: any){
+        if(action == 'edit'){
+          this.action = 'Edit'
+          this.patchPage()
+        }
+      }
+    
+      patchPage(){
+        this.cms_form.patchValue({
+          title    : this.page.title,
+          slug     : this.page.slug,
+          content  : this.page.content
+        })
+      }
+    
+      deactivatePlan(){
+        this._http.delete("cms/"+this.page.id).subscribe((response: any) => {
+          this.getPages()
+          this.resetForm()
+          this.close1.nativeElement.click()
+          console.log ("Page Deactivated")
+        }, (error: any) => {
+          console.error('Check--->', error.messages);
+        })
+      }
+    
+      setPalyLoad(form: any){
+        return {
+          title         : form.title,
+          slug          : form.slug,
+          content       : form.content,
+          is_published  : this.page ? this.page.is_active : true,
+        }
+      }
+    
+      saveForm(){this.action === "Add" ? this.createPage() : this.updatePage()}
+    
+      createPage(){
+        this._http.post('cms', this.setPalyLoad(this.cms_form.value)).subscribe((response: any) => {
+          this.resetForm()
+          this.getPages()
+          this.closed.nativeElement.click()
+          console.log("Page created successfully!")
+        }, (error) => {
+          console.error("Error:", error);
+        })
+      }
+    
+      //forEdit
+      updatePage(){
+        this._http.put('cms/'+this.page.id, this.setPalyLoad(this.cms_form.value)).subscribe((response: any) => {
+          this.resetForm()
+          this.getPages()
+          this.closed.nativeElement.click()
+          console.log("Page updated successfully!")
+        }, (error) => {
+           console.error("Error", error)
+        })
+      }
+    }
+  </code>
+</pre>
+
+
 <p> <strong> Create </strong></p>
 <pre><code>
   createLead(){
@@ -2443,6 +2628,65 @@ heading.remove();
 
       <h2> Services Does Google Cloud Offer? </h2>
       <p> Storage, Security, Networking, Developer Tools, </p>
+        </div>
+
+        
+
+        <div class="box shadow p-2 mb-3" id="async">
+          <h2> Async | Pipe </h2>
+          <p> Async/Await works on top of Promise and allows you to write async code in a synchronous </p>
+          <p> async pipe is used in Angular templates to automatically subscribe to:
+
+            Observable<T> (from RxJS)
+            
+            Promise<T></p>
+          <pre>
+            <code>
+              data = new Promise(resolve => {
+                setTimeout(() => resolve('Loaded from Promise!'), 1500);
+              });
+
+            p> Data: {{ data | async }} /p
+          </code>
+          <h2> async/await </h2>
+          IN TS 
+          result = '';
+
+  async loadData() {
+    const data = await this.fetchData();
+    this.result = data;
+  }
+
+  fetchData(): Promise string> {
+    return new Promise(resolve => {
+      setTimeout(() => resolve('Data loaded with async/await!'), 1000);
+    });
+  }
+
+
+          in html 
+          p> {{ result }} /p
+          button (click)="loadData()"> Load /button
+        </pre>
+
+        <pre>
+          <code>
+            Example with Observable (RxJS)
+            import { of, delay } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [],
+  template: `p>Message: {{ message$ | async }} p>`
+})
+export class AppComponent {
+  message$ = of('Hello from Observable!').pipe(delay(1000));
+}
+          </code>
+        </pre>
+
+
         </div>
 
 
