@@ -63,13 +63,14 @@ pre {
       <li> <a href="#angularrun"> angular Run </a> </li>
 	  <li> <a href="#why"> why angular </a> </li>
       <li> <a href="#architecture"> architecture </a> </li>
+	  <li> <a href="#modules"> Modules, bootstrap </a> </li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
       <li> <a href="#angularspa"> SPA </a> </li>
       <li> <a href="#mvc"> MVC </a> </li>
       <li> <a href="#root"> root </a> </li>
+	  <li> <a href="#jse"> AngularJS Expression - JS Expressions </a> </li>
       <li> <a href="#component"> components </a> </li>
       <li> <a href="#template"> template </a> </li>
-      <li> <a href="#modules"> modules, bootstrap </a> </li>
       <li> <a href="#metadata"> metadata </a> </li>
       <li> <a href="#angularcli"> angular CLI </a> </li>
       <li> <a href="#angularcontroller"> controllers </a> </li>
@@ -78,7 +79,7 @@ pre {
       <li> <a href="#lazy"> lazy loading </a> </li>
       <li> <a href="#change"> Change Detection </a> </li>
       <li> <a href="#accessibility"> accessibility </a> </li>
-      <li> <a href="#newfeatures"> new featurs </a> </li>
+      <li> <a href="#newfeatures" style="background:green; color:#fff;"> New featurs </a> </li>
       <li> <a href="#routeguards"> routeguards, Dynamic Menu </a> </li>
       <li> <a href="#spa"> SPA </a> </li>
       <li> <a href="#state"> state management </a> </li>
@@ -91,6 +92,7 @@ pre {
      
       <li class="borderline"><a href="#">  </a></li>
       <li> <a href="#databinding"> Data Binding </a> </li>
+	   <li> <a href="#datatransfer"> Data Transfer wrelation </a> </li>
       <li> <a href="#decorator"> decorator </a> </li>
       <li> <a href="#directive"> directive </a> </li>
       <li> <a href="#input"> @input() </a> </li>
@@ -104,11 +106,10 @@ pre {
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
-      <li> <a href="#ngrx"> Ngrx </a> </li>
+      <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#services"> Services </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
-      <li> <a href="#typescript"> typescript </a> </li>
        
       <li> <a href="#apiservices"> API </a> </li>
       <li> <a href="#aot"> AOT </a> </li>
@@ -134,7 +135,7 @@ pre {
 		<li> <a href="#google"> Google Cloud </a></li>
 		<li> <a href="#azile"> Azile Methodology </a></li>
 		<li> <a href="#web"> Web Optimization? </a></li>
-		<li> <a href="#html"> HTML </a> </li>
+		
     </ul>
 
  <h2 class="mt-4">INTRO</h2>   
@@ -229,7 +230,42 @@ React
 <p>   Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements. <br> 
 <strong> Template can be categorised into two items :- </strong> <br> 
   Data binding {{ title }}, Directives *ngIf="canShow" </p>
+  
+<h2> Template Variable </h2>
+<p>  template variable is a reference to a DOM element or Angular component/directive defined in your HTML template, and it is used within that template only. </p>
+<pre>
+<code>
+input #myInput type="text">
+---------
+input #username type="text">
+button (click)="log(username.value)">Log Username button>
+------
+with angular compoent <br>
+app-child #childComp> app-child>
+button (click)="childComp.doSomething()">Call Method button>
+
+</code>
+</pre>
 </div>
+
+<div class="box shadow p-2 mb-3" id="jse">
+<h2> Difference Between AngularJS and JavaScript Expressions </h2>
+<p> <strong> AngularJS Expression </strong> <br>
+Executed in the context of AngularJS scope (e.g., component/controller).
+<br> 
+Used inside {{ }} or directives like ng-bind, ng-if, <br>
+Does not support if, for, while, etc. <br>
+{{ 2 + 2 }}, {{ user.name }}, ng-if="user.isLoggedIn"
+</p>
+<p> <strong> JavaScript Expression </strong> <br> 
+Executed in the context of the global window object or current function. <br> 
+Used directly in JS code (e.g., if (a > b), console.log(x + y)). <br>
+Fully supports all control structures. <br>
+2 + 2, user.name, if(user.isLoggedIn) { ... }
+
+</p>
+</div>
+
 
 
 <div class="box shadow p-2 mb-3" id="modules">
@@ -936,6 +972,64 @@ export class CounterComponent {
 
       </code>
     </pre>
+	
+<h2>Transition Between Two States in Angular</h2>
+<pre>
+<code>
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  imports: [
+    BrowserAnimationsModule
+  ]
+})
+export class AppModule {}
+</code>
+</pre>
+<h2> Create Animation in the Component </h2>
+
+<pre>
+<code>
+import { Component } from '@angular/core';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+
+@Component({
+  selector: 'app-demo',
+  template: `
+    div [@openClose]="isOpen ? 'open' : 'closed'" class="box">
+      Toggle Me!
+    div>
+    button (click)="toggle()">Toggle button>
+  `,
+  animations: [
+    trigger('openClose', [
+      state('open', style({
+        height: '200px',
+        backgroundColor: 'lightgreen'
+      })),
+      state('closed', style({
+        height: '100px',
+        backgroundColor: 'lightcoral'
+      })),
+      transition('open <=> closed', [
+        animate('0.5s ease-in-out')
+      ])
+    ])
+  ],
+  styles: [`.box { width: 200px; margin: 20px auto; text-align: center; }`]
+})
+export class DemoComponent {
+  isOpen = true;
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+}
+
+</code>
+</pre>
+
+
 </div>
 
 
@@ -966,6 +1060,8 @@ export class CounterComponent {
 
 
 <div class="box shadow p-2 mb-3" id="newfeatures">
+<p><strong> A standalone component is a component that doesn't require a module (NgModule) to work. It can be used directly without declaring it inside a module. </strong></p>
+
   <h2> NEW FEATURES IN ANGULAR  </h2>
   <p> <strong>  => New Features and Updates in Angular 15 </strong></p>
   <ol>
@@ -1271,7 +1367,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
     bgColor = 'yellow'
 
     HTML 
-    div [style.backgroundColor]="bgColor"> Santosh </div>
+    div [style.backgroundColor]="bgColor"> Santosh div>
   </code>
 </pre>
 
@@ -1285,6 +1381,78 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
       p>You typed: {{ userInput }}</p>
     </code>
   </pre>
+  </div>
+  
+  <div class="box shadow p-2 mb-3" id="datatransfer">
+    <h2> Using a Shared Service with a Subject/BehaviorSubject  </h2>
+	<pre>
+	<code>
+	Create a shared service:
+	// data.service.ts
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  private dataSource = new BehaviorSubject<any>(null);
+  currentData = this.dataSource.asObservable();
+
+  changeData(data: any) {
+    this.dataSource.next(data);
+  }
+}
+	</code>
+	</pre>
+	<h2>  In Component A (sending component): </h2>
+	<pre>
+	<code>
+	
+	 
+	 constructor(private dataService: DataService) {}
+
+		sendData() {
+		  this.dataService.changeData('Hello from Component A');
+		}
+
+	</code>
+	</pre>
+	<h2> In Component B (receiving component): </h2>
+	<pre>
+	<code>
+	dataFromA: any;
+
+constructor(private dataService: DataService) {}
+
+ngOnInit() {
+  this.dataService.currentData.subscribe(data => {
+    this.dataFromA = data;
+  });
+}
+
+	</code>
+	</pre>
+
+<h2> Using Angular Router (if navigating with data) </h2>
+
+<pre>
+<code>
+-sender component
+this.router.navigate(['/target'], { state: { message: 'Hello' } });
+- Receive componet
+constructor(private router: Router) {
+  const nav = this.router.getCurrentNavigation();
+  const state = nav?.extras.state as { message: string };
+  console.log(state.message);
+}
+
+</code>
+</pre>
+
+
+	</div>
+  
 
   <div class="box shadow p-2 mb-3" id="decorator">
     <h2> DECORATOR </h2>
@@ -1293,7 +1461,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 
   <div class="box shadow p-2 mb-3" id="directive">
     <h2> Directive </h2>
-    <p>  Directives in Angular are special instructions in the DOM that Angular interprets and applies behavior to elements. They help extend HTML capabilities. </p>
+    <p>  Directives are classes that add additional behavior to elements in your Angular applications. </p>
     <ol>
       <li> Component Directives (Most Common) <br> Technically, components are a type of directive with a template. </li>
       <li> <strong> Structural Directives (Modify the DOM Structure) </strong> <br> 
@@ -1403,6 +1571,70 @@ template : `
     }  
       </code>
     </pre>
+	
+	<h2> @input Examples </h2>
+	<pre>
+	<code>
+	child.component.ts
+	import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `p>Hello {{ name }}!p>`
+})
+export class ChildComponent {
+  @Input() name!: string;
+}
+
+-- parent.component.html
+app-child [name]="'Angular Learner'"> app-child>
+
+	</code>
+	</pre>
+	
+	
+	<h2> @output Examples </h2>
+	<p> It allows a child component to send data to the parent component using an event. </p>
+	<pre>
+	<code>
+	child.component.ts
+	import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `button (click)="sendData()">Send button>`
+})
+export class ChildComponent {
+  @Output() messageEvent = new EventEmitter<string>();
+
+  sendData() {
+    this.messageEvent.emit('Hello from Child!');
+  }
+}
+
+---------
+
+Prent component html 
+
+app-child (messageEvent)="receiveMessage($event)"> app-child>
+p>{{ message }} /p>
+
+---------
+
+parent.component.ts
+
+export class ParentComponent {
+  message = '';
+
+  receiveMessage(data: string) {
+    this.message = data;
+  }
+}
+
+
+	</code>
+	</pre>
+	
   </div>
 
 
@@ -1644,31 +1876,6 @@ export class TranformpipePipe implements PipeTransform {
 
     </code>
   </pre>
-</div>
-
-
-<div class="box shadow p-2 mb-3" id="typescript">
-  <h2> TYPESCRIPT </h2>
-<p>  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
-  Differences between TypeScript and JavaScript </p>
-
-<p>
-  TypeScript - 
-  Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	<br>
-  
-  JavaScript ----- <br>
-  Dynamically typed <br>
-  No compilation needed <br>
-  Limited support <br>
-  <br>
-  Interface in TypeScript defines a contract for an object’s structure.<br>
-  interface User {
-    name: string;
-    age: number;
-    email?: string; // Optional property
-  }<br>
-  const user: User = { name: "John", age: 25 };
-</p>
 </div>
 
 
@@ -2365,121 +2572,7 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
       </div>
 
 
-<div class="box shadow p-2 mb-3" id="html">
-<h2> HTML AND CSS </h2>
-Hyper Text markup Language <br>
 
-<h2> HTML 5 CANVAS </h2>
-<P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
-<h2> GRID AND FLEX BOX  </h2>
-<p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
-<p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
-
-<h2> Semantic HTML elements </h2>
-<p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
-<pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
-<h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
-Improved SEO, Enhanced Accessibility, Clearer Structure
-
-<h2 class="mt-4"> Non-semantic HTML elements </h2>
-do not provide information about the content <br> like div> div> and span> span>
-<hr>
-
-<h2> P and span tag difference </h2>
-<p> p Block element, Paragraph, Starts on a new line	</p>
-<p> span Inline element, No semantic meaning, Styling small parts, Stays inline </p>
-
-<h2> CSS </h2>
-<p> <strong> css selector </strong> - CSS selector is a pattern used to select HTML elements , like - id, .class, element.class, Parent child, element:hover </p>
-<p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
-<p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
-<p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
-<p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
-<p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
-
-<h2> Less, Sass, and SCSS </h2>
-<p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
-<pre>
-  <code>
-    // scss variable
-    $primary-color: blue;
-  .button {
-    color: $primary-color;
-    padding: 10px;
-  }
-  </code>
-</pre>
-
-<pre>
-  <code>
-    // nesting in scss  
-    .navbar {
-        background: #333;
-        padding: 10px;
-      
-        .menu {
-          list-style: none;
-          padding: 0;
-      
-          li {
-            display: inline-block;
-            margin-right: 10px;
-      
-            a {
-              text-decoration: none;
-              color: white;
-      
-              &:hover {
-                color: yellow;
-              }
-            }
-          }
-        }
-      }
-  </code>
-</pre>
-
-<pre>
-  <code>
-    //Mixins in SCSS
-  
-    @mixin button-style {
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    
-    .btn {
-      @include button-style;
-      background: blue;
-      color: white;
-    }
-    
-    .btn-danger {
-      @include button-style;
-      background: red;
-    }
-  </code>
-</pre>
-
-<pre>
-  <code>
-    //sass
-  $primary-color: blue
-  .button
-    color: $primary-color
-    padding: 10px
-  
-    //loop 
-    @each $size, $padding in (small: 5px 10px, medium: 10px 20px, large: 15px 30px) {
-      .button--#{$size} {
-        padding: $padding;
-      }
-    }
-
-  </code>
-</pre>
-</div>
 
 <div class="box shadow p-2 mb-3" id="dom">
   <h2 id="component"> DOM Manipulation </h2>

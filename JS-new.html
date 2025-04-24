@@ -57,7 +57,7 @@ pre {
     </style>
   </head>
   <body>
-   <div class="container">
+   <div class="container-fluid">
 
     <ul class="index">
       <li> <a href="#js"> javascript </a> </li>
@@ -81,7 +81,10 @@ pre {
       <li> <a href="#arraymethod"> Array Method </a> </li>
       <li> <a href="#infinityloop"> Infinity Loop </a> </li>
       <li> <a href="#hash"> hash </a> </li>
-      <li> <a href="#hoisting"> hoisting </a> </li>
+      <li> <a href="#hoisting"> Hoisting </a> </li>
+      <li> <a href="#this"> This </a> </li>
+      <li> <a href="#promise"> Promise </a> </li>
+      <li> <a href="#operator"> Rest, Spread Operator </a> </li>
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
       <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
@@ -94,6 +97,9 @@ pre {
       <li> <a href="#palindrome"> Palindrome </a> </li>
       <li> <a href="#booble"> Booble sort </a> </li>
       <li> <a href="#reverse"> Reverse </a> </li>
+      <li class="borderline"> <a href="#hoisting"> </a> </li>
+      <li> <a href="#typescript"> TypeScript </a> </li>
+      <li> <a href="#html"> HTML </a> </li>
     </ul>
 
 
@@ -368,6 +374,17 @@ myDisplay();
 
 
 <div class="box shadow p-2 mb-3" id="map">
+<h2> Map Method </h2>
+<p> The map() method creates a new array by calling a callback function on each element of the original array.
+It does not modify the original array. </p>
+<pre>
+<code>
+const numbers = [1, 2, 3, 4];
+const squared = numbers.map(num => num * num);
+console.log(squared); // [1, 4, 9, 16]
+</code>
+</pre>
+
 <h2> Map and Set  </h2>
 <p> * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. ) </p>
 <pre>
@@ -387,6 +404,15 @@ myDisplay();
 <div class="box shadow p-2 mb-3" id="prototype">
 <h2> PROTOTYPE  </h2>
 <p> A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function. </p>
+<p> That prototype is used to share methods and properties between all instances created from a constructor function. <br> avoid duplicating methods in every object.</p>
+
+<h2> Prototype Chain </h2>
+<p> Every object has an internal link to its prototype, which forms a prototype chain. </p>
+
+
+<h2> Why Use Prototypes? </h2>
+<p> 1. Methods are shared across instances., 2. Enables objects to inherit behavior., 3. You can add methods to existing constructors even after objects are created.</p>
+
 <pre>
     <code>
         function Person(name, age) {
@@ -610,6 +636,90 @@ Difference
     </code>
 </pre>
 </div>
+
+<div class="box shadow p-2 mb-3" id="this">
+    <h2> This </h2>
+    <p> In JavaScript, this is a keyword that refers to an object. The value of this depends on how the function or code where it's used is called. </p>
+    <pre>
+        <code>
+            Global Scope
+            console.log(this); // In browsers, this === window
+--------------
+Inside Object Method
+
+const user = {
+    name: "Alice",
+    getName: function () {
+      return this.name; // `this` refers to `user`
+    },
+  };
+  console.log(user.getName()); // Alice
+  --------------
+  Inside a Function
+
+  function sayHi() {
+    console.log(this);
+  }
+  sayHi(); // In non-strict mode, this === window. In strict mode, it's undefined.
+  
+        </code>
+    </pre>
+    </div>
+
+    
+
+    <div class="box shadow p-2 mb-3" id="promise">
+    
+        <strong> Promise -- </strong>  
+// Promise excute immediately when create promises. <br>
+// Pomise emit single value. Promise don't have operator . <br>
+// Promise cann't be cancel  <br>
+<strong> Observable -- </strong> 
+// Observable does not start untill subscription. <br> 
+// Observable emit multiple value.<br>
+// Observable operator like map, filter, reduce. <br>
+// Observable can be cancel using unscribe method <br>
+
+<h2 class="mt-4"> * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never. </h2>
+<pre>
+  <code>
+    let myPromise = new Promise((resolve, reject) => {
+      let success = true; // Change this to false to see the reject case
+      setTimeout(() => {
+        if (success) {
+          resolve("Operation Successful!");
+        } else {
+          reject("Something went wrong!");
+        }
+      }, 2000);
+    });
+    myPromise
+      .then(result => console.log(result)) // Runs when promise is resolved
+      .catch(error => console.log(error)); // Runs when promise is rejected  
+  </code>
+</pre>
+
+<p> <strong> Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values. </strong></p>
+
+<pre><code>
+  myObservable: Observable<number>;
+    ngOnInit() {
+      this.myObservable = new Observable(observer => {
+        let count = 1;
+        setInterval(() => {
+          observer.next(count++); // Emits a value every second
+        }, 1000);
+  
+      });
+      this.myObservable.subscribe(value => {
+        console.log('Received:', value);
+      });
+    }
+</code></pre>
+
+
+    </div>
+
 
 
 <div class="box shadow p-2 mb-3" id="objectclone">
@@ -992,7 +1102,353 @@ console.log(numOfVowels)
   console.log (reverseStrss)
                         </code>
                     </pre>
+					
+<pre>
+<code>
+const input = "Santosh Kumar";
+const output = input
+  .split(" ")
+  .map(word => {
+    // Reverse the word
+    const reversed = word.split("").reverse().join("");
+    // Capitalize first letter, lowercase the rest
+    return reversed.charAt(0).toUpperCase() + reversed.slice(1).toLowerCase();
+  })
+  .join(" ");
+console.log(output); // Output: Hsotnas Ramuk
+</code>
+</pre>
+					
                     </div>
+
+
+                    <div class="box shadow p-2 mb-3" id="typescript">
+                        <h2> TYPESCRIPT </h2>
+                      <p>  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
+                        Differences between TypeScript and JavaScript </p>
+                      
+                      <p>
+                        TypeScript - 
+                        Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	<br>
+                        
+                        JavaScript ----- <br>
+                        Dynamically typed <br>
+                        No compilation needed <br>
+                        Limited support <br>
+                      </p>
+                      
+                      <h2> Interfaces </h2>
+                      <p> Interface is a way to define the structure of an object, function etc. </p>
+                        <pre>
+                          <code>
+                          interface Info {
+                              name:string,
+                              age:number,
+                              college:string
+                          }
+                          
+                          //interface TeacherType extends Info {
+                              //sub: string
+                          //}
+                          
+                          var studentObj:Info = {
+                              name:'anil',
+                              age:30,
+                              college:'IET'
+                          }
+                          
+                          var teacheerObj:Info = {
+                              name:'sam',
+                              age:40,
+                              college:'IET',
+                          }
+                          
+                          //var teacheerObj:TeacherType = {
+                              //name:'sam',
+                              //age:40,
+                              //college:'IET',
+                              //sub: 'Math'
+                          //}
+                          
+                      </code>
+                      </pre>
+                      
+                      <h2> Generics </h2>
+                      <p> Generics in TypeScript allow you to create reusable components or functions that can work with multiple data types.</p>
+                        <pre>
+                          <code>
+                       // fruits(name:string | number):string | number {
+                          //   return name
+                          // }
+                      
+                          fruits<T>(name:T):T {
+                            return name
+                          }
+                          let onlyFruit = fruits("apple")
+                          let onlyNum = fruits(100)
+                          let onlyBool = fruits(true)
+                      </code>
+                      </pre>
+                      
+                      <h2> Modifiers </h2>
+                      <p> Modifiers are keywords that you can use to control access, behavior, or properties of classes, methods, properties, and constructors. </p>
+                        <pre>
+                          <code>
+                          public (default)
+                          class Person {
+                        public name: string;
+                      
+                        constructor(name: string) {
+                          this.name = name;
+                        }
+                      }
+                      
+                      const p = new Person("Alice");
+                      console.log(p.name); // ✅ OK
+                      
+                      --------------------
+                      
+                      ✅ 2. private
+                      
+                      class Person {
+                        private ssn: string;
+                      
+                        constructor(ssn: string) {
+                          this.ssn = ssn;
+                        }
+                      
+                        private showSSN() {
+                          return this.ssn;
+                        }
+                      }
+                      
+                      const p = new Person("123-45-6789");
+                      // console.log(p.ssn); ❌ Error: 'ssn' is private
+                      
+                      ---------------
+                      
+                      ✅ 3. protected
+                      class Animal {
+                        protected move() {
+                          console.log("Animal moving...");
+                        }
+                      }
+                      
+                      class Dog extends Animal {
+                        bark() {
+                          this.move(); // ✅ OK
+                        }
+                      }
+                      
+                      const d = new Dog();
+                      // d.move(); ❌ Error: 'move' is protected
+                      
+                      
+                      </code>
+                      </pre>
+                      
+                      </div>
+
+                      <div class="box shadow p-2 mb-3" id="html">
+                        <h2> HTML AND CSS </h2>
+                        Hyper Text markup Language <br>
+						<p> The <strong> !DOCTYPE </strong> html declaration defines that this document is an HTML5 document </p> 
+	<p> The <strong> html </strong> element is the root element of an HTML page </p> 
+	<p> The <strong> head </strong> element contains meta information about the HTML page </p> 
+	<p> The <strong> title </strong> element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab) </p>
+                        <h2> HTML 5 CANVAS </h2>
+                        <P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
+                        <h2> GRID AND FLEX BOX  </h2>
+                        <p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
+                        <p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
+
+                        <h2> Tag and Element </h2>
+						<p> HTML tag is a piece of markup that defines an element within an HTML document. </p>
+                        <p> <strong> Tag </strong> Opening or closing code in angle brackets </p>
+                        <p> <strong> Elements </strong> Tag(s) plus content</p>
+                        <p> <strong> Void Element </strong>	Element with no content/closing tag	<img />, <br /></p>
+
+                        <h2> Attribute </h2>
+                        <pre>
+                            <code>
+                                img
+                                    src="cat.jpg"
+                                    alt="A cute kitten"
+                                    width="300"
+                                    height="200"
+                                    title="Hover text here"
+                                    class="responsive-img"
+                                    loading="lazy"
+                                    />
+                            </code>
+                        </pre>
+						
+						<h2>What is the difference between “display: none” and “visibility: hidden”, when used as attributes to the HTML element. </h2>
+						<p> When we use the attribute “visibility: hidden” for an HTML element then that element will be hidden from the webpage but still takes up space. Whereas, if we use the “display: none” attribute for an HTML element then the element will be hidden, and also it won’t take up any space on the webpage.</p>
+						
+						<h2> How to specify the metadata in HTML5? </h2>
+						<p> To specify we can use <meta> tag which is a void tag,i.e., it does not have a closing tag. Some of the attributes used with meta tags are name, content, http-equiv, etc. The below image tells how to specify the metadata. </p>
+                        
+                        <h2> Semantic HTML elements </h2>
+                        <p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
+                        <pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
+                        <h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
+                        Improved SEO, Enhanced Accessibility, Clearer Structure
+                        
+                        <h2 class="mt-4"> Non-semantic HTML elements </h2>
+                        do not provide information about the content <br> like div> div> and span> span>
+                        <hr>
+                        
+                        <h2> P and span tag difference </h2>
+                        <p> p Block element, Paragraph, Starts on a new line	</p>
+                        <p> span Inline element, No semantic meaning, Styling small parts, Stays inline </p>
+                        
+                        <h2> CSS </h2>
+                        <p> <strong> css selector </strong> - CSS selector is a pattern used to select HTML elements , like - id, .class, element.class, Parent child, element:hover </p>
+                        <p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
+                        <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
+                        <p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
+                        <p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
+                        <p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
+                        
+                        <h2> Less, Sass, and SCSS </h2>
+                        <p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
+                        <pre>
+                          <code>
+                            // scss variable
+                            $primary-color: blue;
+                          .button {
+                            color: $primary-color;
+                            padding: 10px;
+                          }
+                          </code>
+                        </pre>
+                        
+                        <pre>
+                          <code>
+                            // nesting in scss  
+                            .navbar {
+                                background: #333;
+                                padding: 10px;
+                              
+                                .menu {
+                                  list-style: none;
+                                  padding: 0;
+                              
+                                  li {
+                                    display: inline-block;
+                                    margin-right: 10px;
+                              
+                                    a {
+                                      text-decoration: none;
+                                      color: white;
+                              
+                                      &:hover {
+                                        color: yellow;
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                          </code>
+                        </pre>
+                        
+                        <pre>
+                          <code>
+                            //Mixins in SCSS
+                          
+                            @mixin button-style {
+                              padding: 10px 20px;
+                              border-radius: 5px;
+                              font-size: 16px;
+                            }
+                            
+                            .btn {
+                              @include button-style;
+                              background: blue;
+                              color: white;
+                            }
+                            
+                            .btn-danger {
+                              @include button-style;
+                              background: red;
+                            }
+                          </code>
+                        </pre>
+                        
+                        <pre>
+                          <code>
+                            //sass
+                          $primary-color: blue
+                          .button
+                            color: $primary-color
+                            padding: 10px
+                          
+                            //loop 
+                            @each $size, $padding in (small: 5px 10px, medium: 10px 20px, large: 15px 30px) {
+                              .button--#{$size} {
+                                padding: $padding;
+                              }
+                            }
+                        
+                          </code>
+                        </pre>
+                        </div>
+
+                        <div class="box shadow p-2 mb-3" id="operator">
+                            <h2> Rest Operator </h2>
+                            <p> Collects multiple values into a single array or object. </p>
+                            <pre>
+                                <code>
+                                    Function 
+                                    function sum(...numbers) {
+                                        return numbers.reduce((a, b) => a + b, 0);
+                                      }
+                                      
+                                      console.log(sum(1, 2, 3, 4)); // 10   
+                                      
+                                      --------------
+                                      Destructuring  Array 
+                                      const [first, ...rest] = [1, 2, 3, 4];
+                                        console.log(first); // 1
+                                        console.log(rest);  // [2, 3, 4]
+                                      -------------
+                                      Destructuring (Object)
+                                      const { name, ...details } = {
+                                        name: "Alice",
+                                        age: 25,
+                                        city: "NY",
+                                      };
+                                      
+                                      console.log(name);    // "Alice"
+                                      console.log(details); // { age: 25, city: "NY" }                                      
+
+                                </code>
+                            </pre>
+
+                            <h2> Spread Operator </h2>
+                            <p> Expands an array or object into individual elements or key-value pairs. </p>
+                            <p> Array </p>
+
+                            <pre>
+                                <code>
+                                            const arr1 = [1, 2];
+                                            const arr2 = [...arr1, 3, 4]; 
+                                            console.log(arr2); // [1, 2, 3, 4]
+                                ..........
+                                Object clonning
+                                const user = { name: "Alice" };
+                                const updatedUser = { ...user, age: 30 };
+                                console.log(updatedUser); // { name: "Alice", age: 30 }
+                                -------------
+                                Function 
+                                const numbers = [1, 2, 3];
+                                console.log(Math.max(...numbers)); // 3
+                                </code>
+                            </pre>
+                        </div>
+
+
 
 </div>
 
