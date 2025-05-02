@@ -104,6 +104,8 @@ pre {
     <li> <a href="#form"> Form, reactiveform </a> </li>
     <li> <a href="#crud"> crud </a> </li>
     <li> <a href="#form-crud"> form validation, crud </a> </li>
+    <li> <a href="#empw-api"> Employee crud without api </a> </li>
+    <li> <a href="#emp-api"> Employee crud with api </a> </li>
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
@@ -2776,6 +2778,506 @@ export class ErrorInterceptor implements HttpInterceptor {
       </div>
 
     
+      <div class="box shadow p-2 mb-3" id="empw-api">
+        <h2> Employee crud without API </h2>
+
+        <pre>
+          <code>
+            import { Component } from '@angular/core';
+            import { HeaderComponent } from "../header/header.component";
+            import { CommonModule } from '@angular/common';
+            import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+            
+            @Component({
+              selector: 'app-dynamic-crud',
+              imports: [HeaderComponent, CommonModule, FormsModule, ReactiveFormsModule],
+              templateUrl: './dynamic-crud.component.html',
+              styleUrl: './dynamic-crud.component.css'
+            })
+            export class DynamicCrudComponent {
+            
+            employee_form!: FormGroup
+            employee_Toggle = false
+            
+            employee_details: any = []
+            updateRecordId: any
+            operation: any = "Add"
+            
+            employeeFormToggle(){
+              this.employee_Toggle = !this.employee_Toggle
+            }
+            
+              constructor( private fb: FormBuilder){}
+            
+              empform_fields = {
+                emp_id  : [''],
+                emp_name: ['', Validators.required],
+                emp_email:['', Validators.required],
+                emp_role :['', Validators.required]
+              }
+            
+              ngOnInit(){ 
+                this.initializeForm()
+                let emp_data = localStorage.getItem('employeeData')
+                if(emp_data){
+                  this.employee_details = JSON.parse(emp_data)
+                }
+              }
+            
+              initializeForm(){
+                this.employee_form = this.fb.group(this.empform_fields)
+              }
+            
+              saveEmployee() {
+                if (this.updateRecordId) {
+                  this.updateEmployee();
+                } else {
+                  this.addEmployee();
+                }
+              }
+            
+              addEmployee() {
+                
+                const emp_id = (this.employee_details.at(-1)?.id ?? 0) + 1;
+            
+                this.employee_details.push({
+                  "id"       : emp_id,
+                  "emp_name" : this.employee_form.value.emp_name,
+                  "emp_email": this.employee_form.value.emp_email,
+                  "emp_role" : this.employee_form.value.emp_role
+                })
+            
+                this.resetForm()
+                this.saveToLocalStorage()
+              }
+            
+              updateEmployee() {
+                
+                const found = this.employee_details.filter((empData: any) => empData.id == this.updateRecordId);
+            
+                if (found) {
+                  found[0].emp_name = this.employee_form.value.emp_name;
+                  found[0].emp_email = this.employee_form.value.emp_email;
+                  found[0].emp_role = this.employee_form.value.emp_role;
+                }
+              
+                this.saveToLocalStorage();
+                this.resetForm();
+              }
+              
+            
+              getDataForEdit(emp_id: any){
+                this.updateRecordId = emp_id
+                let data = this.employee_details.filter((empData: any) => empData.id == emp_id)
+                this.employee_form.patchValue(data[0])
+                this.operation = "Update"
+                this.employee_Toggle = true
+              }
+            
+              deleteEmployee(emp_id: any){
+                this.employee_details = this.employee_details.filter((empData: any) => empData.id != emp_id);
+                this.saveToLocalStorage();
+              }
+            
+              resetForm() {
+                this.employee_form.reset();
+                this.updateRecordId = null;
+                this.operation = 'Add';
+                this.employee_Toggle = false;
+              }
+            
+              saveToLocalStorage(){
+                localStorage.setItem('employeeData', JSON.stringify(this.employee_details))
+              }
+            
+            }
+            
+          </code>
+        </pre>
+<hr>
+        <pre> 
+          <code>
+          button (click)="employeeFormToggle()"> {{ !employee_Toggle ? 'Add Employee':'Close Form' }} button
+          form [formGroup]="employee_form" (ngSubmit)="saveEmployee()" *ngIf="employee_Toggle">
+          input type="text" class="form-control" formControlName="emp_name" placeholder="Employee Name">
+           *ngIf="employee_form.get('emp_name')?.touched && employee_form.get('emp_name')?.hasError('required')"> Employee Name is Invalid
+
+           button class="btn btn-primary" type="submit" [disabled]="!employee_form.valid"> {{ operation }} Employee 
+
+          <hr>
+
+           *ngIf="!employee_details.length"  No Data 
+
+          table class="table table-bordered mt-3" *ngIf="employee_details.length">
+              thead>
+                tr>
+                  th>Employee ID </th>
+                  th>Employee Name</th>
+                  th>Employee Email</th>
+                  th>Employee Role</th>
+                  th>Actions</th>
+                /tr>
+              /thead>
+              tbody>
+                tr *ngFor="let employee of employee_details">
+                  td> {{employee.id}} </td>
+                  td> {{employee.emp_name}} </td>
+                  td> {{employee.emp_email}} </td>
+                  td> {{employee.emp_role}} </td>
+                  td>
+                    button class="btn btn-sm btn-warning me-2" (click)="getDataForEdit(employee.id)">Edit</button>
+                    button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
+                  /td>
+                /tr>
+              /tbody>
+            /table>
+
+          </code>
+        </pre>
+      
+
+        <h2> Only Add and Delete </h2>
+
+        <pre>
+          <code>
+            import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HeaderComponent } from "../header/header.component";
+
+@Component({
+  selector: 'app-emp-data',
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
+  templateUrl: './emp-data.component.html',
+  styleUrl: './emp-data.component.css'
+})
+export class EmpDataComponent {
+
+  employee_form!: FormGroup
+
+  employee_details: any = []
+
+  employee_fields = {
+    emp_id: [''],
+    emp_name: ['', Validators.required],
+    emp_email: ['', Validators.required],
+    emp_phone: ['', Validators.required]
+  }
+
+  constructor(private fb: FormBuilder){}
+
+  ngOnInit(){ 
+    this.initializeForm() 
+    let emp_data = localStorage.getItem('employeeData')
+    if(emp_data){
+      this.employee_details = JSON.parse(emp_data)
+    } 
+  }
+
+  initializeForm(){
+    this.employee_form = this.fb.group(this.employee_fields)
+  }
+
+  saveForm(){ this.addEmployee() }
+
+  addEmployee(){
+   
+    const emp_id = (this.employee_details.at(-1)?.id ?? 0) + 1;
+
+    this.employee_details.push({
+      "id": emp_id,
+      "emp_name" : this.employee_form.value.emp_name,
+      "emp_email" : this.employee_form.value.emp_email,
+      "emp_phone" : this.employee_form.value.emp_phone
+    })
+
+    this.saveLocalStorage()
+
+  }
+
+  deleteEmployee(emp_id: any){
+    this.employee_details = this.employee_details.filter((empData: any) => empData.id != emp_id)
+    this.saveLocalStorage()
+  }
+
+  saveLocalStorage(){
+    localStorage.setItem('employeeData', JSON.stringify(this.employee_details))
+  }
+
+}
+
+HTML
+
+form class="row" [formGroup]="employee_form" (ngSubmit)="addEmployee()">
+form>
+table class="table table-bordered mt-5">
+  thead>
+      tr> 
+          th scope="col"> Employee Id </th>
+          th scope="col"> Employee Name </th>
+          th scope="col"> Employee Email </th>
+          th scope="col"> Employee Phone </th>
+      /tr>
+  /thead>
+  tbody>
+      tr *ngFor="let employee of employee_details">
+          td> {{employee.id}} </td>
+          td> {{employee.emp_name}} </td>
+          td> {{employee.emp_email}} </td>
+          td> {{employee.emp_phone}} </td>
+          td> button (click)="deleteEmployee(employee.id)" class="btn btn-danger"> Delete </button></td>
+      /tr>
+  /tbody>
+/table>
+          </code>
+        </pre>
+  
+        </div>
+
+
+        <div class="box shadow p-2 mb-3" id="emp-api">
+          <h2> Employee crud with API </h2>
+          <pre>
+            <code>
+              import { Component, ElementRef, ViewChild } from '@angular/core';
+import { HttpSharedService } from '../http-shared.service';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators, FormGroup, FormsModule } from '@angular/forms';
+import { HeaderComponent } from "../header/header.component";
+import { LoaderSeriveService } from '../loader-serive.service';
+import { ToastrService } from 'ngx-toastr';
+import { response } from 'express';
+
+@Component({
+  selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent, FormsModule],
+  templateUrl: './users.component.html',
+  styleUrl: './users.component.css'
+})
+export class UsersComponent {
+
+  @ViewChild('close') close!: ElementRef
+
+    users: any
+    user_detail: any
+    // loading: boolean = false
+    user_form!: FormGroup
+    user: any;
+    action: string = "Add"
+
+    user_fields = {
+    username : ['', Validators.required],
+    firstName: ['', Validators.required],
+    lastName : ['', Validators.required],
+    email    : ['', Validators.required],
+    phone    : ['', Validators.required],
+    address  : [''],
+    }
+  
+    constructor( 
+      private _http: HttpSharedService,
+      private _fb: FormBuilder,
+      public loader: LoaderSeriveService,
+      private toastr: ToastrService
+     ){ }
+
+    ngOnInit(){
+      this.getUsers()
+      this.initializeForm()
+    }
+
+    resetForm(){
+      this.action = "Add"
+      this.initializeForm()
+    }
+
+    initializeForm(){this.user_form = this._fb.group(this.user_fields)}
+
+    getUsers(){
+     this._http.get('users').subscribe((response: any) => {
+      this.users = response.users;
+      console.log('Check-', this.users);
+    })
+   }
+
+   setUser(user: any, action: string){
+    this.user_detail = user;
+    if(action == 'edit'){
+      this.action = 'Edit'
+      this.patchUser()
+    }
+    // this._http.get('users/'+user.id).subscribe((response: any) => {
+    //   this.user_detail = response;
+    //   if(action == 'edit'){
+    //     this.action = 'Edit'
+    //     this.patchUser()
+    //   }
+    // })
+   }
+
+   patchUser(){
+    this.user_form.patchValue({
+      username  : this.user_detail.username,
+      firstName : this.user_detail.firstName,
+      lastName  : this.user_detail.lastName,
+      email     : this.user_detail.email,
+      phone     : this.user_detail.phone
+      // address   : this.users.address
+    })
+   }
+
+   setPayLoad(form: any){
+    return {
+      username : form.username,
+      firstName: form.firstName,
+      lastName : form.lastName,
+      email    : form.email,
+      phone    : form.phone,
+      address  : form.address
+    }
+   }
+
+   saveForm(){ this.action === "Add" ? this.createUser() : this.updateUser()}
+
+   createUser(){
+    this._http.post('users/add', this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
+      this.getUsers()
+      this.resetForm()
+      this.close.nativeElement.click()
+      this.toastr.success("User Added successfully.");
+      console.log('Create Users', response);
+    })
+   }
+
+   updateUser(){
+    this._http.put('users/'+this.user_detail.id, this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
+      this.resetForm()
+      this.getUsers()
+      this.close.nativeElement.click()
+      this.toastr.success("User Updated Successfully")
+    })
+   }
+
+   deActivatedUser(user: any){
+    this._http.delete('users/'+user.id).subscribe((response: any) => {
+      this.getUsers()
+      this.resetForm()
+      console.log('DeActivate', response);
+      this.toastr.success("User Deleted Successfully")
+    })
+   }
+  
+}
+
+            </code>
+          </pre>
+
+          <hr>
+
+          <pre>
+            <code>
+
+              div class="card">
+                div class="card-body max-w-7xl m-auto">
+            
+                  a href="#" style="display: flex; justify-content: center; margin-left: 23px !important; background: #000; color: #fff; width: 124px; text-align: center; margin-top: 25px; padding: 5px; border-radius: 50px;" data-bs-toggle="modal" data-bs-target="#exampleModal"> Add User /a>
+            
+                  div class="overflow-x-auto p-4">
+                    !-- {{loader.isLoading | async}} -->
+                    table class="min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-lg">
+                      thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                        tr>
+                          th class="px-4 py-3 text-left">Username/th>
+                          th class="px-4 py-3 text-left">Name/th>
+                          th class="px-4 py-3 text-left">Gender/th>
+                          th class="px-4 py-3 text-left">Email/th>
+                          th class="px-4 py-3 text-left">Phone/th>
+                          th class="px-4 py-3 text-left">Address/th>
+                          th class="px-4 py-3 text-center">Actions/th>
+                        /tr>
+                      /thead>
+                      tbody class="text-gray-700 divide-y divide-gray-200">
+                        !-- Row 1 -->
+                        tr class="hover:bg-gray-50" *ngFor="let user of users">
+                          td class="px-4 py-3">  {{user.username}} /td>
+                          td class="px-4 py-3"> {{user.firstName}} {{user.lastName}} /td>
+                          td class="px-4 py-3"> {{user.gender}} /td>
+                          td class="px-4 py-3"> {{user.email}} /td>
+                          td class="px-4 py-3"> {{user.phone}} /td>
+                          td class="px-4 py-3"> {{user.address?.address}} /td>
+                            td class="px-4 py-3 text-center space-x-2">
+                            button class="text-blue-600 hover:underline" (click)="setUser(user, 'edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit/button>
+                            button class="text-red-600 hover:underline" (click)="deActivatedUser(user)">Delete/button>
+                          /td>
+                        /tr>
+                      /tbody>
+                    /table>
+                  /div>
+                /div>
+            /div>
+            
+            !-- Modal -->
+            div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              div class="modal-dialog modal-lg">
+                div class="modal-content">
+                  div class="modal-header">
+                    h5 class="modal-title" id="exampleModalLabel"> {{action}} User /h5>
+                    button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #close (click)="resetForm()">/button>
+                  /div>
+                  div class="modal-body">
+                
+                    form class="mt-4" [formGroup]="user_form" (ngSubmit)="saveForm()">
+                      div class="row mb-3">
+                        div class="col-md-6">
+                          label for="username" class="form-label">Username/label>
+                          input type="text" class="form-control" id="username" placeholder="Enter username" formControlName="username">
+                          div class="error-message" *ngIf="user_form.get('username')?.touched && user_form.get('username')?.hasError('required')">Username is required./div>
+                        /div>
+                        div class="col-md-6">
+                          label for="firstName" class="form-label">First Name/label>
+                          input type="text" class="form-control" id="firstName" placeholder="Enter first name" formControlName="firstName">
+                          div class="error-message" *ngIf="user_form.get('firstName')?.touched && user_form.get('firstName')?.hasError('required')">First Name is required./div>
+                        /div>
+                      /div>
+                    
+                      div class="row mb-3">
+                        div class="col-md-6">
+                          label for="lastName" class="form-label">Last Name/label>
+                          input type="text" class="form-control" id="lastName" placeholder="Enter last name" formControlName="lastName">
+                          div class="error-message" *ngIf="user_form.get('lastName')?.touched && user_form.get('lastName')?.hasError('required')">Last Name is required./div>
+                        /div>
+                      /div>
+                    
+                      div class="row mb-3">
+                        div class="col-md-6">
+                          label for="email" class="form-label">Email/label>
+                          input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
+                          div class="error-message" *ngIf="user_form.get('email')?.touched && user_form.get('email')?.hasError('required')">Email is required./div>
+                        /div>
+                        div class="col-md-6">
+                          label for="phone" class="form-label">Phone/label>
+                          input type="tel" class="form-control" id="phone" placeholder="Enter phone number" formControlName="phone">
+                          div class="error-message" *ngIf="user_form.get('phone')?.touched && user_form.get('phone')?.hasError('required')">Phone is required./div>
+                        /div>
+                      /div>
+                    
+                      div class="mb-3">
+                        label for="address" class="form-label">Address/label>
+                        textarea class="form-control" id="address" rows="3" placeholder="Enter address" formControlName="address">/textarea>
+                        div class="error-message" *ngIf="user_form.get('address')?.touched && user_form.get('address')?.hasError('required')">Address is required./div>
+                      /div>
+                      button type="submit" class="btn btn-primary" [disabled]="user_form.invalid">Submit/button>
+                    /form>
+                  /div>
+                /div>
+              /div>
+            /div>
+
+
+            </code>
+          </pre>
+          </div>
   
 
     <div class="box shadow p-2 mb-3" id="git">
@@ -2808,6 +3310,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         <li> Review & merge into main </li>
       </ul>
       </div>
+
+
 
       <div class="box shadow p-2 mb-3" id="web">
         <h2> What is Web Optimization? </h2>
