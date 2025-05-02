@@ -85,6 +85,9 @@ pre {
       <li> <a href="#this"> This </a> </li>
       <li> <a href="#promise"> Promise </a> </li>
       <li> <a href="#operator"> Rest, Spread Operator </a> </li>
+      <li> <a href="#function"> function statement and function expression </a></li>
+      <li> <a href="#primitive"> Primitive Data Types </a></li>
+
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
       <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
@@ -161,6 +164,10 @@ ctx.fill();
 <h2> ES6 2015 </h2>
 <p> <strong> let, const, Arrow Function, Destructuring, spread and rest operator, class, promise </strong></p>
 <p> <strong> ARROW FUNCTION </strong> - An arrow function is a shorter syntax for writing functions in JavaScript. Introduced in ES6, </p>
+<p> <strong> Normal Function: </strong> Gets hoisted (can call before it's defined). </p>
+<p> <strong> Arrow Function: </strong> Is not hoisted (must define before calling). </p>
+<p> <strong> Normal Function: </strong> Has its own arguments </p>
+<p> <strong> Arrow Function: </strong> Does NOT have its own arguments </p> 
 <p> <strong> Destructuring </strong></p>
 <pre>
     <code>
@@ -171,7 +178,15 @@ ctx.fill();
     }
     </code>
 </pre>
-<h2> ES2022 </h2>
+
+<h2 class="mt-3"> ES2020 </h2>
+<p> <strong> Nullish Coalescing Operator ( ?? ) </strong> </p>
+The Nullish Coalescing operator in JavaScript is represented two question marks (??). <br> 
+It takes two operands and returns the first operand if it is not null or undefined. <br> 
+Otherwise, it returns the second operand. It is a logical operator introduced in ES2020.
+
+
+<h2 class="mt-3"> ES2022 </h2>
 <p> <strong> await , Class Fields & Private Methods ( # ), </strong> </p>
 <pre>
     <code>
@@ -314,6 +329,44 @@ myDisplay();
 </div>
 
 
+
+<div class="box shadow p-2 mb-3" id="primitive">
+  <h2> Primitive Data Types </h2>
+  <p> Primitive are the basic, immutable data types. They hold simple values and are not objects. </p>
+  <ul>
+    <li> String → 'Hello' </li>
+    <li> Number → 42, 3.14, -1 </li>
+    <li> BigInteger - 123n (for very large integers) </li>
+    <li> Boolean → true / false </li>
+    <li> Undefined → variable declared but not assigned </li>
+    <li> Null → represents intentional absence of value </li>
+    <li> Symbol → unique identifiers (used in advanced use cases) </li>
+  </ul>
+<h2> Benefits of Primitive Data Types </h2>
+<ul>
+  <li> Fast access: Stored directly in memory (stack), which is faster than objects (which use heap). </li>
+  <li> Immutable: Values cannot be changed directly (any modification creates a new value). </li>
+  <li> Less memory: They take up minimal memory, which improves performance. </li>
+  <li> Value-based comparison: Two primitive values are equal if their values match, not their references. </li>
+  <pre>
+    <code> 
+      let a = 5;
+let b = 5;
+console.log(a === b); // true
+    </code>
+  </pre>
+</ul>
+
+<h2> Non-Primitive (Reference) Data Types </h2>
+<ol>
+  <li> Objects </li>
+  <li> Arrays </li>
+  <li> Functions </li>
+  <li> Dates, RegExps, etc. </li>
+</ol>
+  </div>  
+
+
 <div class="box shadow p-2 mb-3" id="generators">
 <h2> GENERATORS </h2>
 <p> Functions that can pause and resume execution <br>
@@ -403,12 +456,44 @@ console.log(squared); // [1, 4, 9, 16]
 
 <div class="box shadow p-2 mb-3" id="prototype">
 <h2> PROTOTYPE  </h2>
-<p> A prototype is an existing inbuilt functionality in JavaScript. Whenever we create a JavaScript function. </p>
-<p> That prototype is used to share methods and properties between all instances created from a constructor function. <br> avoid duplicating methods in every object.</p>
+<p> Prototype is like a templeate in javascript. It helps object to share the properties and methods. <br> Instead of duplicating code everywhere, we can define method or property once and then can easily share with other instances of an object. </p>
 
-<h2> Prototype Chain </h2>
+<p> <strong> Types of Prototype in JavaScript </strong> </p>
+<ul>
+<li> <strong> Object Prototype </strong> <p> The object prototype is foundational template to all objects in JavaScript. This template is available in every object we create by default. </p> </li>
+<li> Constructor Function Prototype </li>
+<li> Function Prototype </li>
+<li> Built-in Prototype </li>
+</ul>
+
+<p> Object Examples </p>
+<pre>
+<code>
+let obj = {
+   name: "John",
+   age: 21
+};
+console.log(obj);
+console.log(obj.toString());  // [object Object]
+
+</code>
+</pre>
+<p> // In above example, we have created an object named obj with properties name and age. We also have used toString() method which is available by default in object prototype. </p>
+
+<pre>
+<code>
+<strong> Built-in Prototype </strong>
+let arr = [1, 2, 3, 4, 5];
+console.log(arr);
+console.log(arr.toString());  // 1,2,3,4,5
+console.log(arr.join("-"));  // 1-2-3-4-5
+console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
+</code>
+</pre>
+<p> In above example, we have created an array named arr. We also have used toString(), join(), and reverse() methods which are available by default in array prototype. </p>
+
+<h2 Class="mt-5"> Prototype Chain </h2>
 <p> Every object has an internal link to its prototype, which forms a prototype chain. </p>
-
 
 <h2> Why Use Prototypes? </h2>
 <p> 1. Methods are shared across instances., 2. Enables objects to inherit behavior., 3. You can add methods to existing constructors even after objects are created.</p>
@@ -502,30 +587,36 @@ input type="text" id="textInput" placeholder="Type something...">
 </pre>
 
 <h2> Event Loop </h2>
-<p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and processing events. <br>
-It uses background Web APIs and task queues.
+<p> The event loop is a core part of JavaScript's. It makes asynchronous programming (like setTimeout, Promises, and async/await) 
 </p>
-<h2> Key Components </h2>
-1. Call Stack
-2. Web APIs / Node APIs
-3. Callback Queue (or Task Queue)
-4. Event Loop
+<h2> How it works (step by step):</h2>
+<ol>
+<li> Call Stack -  Executes your code line-by-line </li>
+<li> Web APIs / Node APIs - setTimeout, DOM events, or fetch are handled outside the stack by the browser </li>
+<li> Callback Queue (or Task Queue) - Stores callbacks (like setTimeout or resolved Promises) that are waiting to run. </li>
+<li> Event Loop - Keeps checking the stack. If it's empty, it pushes the next task from the queue to the stack. </li> 
+</ol>
+
 <strong> Examples </strong>
 <pre><code>
-    console.log("Start");
+console.log("Start");
 
 setTimeout(() => {
-  console.log("Callback");
+  console.log("Timeout callback");
 }, 0);
+
+Promise.resolve().then(() => {
+  console.log("Promise callback");
+});
 
 console.log("End");
 
 </code></pre>
-output 
-Start
-End
-Callback
-
+output - <br>
+Start <br>
+End <br>
+Promise callback <br>
+Timeout callback <br>
 </div>
 
 <div class="box shadow p-2 mb-3" id="dom">
@@ -952,6 +1043,45 @@ function greet() {
 </pre>
 </div>
 
+<div class="box shadow p-2 mb-3" id="function">
+<h2> Function Statement and Function Expression </h2>
+<p> function statement(Declaration) and function expression are two different ways to define functions </p>
+<h2> Function Statement (Declaration )</h2>
+<p> Function Statement defines a named using the function keywords, <br> Function declaration are hoisted to the top of their scope. Means we can calll the function even before and defined the code. </p>
+<pre>
+  <code>
+    // declare name only
+    function greet() {
+      console.log("Hello!");
+    }
+
+  // after hoisted top 
+
+  sayHi(); // Works, even before definition
+  function sayHi() {
+    console.log("Good Morning");
+  }
+  </code>
+</pre>
+
+<h2> Function Expression </h2>
+<p>  function expression defines a function and assigns it to a variable. <br>
+   Not hoisted: Function expressions are not hoisted. </p>
+
+<pre>
+  <code>
+    const greet = function(){
+      console.log("Good Morning")
+    }
+    greet()
+  </code>
+</pre>
+
+
+  
+
+</div>
+
 
 <div class="box shadow p-2 mb-3" id="vowel">
 <h2> VOWEL </h2>
@@ -1088,8 +1218,18 @@ console.log(numOfVowels)
                             }
                           
                             console.log (totalstr)
+							
+--------------------------
+							
+let str = "Santosh kumar"
+let reversed = ''
+for (let i=str.length-1; i>=0; i--){
+    reversed += str[i]
+}
+let final = reversed.charAt(0).toUpperCase() + reversed.slice(1).toLowerCase()
+console.log(final)
 
-                            -------------- 
+ -------------- 
 
                             let strs = [1,2,3]
   stroess = strs.reverse();

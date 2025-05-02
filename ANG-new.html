@@ -89,6 +89,7 @@ pre {
      <li> <a href="#storage"> Local Storage </a> </li>
      <li> <a href="#packages"> packages.json, angular.json </a> </li>
      <li> <a href="#async"> Async, Async pipe, promise </a> </li>
+     <li> <a href="#authentication"> Authentication, Authorization </a> </li>
      
       <li class="borderline"><a href="#">  </a></li>
       <li> <a href="#databinding"> Data Binding </a> </li>
@@ -109,6 +110,7 @@ pre {
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#services"> Services </a> </li>
+      <li> <a href="#interceptor"> Interceptor  </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
        
       <li> <a href="#apiservices"> API </a> </li>
@@ -417,6 +419,15 @@ Fully supports all control structures. <br>
 
       <div class="box shadow p-2 mb-3" id="optimize">
         <h2> OPTIMIZE ANGULAR PAGE </h2>
+        <p> <strong> Use of Loaders everywhere possible </strong> Whenever API is call in is progress we need to show loader. So that user will know something is process going on. </p>
+        <p> <strong> Avoid duplicate API call. </strong> For example, when creating a user or employee record, after filling in all the required fields and clicking the "Save" button, an API call is triggered. However, if the "Save" button is clicked multiple times quickly, multiple API requests are sent. It will be increases the loading time and server load.
+          That's why we need api call in codition that onetime call on click.  </p>
+        <P><strong> Use Pagination for Large Data Sets </strong> When retrieving large amounts of data from an API, it's important to implement pagination. Instead of loading all records at once, we should load a limited number of items as 10 or 20 per page—and fetch more data as the user navigates through the pages. This approach helps optimize loading time and improves overall performance and user experience. </P>
+        <p> <strong> Create Reusable Services for Common Form Data </strong> For example, if I'm using a reactive form with a gender dropdown (e.g., "Male" and "Female"), and this dropdown is required in multiple forms across the application, it's a good practice to create a reusable service to provide the gender options. This way, instead of duplicating the same code in every form, we can fetch the gender list from a single source. This improves code reusability, maintainability, and keeps the codebase clean and optimized. </p>
+        <p>
+          <strong> Delegate Certain Logic to the Backend for Better Frontend Performance </strong>
+          Some logic or conditions should be handled on the backend to reduce the complexity and data load on the frontend. For example, implementing pagination on the backend ensures that only a limited set of data is sent to the frontend at a time. This helps improve performance, reduces loading time, and keeps the frontend code simpler and more efficient.
+        </p>
         <ol>
           <li> Optimize Change Detection </li>
           <li> Lazy Loading </li>
@@ -1132,6 +1143,7 @@ decrement() { this.count.set(this.count() - 1); }
       <h2> Lazy Loading </h2>
      <p> Lazy loading in Angular is a design pattern that improves the performance of an application by loading feature modules only when they are needed. Instead of loading all modules during the initial load of the application, Angular delays the loading of certain modules until the user navigates to a route associated with that module. This reduces the initial bundle size, resulting in faster application load times and a more responsive user experience. </p>
      <p>  To implement lazy loading, you define your feature modules with their own routing configuration and set them up in the main routing file using the loadChildren property. This property tells Angular to load the module dynamically. For example, in your app-routing.module.ts, you might add a route like this: </p>
+     <p> For example, suppose you have an Angular application with multiple feature modules, like a dashboard, user profile, settings, and reports. Instead of loading all these modules when the application starts, you can "configure lazy loading" to load these modules only when the user navigates to them. </p>
      <pre>
       <code>
         {
@@ -1140,8 +1152,7 @@ decrement() { this.count.set(this.count() - 1); }
         }
       </code>
      </pre>
-      <p>    In this example, the AdminModule will only be loaded when the user navigates to the /admin path. The AdminModule itself contains its own routing module (AdminRoutingModule) that defines the routes specific to the admin section of the app. </p>
-      <p> Lazy loading is especially beneficial in large-scale applications with many feature modules. By splitting the code into smaller chunks and loading them on demand, Angular ensures efficient use of resources and better application performance. </p>
+    
       </div>
 
       <div class="box shadow p-2 mb-3" id="change">
@@ -2371,6 +2382,18 @@ Using the Service in a Component
 button (click)="saveData()">Save Data</button>
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="authentication">
+  <p> <strong> Authentication means "Who are you?" </strong></p>
+  <p> When you try to log in to an application, you need to prove your identity. For example, if your name is Ram, you must provide some credentials (like a username and password) to prove that you are indeed Ram. If the credentials match, the system authenticates you and grants access. This process of verifying your identity is called Authentication.</p>
+  
+  <p> <strong> Authorization means "What are you allowed to do?"</strong> </p>
+  <p> Once you're logged into the application, you have access to a database — but can you delete tables, update records, insert new data, or are you limited to just read only ? This control over what you can or cannot do within the system is called Authorization. </p>
+
+  <p> <strong> LOGIN PROCESS </strong></p>
+  <p> Login -> Username and Password -> API CALL -> In Backend match with database -> Verified -> the Provide the token - token stores in localStorage by fronted - then each request we have to provide token - backend match token that token is correct or not - than login </p>
+</div>
+
 <div class="box shadow p-2 mb-3" id="filter"> 
 <h2> Filter </h2>
 
@@ -2653,6 +2676,106 @@ heading.remove();
       </code>
     </pre>
     </div>
+
+
+    <div class="box shadow p-2 mb-3" id="interceptor">
+      <h2> Interceptor </h2>
+      <p> An interceptor in Angular is a special service.  It is allows to intercept and manipulate HTTP requests and responses globally before they are sent or received. </p>
+      <p> Authorization headers, Loading indicators, Logging, Error handling, Modifying requests/responses </p>
+<h2> How It works </h2>
+<p> Angular provides an interface called HttpInterceptor, which you can implement in a service. Then, you register that service as an HTTP interceptor in the provider’s array. </p>
+
+<h2> Add a Token to Every Request </h2>
+1. Create the interceptor service
+<pre>
+  <code>
+    // auth.interceptor.ts
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`)
+      });
+      return next.handle(cloned);
+    } else {
+      return next.handle(req);
+    }
+  }
+}
+  </code>
+</pre>
+2. Provide it in you app.module.ts
+<pre>
+  <code>
+    import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+
+@NgModule({
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ]
+})
+export class AppModule {}
+  </code>
+</pre>
+
+<p> You Can Chain Multiple Interceptors
+  Just add more entries to the providers array with multi: true. </p>
+
+  <h2> 1. Global Error Handling Interceptor </h2>
+  <p> This interceptor catches HTTP errors and lets you handle them in one place (like showing a toast, redirecting on 401, etc.) </p>
+
+  <pre>
+    <code>
+      // error.interceptor.ts
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+@Injectable()
+export class ErrorInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'An unknown error occurred!';
+
+        if (error.status === 401) {
+          errorMessage = 'Unauthorized. Redirecting to login...';
+          // Optionally redirect:
+          // this.router.navigate(['/login']);
+        } else if (error.status === 500) {
+          errorMessage = 'Internal server error!';
+        } else if (error.error?.message) {
+          errorMessage = error.error.message;
+        }
+
+        // Show a toast/snackbar here (example with alert)
+        alert(errorMessage);
+
+        return throwError(() => new Error(errorMessage));
+      })
+    );
+  }
+}
+
+    </code>
+  </pre>
+
+      </div>
+
+    
   
 
     <div class="box shadow p-2 mb-3" id="git">
