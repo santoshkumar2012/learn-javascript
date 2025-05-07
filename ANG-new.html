@@ -108,12 +108,14 @@ pre {
     <li> <a href="#emp-api"> Employee crud with api </a> </li>
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
+    <li> <a href="#rxjsoperator"> Rxjs Operators </a> </li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#services"> Services </a> </li>
       <li> <a href="#interceptor"> Interceptor  </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
+      <li> <a href="#class"> Class </a> </li>
        
       <li> <a href="#apiservices"> API </a> </li>
       <li> <a href="#aot"> AOT </a> </li>
@@ -735,6 +737,62 @@ observable.subscribe({
   }, 5000);
 </code></pre>
 
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="rxjsoperator">
+  <h2> RxJS Operators </h2>
+  <h2> Map </h2>
+  <p> <strong> rxjs map() transforms each item emitted by an Observable. </strong> 
+ <br>  Map operator use for our data transform according to need. 
+  We get any data we can change by map operator and it return new observable with modify data . <br>
+  example - map(data => transform)
+  </p>
+  <pre>
+    <code>
+      import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+of(2, 4, 6).pipe(
+  map(x => x * 10)
+).subscribe(console.log); // 20, 40, 60
+    </code>
+  </pre>
+<hr>
+  <pre>
+    <code>
+      ngOnInit(){
+        const members = from([
+          {id: 1, name: 'Anup'},
+          {id: 1, name: 'Pankaj'},
+          {id: 1, name: 'Tanmay'},
+          {id: 1, name: 'Ashish'},
+          {id: 1, name: 'Husnain'},
+          {id: 1, name: 'Rajesh'},
+          ])
+          
+          members.pipe(
+            map(data => data.name)
+          )
+          .subscribe(res => {
+          console.log(res)
+          })
+       }
+
+       -------------
+
+       Nested Object 
+
+       const source = of({ address: { city: 'New York' } }, { address: { city: 'London' } });
+    
+    const example = source.pipe(
+      map(value => value?.address?.city)
+    );
+    
+    example.subscribe(city => console.log(city));
+
+    </code>
+  </pre>
 </div>
 
 
@@ -1469,12 +1527,26 @@ constructor(private router: Router) {
 
   <div class="box shadow p-2 mb-3" id="decorator">
     <h2> DECORATOR </h2>
-    <p> Decorator is a function that add metadata to a class. @component, @directives, @ngModule  </p>
+    <p> <strong> Decorator is a function that add metadata to a class. @component, @directives, @ngModule, @input, @output, @hostListener </strong>  </p>
+    <pre>
+      <code>
+        import { Component } from '@angular/core';
+        @Component({
+          META DATA
+          selector: 'app-ngfor',
+          standalone: true,
+          imports: [CommonModule, HeaderComponent],
+          templateUrl: './ngfor.component.html',
+          styleUrl: './ngfor.component.css'
+        })
+        export class NgforComponent { }
+      </code>
+    </pre>
   </div>
 
   <div class="box shadow p-2 mb-3" id="directive">
     <h2> Directive </h2>
-    <p>  Directives are classes that add additional behavior to elements in your Angular applications. </p>
+    <p>  <strong> Directives are classes that enhance the feature of a HTML element. </strong> </p>
     <ol>
       <li> Component Directives (Most Common) <br> Technically, components are a type of directive with a template. </li>
       <li> <strong> Structural Directives (Modify the DOM Structure) </strong> <br> 
@@ -1521,21 +1593,43 @@ constructor(private router: Router) {
         &lt;p cdirective color="red"&gt; Form &lt;/p&gt;
     -------------------------
     
-      @Input() defaultColor: string = 'yellow'; // Default color
-      @Input() highlightColor: string = 'red'; // Color on click
+    import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+
+    @Directive({
+      selector: '[toggleColor]'
+    })
+    export class ToggleColorDirective implements OnInit {
+      @Input() defaultColor: string = 'yellow'; // Default background color
+      @Input() highlightColor: string = 'red';  // Color to toggle on click
+    
       private isHighlighted = false;
-      
-      onclick button 
-       ngOnInit(): void {
-          this.el.nativeElement.style.backgroundColor = this.defaultColor;
-        }
-      
+    
+      constructor(private el: ElementRef) {}
+    
+      ngOnInit(): void {
+        this.el.nativeElement.style.backgroundColor = this.defaultColor;
+      }
+    
       @HostListener('click') onClick() {
-        this.isHighlighted = !this.isHighlighted; 
-        this.el.nativeElement.style.backgroundColor = this.isHighlighted ? this.highlightColor : this.defaultColor;
-        } 
-        &lt;button cdirective toggleColor defaultColor="yellow" highlightColor="red" class="px-4 py-2 rounded-md border"p&gt; Click Me &lt;/buttonp&gt;
-      ---------------- 
+        this.isHighlighted = !this.isHighlighted;
+        this.el.nativeElement.style.backgroundColor = this.isHighlighted
+          ? this.highlightColor
+          : this.defaultColor;
+      }
+    }
+    
+     HTML 
+
+    button 
+  toggleColor 
+  [defaultColor]="'yellow'" 
+  [highlightColor]="'red'" 
+  class="px-4 py-2 rounded-md border">
+  Click Me
+/button>
+     
+     
+        ---------------- 
       @Directive({
         selector: '[websanto]', // Custom attribute selector
       })
@@ -1695,6 +1789,20 @@ export class ParentComponent {
           div style="background-color: #ececec;">   {{staff.staff_name}} {{staff.salary}} div>
         /ng-template>
     /li>
+
+    NODATA
+
+    div *ngIf="employees && employees.length > 0; else nodata"> 
+      div *ngFor="let emp of employees">
+          ng-container *ngIf="emp.salary > 400000; else highsalary">
+             span style="color: red;">  {{emp.name}} /span>
+          /ng-container>
+          ng-template #highsalary>
+              {{emp.name}}
+          /ng-template>
+      /div>
+  /div>
+  ng-template #nodata> p> No Data /p>/ng-template>
 
     -------------- 
 
@@ -3277,6 +3385,36 @@ export class UsersComponent {
 
             </code>
           </pre>
+          </div>
+
+
+          <div class="box shadow p-2 mb-3" id="class"> 
+            <h2> classs </h2>
+            <p> A class is a TypeScript feature (and JavaScript ES6) that allows you to create reusable objects with properties and methods.
+              <br>
+              In Angular, classes are used everywhere — especially with decorators like @Component, @Injectable, and @NgModule. </p>
+
+              <h2> class in Angular </h2>
+              <pre>
+                <code>
+                  export class User {
+                    constructor(
+                      public name: string,
+                      public age: number
+                    ) {}
+                  
+                    greet() {
+                      return `Hello, my name is ${this.name}`;
+                    }
+                  }
+                  
+                  // usaseg 
+
+                  let user = new User("John", 30);
+console.log(user.greet());  // "Hello, my name is John"
+
+                </code>
+              </pre>
           </div>
   
 

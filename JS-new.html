@@ -63,6 +63,7 @@ pre {
       <li> <a href="#js"> javascript </a> </li>
       <li> <a href="#d3"> D3, canvas, svg </a> </li>
       <li> <a href="#es6"> Es6 </a> </li>
+	    <li> <a href="#arrow"> Arrow Function vs Normal Function: this Behavior </a> </li>
       <li> <a href="#async"> Async </a> </li>
       <li> <a href="#default"> Default Paramerter </a> </li>
       <li> <a href="#generators"> Generators </a> </li>
@@ -100,9 +101,19 @@ pre {
       <li> <a href="#palindrome"> Palindrome </a> </li>
       <li> <a href="#booble"> Booble sort </a> </li>
       <li> <a href="#reverse"> Reverse </a> </li>
+      <li> <a href="#factorial"> Factorial </a></li>
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#typescript"> TypeScript </a> </li>
       <li> <a href="#html"> HTML </a> </li>
+      <li> <a href="#less"> Less, Sass, Scss </a> </li>
+      <li> <a href="#position"> Position style </a> </li>
+      <li> <a href="#semantic"> Semantic </a> </li>
+      <li> <a href="#position"> Position style </a> </li>
+      <li> <a href="#html5"> HTML5 </a> </li>
+      <li> <a href="#gridFlex"> Gridflex </a> </li>
+      <li> <a href="#sse"> SSE </a></li>
+      <li> <a href="#debugging">  Debugging </a></li>
+      <li> <a href="#frontend">  Frontend Performance </a></li>
     </ul>
 
 
@@ -159,6 +170,79 @@ ctx.fill();
 </pre>
 </div>
 
+<div class="box shadow p-2 mb-3" id="arrow">
+  <h2> Arrow Function vs Normal Function : this Behavior </h2>
+<div class="row">
+  <div class="col-lg-6"> 
+    <ul>
+      <strong> Normal Function </strong>
+      <li> syntax difference , function keyword </li>
+      <li> Dynamic (runtime-bound) </li>
+      <li> Best for	Object methods, constructors </li>
+      <li> Gets hoisted (can call before it's defined). </li>
+      <li> Has its own arguments </li>
+    </ul>
+  </div>
+  <div class="col-lg-6"> 
+    <ul>
+      <strong> Arrow Function </strong>
+      <li> syntax difference , => </li>
+      <li> Lexical (inherits from parent) </li>
+      <li> Callbacks, short functions </li>
+      <li> Is not hoisted (must define before calling). </li>
+      <li> Does NOT have its own arguments </li>
+    </ul>
+  </div>
+</div>
+
+<h2> The this Keyword Behavior </h2>
+<p> Normal functions: this is dynamic, depends on how the function is called
+<br>
+  Arrow functions: this is lexical, inherits from the parent scope </p>
+
+<h2> 1: this in a regular function </h2>
+<pre><code>
+  const user = {
+    name: "Alice",
+    sayHi: function () {
+      console.log("Hi, I'm " + this.name);
+    }
+  };
+  
+  user.sayHi();  // "Hi, I'm Alice"  
+</code>
+</pre>
+<h2> this in an arrow function </h2>
+<pre>
+  <code>
+    const user = {
+      name: "Bob",
+      sayHi: () => {
+        console.log("Hi, I'm " + this.name);
+      }
+    };
+    
+    user.sayHi(); // "Hi, I'm undefined"
+    
+  </code>
+</pre>
+<h2> Use case where arrow function is helpful: </h2>
+<pre>
+  <code>
+    function Person() {
+      this.age = 0;
+    
+      setInterval(() => {
+        this.age++;  // `this` refers to the Person instance
+        console.log(this.age);
+      }, 1000);
+    }
+    
+    new Person();
+    
+  </code>
+</pre>
+  </div>
 
 <div class="box shadow p-2 mb-3" id="es6">
 <h2> ES6 2015 </h2>
@@ -1118,6 +1202,25 @@ console.log(numOfVowels)
     </pre>
     </div>
 
+    <div class="box shadow p-2 mb-3" id="factorial">
+      <h2> Factorial Calculation </h2>
+      <pre>
+          <code>
+            let n = 5;
+            let result = 1;
+            
+            for (let i = 1; i <= n; i++) {
+              result *= i;
+            }
+            
+            console.log(result); // Output: 120
+            
+            </code>
+            </pre>
+            </div>
+
+    
+
     <div class="box shadow p-2 mb-3" id="triangle">
         <h2>  Triangle Pattern </h2>
         <pre>
@@ -1396,14 +1499,10 @@ console.log(output); // Output: Hsotnas Ramuk
 	<p> The <strong> html </strong> element is the root element of an HTML page </p> 
 	<p> The <strong> head </strong> element contains meta information about the HTML page </p> 
 	<p> The <strong> title </strong> element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab) </p>
-                        <h2> HTML 5 CANVAS </h2>
-                        <P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
-                        <h2> GRID AND FLEX BOX  </h2>
-                        <p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
-                        <p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
-
+                       
+                       
                         <h2> Tag and Element </h2>
-						<p> HTML tag is a piece of markup that defines an element within an HTML document. </p>
+						            <p> HTML tag is a piece of markup that defines an element within an HTML document. </p>
                         <p> <strong> Tag </strong> Opening or closing code in angle brackets </p>
                         <p> <strong> Elements </strong> Tag(s) plus content</p>
                         <p> <strong> Void Element </strong>	Element with no content/closing tag	<img />, <br /></p>
@@ -1429,15 +1528,7 @@ console.log(output); // Output: Hsotnas Ramuk
 						<h2> How to specify the metadata in HTML5? </h2>
 						<p> To specify we can use <meta> tag which is a void tag,i.e., it does not have a closing tag. Some of the attributes used with meta tags are name, content, http-equiv, etc. The below image tells how to specify the metadata. </p>
                         
-                        <h2> Semantic HTML elements </h2>
-                        <p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
-                        <pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
-                        <h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
-                        Improved SEO, Enhanced Accessibility, Clearer Structure
-                        
-                        <h2 class="mt-4"> Non-semantic HTML elements </h2>
-                        do not provide information about the content <br> like div> div> and span> span>
-                        <hr>
+                       
                         
                         <h2> P and span tag difference </h2>
                         <p> p Block element, Paragraph, Starts on a new line	</p>
@@ -1446,94 +1537,221 @@ console.log(output); // Output: Hsotnas Ramuk
                         <h2> CSS </h2>
                         <p> <strong> css selector </strong> - CSS selector is a pattern used to select HTML elements , like - id, .class, element.class, Parent child, element:hover </p>
                         <p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
-                        <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
-                        <p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
-                        <p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
+                        
                         <p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
                         
-                        <h2> Less, Sass, and SCSS </h2>
-                        <p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
-                        <pre>
-                          <code>
-                            // scss variable
-                            $primary-color: blue;
-                          .button {
-                            color: $primary-color;
-                            padding: 10px;
-                          }
-                          </code>
-                        </pre>
-                        
-                        <pre>
-                          <code>
-                            // nesting in scss  
-                            .navbar {
-                                background: #333;
-                                padding: 10px;
-                              
-                                .menu {
-                                  list-style: none;
-                                  padding: 0;
-                              
-                                  li {
-                                    display: inline-block;
-                                    margin-right: 10px;
-                              
-                                    a {
-                                      text-decoration: none;
-                                      color: white;
-                              
-                                      &:hover {
-                                        color: yellow;
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                          </code>
-                        </pre>
-                        
-                        <pre>
-                          <code>
-                            //Mixins in SCSS
-                          
-                            @mixin button-style {
-                              padding: 10px 20px;
-                              border-radius: 5px;
-                              font-size: 16px;
-                            }
-                            
-                            .btn {
-                              @include button-style;
-                              background: blue;
-                              color: white;
-                            }
-                            
-                            .btn-danger {
-                              @include button-style;
-                              background: red;
-                            }
-                          </code>
-                        </pre>
-                        
-                        <pre>
-                          <code>
-                            //sass
-                          $primary-color: blue
-                          .button
-                            color: $primary-color
-                            padding: 10px
-                          
-                            //loop 
-                            @each $size, $padding in (small: 5px 10px, medium: 10px 20px, large: 15px 30px) {
-                              .button--#{$size} {
-                                padding: $padding;
-                              }
-                            }
-                        
-                          </code>
-                        </pre>
+                       
                         </div>
+
+<div id="frontend">
+  <h2> Frontend Performance Tips </h2>
+  <ol>
+    <li> Minify CSS, JavaScript, and HTML (remove whitespace/comments). </li>
+    <li> Optimize Images , Use correct formats: WebP , responsive images, Lazy load images  </li>
+    <li> Use a Content Delivery Network (CDN) </li>
+    <li> Reduce number of render-blocking resources (like large CSS or JS). </li>
+    <li> Backend & Server Optimization </li>
+  </ol>
+  <h2> Tools to Measure & Monitor </h2>
+Lighthouse (built into Chrome DevTools): Full performance audit. <br>
+PageSpeed Insights: Google’s tool with real-world data. <br>
+WebPageTest.org: Waterfall view of your site’s loading. <br>
+GTmetrix: Performance scores + suggestions. <br>
+Chrome DevTools: Network tab, performance tab, coverage tab. <br>
+</div>
+
+
+                        <div id="debugging"> 
+                          <h2>Debugging </h2>
+                          <strong> Browser DevTools (Chrome/Edge/Safari/Firefox): </strong>
+                          Elements tab: Inspect HTML & CSS in real time. <br>
+                          Console tab: View logs, warnings, errors. <br>
+                          Sources tab: Set breakpoints, step through code. <br>
+                          Network tab: Track API calls, status codes, and payloads. <br>
+                          Performance tab: Analyze load time, bottlenecks. <br>
+                          Application tab: View localStorage, sessionStorage, cookies. <br>
+                        </div>
+
+<div id="sse">
+<p> SSE is a way for the server to push real-time updates to the browser over HTTP — using a unidirectional communication channel. </p>
+<h2> SSE vs WebSockets </h2>
+<p> <strong> SSE </strong></p>
+<p class="p-0 m-0"> One-way (Server→Client) </p>
+<p class="p-0 m-0"> Protocol ->	HTTP </p>
+<p class="p-0 m-0"> Reconnect -> Auto </p>
+<p class="p-0 m-0"> Easy </p>
+<p> <strong> WebSocket </strong></p>
+<p class="p-0 m-0"> Two-way (Full duplex) </p>
+<p class="p-0 m-0"> WebSocket (WS)	 </p>
+<p class="p-0 m-0"> Manual </p>
+<p class="p-0 m-0"> Complex </p>
+</div>
+
+<div id="html5"> 
+<h2> HTML 5 CANVAS </h2>
+<P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
+
+<h2> HTML API </h2>
+<p> HTML5 introduced a bunch of JavaScript-accessible browser APIs that give you more control over the browser, user interaction, and data — without needing plugins.
+</p>
+
+<h2> Geolocation API </h2>
+<p> Get user's location </p>
+<pre><code>
+  navigator.geolocation.getCurrentPosition((pos) => {
+    console.log(pos.coords.latitude, pos.coords.longitude);
+  });  
+</code>
+</pre>
+
+<h2>  Web Storage API </h2>
+<p> localStorage: persists data even after reloads </p>
+<p> sessionStorage: clears on tab close </p>
+
+<h2> Canvas API </h2>
+<pre>
+  <code>
+    canvas id="myCanvas" width="200" height="100"> canvas>
+script>
+  const ctx = document.getElementById('myCanvas').getContext('2d');
+  ctx.fillStyle = "red";
+  ctx.fillRect(20, 20, 150, 50);
+/script>
+  </code>
+</pre>
+
+<h2> Notification API </h2>
+<pre>
+  <code>
+    Notification.requestPermission().then((perm) => {
+      if (perm === "granted") {
+        new Notification("Hello!", { body: "Welcome back!" });
+      }
+    });    
+  </code>
+</pre>
+
+<h2> Audio/Video API </h2>
+<pre><code>
+  video controls>
+    source src="video.mp4" type="video/mp4">
+  /video>  
+</code></pre>
+
+</div>
+
+<div id="gridFlex">
+<h2> Grid Flex </h2>
+<p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
+<p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column spacing </p>
+
+</div>
+
+<div id="semantic">
+  <h2> Semantic </h2>
+  <h2> Semantic HTML elements </h2>
+  <p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
+  <pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
+  <h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
+  Improved SEO, Enhanced Accessibility, Clearer Structure
+  
+  <h2 class="mt-4"> Non-semantic HTML elements </h2>
+  do not provide information about the content <br> like div> div> and span> span>
+  <hr>
+</div>
+
+<div id="less">
+  <h2> Less, Sass, and SCSS </h2>
+  <p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
+  <pre>
+    <code>
+      // scss variable
+      $primary-color: blue;
+    .button {
+      color: $primary-color;
+      padding: 10px;
+    }
+    </code>
+  </pre>
+  
+  <pre>
+    <code>
+      // nesting in scss  
+      .navbar {
+          background: #333;
+          padding: 10px;
+        
+          .menu {
+            list-style: none;
+            padding: 0;
+        
+            li {
+              display: inline-block;
+              margin-right: 10px;
+        
+              a {
+                text-decoration: none;
+                color: white;
+        
+                &:hover {
+                  color: yellow;
+                }
+              }
+            }
+          }
+        }
+    </code>
+  </pre>
+  
+  <pre>
+    <code>
+      //Mixins in SCSS
+    
+      @mixin button-style {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      
+      .btn {
+        @include button-style;
+        background: blue;
+        color: white;
+      }
+      
+      .btn-danger {
+        @include button-style;
+        background: red;
+      }
+    </code>
+  </pre>
+  
+  <pre>
+    <code>
+      //sass
+    $primary-color: blue
+    .button
+      color: $primary-color
+      padding: 10px
+    
+      //loop 
+      @each $size, $padding in (small: 5px 10px, medium: 10px 20px, large: 15px 30px) {
+        .button--#{$size} {
+          padding: $padding;
+        }
+      }
+  
+    </code>
+  </pre>
+</div>
+
+<div id="position"> 
+  <h2> Position </h2>
+  <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
+  <p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
+  <p> <strong> Fixed </strong> - The element is positioned relative to the viewport (browser window). </p>
+</div>
+
 
                         <div class="box shadow p-2 mb-3" id="operator">
                             <h2> Rest Operator </h2>
