@@ -206,13 +206,20 @@ React
 <h2 id="component"> COMPONENTS </h2>
 <div class="box shadow p-2 mb-3" id="component">
 <p> Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. </p>
-<pre><code> @Component({
+<pre><code> 
+  import { Component } from '@angular/core';
+
+  @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
-}) </code> </pre>
+}) 
+
+export class NgforComponent {}
+
+</code> </pre>
 <p> @Component: A decorator used to convert a normal Typescript class to Angular Component.
 </p>
 </div>
@@ -793,6 +800,214 @@ of(2, 4, 6).pipe(
 
     </code>
   </pre>
+
+  <h2> switchMap </h2>
+  <p> switchMap is an RxJS operator used to switch to a new observable every time the source emits a value. If a new value comes in before the previous inner observable completes, switchMap cancels the previous one and switches to the latest. </p>
+  <h2> Basic Examples </h2>
+  <pre>
+    <code>
+      import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { MyService } from './my.service';
+
+@Component({
+  selector: 'app-search',
+  template: `input [formControl]="searchControl" placeholder="Search...">`
+})
+export class SearchComponent {
+  searchControl = new FormControl();
+
+  constructor(private myService: MyService) {
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      switchMap(searchTerm => this.myService.searchData(searchTerm))
+    ).subscribe(result => {
+      console.log(result);
+    });
+  }
+}
+
+    </code>
+  </pre>
+
+  <h2>  Another Example switchMap : Chained API Calls </h2>
+<pre>
+  <code> this.route.params.pipe(
+    switchMap(params => this.userService.getUserById(params['id']))
+  ).subscribe(user => {
+    console.log('User data:', user);
+  });
+  </code>
+</pre>
+
+<h2> concatMap </h2>
+<p> concatMap is an RxJS operator that maps each value to an inner observable, queues them, and subscribes to them one after the other — maintaining the order and waiting for each one to complete before moving to the next.</p>
+
+<pre>
+  <code>
+    import { from } from 'rxjs';
+import { concatMap, delay } from 'rxjs/operators';
+
+from([1, 2, 3]).pipe(
+  concatMap(val => {
+    console.log('Requesting:', val);
+    return of(`Processed ${val}`).pipe(delay(1000));
+  })
+).subscribe(result => console.log(result));
+
+  </code>
+</pre>
+
+<h2> Real World Example </h2>
+<pre>
+  <code>
+    saveUser(userData: any) {
+      return this.http.post('/api/saveUser', userData);
+    }
+    
+    notifyUser(userId: string) {
+      return this.http.post(`/api/notifyUser/${userId}`, {});
+    }
+    
+    doAll(userData: any) {
+      of(userData).pipe(
+        concatMap(data => this.saveUser(data)),
+        concatMap((savedUser: any) => this.notifyUser(savedUser.id))
+      ).subscribe(() => {
+        this.router.navigate(['/dashboard']);
+      });
+    }
+    
+  </code>
+</pre>
+<h2> File upload que </h2>
+<pre>
+  <code>
+    uploadFiles(files: File[]) {
+      from(files).pipe(
+        concatMap(file => this.uploadService.upload(file))
+      ).subscribe(response => {
+        console.log('Uploaded:', response);
+      });
+    }    
+  </code>
+</pre>
+
+<h2> MergeMap in Rxjs Angular  </h2>
+<p> mergeMap maps each value from the source observable to a new inner observable, and merges all inner observables into a single observable — allowing them to run in parallel.</p>
+
+<h2> Real-world Example in Angular: Parallel API Calls </h2>
+<pre>
+  <code>
+    getUserById(id: number) {
+      return this.http.get(`/api/users/${id}`);
+    }
+    
+    fetchAllUsers(ids: number[]) {
+      from(ids).pipe(
+        mergeMap(id => this.getUserById(id))
+      ).subscribe(user => {
+        console.log('User:', user);
+      });
+    }
+    
+  </code>
+</pre>
+
+<h2> DebounceTime </h2>
+<p> debounceTime(ms) waits for a pause in emissions from the source observable.
+  It only emits the latest value after the given time (in ms) has passed without another emission. </p>
+
+<h2> Basic Examples </h2>
+<pre>
+  <code>
+    import { fromEvent } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+
+const input = document.getElementById('myInput');
+
+fromEvent(input, 'input').pipe(
+  map((e: any) => e.target.value),
+  debounceTime(500)
+).subscribe(value => {
+  console.log('User stopped typing:', value);
+});
+
+  </code>
+</pre>
+
+<h2> Real-World Angular DebounceTime Example: Search Box </h2>
+<pre>
+  <code>
+    import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-search',
+  template: `input [formControl]="searchControl" placeholder="Search...">`
+})
+export class SearchComponent {
+  searchControl = new FormControl();
+
+  ngOnInit() {
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300)
+    ).subscribe(value => {
+      console.log('Searching for:', value);
+      // Call your API or service here
+    });
+  }
+}
+
+  </code>
+</pre>
+
+<h2> pluck </h2>
+<p> pluck is an RxJS operator that lets you pull out a specific property (or nested property) from each emitted object. </p>
+
+<pre>
+  <code>
+    import { from } from 'rxjs';
+import { pluck } from 'rxjs/operators';
+
+const source$ = from([
+  { name: 'Alice' },
+  { name: 'Bob' },
+  { name: 'Charlie' }
+]);
+
+source$.pipe(
+  pluck('name')
+).subscribe(name => console.log(name));
+
+
+//output
+Alice
+Bob
+Charlie
+  </code>
+</pre>
+
+<h2> Another Example: From DOM Events </h2>
+<pre>
+  <code>
+    import { fromEvent } from 'rxjs';
+import { pluck } from 'rxjs/operators';
+
+const input = document.getElementById('myInput');
+
+fromEvent(input, 'input').pipe(
+  pluck('target', 'value')
+).subscribe(val => {
+  console.log('Typed value:', val);
+});
+
+  </code>
+</pre>
+
 </div>
 
 
@@ -2138,52 +2353,41 @@ ul>
 <p><strong> Difference between Template-driven and Reactive Forms? </strong></p>
 <ul>
   <li><strong> Template-driven </strong></li>
+  <li> HTML-centric (form logic in template) </li>
   <li> Structure Based on directives </li>
   <li> Validation Asynchronous </li>
   <li> Simple forms </li>
-  <li> Two-way data binding </li>
+  <li> Two-way data binding  ([(ngModel)]) </li>
 </ul>
 <ul>
   <li><strong>  Reactive Forms </strong></li>
+  <li> TypeScript-centric (logic in TS file) </li>
   <li>   Structure Based on explicit creation </li>
   <li> Synchronous </li>
   <li>   Complex forms </li>
-  <li> Immutable data model </li>
+  <li> One-way, explicit & predictable </li>
 </ul>
-
+<h2> 1. Template-driven Form Example </h2>
 <pre>
   <code>
-    TS
-    lead_form!: FormGroup
-    lead_fields = {
-    name     : ['', Validators.required],
-    email    : ['', Validators.required],
+    form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+      input name="username" ngModel required />
+      input type="email" name="email" ngModel />
+      button type="submit">Submit /button>
+    /form>
+    --------- 
+    onSubmit(form: NgForm) {
+      console.log(form.value);
     }
-    constructor( private _fb    : FormBuilder ){
-  this._route.queryParams.subscribe(params => { this.tenant_id = params['id']})
-  }
-  ngOnInit(){this.initializeForm()}
-  initializeForm(){
-  this.lead_form = this._fb.group(this.lead_fields)
-  this.getLeads()
-  }
-  saveForm() {
-    if (this.myForm.invalid) {
-      alert('Please fill in all required fields!');
-      return;
-    }
-
-    HTML 
-
-    form [formGroup]="user_details_form" (ngSubmit)="saveForm()">
-      label class="form-label">First Name /label>
-      input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
-      div class="error-message"
-        *ngIf="user_details_form.get('first_name')?.touched && user_details_form.get('first_name')?.hasError('required')">
-        First Name is required.
-        button [disabled]="!loginForm.valid" type="submit" class="btn btn-light">Login button
+    
     </form>
   </code>
+  <h2> 2. Reactive Form Example </h2>
+  <pre>
+    <code>
+
+    </code>
+  </pre>
 </pre>
 </div>
 
@@ -2590,6 +2794,109 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 </div>
 
 <div class="box shadow p-2 mb-3" id="login-setup">
+<h2> Login with api and username and password </h2>
+
+<pre>
+  <code>
+    import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { HttpSharedService } from '../http-shared.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { response } from 'express';
+import { LoaderComponent } from "../loader/loader.component";
+
+@Component({
+  selector: 'app-login',
+  imports: [CommonModule, ReactiveFormsModule, LoaderComponent],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
+})
+export class LoginComponent {
+
+  loginForm!: FormGroup
+  loading: boolean = false
+
+constructor(
+  private fb: FormBuilder,
+  private http: HttpSharedService,
+  private router: Router,
+  private toastr: ToastrService
+){
+}
+
+form_field = {
+  username: ['', Validators.required],
+  password: ['', Validators.minLength(6)]
+}
+
+ngOnInit(){
+  this.loginForm = this.fb.group(this.form_field)
+  this.login()
+  this.pathFakerUser()
+}
+
+setPayload(form: any){
+  return { 
+  username: form.username, 
+  password: form.password
+}
+}
+
+pathFakerUser(){
+  this.http.get('','').subscribe((response: any) => {
+    this.loginForm.patchValue(
+      {"username": "emilys", "password": "emilyspass"}
+    )
+  })
+  // this.loginForm.setValue({
+  //   email: 'emilys',
+  //   password: 'emilyspass'
+  // });
+}
+
+
+login() {
+  this.http.post('auth/login', this.setPayload(this.loginForm.value)).subscribe((response: any) => {
+    if(response.accessToken){
+      sessionStorage.setItem("token", response.accessToken)
+      this.toastr.success("Login is successfully.");
+      this.router.navigateByUrl('dashboard')
+    }  else {
+      this.toastr.error("Login failed. No access token received.");
+    }
+    })
+}
+
+}
+
+
+
+html 
+
+
+form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
+  div>
+      label>Your email label>
+      input type="email" name="username" id="email" formControlName="username" placeholder="Username">
+        div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')"> Username is required. </div>
+  /div>
+  div>
+      label for="password">Password label>
+      input type="password" name="password" id="password" formControlName="password" placeholder="••••••••" required="">
+      div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"> Password is required. div>
+  /div>
+
+  button type="submit" class="w-full text-white bg-gray-900 p-3 rounded" [disabled]="loginForm.invalid">Sign in button>
+/form>
+
+
+  </code>
+</pre>
+
+
+
 <h2> Login page Setup </h2>
 <div>
   ng generate component pages/login
@@ -2664,6 +2971,107 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
         <h2>Welcome to Dashboard</h2>
         button (click)="logout()">Logout</button>
       </div>
+    </code>
+  </pre>
+
+  <h2> Login with DUMMY API </h2>
+
+  <pre>
+    <code>
+      loginForm!: FormGroup
+      show_password: boolean = false
+    
+      constructor(
+        private fb: FormBuilder,
+        private http: HttpSharedService,
+        private toastr: ToastrService,
+        private _common: CommonService
+      ){}
+    
+      form_field = {
+        email: ['', Validators.required],
+        password: ['', Validators.required]
+      }
+    
+      ngOnInit(){
+        this.loginForm = this.fb.group(this.form_field)
+    
+        let domain = window.location.hostname; // e.g. "example.com"
+        sessionStorage.setItem('domain', domain);
+        console.log('Stored domain:', domain);
+    
+    
+      }
+      togglePassword(){ this.show_password = !this.show_password}
+      setPayload(form: any){return { email: form.email, password: form.password}}
+    
+      login() {
+    
+        if(this.loginForm.value.email!="admin@yopmail.com"){
+          
+          this.toastr.warning("Only Admin Login is allowed here!")
+          return
+        }
+    
+        this.http.post('users/login', this.setPayload(this.loginForm.value)).subscribe((loginResponse: any) => {
+          console.log(loginResponse)
+          if (loginResponse.detail) {
+            this.toastr.error(loginResponse.detail)
+          } else {
+            this._common.setSessionData(loginResponse)
+          }
+        }, (error: any) => {
+          console.log("error", error)
+          this.toastr.error("Invalid Details")
+        })
+      }
+
+      ---------------
+
+      HTML 
+
+      form [formGroup]="loginForm" (ngSubmit)="login()" class="row g-3">
+        div class="col-12">
+          label for="inputEmailAddress" class="form-label">Email/label>
+          input type="email" class="form-control" id="inputEmailAddress" placeholder="jhon@example.com"
+            formControlName="email">
+          div *ngIf="(!loginForm?.get('email')?.valid && loginForm?.get('email')?.touched )"
+            class="text-danger mt-1" style="text-align: left;">
+            Please enter email
+          /div>
+        /div>
+        div class="col-12">
+          label for="inputChoosePassword" class="form-label">Password /label>
+          div class="input-group" id="show_hide_password">
+            input [type]="show_password ? 'text' : 'password'" class="form-control border-end-0" formControlName="password"
+              id="inputChoosePassword" placeholder="Enter Password">
+            a (click)="togglePassword()" class="input-group-text bg-transparent">
+              i class='bx bx-hide'></i>
+            </a>
+          /div>
+          div *ngIf="(!loginForm?.get('password')?.valid && loginForm?.get('password')?.touched )"
+            class="text-danger mt-1" style="text-align: left;">
+            Please enter password
+          /div>
+        /div>
+        div class="col-md-6">
+          div class="form-check form-switch">
+            input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+            label class="form-check-label" for="flexSwitchCheckChecked">Remember
+              Me</label>
+          /div>
+        /div>
+        div class="col-md-6 text-end"> a routerLink="/forgot-password" class="linkbtn">Forgot
+            Password ? /a>
+        /div>
+      div class="col-12">
+          div class="d-grid">
+            button [disabled]="!loginForm.valid" type="submit" class="btn btn-light">Login /button>
+          /div>
+        /div>
+      
+    /form>
+
     </code>
   </pre>
 
