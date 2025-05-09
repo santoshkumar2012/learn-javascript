@@ -106,6 +106,8 @@ pre {
     <li> <a href="#form-crud"> form validation, crud </a> </li>
     <li> <a href="#empw-api"> Employee crud without api </a> </li>
     <li> <a href="#emp-api"> Employee crud with api </a> </li>
+    <li> <a href="#reusable"> Component Reusable </a> </li>
+    
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
     <li> <a href="#rxjsoperator"> Rxjs Operators </a> </li>
@@ -3293,6 +3295,55 @@ export class ErrorInterceptor implements HttpInterceptor {
 
       </div>
 
+
+
+      <div class="box shadow p-2 mb-3" id="reusable">
+<h2> Reusable Component </h2>
+<h2> show more </h2>
+<pre>
+  <code>
+// show-more.component.ts
+import { Component, Input, booleanAttribute, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-show-more',
+  standalone: true,
+  template: `
+    div>
+      p>{{ isExpanded() ? text : (text | slice:0:maxLength) + '...' }} /p>
+      button (click)="toggle()" class="text-blue-500 hover:underline">
+        {{ isExpanded() ? 'Show less' : 'Show more' }}
+      /button>
+    /div>
+  `,
+})
+export class ShowMoreComponent {
+  @Input({ required: true }) text = '';
+  @Input({ transform: booleanAttribute }) expanded = false;
+  @Input({ transform: (value: string | number) => +value }) maxLength = 100;
+  
+  isExpanded = signal(this.expanded);
+
+  toggle() {
+    this.isExpanded.update(v => !v);
+  }
+}
+
+
+  <!-- ShowMore Example -->
+    app-show-more 
+      [text]="longText" 
+      [maxLength]="50" 
+      [expanded]="false"
+    />
+
+  </code>
+</pre>
+
+
+
+      </div>
+
     
       <div class="box shadow p-2 mb-3" id="empw-api">
         <h2> Employee crud without API </h2>
@@ -3545,6 +3596,172 @@ table class="table table-bordered mt-5">
       /tr>
   /tbody>
 /table>
+          </code>
+        </pre>
+
+        <h2> Crud Operation with Static Data </h2>
+
+        <pre>
+          <code>
+            import { Component } from '@angular/core';
+import { HeaderComponent } from "../../header/header.component";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-crud-lg-practise',
+  imports: [HeaderComponent, ReactiveFormsModule, FormsModule, CommonModule],
+  templateUrl: './crud-lg-practise.component.html',
+  styleUrl: './crud-lg-practise.component.css'
+})
+export class CrudLgPractiseComponent {
+
+  emp_form!: FormGroup;
+  emp_details = [
+    {
+      emp_id: 1,
+      emp_name: "Achyut Kadam Singh",
+      emp_email: "achyut@gmail.com",
+      emp_role: "WebDeveloper"
+    },
+    {
+      emp_id: 2,
+      emp_name: "Gorakh Sans",
+      emp_email: "gorakh@gmail.com",
+      emp_role: "Fullstack Developer"
+    },
+    {
+      emp_id: 3,
+      emp_name: "Achyut Kadam",
+      emp_email: "achyut@gmail.com",
+      emp_role: "Senior webDeveloper"
+    }
+  ];
+  empUpdateid: number | null = null;
+
+  constructor(private fb: FormBuilder) {}
+
+  emp_fields = {
+    emp_id: [''],
+    emp_name: ['', Validators.required],
+    emp_email: ['', Validators.required],
+    emp_role: ['', Validators.required]
+  };
+
+  ngOnInit() {
+    this.intializeForm();
+  }
+
+  intializeForm() {
+    this.emp_form = this.fb.group(this.emp_fields);
+  }
+
+  resetForm() {
+    this.intializeForm();
+    this.empUpdateid = null;
+  }
+
+  saveEmployeeData() {
+    if (this.empUpdateid !== null) {
+      this.empUpdate();
+    } else {
+      this.createEmp();
+    }
+  }
+
+  createEmp() {
+    const newId = this.emp_details.length > 0
+      ? Math.max(...this.emp_details.map(emp => emp.emp_id)) + 1
+      : 1;
+
+    this.emp_details.push({
+      emp_id: newId,
+      emp_name: this.emp_form.value.emp_name,
+      emp_email: this.emp_form.value.emp_email,
+      emp_role: this.emp_form.value.emp_role
+    });
+
+    this.resetForm();
+  }
+
+  empUpdate() {
+    const index = this.emp_details.findIndex(emp => emp.emp_id === this.empUpdateid);
+    if (index > -1) {
+      this.emp_details[index].emp_name = this.emp_form.value.emp_name;
+      this.emp_details[index].emp_email = this.emp_form.value.emp_email;
+      this.emp_details[index].emp_role = this.emp_form.value.emp_role;
+    }
+
+    this.resetForm();
+  }
+
+  empUpdateEdit(emp_id: number) {
+    this.empUpdateid = emp_id;
+    const emp = this.emp_details.find(emp => emp.emp_id === emp_id);
+    if (emp) {
+      this.emp_form.patchValue(emp);
+    }
+  }
+
+  deleteEmp(emp_id: number) {
+    this.emp_details = this.emp_details.filter(emp => emp.emp_id !== emp_id);
+    this.resetForm();
+  }
+}
+
+-------------- 
+HTML 
+--------------- 
+
+<div class="container">
+
+        form [formGroup]="emp_form" (ngSubmit)="saveEmployeeData()">
+          div class="row m-auto"> 
+          div class="col-lg-3"> 
+          input type="text" class="form-control" formControlName="emp_name" placeholder="Employee Name">
+          div class="error" *ngIf="emp_form.get('emp_name')?.touched && emp_form.get('emp_name')?.hasError('required')"> Employee Name is Invalid /div>
+          /div>
+  
+          div class="col-lg-3">  
+          input type="text" class="form-control" formControlName="emp_email" placeholder="Employee Email">
+          div class="error" *ngIf="emp_form.get('emp_email')?.touched && emp_form.get('emp_email')?.hasError('required')"> Employee Email is Invalid /div>
+          /div>
+  
+          div class="col-lg-3"> 
+          input type="text" class="form-control" formControlName="emp_role" placeholder="Employee Role">
+          div class="error" *ngIf="emp_form.get('emp_role')?.touched && emp_form.get('emp_role')?.hasError('required')"> Employee Role is Invalid /div>
+          /div>
+          div class="col-lg-3">  button class="btn btn-primary" type="submit"> Employee /button>/div>
+      /div>    
+      /form>
+
+
+    table class="table table-bordered mt-3">
+        thead>
+          tr>
+            th>Employee ID /th>
+            th>Employee Name /th>
+            th>Employee Email /th>
+            th>Employee Role /th>
+            th>Actions /th>
+          /tr>
+        /thead>
+      tbody>
+          tr *ngFor="let emp of emp_details">
+            td> {{emp.emp_id}} /td>
+            td> {{emp.emp_name}} /td>
+            td> {{emp.emp_email}} /td>
+            td> {{emp.emp_role}} /td>
+            td>
+              button class="btn btn-sm btn-warning me-2" (click)="empUpdateEdit(emp.emp_id)">Edit/button>
+              button class="btn btn-sm btn-danger" (click)="deleteEmp(emp.emp_id)">Delete/button>
+            /td>
+          /tr>
+        /tbody>
+      /table>
+/div>
+
+
           </code>
         </pre>
   
