@@ -97,7 +97,7 @@ pre {
       <li> <a href="#decorator"> decorator </a> </li>
       <li> <a href="#directive"> directive </a> </li>
       <li> <a href="#input"> @input() </a> </li>
-      <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle  </a> </li>
+      <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle, @HostListener  </a> </li>
       <li> <a href="#pipe"> pipe, pure, impure </a> </li>
       <li> <a href="#viewchild"> viewchild </a> </li>
 	  <li> <a href="#global-variable"> global-variable </a> </li>
@@ -757,38 +757,88 @@ observable.subscribe({
   We get any data we can change by map operator and it return new observable with modify data . <br>
   example - map(data => transform)
   </p>
-  <pre>
-    <code>
-      import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-of(2, 4, 6).pipe(
-  map(x => x * 10)
-).subscribe(console.log); // 20, 40, 60
-    </code>
-  </pre>
+  
+  <p> <strong> From </strong>  Basically coverts array data (any data iterable) into an observable. meaning it will emit each item if the array one by one, in sequence </p>
+  
 <hr>
   <pre>
     <code>
-      ngOnInit(){
-        const members = from([
-          {id: 1, name: 'Anup'},
-          {id: 1, name: 'Pankaj'},
-          {id: 1, name: 'Tanmay'},
-          {id: 1, name: 'Ashish'},
-          {id: 1, name: 'Husnain'},
-          {id: 1, name: 'Rajesh'},
-          ])
-          
-          members.pipe(
-            map(data => data.name)
-          )
-          .subscribe(res => {
-          console.log(res)
-          })
-       }
+
+export class MapComponent {
+
+  sub1!: Subscription
+  msg1: any
+
+  sub2!: Subscription
+  msg2: any
+
+ constructor(){}
+
+ ngOnInit(){
+
+  //Simple Examples 01
+
+  const broadCastingVideo = interval(1000)
+
+  this.sub1 = broadCastingVideo.pipe(
+    map(data => 'Video '+ data)
+  )
+  .subscribe((response: any) => {
+    console.log(response);
+    this.msg1 = response;
+  })
+
+  setTimeout(() => {
+    this.sub1.unsubscribe()
+  }, 10000)
+
+
+ //Map Logic Examples 02
+
+ this.sub2 = broadCastingVideo.pipe(
+  map(data => 'Video '+ data * 10)
+ )
+ 
+ .subscribe((response: any) => {
+  this.msg2 = response
+ })
+
+ setTimeout(() => {
+  this.sub2.unsubscribe()
+ }, 10000)
+
+
+  //Examples 03 For Objects
+
+  const members = from([
+    {id: 1, name: 'Anup'},
+    {id: 1, name: 'Pankaj'},
+    {id: 1, name: 'Tanmay'},
+    {id: 1, name: 'Ashish'},
+    {id: 1, name: 'Husnain'},
+    {id: 1, name: 'Rajesh'},
+    ])
+
+    members.pipe(
+      map(data => data.name)
+    )
+    .subscribe((response: any) => {
+      console.log('Check--->', response);
+    })
+
+ }
+    
+  
+}
+
+HTML ===
+{{msg1}}
+
+
+
 
        -------------
+	   --------------
 
        Nested Object 
 
@@ -847,6 +897,12 @@ export class SearchComponent {
 <h2> concatMap </h2>
 <p> concatMap is an RxJS operator that maps each value to an inner observable, queues them, and subscribes to them one after the other — maintaining the order and waiting for each one to complete before moving to the next.</p>
 
+<p> <strong> mergeMap vs concatMap </strong> </p>
+meregeMap = Subscribes to all inner observables immediately	<br>
+cancatMap = Waits for the previous inner observable to complete <br>
+meregeMap = Faster overall <br>
+cancatMap = Slower, but ordered <br>
+
 <pre>
   <code>
     import { from } from 'rxjs';
@@ -898,7 +954,57 @@ from([1, 2, 3]).pipe(
 </pre>
 
 <h2> MergeMap in Rxjs Angular  </h2>
-<p> mergeMap maps each value from the source observable to a new inner observable, and merges all inner observables into a single observable — allowing them to run in parallel.</p>
+<p> mergeMap operator is basically a combination of two operators – merge and map. 
+mergeMap emitted value to inner observable and will subscribe to all observables and merge. </p>
+
+<h2> Simple Examples </h2>
+<pre>
+<code>
+export class MergemapComponent {
+
+  getData(data: any){
+    return of (data + 'Video Uploaded')
+  }
+
+  ngOnInit(){
+
+     //Example 01
+
+    const source = from(['Tech', 'Comedy', 'News']);
+    source.pipe(
+      map( response => this.getData(response))
+    )
+    .subscribe((response: any) => {
+      console.log(response)
+    })
+
+    //.subscribe(response => response.subscribe( response2 => {
+      //console.log(response2);
+    //}))
+
+     //Example 02 MergeAll
+
+     source.pipe(
+      map( response => this.getData(response)),
+      mergeAll()
+    )
+    .subscribe((response: any) => {
+      console.log(response)
+    })
+
+    //Example 02 Mergemap
+
+     source.pipe(
+      mergeMap( response => this.getData(response)),
+    )
+    .subscribe((response: any) => {
+      console.log(response)
+    })
+
+  }
+}
+</code>
+</pre>
 
 <h2> Real-world Example in Angular: Parallel API Calls </h2>
 <pre>
@@ -1348,7 +1454,8 @@ export class DemoComponent {
 
 
 <div class="box shadow p-2 mb-3" id="newfeatures">
-<p><strong> A standalone component is a component that doesn't require a module (NgModule) to work. It can be used directly without declaring it inside a module. </strong></p>
+<p><strong> Standalone components in Angular are components that can operate independently without requiring a module. <br> This feature, introduced in Angular 14 and becoming the default in Angular 17. <br>
+This feature simplifies component development and reuse, making it easier to build and maintain large-scale applications. </strong></p>
 
   <h2> NEW FEATURES IN ANGULAR  </h2>
   <p> <strong>  => New Features and Updates in Angular 15 </strong></p>
@@ -2036,6 +2143,10 @@ export class ParentComponent {
 
       </code>
     </pre>
+	
+<h2> @HostListener </h2>	
+@HostListener is a decorator in Angular that lets you listen to DOM events on the host element of a directive or component.
+You use it when you want to react to events like clicks, mouse movements, key presses, etc., directly on the element where your directive or component is applied.
 
 
 

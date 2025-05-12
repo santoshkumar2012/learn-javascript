@@ -69,7 +69,7 @@ pre {
       <li> <a href="#generators"> Generators </a> </li>
       <li> <a href="#destructruing"> Destructruing </a> </li>
       <li> <a href="#classes"> classes </a> </li>
-      <li> <a href="#map"> map and set </a> </li>
+      <li> <a href="#map"> map and set, forEach, filter </a> </li>
       <li> <a href="#prototype"> prototype </a> </li>
       <li> <a href="#closure"> closure </a> </li>
       <li> <a href="#foreach"> foreach </a> </li>
@@ -102,6 +102,7 @@ pre {
       <li> <a href="#booble"> Booble sort </a> </li>
       <li> <a href="#reverse"> Reverse </a> </li>
       <li> <a href="#factorial"> Factorial </a></li>
+	  <li> <a href="#true"> True and False </a></li>
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#typescript"> TypeScript </a> </li>
       <li> <a href="#html"> HTML </a> </li>
@@ -534,6 +535,37 @@ console.log(squared); // [1, 4, 9, 16]
   let obj = new Set(myArray);
   console.log(obj)
     </code>
+</pre>
+
+<h2> Different between forEach, map, filter </h2>
+
+forEach - Retuns No array <br>
+map - Returns new array <br>
+filter - Returns new array <br>
+----------------<br>
+forEach - Just loops through the array <br>
+map - Transforms each element <br>
+filter - Keeps elements that match a condition <br>
+
+<pre>
+<code> 
+ForEach
+const numbers = [1, 2, 3];
+numbers.forEach(num => {
+  console.log(num * 2);  // Just prints, no new array
+});
+---------
+Map 
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6]
+-----------
+Filter
+const numbers = [1, 2, 3, 4];
+const even = numbers.filter(num => num % 2 === 0);
+console.log(even); // [2, 4]
+
+</code>
 </pre>
 </div>
 
@@ -1218,6 +1250,77 @@ console.log(numOfVowels)
             </code>
             </pre>
             </div>
+			
+    <div class="box shadow p-2 mb-3" id="true">
+      <h2> True and False Logic </h2>
+      <pre>
+          <code>
+           
+1 == '1'         // true  (type coercion happens)
+1 === '1'        // false (number !== string)
+
+0 == false       // true  (false becomes 0)
+0 === false      // false
+
+
+null == undefined // true (special rule)
+null === undefined // false
+
+
+[] == false      // true  ([] becomes '')
+[] === false     // false
+
+[] == ![]       // true
+
+
+0 == '0'    // true (string '0' is coerced to number 0)
+0 === '0'   // false (number !== string)
+
+
+1. 0 == '0'             // true
+2. 0 === '0'            // false
+3. null == undefined    // true 
+4. null === undefined   // false ( Because null datatype is null and undefined datatype is object )
+5. ' \t\r\n' == 0       // true
+6. false == 'false'     // false
+7. [] == 0              // true
+8. {} == {}             // false (reference comparison)
+9. (parseInt('10 + 2'))  // 10
+		   
+----------
+
+
+9 > 5 > 1   // false
+
+9 > 5 > 1
+↓
+true > 1
+↓
+1 > 1
+↓
+false
+
+
+false == 0 → true (Boolean to number)
+
+'2' > 1 → true ('2' is converted to number)
+
+-----------
+
+true + true → 1 + 1 = 2
+
+--------------
+
+10 > 9 > 8 === true
+
+10 > 9 → true
+true > 8 → 1 > 8 → false
+false === true → false		   
+            
+            </code>
+            </pre>
+            </div>			
+
 
     
 
