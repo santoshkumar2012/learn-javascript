@@ -112,7 +112,7 @@ pre {
     
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
-    <li> <a href="#rxjsoperator"> Rxjs Operators </a> </li>
+    <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck,) </a> </li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
@@ -416,6 +416,12 @@ Fully supports all control structures. <br>
         <li> <strong> ngAfterViewChecked() </strong>	- Called after the component’s and child views are checked </li>
         <li> <strong> ngOnDestroy() </strong> Called just before the component is destroyed </li>
       </ol>
+	  <p>
+	  You should use ngAfterViewInit() when: <br>
+You need to interact with the DOM (e.g., via @ViewChild) <br>
+You need to trigger logic that depends on the fully initialized view <br>
+Like measuring elements, integrating third-party libraries, animations, etc.
+</p>
       <pre>
         <code>
           <h2> ngOnChanges() </h2>
@@ -867,30 +873,75 @@ HTML ===
   <h2> switchMap </h2>
   <p> switchMap is an RxJS operator used to switch to a new observable every time the source emits a value. If a new value comes in before the previous inner observable completes, switchMap cancels the previous one and switches to the latest. </p>
   <h2> Basic Examples </h2>
+
   <pre>
     <code>
-      import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { debounceTime, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { MyService } from './my.service';
+      
+import { Component } from '@angular/core';
+import { HeaderComponent } from "../../../../header/header.component";
+import { HttpSharedService } from '../../../../http-shared.service';
+import { FormControl, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-search',
-  template: `input [formControl]="searchControl" placeholder="Search...">`
+  selector: 'app-switchmap',
+  imports: [HeaderComponent, ReactiveFormsModule, CommonModule, FormsModule],
+  templateUrl: './switchmap.component.html',
+  styleUrl: './switchmap.component.css'
 })
-export class SearchComponent {
+export class SwitchmapComponent {
+  
   searchControl = new FormControl();
+  products: any[] = [];
 
-  constructor(private myService: MyService) {
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      switchMap(searchTerm => this.myService.searchData(searchTerm))
-    ).subscribe(result => {
-      console.log(result);
+  constructor(private http: HttpSharedService) {}
+
+  ngOnInit(): void {
+  this.searchControl.valueChanges.pipe(
+    debounceTime(300),
+    distinctUntilChanged(),
+    switchMap((term) => this.http.get(`products/search?q=${term}`))
+  ).subscribe((res: any) => {
+    this.products = res.products;
+  });
+  this.getProduct();
+}
+
+  getProduct() {
+    this.http.get('products').subscribe((response: any) => {
+      this.products = response.products;
     });
   }
+
 }
+
+
+HTML 
+
+input
+    type="text"
+    [formControl]="searchControl"
+    placeholder="Search..."
+    class="form-control"
+  />
+
+    table class="table table-bordered mt-5" *ngIf="products.length">
+        thead>
+            tr>
+                td> Product title /td>
+                td> Product Brand /td>
+                td> Product Category /td>
+            /tr>
+      /thead>
+        tbody>
+            tr *ngFor="let product of products">
+                td> {{product.title}} /td>
+                td> {{product.brand}} /td>
+                td> {{product.category}} /td>
+            /tr>
+        /tbody>
+    /table>
 
     </code>
   </pre>
@@ -1038,6 +1089,8 @@ export class MergemapComponent {
 <h2> DebounceTime </h2>
 <p> debounceTime(ms) waits for a pause in emissions from the source observable.
   It only emits the latest value after the given time (in ms) has passed without another emission. </p>
+
+  <p> <strong>  DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything. </strong> </p>
 
 <h2> Basic Examples </h2>
 <pre>
@@ -1513,6 +1566,19 @@ This feature simplifies component development and reuse, making it easier to bui
 <div class="box shadow p-2 mb-3" id="state">
   <h2> State Management in Angular </h2>
   <p> State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State) </p>
+
+<h2> How to handle state management </h2>
+<p> <strong> 1. @Input() / @Output() — Parent-child communication </strong>,  </p>
+<p> <strong> 2. Service with BehaviorSubject </strong> <br> Multiple components need to read and update shared data <br>
+You want a simple reactive way to subscribe to changes </p>
+<p> Intermediate: Services + Local Storage </p>
+<p> Advanced: NgRx (Redux for Angular) </p>
+
+NgRx Key Concepts:
+<p> Store = global state container </p>
+<p> Actions = events that describe state changes </p>
+<p> Reducers = functions that update state based on actions </p>
+<p> Effects = handle async operations (e.g., API calls) </p>
   </div>
 
 
@@ -2766,6 +2832,9 @@ getLeads(){
 
 <div class="box shadow p-2 mb-3" id="storage">
 <h2> Local Storage </h2>
+<p> <strong> Local Storage - </strong> Web storage API stores data in our browser, and no any specific time for expiration. </p>
+<p> <strong> Session Storage - </strong> In Session Storage also web storage API  stores data in our current browser and tab. When you close the tab so after that all data is cleared. </p>
+<p> <strong> Cookies - </strong> Small pieces of data stored in the browser and sent to the server with every HTTP Request. </p>
  <ul>
   <li> Data remains even after closing/reopening the browser </li>
   <li> Available across all tabs/windows of the same origin </li>
