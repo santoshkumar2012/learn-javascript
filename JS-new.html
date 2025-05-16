@@ -102,7 +102,9 @@ pre {
       <li> <a href="#booble"> Booble sort </a> </li>
       <li> <a href="#reverse"> Reverse </a> </li>
       <li> <a href="#factorial"> Factorial </a></li>
-	  <li> <a href="#true"> True and False </a></li>
+      <li> <a href="#median"> Median logic </a></li>
+      <li> <a href="#digitalroot"> Digital Root repeatedly </a></li>
+	    <li> <a href="#true"> True and False </a></li>
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#typescript"> TypeScript </a> </li>
       <li> <a href="#html"> HTML </a> </li>
@@ -943,9 +945,221 @@ const user = {
 <div class="box shadow p-2 mb-3" id="arraymethod">
 <h2> ARRAY METHOD  </h2>
 
+<h2> Iteration / Looping </h2>
+
+<strong> Method	Description </strong> <br> 
+<ul>
+  <li> forEach()	Executes a function for each element (no return value) </li>
+  <li> map()	Transforms each element and returns a new array </li>
+  <li> filter()	Filters elements based on a condition and returns a new array </li>
+  <li> some()	Returns true if any element matches the condition </li>
+  <li> every()	Returns true if all elements match the condition </li>
+  <li> find()	Returns the first matching element </li>
+  <li> findIndex()	Returns the index of the first matching element </li>
+  <li> flatMap()	Maps and flattens results into a new array </li>
+</ul>
+
+<strong class="mt-3"> Combining / Slicing </strong> <br>
+<ul>
+  <li> concat()	Merges arrays into a new array </li>
+  <li> slice()	Returns a part of the array without modifying the original </li>
+  <li> join()	Converts array to string using a separator </li>
+  <li> toString()	Converts entire array to a comma-separated string </li>
+</ul>
+
+ <strong class="mt-3"> Searching </strong>
+<ul> 
+<li> includes()	Checks if array contains a value </li>
+<li> indexOf()	Returns index of first match </li>
+<li> lastIndexOf()	Returns index of last match </li>
+</ul>
+
 <pre>
     <code>
-        / Filter
+	
+1. push() – Add to the end
+let fruits = ["apple", "banana"];
+fruits.push("orange");
+console.log(fruits); // ["apple", "banana", "orange"]
+------------------------
+
+2. pop() – Remove from the end
+let fruits = ["apple", "banana", "orange"];
+fruits.pop();
+console.log(fruits); // ["apple", "banana"]
+
+-------------------------------
+
+3. shift() – Remove from the beginning
+let fruits = ["apple", "banana"];
+fruits.shift();
+console.log(fruits); // ["banana"]
+
+------------------------------
+
+4. unshift() – Add to the beginning
+let fruits = ["banana"];
+fruits.unshift("apple");
+console.log(fruits); // ["apple", "banana"]
+
+----------------------------------
+
+5. map() – Transform each element
+let nums = [1, 2, 3];
+let doubled = nums.map(n => n * 2);
+console.log(doubled); // [2, 4, 6]
+
+-----------------
+
+6. filter() – Keep elements that match a condition
+let nums = [1, 2, 3, 4];
+let evens = nums.filter(n => n % 2 === 0);
+console.log(evens); // [2, 4]
+
+-----------------
+
+7. forEach() – Loop through each element
+let fruits = ["apple", "banana", "orange"];
+fruits.forEach(fruit => console.log(fruit));
+// Prints each fruit one by one
+
+--------------------
+
+8. find() – Find the first match
+let nums = [10, 20, 30];
+let found = nums.find(n => n > 15);
+console.log(found); // 20
+
+---------------------
+
+9. includes() – Check if value exists
+let fruits = ["apple", "banana"];
+console.log(fruits.includes("banana")); // true
+
+----------------------
+
+10. slice() – Copy a portion
+let nums = [1, 2, 3, 4, 5];
+let part = nums.slice(1, 4); // from index 1 to 3
+console.log(part); // [2, 3, 4]
+
+-------------------
+
+11. splice() – Add/remove elements at specific index
+let nums = [1, 2, 3, 4];
+nums.splice(2, 1, 99); // remove 1 element at index 2, insert 99
+console.log(nums); // [1, 2, 99, 4]
+
+----------------------
+
+12. reduce() – Combine elements into one value
+let nums = [1, 2, 3, 4];
+let total = nums.reduce((sum, n) => sum + n, 0);
+console.log(total); // 10
+
+----------------------
+
+1. charAt() – Get the character at a specific index
+let str = "JavaScript";
+console.log(str.charAt(0)); // "J"
+console.log(str.charAt(4)); // "S"
+console.log(str.charAt(10)); // "" (empty string, because there's no character at index 10)
+
+--------------------
+
+2. join() – Join array elements into a string
+let fruits = ["apple", "banana", "cherry"];
+let result = fruits.join(", "); // Join with a comma and a space
+console.log(result); // "apple, banana, cherry"
+
+----------------------
+
+3. concat() – Merge two or more arrays or strings
+let arr1 = [1, 2, 3];
+let arr2 = [4, 5, 6];
+let result = arr1.concat(arr2);
+console.log(result); // [1, 2, 3, 4, 5, 6]
+
+-----------------
+
+let greeting = "Hello";
+let name = "World";
+let message = greeting.concat(", ", name, "!");
+console.log(message); // "Hello, World!"
+-------------
+
+1. split() – Split a string into an array
+let sentence = "JavaScript is awesome";
+let words = sentence.split(" ");
+console.log(words); // ["JavaScript", "is", "awesome"]
+
+---------------
+
+4. reverse() – Reverse an array
+let numbers = [1, 2, 3, 4];
+numbers.reverse();
+console.log(numbers); // [4, 3, 2, 1]
+
+---------
+
+5. indexOf() – Find the first index of an element
+let arr = [10, 20, 30, 40];
+console.log(arr.indexOf(30)); // 2
+console.log(arr.indexOf(50)); // -1
+
+-------------
+
+let text = "Hello, world!";
+console.log(text.indexOf("world")); // 7
+console.log(text.indexOf("universe")); // -1
+
+-------------
+6. sort() – Sort the elements of an array
+let nums = [10, 5, 8, 1];
+nums.sort();
+console.log(nums); // [1, 10, 5, 8] (alphabetically sorted, not numerically)
+
+let numbers = [10, 5, 8, 1];
+numbers.sort((a, b) => a - b); // Sort numerically
+console.log(numbers); // [1, 5, 8, 10]
+
+-------------------
+
+7. slice() – Extract part of an array or string
+let fruits = ["apple", "banana", "cherry", "date"];
+let selectedFruits = fruits.slice(1, 3);
+console.log(selectedFruits); // ["banana", "cherry"]
+
+-------------
+
+let text = "Hello, World!";
+let part = text.slice(7, 12);
+console.log(part); // "World"
+
+-----------------------------
+
+8. some() – Check if at least one element satisfies a condition
+let nums = [1, 2, 3, 4];
+let hasEven = nums.some(n => n % 2 === 0);
+console.log(hasEven); // true (because 2 and 4 are even)
+
+--------------
+
+9. every() – Check if all elements satisfy a condition
+let nums = [2, 4, 6, 8];
+let allEven = nums.every(n => n % 2 === 0);
+console.log(allEven); // true (because all elements are even)
+
+---------------
+
+10. replace() – Replace part of a string
+let text = "Hello, World!";
+let newText = text.replace("World", "JavaScript");
+console.log(newText); // "Hello, JavaScript!"
+
+----------
+	
+/ Filter
 
 const websantos = [2,3,4,5,6,7,8,9]
 const santo = websantos.filter((x) => x % 2 )
@@ -1250,6 +1464,57 @@ console.log(numOfVowels)
             </code>
             </pre>
             </div>
+
+     <div class="box shadow p-2 mb-3" id="median">
+      <h2> Median Logic </h2>
+      <pre>
+          <code>
+           function findMedian(arr) {
+            arr.sort((a, b) => a - b);
+            let mid = Math.floor(arr.length / 2);
+
+            return arr.length % 2 !== 0
+              ? arr[mid]
+              : (arr[mid - 1] + arr[mid]) / 2;
+          }
+
+          // Example:
+          console.log(findMedian([5, 2, 1]));      // 2
+          console.log(findMedian([4, 2, 1, 3]));   // 2.5
+            </code>
+            </pre>
+            </div>
+
+
+    <div class="box shadow p-2 mb-3" id="digitalroot">
+      <h2> Digital Root repeatedly adding its digits</h2>
+      <pre>
+          <code>
+          
+            function toSingleDigit(num) {
+                while (num >= 10) {
+                  num = num.toString().split('').reduce((sum, digit) => sum + Number(digit), 0);
+                }
+                return num;
+              }
+
+              // Example:
+              console.log(toSingleDigit(38)); // 2
+              console.log(toSingleDigit(123456)); // 3
+
+
+              // How to Works
+
+              Converts number to string → "38"
+              Splits it → ["3", "8"]
+              Converts back to numbers and adds → 3 + 8 = 11
+              Repeats if the result is still more than 9
+
+            </code>
+            </pre>
+            </div>
+
+
 			
     <div class="box shadow p-2 mb-3" id="true">
       <h2> True and False Logic </h2>
@@ -1352,40 +1617,6 @@ false === true → false
                       // Test it
                       console.log(isPalindrome("madam"));    // true
                       console.log(isPalindrome("hello"));    // false                      
-                </code>
-            </pre>
-            <pre>
-                <code>
-                    function PalindromeSwapper(str) {
-                        // Helper function to check if a string is a palindrome
-                        function isPalindrome(s) {
-                          return s === s.split('').reverse().join('');
-                        }
-                        // If the string is already a palindrome, return it
-                        if (isPalindrome(str)) {
-                          return str;
-                        }
-                        let arr = str.split('');
-                          console.log(arr)
-                        // Try swapping each pair of characters to check if it becomes a palindrome
-                        for (let i = 0; i < arr.length; i++) {
-                          for (let j = i + 1; j < arr.length; j++) {
-                            // Swap characters
-                            [arr[i], arr[j]] = [arr[j], arr[i]];
-                            // Check if the swapped string is a palindrome
-                            if (isPalindrome(arr.join(''))) {
-                              return arr.join('');
-                            }
-                            // Swap back to restore original string
-                            [arr[i], arr[j]] = [arr[j], arr[i]];
-                          }
-                        }
-                        // If no valid swap makes it a palindrome, return the original string
-                        return str;
-                      }
-                      // Test cases
-                      console.log(PalindromeSwapper("anna"));  // Output: "anna" (already a palindrome)
-                      console.log(PalindromeSwapper("kyaak")); // Output: "kayak" (swap 'y' and 'a')
                 </code>
             </pre>
             </div>

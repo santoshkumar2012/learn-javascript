@@ -145,6 +145,7 @@ pre {
 		<li> <a href="#google"> Google Cloud </a></li>
 		<li> <a href="#azile"> Azile Methodology </a></li>
 		<li> <a href="#web"> Web Optimization? </a></li>
+		<li> <a href="#asetup"> Angular Setup </a></li>
 		
     </ul>
 
@@ -156,7 +157,45 @@ I was responsible for creating and maintaining UI architectures, optimizing appl
 Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility.
 </div>
 
+<div class="box shadow p-2 mb-3" id="asetup">
+  <h2> ANGULAR Setup </h2>
+  
+  npm install -g @angular/cli <br>
+ng new project-name> <br>
+cd my-first-angular-app <br>
+npm start<br>
+<br>
 
+After got error follows below step<br>
+Error: Could not find the '@angular-devkit/build-angular:dev-server' builder's node package.<br>
+<br>
+<br>
+rm -rf node_modules package-lock.json<br>
+npm cache clean --force<br>
+npm install<br>
+
+<br>
+------------------
+<br>
+routing Setup<br>
+<br>
+import { Routes } from '@angular/router';<br>
+import { LoginComponent } from './login/login.component';<br>
+import { DashboardComponent } from './dashboard/dashboard.component';<br>
+<br>
+export const routes: Routes = [<br>
+    {path: '', component: LoginComponent},<br>
+    {path: 'dashboard', component: DashboardComponent}<br>
+];
+<br>
+---------------------------
+<br>
+app.component.html<br>
+router-outlet>/router-outlet><br>
+
+
+
+ </div>
 
 
 <div class="box shadow p-2 mb-3" id="mvc">
@@ -1929,6 +1968,36 @@ constructor(private router: Router) {
   <div class="box shadow p-2 mb-3" id="decorator">
     <h2> DECORATOR </h2>
     <p> <strong> Decorator is a function that add metadata to a class. @component, @directives, @ngModule, @input, @output, @hostListener </strong>  </p>
+
+    <h2> Decorators Types </h2>
+<div class="mb-3"> 
+<strong> 1. Class Decorators <br> </strong>
+These are used to define classes as Angular like components, modules, directives, etc.<br>
+<strong> @Component </strong> - Declares a class as a component and provides metadata like selector, template, styles, etc. <br> 
+<strong> @Directive </strong> Declares a class as a directive. Used to extend the behavior of elements. <br>
+<strong> @Injectable </strong> Marks a class as available to be injected as a dependency. <br>
+<strong> @NgModule </strong> Declares a class as an Angular module and provides metadata about the module.
+</div>
+
+<div class="mb-4"> 
+<strong> 2. Property Decorators <br> </strong>
+Used to decorate properties inside classes. <br>
+<strong> @Input </strong> - Declares an input property to receive data from a parent component. <br> - @Input() title: string;
+<br> 
+@Output -  Declares an output property that emits events to the parent component. <br>
+@Output() clicked = new EventEmitter<void>(); <br>
+</void>
+<strong> @ViewChild / @ViewChildren </strong> , Accesses child component(s) or element(s) in the component's view. <br>
+<strong> @ContentChild / @ContentChildren </strong> Accesses projected content inside <ng-content>.
+</div>
+
+<div class="mb-4"> 
+<strong> 3. Method Parameter Decorators </strong> <br>
+@Inject - Specifies a custom provider token when injecting a dependency. <br>
+@Optional - Marks a dependency as optional. If it’s not found, Angular will pass null.
+</div>
+
+
     <pre>
       <code>
         import { Component } from '@angular/core';
@@ -2287,9 +2356,16 @@ You use it when you want to react to events like clicks, mouse movements, key pr
   </p>
   <h2> What are pure Pipes? </h2>
   <p> Pure pipes are executed only when a "pure change" is detected in the input value. <br> By default, all pipelines are pure </p>
+  
   <h2> What are Impure Pipes? </h2>
   <p> Angular calls an impure pipe for each change detection cycle, independent of the change in the input fields. For each of these pipes, several pipe instances are produced.  </p>
 
+  <h2> Disadvantages of Impure Pipes </h2>
+ <p class="p-0, m-0"> 1. Performance Issues -- Impure pipes run every time Angular checks for changes, which could be many times per second. </p>
+  <p class="p-0, m-0"> 2. Unnecessary Computations - Even if the input data hasn’t changed, the pipe still executes. </p>
+ <p class="p-0, m-0"> 3. Hard to Debug - Since impure pipes run so frequently, it can be difficult to track down performance bottlenecks or unintended behaviors. </p>
+
+<br> 
   <p> <strong> pure - Only when input data changes	, Faster , Static data transformations	 </strong></p>
 <p> <strong> impure - On every change detection cycle, Slower  </strong></p>
 
@@ -3073,7 +3149,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
   div>
       label>Your email label>
       input type="email" name="username" id="email" formControlName="username" placeholder="Username">
-        div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')"> Username is required. </div>
+        div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')"> Username is required. div>
   /div>
   div>
       label for="password">Password label>
@@ -3081,7 +3157,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
       div class="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"> Password is required. div>
   /div>
 
-  button type="submit" class="w-full text-white bg-gray-900 p-3 rounded" [disabled]="loginForm.invalid">Sign in button>
+  button type="submit" class="w-full text-white bg-gray-900 p-3 rounded" [disabled]="loginForm.invalid"> Sign in button >
 /form>
 
 
@@ -3092,10 +3168,10 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 
 <h2> Login page Setup </h2>
 <div>
-  ng generate component pages/login
-  ng generate component pages/dashboard
-  ng generate service services/auth
-  Auth Guard: Prevents unauthorized users from accessing Dashboard
+  ng generate component pages/login <br>
+  ng generate component pages/dashboard <br>
+  ng generate service services/auth <br>
+  Auth Guard: Prevents unauthorized users from accessing Dashboard <br>
   -----------------
   Create Authentication Service ( auth.service.ts)
   <pre>
