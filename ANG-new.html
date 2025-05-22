@@ -1219,6 +1219,56 @@ fromEvent(input, 'input').pipe(
   </code>
 </pre>
 
+<h2> ForkJoin operator </h2>
+
+ForkJoin is an RxJS operator that takes in multiple observables and returns a single observable that emits the last emitted value from each of the input observables, once all input observables complete.
+
+<pre>
+<code> 
+import { forkJoin, of, timer } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+const obs1 = of('A').pipe(delay(1000)); // emits 'A' after 1s
+const obs2 = of('B').pipe(delay(2000)); // emits 'B' after 2s
+
+forkJoin([obs1, obs2]).subscribe({
+  next: ([res1, res2]) => console.log('Results:', res1, res2),
+  complete: () => console.log('All done.')
+});
+
+</code>
+</pre>
+
+<h2> Filter operator </h2>
+filter operator in RxJS is used to emit values from an observable that pass a certain condition (predicate). It works like the Array.prototype.filter() method but on an observable stream.
+
+<pre>
+<code> 
+import { from } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+// Sample employee data
+const employees = [
+  { id: 1, name: 'Alice', salary: 40000 },
+  { id: 2, name: 'Bob', salary: 60000 },
+  { id: 3, name: 'Charlie', salary: 55000 },
+  { id: 4, name: 'David', salary: 30000 }
+];
+
+// Create observable from employee array
+from(employees).pipe(
+  // Filter employees with salary > 50000
+  filter(emp => emp.salary > 50000),
+  // Optionally extract only the salary or full employee object
+  map(emp => ({ name: emp.name, salary: emp.salary }))
+).subscribe({
+  next: data => console.log('High salary employee:', data),
+  complete: () => console.log('Completed')
+});
+
+</code>
+</pre>
+
 </div>
 
 
