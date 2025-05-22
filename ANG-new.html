@@ -112,7 +112,8 @@ pre {
     
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
-    <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck,) </a> </li>
+    <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck, Filter) </a> </li>
+		<li><a href="#error"> Error Handling </a></li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
@@ -909,7 +910,141 @@ HTML ===
     </code>
   </pre>
 
-  <h2> switchMap </h2>
+<hr>
+
+<h2> Filter by Employee data, Maxmimum salary, name length, search </h2>
+<p> <strong> filter operator emits only those values from the source Observable that pass a specified condition (predicate). </strong></p>
+<pre>
+<code>
+
+  filterEmployee: any = []
+  searchText: any;
+
+  constructor(){}
+
+  ngOnInit(){
+    this.employeeDetails()
+  }
+
+  employees = [
+  { name: 'Alice', designation: 'Developer', salary: 70000 },
+  { name: 'Bob', designation: 'Manager', salary: 90000 },
+  { name: 'Charlie', designation: 'Intern', salary: 30000 },
+  { name: 'Diana', designation: 'Developer', salary: 80000 }
+];
+
+employeeDetails(){
+  this.filterEmployee = this.employees.filter(employee => employee.salary < 90000 )
+  //this.filterEmployee = this.employees.filter(employee => employee.name.length > 3 )
+}
+------------------
+  // RXJS FILTER OPERATOR 
+  // employeeDetails() {
+  //   from(this.employees).pipe(
+  //     filter(emp => emp.name.length > 3),
+  //     toArray() // Collect filtered results into an array
+  //   ).subscribe(filtered => {
+  //     this.filterEmployee = filtered;
+  //     console.log('Filtered Employees:', this.filterEmployee);
+  //   });
+  // }
+------------------ 
+  // RxJS Filter Employees with Salary Greater Than X
+  // employeeDetails(){
+  //   from(this.employees).pipe(
+  //     filter(emp => emp.salary > 75000),
+  //     toArray()
+  //   ).subscribe(res => this.filterEmployee = res);
+  // }
+------------------
+  // // RxJS Filter by Designation (e.g., Only Developers)
+  // employeeDetails(){
+  //   this.filterEmployee = this.employees.filter(emp => emp.designation === 'Developer');
+  // }
+------------------
+  // RxJS Filter by Name Starting with a Specific Letter
+  // employeeDetails(){
+  //   this.filterEmployee = this.employees.filter(emp => emp.name.startsWith('A'));
+  // }
+------------------
+   // RxJS Filter by Multiple Conditions (e.g., Developer with High Salary)
+  // employeeDetails(){
+  //   this.filterEmployee = this.employees.filter(emp =>
+  //     emp.designation === 'Developer' && emp.salary > 75000
+  //   );
+  // }
+------------------
+    // RxJS Search Employees by Name (Dynamic)
+  // employeeDetails(){
+  //   this.filterEmployee = this.employees.filter(emp =>
+  //     emp.name.toLowerCase().includes(this.searchText.toLowerCase())
+  // );
+  // }
+------------------
+  //RxJs Highest Score
+  // employeeDetails(){
+  // this.filterEmployee = [...this.employees]
+  // .sort((a, b) => b.salary - a.salary)
+  // .slice(0, 3);  // top 3
+  // }
+  
+  ------------------
+  
+  HTML 
+  
+  //input type="text" class="form-control" [(ngModel)]="searchText" (input)="employeeDetails()" placeholder="Search"
+  
+  table class="table table-bordered mt-4">
+    thead>
+        tr>
+            td> Name </td>
+            td> Designation </td>
+            td> Salary </td>
+        /tr>
+    /thead>
+    tbody>
+        tr *ngFor="let employee of filterEmployee">
+            td> {{employee.name}} </td>
+            td> {{employee.designation}}  </td>
+            td> {{employee.salary}}  </td>
+        /tr>
+    /tbody>
+/table>
+
+</code>
+</pre>
+
+<hr>
+
+<h2> Forkjoin </h2>
+<p><strong> forkJoin is used to run multiple HTTP requests in parallel and get all their results once all are completed. </strong></p>
+<pre>
+<code>
+ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
+    const userDetails = this.http.get('https://jsonplaceholder.typicode.com/users/1');
+    const userPosts = this.http.get('https://jsonplaceholder.typicode.com/posts?userId=1');
+
+    forkJoin([userDetails, userPosts]).subscribe(
+      ([user, posts]) => {
+        console.log('User Details:', user);
+        console.log('User Posts:', posts);
+      },
+      error => {
+        console.error('One of the requests failed:', error);
+      }
+    );
+  }
+</code>
+</pre>
+
+
+<hr>
+
+  <h2> SwitchMap </h2>
   <p> switchMap is an RxJS operator used to switch to a new observable every time the source emits a value. If a new value comes in before the previous inner observable completes, switchMap cancels the previous one and switches to the latest. </p>
   <h2> Basic Examples </h2>
 
@@ -995,7 +1130,9 @@ input
   </code>
 </pre>
 
-<h2> concatMap </h2>
+<hr>
+
+<h2> ConcatMap </h2>
 <p> concatMap is an RxJS operator that maps each value to an inner observable, queues them, and subscribes to them one after the other — maintaining the order and waiting for each one to complete before moving to the next.</p>
 
 <p> <strong> mergeMap vs concatMap </strong> </p>
@@ -1054,7 +1191,9 @@ from([1, 2, 3]).pipe(
   </code>
 </pre>
 
-<h2> MergeMap in Rxjs Angular  </h2>
+<hr>
+
+<h2> MergeMap in Rxjs Angular, MergeAll  </h2>
 <p> mergeMap operator is basically a combination of two operators – merge and map. 
 mergeMap emitted value to inner observable and will subscribe to all observables and merge. </p>
 
@@ -1125,11 +1264,12 @@ export class MergemapComponent {
   </code>
 </pre>
 
+<hr>
+
 <h2> DebounceTime </h2>
 <p> debounceTime(ms) waits for a pause in emissions from the source observable.
   It only emits the latest value after the given time (in ms) has passed without another emission. </p>
-
-  <p> <strong>  DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything. </strong> </p>
+<p> <strong>  DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything. </strong> </p>
 
 <h2> Basic Examples </h2>
 <pre>
@@ -1175,6 +1315,8 @@ export class SearchComponent {
 
   </code>
 </pre>
+
+<hr>
 
 <h2> pluck </h2>
 <p> pluck is an RxJS operator that lets you pull out a specific property (or nested property) from each emitted object. </p>
@@ -1269,6 +1411,88 @@ from(employees).pipe(
 </code>
 </pre>
 
+</div>
+
+<div class="box shadow p-2 mb-3" id="error">
+<h2> ERROR HANDLING </h2>
+
+<p> Error handling in Angular means managing what happens when an HTTP request or some code fails — for example, if a server is down, the user enters wrong credentials, or the internet connection is lost. </p>
+
+<p><strong> How Error Handling Works </strong></p>
+<div>
+<strong> Try to Make a Request </strong> <br>
+Angular sends a request to the server (like saving data or logging in). <br>
+<strong> Response Comes Back </strong> <br>
+If the response is successful, Angular continues normally.<br>
+But if something goes wrong (like a 404 or 500 error), it triggers the error block.<br>
+<br>
+<strong> Catch the Error </strong> <br>
+Angular lets you "catch" the error and decide what to do — such as:<br>
+Show a friendly error message to the user<br>
+Log the error for debugging<br>
+Retry the request<br>
+Redirect to another page
+<br>
+<br>
+</div>
+
+<pre>
+<code>
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+this.http.get('https://api.example.com/data')
+  .pipe(
+    catchError(error => {
+      console.error('Request failed:', error);
+      return throwError(() => error);
+    })
+  )
+  .subscribe();
+  
+...............
+
+1. Create a Global Error Interceptor
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Global error logic here
+        console.error('HTTP Error:', error);
+
+        if (error.status === 0) {
+          this.toastr.error('Network error. Please check your connection.');
+        } else if (error.status === 401) {
+          this.toastr.error('Unauthorized. Please login.');
+        } else if (error.error?.message) {
+          this.toastr.error(error.error.message); // From server
+        } else {
+          this.toastr.error('Something went wrong.');
+        }
+
+        return throwError(() => error); // Rethrow the error
+      })
+    );
+	
+...............
+
+
+createUser() {
+  this.http.post('users/add', this.setPayLoad(this.user_form.value)).subscribe({
+    next: (response: any) => {
+      this.getUser();
+      this.resetForm();
+    },
+    error: (err) => {
+      console.error('Create user error:', err);
+      // Handle error message - show to user
+      this.errorMsg = err?.error?.message || 'Something went wrong while creating user.';
+    }
+  });
+}
+
+
+</code>
+</pre>
 </div>
 
 

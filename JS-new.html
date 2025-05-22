@@ -71,7 +71,7 @@ pre {
       <li> <a href="#classes"> classes </a> </li>
       <li> <a href="#map"> map and set, forEach, filter </a> </li>
       <li> <a href="#prototype"> prototype </a> </li>
-      <li> <a href="#closure"> closure </a> </li>
+      <li> <a href="#closure"> closure, Lexical </a> </li>
       <li> <a href="#foreach"> foreach </a> </li>
       <li> <a href="#event"> <strong> event </strong> </a> </li>
       <li> <a href="#dom"> dom </a> </li>
@@ -117,6 +117,7 @@ pre {
       <li> <a href="#sse"> SSE </a></li>
       <li> <a href="#debugging">  Debugging </a></li>
       <li> <a href="#frontend">  Frontend Performance </a></li>
+	  <li> <a href="#database">  Database Mysql </a></li>
     </ul>
 
 
@@ -655,6 +656,27 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
         counter(); // Output: 3    
     </code>
 </pre>
+
+<h2> Lexical Scope </h2>
+<p> In JavaScript, "lexical" refers to how things are organized and scoped based on the structure of the code when it's written (at compile time), rather than when it's executed (runtime).</p> 
+
+<pre>
+<code>
+function outer() {
+  let name = "ChatGPT";
+
+  function inner() {
+    console.log(name); // has access to 'name' due to lexical scope
+  }
+
+  inner();
+}
+outer();
+
+//Here, inner() has access to name because of lexical scope — it’s defined inside outer().
+</code>
+</pre>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="foreach">
@@ -1619,6 +1641,19 @@ false === true → false
                       console.log(isPalindrome("hello"));    // false                      
                 </code>
             </pre>
+			<hr>
+			
+			<pre>
+			<code>
+			var isPalindrome = function(s) {
+				 s = s.replace(/[^a-z0-9]/gi, '').toLowerCase();
+				return s === s.split('').reverse().join('');
+			};
+			let input = "A man, a plan, a canal: Panama";
+			console.log(isPalindrome(input));
+			</code>
+			</pre>
+			
             </div>
 
             <div class="box shadow p-2 mb-3" id="booble">
@@ -1702,6 +1737,23 @@ console.log(output); // Output: Hsotnas Ramuk
 const result = str.split(' ').map(word => word.split('').reverse().join('')).join(' ');
 console.log(result); // "I ma mas"
   </code>
+</pre>
+
+<hr>
+<pre>
+<code>
+var reverseWords = function(s) {
+    return s
+        .trim() // remove leading/trailing spaces
+        .split(/\s+/) // split by one or more spaces
+        .reverse() // reverse the array of words
+        .join(" "); // join with single space
+};
+
+// Example
+let s = "the sky is blue";
+console.log(reverseWords(s)); // Output: "blue is sky the"
+</code>
 </pre>
 					
                     </div>
@@ -2087,6 +2139,56 @@ script>
   </pre>
 </div>
 
+<div id="database">
+<h2> What are Database Technologies? </h2>
+Database technologies are systems that allow you to store, manage, retrieve, and manipulate data efficiently. <br>
+They help applications (like web apps, mobile apps, etc.) to:<br>
+Save user data (like name, email, orders, etc.)<br>
+Search and filter data<br>
+Update or delete data<br>
+Maintain data integrity and security<br>
+----------
+Common Types of Databases:<br>
+1. Relational Databases (SQL)<br>
+Store data in tables (rows & columns)<br>
+Use Structured Query Language (SQL) to interact<br>
+Relationships can be defined between tables<br>
+
+🛠️ Examples:<br>
+MySQL (very popular, open-source)<br>
+PostgreSQL<br>
+Oracle Database<br>
+SQL Server (Microsoft)<br>
+2. Non-Relational Databases (NoSQL)<br>
+Store data in formats like JSON, key-value, documents, graphs<br>
+More flexible for large-scale, unstructured data<br>
+<br>
+🛠️ Examples:<br>
+MongoDB (document-based)<br>
+Redis (key-value)<br>
+Firebase Realtime DB / Firestore<br>
+Cassandra<br>
+
+<h2> What is MySQL? </h2>
+
+MySQL is a relational database management system (RDBMS) that:<br>
+Uses SQL (Structured Query Language)<br>
+Organizes data into tables<br>
+Is free and open-source (owned by Oracle)<br>
+Commonly used in web development with PHP, Node.js, and many backend frameworks<br>
+
+📦 MySQL Core Concepts:<br>
+Concept	Description<br>
+Database	A collection of tables<br>
+Table	A structure to store rows of data<br>
+Row	A single data record<br>
+Column	A field or property of the record<br>
+Primary Key	Unique identifier for each row<br>
+Foreign Key	Creates a relationship between tables<br>
+
+
+</div>
+
 <div id="position"> 
   <h2> Position </h2>
   <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
@@ -2147,6 +2249,116 @@ script>
                                 </code>
                             </pre>
                         </div>
+						
+						
+						
+						
+<div class="box shadow p-2 mb-3">
+                            <h2> Second Highest Salary </h2>
+
+                            <pre>
+                                <code>
+								
+const salaries = [5000, 7000, 6000, 8000, 9000];
+const uniqueSalaries = [...new Set(salaries)]; // Remove duplicates
+uniqueSalaries.sort((a, b) => b - a); // Sort descending
+const secondHighest = uniqueSalaries[1];
+console.log(secondHighest); // Output: 8000
+								</code>
+								</pre>
+								
+<pre>
+<code>
+const employees = [
+  { name: "Alice", salary: 5000 },
+  { name: "Bob", salary: 7000 },
+  { name: "Charlie", salary: 6000 },
+  { name: "David", salary: 8000 },
+  { name: "Eva", salary: 9000 },
+];
+
+const salaries = [...new Set(employees.map(e => e.salary))];
+salaries.sort((a, b) => b - a);
+
+const secondHighest = salaries[1];
+console.log(secondHighest); // Output: 8000
+
+								</code>
+								</pre>
+							
+<h2> Angular </h2>
+
+<pre>
+<code>
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+})
+export class EmployeeComponent implements OnInit {
+  employees = [
+    { name: 'Alice', salary: 5000 },
+    { name: 'Bob', salary: 7000 },
+    { name: 'Charlie', salary: 6000 },
+    { name: 'David', salary: 8000 },
+    { name: 'Eva', salary: 9000 },
+  ];
+
+  secondHighestSalary: number | null = null;
+
+  ngOnInit() {
+    this.secondHighestSalary = this.getSecondHighestSalary(this.employees);
+    console.log('Second highest salary:', this.secondHighestSalary);
+  }
+
+  getSecondHighestSalary(data: { name: string; salary: number }[]): number | null {
+    const uniqueSalaries = [...new Set(data.map(emp => emp.salary))];
+    if (uniqueSalaries.length < 2) return null; // Edge case
+
+    uniqueSalaries.sort((a, b) => b - a);
+    return uniqueSalaries[1];
+  }
+}
+
+
+HTML
+p>Second Highest Salary: {{ secondHighestSalary }} p>
+
+----------------------------
+
+import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from './employee.service';
+import { from } from 'rxjs';
+import { map, toArray, distinct, switchMap, filter } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-employee',
+  templateUrl: './employee.component.html',
+})
+export class EmployeeComponent implements OnInit {
+  secondHighestSalary: number | null = null;
+
+  constructor(private employeeService: EmployeeService) {}
+
+  ngOnInit() {
+    this.employeeService.getEmployees().pipe(
+      switchMap(employees => from(employees.map(e => e.salary))),  // flatten to salary stream
+      distinct(), // remove duplicates
+      toArray(), // collect into array again
+      map(salaries => salaries.sort((a, b) => b - a)), // sort descending
+      map(sorted => sorted.length > 1 ? sorted[1] : null) // get second highest
+    ).subscribe(second => {
+      this.secondHighestSalary = second;
+      console.log('Second highest salary:', second);
+    });
+  }
+}
+
+</code>
+</pre>
+								
+</div>
 
 
 
