@@ -118,6 +118,28 @@ pre {
       <li> <a href="#debugging">  Debugging </a></li>
       <li> <a href="#frontend">  Frontend Performance </a></li>
 	  <li> <a href="#database">  Database Mysql </a></li>
+    <hr>
+    <li> <a href="#sql">  difference between DELETE, TRUNCATE, and DROP </a></li>
+
+    <li> <a href="#acid">   ACID properties of a transaction </a></li>
+    <li> <a href="#clustered">   clustered index, non-clustered index </a></li>
+    <li> <a href="#normalization"> normalization  </a></li>
+    <li> <a href="#key">  foreign key </a></li>
+    <li> <a href="#join">  INNER JOIN and LEFT JOIN </a></li>
+    <li> <a href="#view">  view </a></li>
+    <li> <a href="#procedure"> stored procedure  </a></li>
+    <li> <a href="#cte"> use of CTE  </a></li>
+    <li> <a href="#tables">  tables </a></li>
+    <li> <a href="#trigger"> trigger  </a></li>
+    <li> <a href="#execution">  execution plan </a></li>
+    <li> <a href="#indexing"> indexing  </a></li>
+    <li> <a href="#deadlock"> deadlock  </a></li>
+    <li> <a href="#clause"> WHERE and HAVING clause </a></li>
+    <li> <a href="#wfunctions">  window functions? </a></li>
+    <li> <a href="#transaction"> transaction log </a></li>
+    <li> <a href="#isnull"> ISNULL() and COALESCE() </a></li>
+    <li> <a href="#union"> UNION and UNION ALL </a></li>
+    <li> <a href="#optimize"> optimize a SQL query </a></li>
     </ul>
 
 
@@ -2360,6 +2382,182 @@ export class EmployeeComponent implements OnInit {
 								
 </div>
 
+<div id="sql">
+<h2> 1. What is the difference between DELETE, TRUNCATE, and DROP? </h2>
+<ul>
+  <li> DELETE: Removes rows, can use WHERE, logs each row (slow but safe). </li>
+  <li> TRUNCATE: Removes all rows, faster, can’t use WHERE, minimal logging. </li>
+  <li> DROP: Deletes the entire table structure. </li>
+</ul>
+</div>
+
+
+<div id="acid">
+<h2> 1. What are the ACID properties of a transaction? </h2>
+<ul>
+  <li> Atomicity: All or nothing. </li>
+  <li> Consistency: Data remains valid. </li>
+  <li> Isolation: Transactions don’t interfere. </li>
+  <li> Durability: Once committed, it's saved even if system crashes. </li>
+</ul>
+</div>
+
+
+<div id="clustered">
+<h2> 1. What is a clustered index vs. non-clustered index? </h2>
+<ul>
+  <li> Clustered: Sorts and stores data physically. </li>
+  <li> Non-clustered: Stores pointers to the data. </li>
+</ul>
+</div>
+
+
+<div id="normalization">
+<h2> 1. What is normalization? Name its types. </h2>
+<ul>
+  <li> Process of organizing data to reduce redundancy. </li>
+  <li> Types: 1NF, 2NF, 3NF, BCNF, 4NF, 5NF. </li>
+</ul>
+</div>
+
+
+<div id="key">
+<h2> What is a foreign key? </h2>
+<ul>
+  <li> A field that references the primary key of another table. </li>
+  <li> Enforces referential integrity. </li>
+</ul>
+</div>
+
+
+<div id="join">
+<h2> What is the difference between INNER JOIN and LEFT JOIN? </h2>
+<ul>
+  <li> INNER JOIN: Returns only matching rows. </li>
+  <li> LEFT JOIN: Returns all rows from the left, and matches from the right. </li>
+</ul>
+</div>
+
+
+<div id="view">
+<h2> What is a view? </h2>
+<ul>
+  <li> A virtual table based on a query.</li>
+  <li> Used for abstraction and security. </li>
+</ul>
+</div>
+
+
+<div id="procedure">
+<h2>What is a stored procedure? </h2>
+<ul>
+  <li> A precompiled collection of SQL statements. </li>
+  <li> Improves performance and security. </li>
+</ul>
+</div>
+
+
+<div id="cte">
+<h2> What is the use of CTE (Common Table Expression)? </h2>
+<ul>
+  <li> Temporary result set used for recursion or complex joins. </li>
+</ul>
+</div>
+
+
+<div id="tables">
+<h2> What are temp tables? </h2>
+<ul>
+  <li> Temporary tables stored in tempdb, used for intermediate processing. </li>
+</ul>
+</div>
+
+<div id="trigger">
+<h2> What is a trigger?</h2>
+<ul>
+  <li> An automatic action executed when a table event (INSERT/UPDATE/DELETE) occurs. </li>
+</ul>
+</div>
+
+
+<div id="execution">
+<h2> What is an execution plan? </h2>
+<ul>
+  <li> Shows how SQL Server executes a query. </li>
+  <li> Used for performance tuning. </li>
+</ul>
+</div>
+
+
+<div id="indexing">
+<h2> What is indexing and how does it improve performance? </h2>
+<ul>
+  <li> Creates a data structure to improve query speed. </li>
+  <li> Reduces the need for full table scans. </li>
+</ul>
+</div>
+
+
+<div id="deadlock">
+<h2> What is a deadlock? </h2>
+<ul>
+  <li> When two processes wait on each other to release resources. </li>
+  <li> Solved by proper indexing, consistent order, or timeout. </li>
+</ul>
+</div>
+
+
+<div id="clause">
+<h2> Difference between WHERE and HAVING clause? </h2>
+<ul>
+  <li> WHERE: Filters rows before grouping. </li>
+  <li> HAVING: Filters groups after aggregation. </li>
+</ul>
+</div>
+
+
+<div id="wfunctions">
+<h2> What are window functions? </h2>
+<ul>
+  <li> Functions like ROW_NUMBER(), RANK() that perform calculations across rows related to the current row. </li>
+</ul>
+</div>
+
+
+<div id="transaction">
+<h2> What is a transaction log? </h2>
+<ul>
+  <li> A file that records all transactions and modifications made by SQL Server. </li>
+</ul>
+</div>
+
+
+<div id="isnull">
+<h2>  What is the difference between ISNULL() and COALESCE()? </h2>
+<ul>
+  <li> Both handle NULLs. </li>
+  <li> ISNULL() returns first non-null value; COALESCE() can handle multiple values and different data types. </li>
+</ul>
+</div>
+
+<div id="union">
+<h2>  What is the difference between UNION and UNION ALL? </h2>
+<ul>
+  <li> UNION: Removes duplicates. </li>
+  <li> UNION ALL: Includes duplicates (faster). </li>
+</ul>
+</div>
+
+<div id="optimize">
+<h2>  How do you optimize a SQL query? </h2>
+<ul>
+  <li> Use proper indexes </li>
+  <li> Avoid SELECT * </li>
+  <li> Use EXISTS instead of IN </li>
+  <li> Avoid cursors </li>
+  <li> Review execution plans </li>
+</ul>
+</div>
 
 
 </div>

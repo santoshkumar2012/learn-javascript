@@ -62,6 +62,7 @@ pre {
     <ul class="index">
       <li> <a href="#angularrun"> angular Run </a> </li>
 	  <li> <a href="#why"> why angular </a> </li>
+    <li> <a href="#angularjs"> Angular and Angular JS </a> </li>
       <li> <a href="#architecture"> architecture </a> </li>
 	  <li> <a href="#modules"> Modules, bootstrap </a> </li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
@@ -157,6 +158,38 @@ In addition to frontend development, I have strong design skills and experience 
 I was responsible for creating and maintaining UI architectures, optimizing application performance, and ensuring cross-browser compatibility. I also implemented custom Angular directives, pipes, and services to enhance code reusability and maintainability.
 Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility.
 </div>
+
+<div class="box shadow p-2 mb-3" id="angularjs">
+  <h2> ANGULAR and ANGULAR JS different between </h2>
+<p> 
+  AngularJS = v1.x <br>
+  Angular = v2 and above (latest is v17 as of 2025)
+</p>
+<p> 
+  AngularJS = JavaScript <br>
+  Angular = TypeScript (superset of JavaScript)
+</p>
+<p> 
+  AngularJS = MVC (Model-View-Controller)	 <br>
+  Angular = Component-based architecture
+</p>
+<p> 
+  AngularJS = Not mobile-friendly	 <br>
+  Angular = Built with mobile-first in mind
+</p>
+<p> 
+  AngularJS = Slower (due to two-way binding and digest cycle) <br>
+  Angular = Faster (thanks to one-way data binding and Ivy compiler)
+</p>
+<p> 
+  AngularJS = Two-way binding (default) <br>
+  Angular = One-way binding (by default, can do two-way)
+</p>
+<p> 
+  AngularJS = Done directly in controllers <br>
+  Angular = Handled via directives and templates
+</p>
+  </div>
 
 <div class="box shadow p-2 mb-3" id="asetup">
   <h2> ANGULAR Setup </h2>
@@ -532,6 +565,34 @@ Like measuring elements, integrating third-party libraries, animations, etc.
          <div class="box shadow p-2 mb-3" id="apiservices">
           <h2> API CALL RESTful APIs -- API serives  </h2>
           <p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
+
+<h2> Why Do We Use APIs in Angular Projects? </h2>
+API = Application Programming Interface <br>
+In Angular (a frontend framework), APIs allow your app to talk to a backend server or external services to:<br>
+✅ 1. Get Data<br>
+Example: Fetch product details, user info, or blog posts from a database through an API.<br>
+
+✅ 2. Send Data<br>
+Example: When a user submits a form (like login, registration), the data is sent via an API to the server.<br>
+<br>
+✅ 3. Update or Delete Data<br>
+API allows your app to update or delete something in the backend (e.g., edit a profile, delete a comment).<br>
+<br>
+✅ 4. Secure & Scalable<br>
+APIs enforce security, validation, and rules.<br>
+<br>
+The backend handles heavy logic, so Angular only deals with UI/UX.<br>
+
+<h2> How Important is API in Angular? </h2>
+<p> <strong> Very Important! </strong></p>
+<p> Without APIs: Your Angular app is static – it can't fetch or update live data. </p>
+<p> You can’t store user info, login users, or interact with databases. </p>
+
+<h2> Common API Tools in Angular: </h2>
+<p> HttpClientModule for making API requests </p>
+<p> HttpClient.get(), post(), put(), delete() </p>
+<p> Uses Observables to handle async responses </p>
+
           <pre><code>
             ngOnInit() {
               this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
@@ -807,6 +868,18 @@ observable.subscribe({
 
 
 <div class="box shadow p-2 mb-3" id="rxjsoperator">
+<h2> RxJS Operators All Defination</h2>
+<p> <strong> Map </strong> Map operator use for our data transform according to need. 
+  We get any data we can change by map operator and it return new observable with modify data . </p>
+<p> <strong> Filter </strong> - filter operator emits only those values from the source Observable that pass a specified condition (predicate). </p>
+<p> <strong> Forkjoin </strong> - forkJoin is used to run multiple HTTP requests in parallel and get all their results once all are completed. </p>
+<p><strong> SwitchMap </strong> - switchMap is an RxJS operator used to switch to a new observable every time the source emits a value. If a new value comes in before the previous inner observable completes, switchMap cancels the previous one and switches to the latest. </p>
+<p> <strong> ConcatMap </strong> concatMap is an RxJS operator that maps each value to an inner observable, queues them, and subscribes to them one after the other — maintaining the order and waiting for each one to complete before moving to the next. </p>
+<p><strong> MergeMap </strong> - mergeMap operator is basically a combination of two operators – merge and map. mergeMap emitted value to inner observable and will subscribe to all observables and merge. </p>
+<p><strong>DebounceTime</strong> - DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything.</p>
+<p><strong> pluck </strong> - Pluck is an RxJS operator that lets you pull out a specific property (or nested property) from each emitted object. </p>
+
+----------------------------- 
   <h2> RxJS Operators </h2>
   <h2> Map </h2>
   <p> <strong> rxjs map() transforms each item emitted by an Observable. </strong> 
