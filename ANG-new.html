@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title> Angular </title>
     <style>
+	body{ font-size:1.2rem; }
+	pre code { font-size:1.2rem !important; }
       #toTopBtn {
   position: fixed;
   bottom: 30px;
@@ -489,12 +491,17 @@ Fully supports all control structures. <br>
         <li> <strong> ngAfterViewChecked() </strong>	- Called after the component’s and child views are checked </li>
         <li> <strong> ngOnDestroy() </strong> Called just before the component is destroyed </li>
       </ol>
-	  <p>
-	  You should use ngAfterViewInit() when: <br>
-You need to interact with the DOM (e.g., via @ViewChild) <br>
-You need to trigger logic that depends on the fully initialized view <br>
-Like measuring elements, integrating third-party libraries, animations, etc.
-</p>
+	  <p> You should use <strong> ngAfterViewInit() </strong> when: <br> You need to interact with the DOM (e.g., via @ViewChild) <br> You need to trigger logic that depends on the fully initialized view <br> Like measuring elements, integrating third-party libraries, animations, etc. </p>
+	  
+	  <p> <strong> ngOnChanges() </strong> <strong> ngDoCheck()  </strong> Different Between = </p>
+	  <p> <strong> ngOnChanges() </strong> Automatically called when Angular detects changes to input properties (@Input()). </p>
+	  <p> Reacting to updated input data from parent components.</p> 
+	  <p> <strong> ngDoCheck() </strong> Called every time change detection runs., It manually or deep change tracking. </p>
+	  <p> <strong> “Change Detection Cycle” </strong> :- </p>
+	  <p> In Angular, a change detection cycle is the process where Angular checks your app to see if any data has changed, and if so, it updates the DOM to reflect changes. </p>
+	  <p> For examples - User input (input> typing) <br> Events (click, submit, etc.) <br> HTTP responses <br> setTimeout, setInterval <br>  Promise or Observable resolution <br> Manually triggered with ChangeDetectorRef.detectChanges()</p>
+	  <p> if you click a button 5 times, ngDoCheck() will run 5 times.</p>
+	  
       <pre>
         <code>
           <h2> ngOnChanges() </h2>
@@ -1459,6 +1466,81 @@ Redirect to another page
 <br>
 </div>
 
+<p> <strong> Manually Globally error handle </strong> </p>
+
+<pre>
+<code>
+import { ErrorHandler, inject } from "@angular/core";
+
+export class MyErrorHandler implements ErrorHandler {
+  error: any;
+    // private error = inject(ErrorService)
+  handleError(error: any) {
+    console.log("Error occure : ", error)
+    if(error.status == 422){
+        let message = 'required fileds: '
+        let params_required = error.error.detail.map((entity: any) => `${entity.loc[1]}`)
+        console.log(message + params_required)
+        this.error.setError(message + params_required)
+    }
+    if(error.status == 404){
+        console.log("Please check your api url")
+        this.error.setError("Please check your api url")
+    }
+    if(error.status == 500){
+        console.log("Please check your network")
+        this.error.setError("Please check your network")
+    }
+  }
+}
+
+================
+
+In main.ts 
+ providers: [
+    ...appConfig.providers,
+    importProvidersFrom(BrowserAnimationsModule),
+    provideToastr(),
+    provideRouter(routes),
+    {provide: ErrorHandler, useClass: MyErrorHandler}
+  ]
+
+</code>
+</pre>
+
+<p> <strong> Server Error Status </strong> </p>
+500	- Internal Server Error, 
+502	- Bad Gateway,
+503 - Service Unavailable,
+400 - Bad Request	,
+401 - Unauthorized	,
+403 - Forbidden,
+404 -  Not Found,
+200 - Ok status,
+201 - Created – Resource was created,
+204 - No Content – Success but no response body
+<br>
+
+<p> <strong> Normal Error Handling with API call </strong> </p>
+
+<pre>
+<code>
+this.http.get('/api/data').subscribe({
+  next: res => console.log(res),
+  error: (err: HttpErrorResponse) => {
+    if (err.status === 0) {
+      console.error('Network error or CORS issue');
+    } else if (err.status === 500) {
+      console.error('Server error!');
+    } else if (err.status === 404) {
+      console.error('Not found');
+    }
+  }
+});
+
+</code>
+</pre>
+<br> 
 <pre>
 <code>
 import { catchError } from 'rxjs/operators';
@@ -2912,6 +2994,15 @@ ul>
     </div>
 
 <div class="box shadow p-2 mb-3" id="form">
+<h2> Form Status </h2>
+<p> In Angular, form status tells you the validation state of a form or form control. </p>
+<p> You can check the status using Reactive Forms <strong> (FormGroup, FormControl) </strong> or Template-driven forms <strong> (NgForm, NgModel) </strong> . </p>
+<h3> Common Form Status Values </h3>
+<p> VALID	All validations passed </p>
+<p> INVALID	At least one validation failed </p>
+<p> PENDING	Async validator is running </p>
+<p> DISABLED	Control is disabled (excluded from validation/status) </p>
+
 <h2> FORMS </h2>
 <p><strong> Difference between Template-driven and Reactive Forms? </strong></p>
 <ul>
