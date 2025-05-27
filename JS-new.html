@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title> JS </title>
     <style>
+		body{ font-size:1.2rem; }
+	pre code { font-size:1.2rem !important; }
       #toTopBtn {
   position: fixed;
   bottom: 30px;
@@ -88,6 +90,7 @@ pre {
       <li> <a href="#operator"> Rest, Spread Operator </a> </li>
       <li> <a href="#function"> function statement and function expression </a></li>
       <li> <a href="#primitive"> Primitive Data Types </a></li>
+       <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
@@ -105,6 +108,7 @@ pre {
       <li> <a href="#median"> Median logic </a></li>
       <li> <a href="#digitalroot"> Digital Root repeatedly </a></li>
 	    <li> <a href="#true"> True and False </a></li>
+      <li> <a href="#dpstring">  Remove duplicate string </a></li>
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#typescript"> TypeScript </a> </li>
       <li> <a href="#html"> HTML </a> </li>
@@ -438,7 +442,49 @@ myDisplay();
 </pre>
 </div>
 
+<div class="box shadow p-2 mb-3" id="method">
+<h2> Call, Bind, Apply </h2>
+<p> call() - The call() method in JavaScript allows us to invoke a function with a specified value for this keyword and arguments provided individually. </p>
+<p> apply() - The apply() method in JavaScript is a function method that allows a function to be called with a specified this value and arguments provided as an array or an array-like object. </p>
+<p> The apply() method is similar to the call() method, but the call() method accepts arguments individually rather than as an array. </p>
+<p> 
+Different between <br>
+Use <strong> **call** </strong> when you want to immediately invoke a function and pass arguments one by one. <br>
+Use <strong> **apply** </strong> when you want to immediately invoke a function but pass arguments as an array. <br>
+Use <strong> **bind** </strong> when you want to create a new function with this permanently set, but not execute it immediately. <br>
+</p>
 
+<pre>
+  <code>
+const person = {
+name: 'Alice'
+};
+
+function greet(greeting, punctuation) {
+  console.log(`${greeting}, I'm ${this.name}${punctuation}`);
+}
+
+
+call()/////////
+
+greet.call(person, 'Hello', '!'); 
+// Output: Hello, I'm Alice!
+
+
+apply()////
+
+greet.apply(person, ['Hi', '...']); 
+// Output: Hi, I'm Alice...
+
+
+bind()//
+const greetAlice = greet.bind(person, 'Hey', '!');
+greetAlice(); 
+// Output: Hey, I'm Alice!
+
+  </code>
+</pre>
+</div>
 
 <div class="box shadow p-2 mb-3" id="primitive">
   <h2> Primitive Data Types </h2>
@@ -1559,6 +1605,24 @@ console.log(numOfVowels)
             </div>
 
 
+  <div class="box shadow p-2 mb-3" id="dpstring">
+  <h2> Remove Dublicate </h2>
+
+  <pre>
+    <code>
+    const killers = [
+      "Laziness kills Consistency",
+      "Comfort kills Consistency",
+      "Doubt kills Consistency",
+      "Fear kills Consistency"
+    ];
+    const result = killers.map(killer => killer.split(" kills Consistency")[0]);
+    console.log(result);
+    </code>
+  </pre>
+
+  </div>
+
 			
     <div class="box shadow p-2 mb-3" id="true">
       <h2> True and False Logic </h2>
@@ -1721,13 +1785,14 @@ for (let i=str.length-1; i>=0; i--){
     reversed += str[i]
 }
 let final = reversed.charAt(0).toUpperCase() + reversed.slice(1).toLowerCase()
-console.log(final)
+console.log(final) // Ramuk hsotnas
+
 
  -------------- 
 
-                            let strs = [1,2,3]
+  let strs = [1,2,3]
   stroess = strs.reverse();
-  console.log(stroess)
+  console.log(stroess) // [ 3, 2, 1 ]
 
   -------------- 
 
