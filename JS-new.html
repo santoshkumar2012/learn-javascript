@@ -93,6 +93,7 @@ pre {
        <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
+      <li> <a href="#filter"> filter </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
       <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
       <li> <a href="#find"> find sum number </a> </li>
@@ -1462,6 +1463,30 @@ function greet() {
     </code>
 </pre>
 </div>
+
+<div class="box shadow p-2 mb-3" id="filter">
+<h2> Filter  </h2>
+<pre>
+    <code>
+      const objects = [
+  { name: "Alice", age: 30, city: "New York" },
+  { name: "Bob", age: 25, city: "Los Angeles" },
+  { name: "Charlie", age: 35, city: "Chicago" },
+  { name: "David", age: 40, city: "Houston" },
+  { name: "Eve", age: 28, city: "Miami" }
+];
+
+const citiesAbove30 = objects
+  .filter(person => person.age > 30)
+  .map(person => person.city);
+
+console.log(citiesAbove30);
+
+    </code>
+</pre>
+</div>
+
+
 
 <div class="box shadow p-2 mb-3" id="function">
 <h2> Function Statement and Function Expression </h2>
