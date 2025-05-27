@@ -41,6 +41,10 @@ pre {
     font-size: .875em;
     background: #eeeeee;
 }
+pre, code {
+    word-wrap: break-word !important;    /* Break long words */
+    overflow-wrap: break-word !important;
+  }
 .index { padding: 0; margin: 0;}
 .index li {     
     list-style: none;
@@ -994,7 +998,7 @@ HTML ===
 
 <h2> Filter by Employee data, Maxmimum salary, name length, search </h2>
 <p> <strong> filter operator emits only those values from the source Observable that pass a specified condition (predicate). </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 
   filterEmployee: any = []
@@ -2492,6 +2496,72 @@ Used to decorate properties inside classes. <br>
       }
     in HTML 
     &lt;button websanto color="red">Submit&lt;/buttonp&gt;
+      </code>
+    </pre>
+
+    <br>
+
+    <pre>
+      <code>
+        //highlight-india.directive.ts
+
+        import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Directive({
+  selector: '[appHighlightIndia]',
+  standalone: true,
+  imports: [CommonModule]
+})
+export class HighlightIndiaDirective {
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('click')
+  onClick() {
+    // Delay to allow options to render if needed
+    setTimeout(() => {
+      const options = this.el.nativeElement.options;
+      for (let i = 0; i < options.length; i++) {
+        const option = options[i];
+        if (option.text.trim().toLowerCase() === 'india') {
+          this.renderer.setStyle(option, 'color', 'red');
+          this.renderer.setStyle(option, 'textDecoration', 'underline');
+        }
+      }
+    });
+  }
+}
+
+
+------------------
+
+app.component.ts
+
+import { Component } from '@angular/core';
+import { HighlightIndiaDirective } from './highlight-india.directive';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [HighlightIndiaDirective],
+  template: `
+    h2>Select a Country /h2>
+    select appHighlightIndia>
+      option>USA/option>
+      option>Canada/option>
+      option>UK/option>
+      option>Germany/option>
+      option>Australia/option>
+      option>France/option>
+      option>Italy/option>
+      option>Japan/option>
+      option>India/option>
+      option>Brazil/option>
+    /select>
+  `
+})
+export class AppComponent {}
+
       </code>
     </pre>
 
