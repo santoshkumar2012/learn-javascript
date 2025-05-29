@@ -120,7 +120,7 @@ pre, code {
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
     <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck, Filter) </a> </li>
-		<li><a href="#error"> Error Handling </a></li>
+    <li><a href="#error"> Error Handling </a></li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
@@ -889,6 +889,44 @@ observable.subscribe({
 <p><strong> MergeMap </strong> - mergeMap operator is basically a combination of two operators – merge and map. mergeMap emitted value to inner observable and will subscribe to all observables and merge. </p>
 <p><strong>DebounceTime</strong> - DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything.</p>
 <p><strong> pluck </strong> - Pluck is an RxJS operator that lets you pull out a specific property (or nested property) from each emitted object. </p>
+<p> <strong> Error Handling </strong> </p>
+<p> <strong> Error Handling Operators: </strong> These operators handle errors in observables. </p>
+<p> <strong> catchError: </strong> Catches errors and returns a fallback observable. </p>
+<p> <strong> retry: </strong>Retries an observable a specified number of times upon error. </p>
+<p> <strong> retryWhen: </strong> Retries an observable based on a condition. </p>
+
+<h2> Switch Map and Exhaust different between</h2>
+<p> Switch Map - Cancels the previous inner observable and switches to new one </p>
+<p> ExhaustMap - Ignores new inner observables if one is already active </p>
+<p> Switch Map - Auto-complete, type-ahead, real-time search	</p>
+<p> ExhaustMap - Login, signup, form submission (one at a time) </p>
+<p> Switch map - Only latest is processed, rest are canceled	 </p>
+<p> ExhaustMap - Only first is processed, others are ignored </p>
+
+<pre>
+  <code>
+    Switch Map - 
+    this.searchInput.valueChanges.pipe(
+  debounceTime(300),
+  switchMap(query => this.searchService.search(query))
+).subscribe(result => {
+  this.results = result;
+});
+
+  </code>
+</pre>
+
+<pre>
+  <code>
+    exhaustMap -
+    this.loginForm.valueChanges.pipe(
+  exhaustMap(credentials => this.authService.login(credentials))
+).subscribe(response => {
+  // only one login request will be processed at a time
+});
+
+  </code>
+</pre>
 
 ----------------------------- 
   <h2> RxJS Operators </h2>
@@ -3820,6 +3858,14 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
       
     </code>
   </pre>
+
+  <p> <strong> Modal angular </strong></p>
+<ul>
+  <li> Use MatDialog to create and control modals. </li>
+  <li> Dialogs are regular Angular components. </li>
+  <li> You can pass data to and receive data from modals. </li>
+  <li> Ideal for confirmation dialogs, forms, and popups. </li>
+</ul>
   </div>
 
   <div class="box shadow p-2 mb-3" id="json">
