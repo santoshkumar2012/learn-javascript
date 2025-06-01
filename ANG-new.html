@@ -120,6 +120,7 @@ pre, code {
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
     <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck, Filter) </a> </li>
+    <li> <a href="#rxjsoperatorlive"> Rxjs Operators live example </a> </li>
     <li><a href="#error"> Error Handling </a></li>
 	  <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
@@ -159,10 +160,40 @@ pre, code {
 
  <h2 class="mt-4">INTRO</h2>   
 <div class="box shadow p-2 mb-3">
-As a UI and Frontend Developer, my primary role was to design, develop, and optimize complex user interfaces for web applications. I worked with Angular to build reusable components, implement routing, handle state management, and integrate APIs. <br>
-In addition to frontend development, I have strong design skills and experience working with Figma and Photoshop. I have designed UI layouts, website templates, and even complete dashboards for admin panels, ensuring intuitive and user-friendly interfaces. <br>
-I was responsible for creating and maintaining UI architectures, optimizing application performance, and ensuring cross-browser compatibility. I also implemented custom Angular directives, pipes, and services to enhance code reusability and maintainability.
-Moreover, I followed best practices in CSS frameworks like Tailwind and Bootstrap to ensure responsiveness and accessibility.
+"In my previous role at Quickparts, a manufacturing-based company, I worked primarily as an Angular Frontend Developer. My main responsibility was building the Product Management Dashboard, where I developed complex UI modules like product listing, filtering, status updates, and detailed views using Angular."
+<br>
+<br>
+"I created <a href="#reusable"> reusable components </a>, managed routing and <a href="#lazy"> lazy loading </a>, handled <a href="#state">
+state management </a> <a href="#rxjs"> using RxJS </a>, and <a href="#apiservices"> integrated REST APIs </a> to fetch and display dynamic data. I also implemented <a href="#directive"> custom directives </a> and pipes to enhance functionality and maintain clean, modular code."
+<br>
+<br>
+"While I collaborated with the design team and used Figma/Photoshop to implement pixel-perfect UI, my main contribution was in Angular development — building real features, solving bugs, and <a href="#optimize"> optimizing performance </a>."
+<br>
+<br>
+
+real dynamic data, API integration
+------ 
+
+Module / Feature
+
+<ul>
+  <li> <strong> Product List Page </strong>	*ngFor, custom filter pipe, API integration  </li>
+  <li> <strong> Product Detail Page </strong>	Routing with params, ngIf, custom component </li>
+  <li> <strong> Product Upload </strong>	Reactive Forms, validations </li>
+  <li> <strong> Product Status </strong> Toggle	Click handlers, conditional class, API PATCH </li>
+  <li> <strong> Dashboard </strong> Charts	Angular services + chart libraries </li>
+  <li> <strong> Lazy Loading </strong> Sections	Angular routing, feature modules </li>
+  <li> <strong> Auth/Login	 </strong>Reactive forms, AuthService, Route Guards </li>
+</ul>
+
+<h2> Product Dashboard Project </h2>
+
+<p> “In the Quickparts product dashboard, we worked with real-time product data fetched from REST APIs. The data included fields like product name, SKU, price, category, quantity, status (active/inactive), images, and timestamps. I used Angular services and the HttpClient module to call APIs, and displayed data using *ngFor in tables and cards.” </p>
+
+<p> “We also implemented features like searching, filtering by category or status, pagination, and sorting. For example, on the product list module, I received JSON data from the backend, and used RxJS operators like map and filter to manipulate it before rendering.” </p>
+
+<p> “In forms, I also handled data for creating or updating a product — like uploading product images, selecting categories from dropdowns, and validating inputs using Angular Reactive Forms.”</p>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="angularjs">
@@ -1485,6 +1516,137 @@ fromEvent(input, 'input').pipe(
 
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="rxjsoperatorlive">
+  <h2> Map Example </h2>
+  <pre>
+    <code>
+      import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-users',
+  standalone: true,
+  imports: [CommonModule],
+  template: ``
+})
+export class UsersComponent {
+  users: any[] = [];
+
+  constructor(private http: HttpClient) {
+    this.getUsers();
+  }
+
+  getUsers() {
+    this.http.get<any>('https://yourapi.com/users')
+      .pipe(
+        map(response => response.users) // Only extract users array
+      )
+      .subscribe((users) => {
+        this.users = users;
+        console.log('Users:', this.users);
+      });
+  }
+}
+
+    </code>
+  </pre>
+<p></p>
+  <pre>
+    <code>
+      // example.service.ts
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ExampleService {
+  constructor(private http: HttpClient) {}
+
+  getLiveData() {
+    return this.http.get<any>('https://api.example.com/data').pipe(
+      map(response => {
+        // You can transform the response here
+        return response.data.map((item: any) => ({
+          id: item.id,
+          name: item.name.toUpperCase(),  // for example, make names uppercase
+          active: item.status === 'active'
+        }));
+      })
+    );
+  }
+}
+
+    </code>
+  </pre>
+
+
+  <pre>
+    <code>
+      // Filter
+      // 1. Service: Making API Call
+// user.service.ts
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, from } from 'rxjs';
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  constructor(private http: HttpClient) {}
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>('https://api.example.com/users');
+  }
+}
+<hr>
+
+2. Component: Use filter Operator
+
+// user.component.ts
+import { Component, OnInit } from '@angular/core';
+import { UserService } from './user.service';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-user',
+  template: `
+    div *ngFor="let user of activeUsers">
+      {{ user.name }}
+    /div>
+  `
+})
+export class UserComponent implements OnInit {
+  activeUsers: any[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService.getUsers()
+      .pipe(
+        map(users => users.filter(user => user.isActive)) // filter the array
+      )
+      .subscribe(filteredUsers => {
+        this.activeUsers = filteredUsers;
+      });
+  }
+}
+
+
+// 🔁 Example Using filter on Emitted Values:
+import { of } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
+of(1, 2, 3, 4, 5)
+  .pipe(filter(value => value % 2 === 0))
+  .subscribe(val => console.log(val)); // Output: 2, 4
+
+
+    </code>
+  </pre>
+
+</div>
+
 <div class="box shadow p-2 mb-3" id="error">
 <h2> ERROR HANDLING </h2>
 
@@ -2470,6 +2632,132 @@ Used to decorate properties inside classes. <br>
 
     <h2> Custom Directive </h2>
 
+    <h2> Simple Angular custom directive </h2>
+    <pre>
+      <code>
+        ng generate directive changeBg
+        ------
+
+        // change-bg.directive.ts
+        import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+
+        @Directive({
+          selector: '[appChangeBg]'
+        })
+        export class ChangeBgDirective {
+
+          private isColored = false;
+
+          constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+          @HostListener('click') onClick() {
+            this.isColored = !this.isColored;
+            const color = this.isColored ? 'lightblue' : 'white';
+            this.renderer.setStyle(this.el.nativeElement, 'background-color', color);
+          }
+        }
+
+        ----- 
+
+        <!-- parent.component.html or app.component.html -->
+      button appChangeBg>Click me to change background /button>
+
+      </code>
+    </pre>
+
+    <br>
+
+    <h2> Accept dynamic color as input </h2>
+
+    <pre>
+      <code>
+        @Input('appChangeBg') color = 'yellow'; // default
+
+        @HostListener('click') onClick() {
+          const bg = this.isColored ? 'white' : this.color;
+          this.renderer.setStyle(this.el.nativeElement, 'background-color', bg);
+          this.isColored = !this.isColored;
+        }
+
+        ------ 
+
+        button [appChangeBg]="'pink'"> Click me /button>
+
+      </code>
+    </pre>
+    
+    <br>
+
+    <h2> Work on multiple elements (like multiple buttons or divs) <br> Accept a color as input <br> Apply or remove a CSS class (instead of inline styles) </h2>
+
+<pre>
+  <code>
+    1. Create Class 
+    .custom-bg {
+  background-color: lightblue;
+  transition: background-color 0.3s ease;
+}
+
+--------------
+
+2. Update the Directive
+
+// change-bg.directive.ts
+import { Directive, ElementRef, HostListener, Input, Renderer2 } from '@angular/core';
+
+@Directive({
+  selector: '[appChangeBg]'
+})
+export class ChangeBgDirective {
+  private isActive = false;
+
+  @Input('appChangeBg') bgClass: string = 'custom-bg'; // default class
+
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  @HostListener('click') toggleBg() {
+    this.isActive = !this.isActive;
+
+    if (this.isActive) {
+      this.renderer.addClass(this.el.nativeElement, this.bgClass);
+    } else {
+      this.renderer.removeClass(this.el.nativeElement, this.bgClass);
+    }
+  }
+}
+
+
+-----
+
+ 3. Use in HTML on multiple elements
+
+ <!-- Works on multiple buttons -->
+button appChangeBg>Button 1 /button>
+button appChangeBg>Button 2 /button>
+
+<!-- Apply custom class -->
+button [appChangeBg]="'my-highlight'">Custom Class /button>
+
+<!-- Works on divs too -->
+div appChangeBg style="padding: 10px;">Div 1 /div>
+div appChangeBg>Div 2 /div>
+
+----------- 
+
+ 4. Optional: Custom class
+
+.my-highlight {
+  background-color: hotpink;
+  color: white;
+  font-weight: bold;
+}
+
+
+  </code>
+</pre>
+
+    <br>
+
     <pre>
       <code>
         custom Directive Command - ng g d directive-name (cdirective)
@@ -2608,6 +2896,55 @@ export class AppComponent {}
   <div class="box shadow p-2 mb-3" id="input">
     <h2> @Input, @output </h2>
     <p> @Input and @Output are used for communication between parent and child components </p>
+
+<h2>  Sharing data between parent and multiple child components </h2>
+
+<pre>
+  <code>
+    1. Parent Component (Holds the Button & Shared State)
+
+    // parent.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    button (click)="changeBackground()">Change Background/button>
+    app-child [changeColor]="isColorChanged">/app-child>
+    app-child [changeColor]="isColorChanged">/app-child>
+  `
+})
+export class ParentComponent {
+  isColorChanged = false;
+
+  changeBackground() {
+    this.isColorChanged = !this.isColorChanged;
+  }
+}
+-------------- 
+
+// 2. Child Component (Listens via @Input) 
+
+// child.component.ts
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  template: `
+    div [ngStyle]="{'background-color': changeColor ? 'lightblue' : 'lightgray'}"
+         style="width: 200px; height: 100px; margin: 10px; border: 1px solid #ccc;">
+      Child Box
+    /div>
+  `
+})
+export class ChildComponent {
+  @Input() changeColor: boolean = false;
+}
+
+  </code>
+</pre>
+
+
     <p> <strong> example child ts </strong></p>
     <pre>
       <code class="whitespace-pre! language-html">
@@ -2987,8 +3324,8 @@ export class TranformpipePipe implements PipeTransform {
   <h2> Route Guards in Angular  </h2>
   <p> Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include: </p>
   <ul>
-    <li> CanActivate:  if a route can be activated.</li>
-    <li> CanDeactivate: Checks if a route can be deactivated.</li>
+    <li> CanActivate:  Protect Route Access <br> CanActivate is used to determine whether a user can navigate to a specific route or not. It runs before the route is loaded. </li>
+    <li> CanDeactivate: Prevent Leaving the Route <br> CanDeactivate is used to ask the user before navigating away from a component, typically if a form is dirty/unsaved </li>
     <li> CanLoad: Determines if a module can be loaded lazily. </li>
   </ul>
   <pre>
@@ -3129,6 +3466,16 @@ ul>
   <li>   Complex forms </li>
   <li> One-way, explicit & predictable </li>
 </ul>
+---
+<ul>
+  <li> <p> .dirty is a property that tells whether the form (or form field) has been modified by the user. 
+    <br> .dirty is true if the user has changed the form field or form value <br> .dirty is false if the user hasn’t touched or changed anything
+  </p></li>
+  <li> .dirty	- User has changed the value  </li>
+  <li> .touched	- User has focused + left the field </li>
+  <li> .untouched	- User has never interacted with field </li>
+</ul>
+
 <h2> 1. Template-driven Form Example </h2>
 <pre>
   <code>
