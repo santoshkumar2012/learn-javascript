@@ -116,6 +116,7 @@ pre, code {
     <li> <a href="#empw-api"> Employee crud without api </a> </li>
     <li> <a href="#emp-api"> Employee crud with api </a> </li>
     <li> <a href="#reusable"> Component Reusable </a> </li>
+    <li> <a href="#apiservices"> Rest API / Web API </a> </li>
     
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
@@ -129,8 +130,6 @@ pre, code {
       <li> <a href="#interceptor"> Interceptor  </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
       <li> <a href="#class"> Class </a> </li>
-       
-      <li> <a href="#apiservices"> API </a> </li>
       <li> <a href="#aot"> AOT </a> </li>
       <li> <a href="#signals"> signals </a> </li>   
 		<li> <a href="#graphql"> graphql </a> </li>	  
@@ -462,6 +461,16 @@ Fully supports all control structures. <br>
         <li> <strong> providers: [], </strong> Providers option is used to include the services . </li>
         <li> <strong> import{} </strong> imports option is used to import other modules into the AppModulemodule. </li>
         </ol>
+<h2 class="mt-4"> <strong> BOOTSTRAP </strong> </h2>
+<p class="m-0 p-0"><strong> Bootstrap start the angular application by loading root component through main.ts file </strong></p>
+<p> <strong> Bootstrap process </strong> Bootstrap => main.ts => app component ( app-root> /app-root> ) => index.html </p>
+
+<h2 class="mt-4"> <strong> Browser Behind Angular Application </strong> </h2>
+<p> Browser Load index.html ( app-root> /app-root> ) =>  Main.ts (File Runs) => Bootstrap Application => Angular Replace app-root> /app-root> ( HTML from APP component ) 
+  => Angular Setup DI Dependancy Injection ( Services, Routes, HTTP Client ) => Router read the URL => Component ( Tree Based ) => Data Binding Event = Angular Render DOM 
+</p> 
+                                                                
+
   </div>
 
 
@@ -565,9 +574,12 @@ Fully supports all control structures. <br>
       <div class="box shadow p-2 mb-3" id="optimize">
         <h2> OPTIMIZE ANGULAR PAGE </h2>
         <p> <strong> Use of Loaders everywhere possible </strong> Whenever API is call in is progress we need to show loader. So that user will know something is process going on. </p>
+		
         <p> <strong> Avoid duplicate API call. </strong> For example, when creating a user or employee record, after filling in all the required fields and clicking the "Save" button, an API call is triggered. However, if the "Save" button is clicked multiple times quickly, multiple API requests are sent. It will be increases the loading time and server load.
           That's why we need api call in codition that onetime call on click.  </p>
+		  
         <P><strong> Use Pagination for Large Data Sets </strong> When retrieving large amounts of data from an API, it's important to implement pagination. Instead of loading all records at once, we should load a limited number of items as 10 or 20 per page—and fetch more data as the user navigates through the pages. This approach helps optimize loading time and improves overall performance and user experience. </P>
+		
         <p> <strong> Create Reusable Services for Common Form Data </strong> For example, if I'm using a reactive form with a gender dropdown (e.g., "Male" and "Female"), and this dropdown is required in multiple forms across the application, it's a good practice to create a reusable service to provide the gender options. This way, instead of duplicating the same code in every form, we can fetch the gender list from a single source. This improves code reusability, maintainability, and keeps the codebase clean and optimized. </p>
         <p>
           <strong> Delegate Certain Logic to the Backend for Better Frontend Performance </strong>
@@ -604,16 +616,15 @@ Fully supports all control structures. <br>
          </div>
 
 
-         <div class="box shadow p-2 mb-3" id="apiservices">
-          <h2> API CALL RESTful APIs -- API serives  </h2>
-          <p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
+<div class="box shadow p-2 mb-3" id="apiservices">
+<h2> API CALL RESTful APIs -- API serives  </h2>
+<p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
 
 <h2> Why Do We Use APIs in Angular Projects? </h2>
 API = Application Programming Interface <br>
 In Angular (a frontend framework), APIs allow your app to talk to a backend server or external services to:<br>
 ✅ 1. Get Data<br>
 Example: Fetch product details, user info, or blog posts from a database through an API.<br>
-
 ✅ 2. Send Data<br>
 Example: When a user submits a form (like login, registration), the data is sent via an API to the server.<br>
 <br>
@@ -624,7 +635,6 @@ API allows your app to update or delete something in the backend (e.g., edit a p
 APIs enforce security, validation, and rules.<br>
 <br>
 The backend handles heavy logic, so Angular only deals with UI/UX.<br>
-
 <h2> How Important is API in Angular? </h2>
 <p> <strong> Very Important! </strong></p>
 <p> Without APIs: Your Angular app is static – it can't fetch or update live data. </p>
@@ -643,6 +653,27 @@ The backend handles heavy logic, so Angular only deals with UI/UX.<br>
               })
             }
           </code></pre>
+
+<p class="mt-4"> <strong> What is different between Web API and Rest API </strong></p>
+<P> <strong> Web API (Web Application Programming Interface) </strong></P>
+<ul>
+<li> Definition: A Web API is a general term for any API that can be accessed over the web using the HTTP protocol. </li>
+<li> Purpose: It allows communication between client and server applications. </li>
+<li> Format: Can use any format like JSON, XML, or even HTML. </li>
+<li> Architecture: Can follow any architecture style, such as REST, SOAP, GraphQL, etc. </li>
+</ul>
+
+<P> <strong> REST API (Representational State Transfer API) </strong></P>
+<ul>
+<li> Definition: A specific type of Web API that follows the REST architecture. </li>
+<li> Stateless (each request is independent) </li>
+<li> Uses HTTP methods: GET, POST, PUT, DELETE </li>
+<li> Resource-based (each URL represents a resource) </li>
+<li> Uses standard response codes (like 200, 404, etc.) </li>
+<li> Data Format: Typically uses JSON, but can also support XML. </li>
+</ul>
+
+
           </div>
 
 
@@ -670,6 +701,9 @@ getLeads(){
 }
             </code></pre>
           </div>
+
+
+
 
 
           <div class="box shadow p-2 mb-3" id="crud">
@@ -748,6 +782,30 @@ If You Try Directly Updating from 15 to 19? <br>
 
   <p> RxJS (Reactive Extensions for JavaScript) is a library for reactive programming using observables. 
     It's used in Angular to handle asynchronous operations, events, and data streams. </p>
+
+  <p class="mt-4"> <strong> Why RxJS is Used in Angular? </strong></p>
+  <ul>
+    <li> RxJS stands for Reactive Extensions for JavaScript. </li>
+    <li> It is a library for reactive programming using Observables. </li>
+    <li> Think of it like a tool to handle async data streams (like events, HTTP calls, user inputs, etc.) more efficiently. </li>
+  </ul>
+
+  <p class="mt-4"> <strong> Benefits of RxJS in Angular </strong>  </p>
+  <ul>
+    <li>Observables - Easy to work with asynchronous operations like HTTP, events, and user inputs. </li>
+    <li> Operators (like map, filter, switchMap) - Powerful tools to transform and manage data streams. </li>
+    <li> Reactive Forms - Angular forms use observables behind the scenes. </li>
+    <li> HTTP Client - Angular's HttpClient returns Observables, not Promises. </li>
+    <li> Real-time Data - Ideal for apps with real-time features like chat, notifications, or live updates. </li>
+  </ul>
+
+  <p class="mt-4"> <strong> What if RxJS was not in Angular? </strong>  </p>
+  <ul>
+    <li> You’d have to use Promises, callbacks, or manual subscriptions. </li>
+    <li> Managing multiple async operations (like dependent HTTP calls, or canceling previous API calls) would be very complex. </li>
+    <li> You'd lose powerful operators like debounceTime, switchMap, retry, etc., which simplify async logic. </li>
+  </ul>
+
 
     <p><strong> Rxjs use in HTTP Request, Reactive Forms, Routing(params, guards), Event management, State Management </strong></p>
 
@@ -4890,135 +4948,113 @@ HTML
           <h2> Employee crud with API </h2>
           <pre>
             <code>
-              import { Component, ElementRef, ViewChild } from '@angular/core';
-import { HttpSharedService } from '../http-shared.service';
+             
+import { Component } from '@angular/core';
+import { HeaderComponent } from "../../header/header.component";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators, FormGroup, FormsModule } from '@angular/forms';
-import { HeaderComponent } from "../header/header.component";
-import { LoaderSeriveService } from '../loader-serive.service';
+import { HttpSharedService } from '../../http-shared.service';
 import { ToastrService } from 'ngx-toastr';
-import { response } from 'express';
+
 
 @Component({
-  selector: 'app-users',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HeaderComponent, FormsModule],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  selector: 'app-crud-api',
+  imports: [HeaderComponent, CommonModule, FormsModule, ReactiveFormsModule],
+  templateUrl: './crud-api.component.html',
+  styleUrl: './crud-api.component.css'
 })
-export class UsersComponent {
+export class CrudApiComponent {
 
-  @ViewChild('close') close!: ElementRef
+  users: any
+  user_detail: any
+  user_form!: FormGroup
 
-    users: any
-    user_detail: any
-    // loading: boolean = false
-    user_form!: FormGroup
-    user: any;
-    action: string = "Add"
+  constructor(private fb: FormBuilder, private http: HttpSharedService, private toastr: ToastrService){}
+    user_field = {
+    username  : ['', Validators.required],
+    firstName : ['', Validators.required],
+    lastName  : ['', Validators.required],
+    email     : ['', Validators.required],
+    phone     : ['', Validators.required],
+    address   : ['', Validators.required]
+  }
 
-    user_fields = {
-    username : ['', Validators.required],
-    firstName: ['', Validators.required],
-    lastName : ['', Validators.required],
-    email    : ['', Validators.required],
-    phone    : ['', Validators.required],
-    address  : [''],
-    }
-  
-    constructor( 
-      private _http: HttpSharedService,
-      private _fb: FormBuilder,
-      public loader: LoaderSeriveService,
-      private toastr: ToastrService
-     ){ }
+ ngOnInit(){ 
+  this.getUser()
+  this.intializeForm()
+ }
 
-    ngOnInit(){
-      this.getUsers()
-      this.initializeForm()
-    }
+ resetForm(){
+  this.intializeForm()
+}
 
-    resetForm(){
-      this.action = "Add"
-      this.initializeForm()
-    }
+ intializeForm(){ this.user_form = this.fb.group(this.user_field)}
 
-    initializeForm(){this.user_form = this._fb.group(this.user_fields)}
+ getUser(){
+  this.http.get('users').subscribe((response: any) => {
+    this.users = response.users;
+  })
+ }
 
-    getUsers(){
-     this._http.get('users').subscribe((response: any) => {
-      this.users = response.users;
-      console.log('Check-', this.users);
-    })
-   }
+ setUser(user: any){
+  this.user_detail = user;
+  this.patchForm()
+ }
 
-   setUser(user: any, action: string){
-    this.user_detail = user;
-    if(action == 'edit'){
-      this.action = 'Edit'
-      this.patchUser()
-    }
-    // this._http.get('users/'+user.id).subscribe((response: any) => {
-    //   this.user_detail = response;
-    //   if(action == 'edit'){
-    //     this.action = 'Edit'
-    //     this.patchUser()
-    //   }
-    // })
-   }
+ saveForm(){ 
+  this.createUser(),
+  this.updateUser()
+ }
 
-   patchUser(){
-    this.user_form.patchValue({
-      username  : this.user_detail.username,
-      firstName : this.user_detail.firstName,
-      lastName  : this.user_detail.lastName,
-      email     : this.user_detail.email,
-      phone     : this.user_detail.phone
-      // address   : this.users.address
-    })
-   }
+ patchForm(){
+  this.user_form.patchValue({
+    username  : this.user_detail.username,
+    firstName : this.user_detail.firstName ,
+    lastName  : this.user_detail.lastName ,
+    email     : this.user_detail.email,
+    phone     : this.user_detail.phone,
+    address   : this.user_detail.address
+  })
+ }
 
-   setPayLoad(form: any){
-    return {
-      username : form.username,
-      firstName: form.firstName,
-      lastName : form.lastName,
-      email    : form.email,
-      phone    : form.phone,
-      address  : form.address
-    }
-   }
+ setPayLoad(form: any){
+  return {
+    username  : form.username,
+    firstName : form.firstName ,
+    lastName  : form.lastName ,
+    email     : form.email,
+    phone     : form.phone,
+    address   : form.address
+  }
+ }
 
-   saveForm(){ this.action === "Add" ? this.createUser() : this.updateUser()}
+ createUser(){
+  this.http.post('users/add', this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
+    this.getUser()
+    this.resetForm()
+    console.log('Add User --->', response);
+    this.toastr.success("User Added Successfully")
+  })
+ }
 
-   createUser(){
-    this._http.post('users/add', this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
-      this.getUsers()
-      this.resetForm()
-      this.close.nativeElement.click()
-      this.toastr.success("User Added successfully.");
-      console.log('Create Users', response);
-    })
-   }
+ updateUser(){
+  this.http.put('users/'+this.user_detail.id, this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
+    this.getUser()
+    this.resetForm()
+    console.log('Add User --->', response);
+    this.toastr.success("User Updated Successfully")
+  })
+ }
 
-   updateUser(){
-    this._http.put('users/'+this.user_detail.id, this.setPayLoad(this.user_form.value)).subscribe((response: any) => {
-      this.resetForm()
-      this.getUsers()
-      this.close.nativeElement.click()
-      this.toastr.success("User Updated Successfully")
-    })
-   }
+ deActivatedUser(user: any){
+  this.http.delete('users/'+user.id).subscribe((response: any) => {
+    this.getUser()
+    this.resetForm()
+    console.log('Delete', response);
+    this.toastr.success("User Deleted Successfully")
+  })
+ }
 
-   deActivatedUser(user: any){
-    this._http.delete('users/'+user.id).subscribe((response: any) => {
-      this.getUsers()
-      this.resetForm()
-      console.log('DeActivate', response);
-      this.toastr.success("User Deleted Successfully")
-    })
-   }
-  
 }
 
             </code>
@@ -5029,101 +5065,87 @@ export class UsersComponent {
           <pre>
             <code>
 
-              div class="card">
-                div class="card-body max-w-7xl m-auto">
-            
-                  a href="#" style="display: flex; justify-content: center; margin-left: 23px !important; background: #000; color: #fff; width: 124px; text-align: center; margin-top: 25px; padding: 5px; border-radius: 50px;" data-bs-toggle="modal" data-bs-target="#exampleModal"> Add User /a>
-            
-                  div class="overflow-x-auto p-4">
-                    !-- {{loader.isLoading | async}} -->
-                    table class="min-w-full divide-y divide-gray-200 bg-white shadow-md rounded-lg">
-                      thead class="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
-                        tr>
-                          th class="px-4 py-3 text-left">Username/th>
-                          th class="px-4 py-3 text-left">Name/th>
-                          th class="px-4 py-3 text-left">Gender/th>
-                          th class="px-4 py-3 text-left">Email/th>
-                          th class="px-4 py-3 text-left">Phone/th>
-                          th class="px-4 py-3 text-left">Address/th>
-                          th class="px-4 py-3 text-center">Actions/th>
-                        /tr>
-                      /thead>
-                      tbody class="text-gray-700 divide-y divide-gray-200">
-                        !-- Row 1 -->
-                        tr class="hover:bg-gray-50" *ngFor="let user of users">
-                          td class="px-4 py-3">  {{user.username}} /td>
-                          td class="px-4 py-3"> {{user.firstName}} {{user.lastName}} /td>
-                          td class="px-4 py-3"> {{user.gender}} /td>
-                          td class="px-4 py-3"> {{user.email}} /td>
-                          td class="px-4 py-3"> {{user.phone}} /td>
-                          td class="px-4 py-3"> {{user.address?.address}} /td>
-                            td class="px-4 py-3 text-center space-x-2">
-                            button class="text-blue-600 hover:underline" (click)="setUser(user, 'edit')" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit/button>
-                            button class="text-red-600 hover:underline" (click)="deActivatedUser(user)">Delete/button>
-                          /td>
-                        /tr>
-                      /tbody>
-                    /table>
-                  /div>
-                /div>
+           div class="container mt-5">
+    h2 class="mb-5"> Crud Operation with API /h2>
+
+    div class="container">
+        div class="dynamic-form shadow p-3 col-lg-12 m-auto mb-5 card">
+    
+            div class="d-flex justify-content-between mb-4"> 
+                h5> span class="mb-4"> User Form  /span>/h5>
+                button class="btn btn-success"> Add User /button>
             /div>
-            
-            !-- Modal -->
-            div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              div class="modal-dialog modal-lg">
-                div class="modal-content">
-                  div class="modal-header">
-                    h5 class="modal-title" id="exampleModalLabel"> {{action}} User /h5>
-                    button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #close (click)="resetForm()">/button>
-                  /div>
-                  div class="modal-body">
-                
-                    form class="mt-4" [formGroup]="user_form" (ngSubmit)="saveForm()">
-                      div class="row mb-3">
-                        div class="col-md-6">
-                          label for="username" class="form-label">Username/label>
-                          input type="text" class="form-control" id="username" placeholder="Enter username" formControlName="username">
-                          div class="error-message" *ngIf="user_form.get('username')?.touched && user_form.get('username')?.hasError('required')">Username is required./div>
-                        /div>
-                        div class="col-md-6">
-                          label for="firstName" class="form-label">First Name/label>
-                          input type="text" class="form-control" id="firstName" placeholder="Enter first name" formControlName="firstName">
-                          div class="error-message" *ngIf="user_form.get('firstName')?.touched && user_form.get('firstName')?.hasError('required')">First Name is required./div>
-                        /div>
-                      /div>
-                    
-                      div class="row mb-3">
-                        div class="col-md-6">
-                          label for="lastName" class="form-label">Last Name/label>
-                          input type="text" class="form-control" id="lastName" placeholder="Enter last name" formControlName="lastName">
-                          div class="error-message" *ngIf="user_form.get('lastName')?.touched && user_form.get('lastName')?.hasError('required')">Last Name is required./div>
-                        /div>
-                      /div>
-                    
-                      div class="row mb-3">
-                        div class="col-md-6">
-                          label for="email" class="form-label">Email/label>
-                          input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email">
-                          div class="error-message" *ngIf="user_form.get('email')?.touched && user_form.get('email')?.hasError('required')">Email is required./div>
-                        /div>
-                        div class="col-md-6">
-                          label for="phone" class="form-label">Phone/label>
-                          input type="tel" class="form-control" id="phone" placeholder="Enter phone number" formControlName="phone">
-                          div class="error-message" *ngIf="user_form.get('phone')?.touched && user_form.get('phone')?.hasError('required')">Phone is required./div>
-                        /div>
-                      /div>
-                    
-                      div class="mb-3">
-                        label for="address" class="form-label">Address/label>
-                        textarea class="form-control" id="address" rows="3" placeholder="Enter address" formControlName="address">/textarea>
-                        div class="error-message" *ngIf="user_form.get('address')?.touched && user_form.get('address')?.hasError('required')">Address is required./div>
-                      /div>
-                      button type="submit" class="btn btn-primary" [disabled]="user_form.invalid">Submit/button>
-                    /form>
-                  /div>
-                /div>
-              /div>
+    
+            form [formGroup]="user_form" (ngSubmit)="saveForm()">
+            div class="row m-auto"> 
+            div class="col-lg-3 mb-4"> 
+            input type="text" class="form-control" formControlName="username" placeholder="Username">
+            div class="error" *ngIf="this.user_form.get('username')?.touched && this.user_form.get('username')?.hasError('required')"> Username is Invalid /div>
             /div>
+    
+            div class="col-lg-3 mb-4">  
+            input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+            div class="error" *ngIf="this.user_form.get('firstName')?.touched && this.user_form.get('firstName')?.hasError('required')"> First Name is Invalid /div>
+            /div>
+    
+            div class="col-lg-3 mb-4"> 
+            input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+            div class="error" *ngIf="this.user_form.get('lastName')?.touched && this.user_form.get('lastName')?.hasError('required')"> Last Name is Invalid /div>
+            /div>
+
+            div class="col-lg-3 mb-4"> 
+                input type="text" class="form-control" formControlName="email" placeholder="Email">
+                div class="error" *ngIf="this.user_form.get('email')?.touched && this.user_form.get('email')?.hasError('required')"> Email is Invalid /div>
+                /div>
+
+            div class="col-lg-3 mb-4"> 
+                input type="text" class="form-control" formControlName="phone" placeholder="Phone">
+                div class="error" *ngIf="this.user_form.get('phone')?.touched && this.user_form.get('phone')?.hasError('required')"> Phone is Invalid /div>
+            /div>
+
+            div class="col-lg-3 mb-4"> 
+                input type="text" class="form-control" formControlName="address" placeholder="Address">
+                div class="error" *ngIf="this.user_form.get('address')?.touched && this.user_form.get('address')?.hasError('required')"> Address is Invalid /div>
+            /div>
+
+            div class="col-lg-3 mb-4">  
+                button class="btn btn-primary" type="submit"> Submit /button>/div>
+        /div>    
+        /form>
+    
+        /div>
+    
+        <!-- <div *ngIf="!User_details.length">  <h5> No Data </h5></div> -->
+    
+        table class="table table-bordered mt-3">
+            thead>
+              tr>
+                th> Username /th>
+                th> Name /th>
+                th> Gender /th>
+                th> Email /th>
+                th> Phone /th>
+                th> Address /th>
+                th> Action /th>
+              /tr>
+            /thead>
+            tbody>
+              tr *ngFor="let user of users">
+                td> {{user.username}} /td>
+                td> {{user.firstName}} {{user.lastName}} /td>
+                td> {{user.gender}} /td>
+                td> {{user.email}} /td>
+                td> {{user.phone}} /td>
+                td> {{user.address?.address}} /td>
+              td>
+                  button class="btn btn-sm btn-warning me-2" (click)="setUser(user)">Edit /button>
+                  button class="btn btn-sm btn-danger" (click)="deActivatedUser(user)">Delete /button>
+                /td>
+              /tr>
+            /tbody>
+          /table>
+    /div>
+/div>
 
 
             </code>
