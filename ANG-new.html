@@ -116,6 +116,8 @@ pre, code {
     <li> <a href="#form-crud"> form validation, crud </a> </li>
     <li> <a href="#empw-api"> Employee crud without api </a> </li>
     <li> <a href="#emp-api"> Employee crud with api </a> </li>
+    <li> <a href="#emp-dynamic"> Emp crud API Dynamic Form </a> </li>
+     <li> <a href="#emp-withoutdynamic"> Emp crud WITHOUT API Dynamic Form </a> </li>
     <li> <a href="#reusable"> Component Reusable </a> </li>
     <li> <a href="#apiservices"> Rest API / Web API </a> </li>
     
@@ -145,7 +147,7 @@ pre, code {
       <li> <a href="#pagination"> pagination </a> </li>
       <li> <a href="#login-setup"> login-setup </a> </li>
       <li> <a href="#json"> json </a> </li>
-      <li> <a href="dom"> DOM Manipulation </a></li>
+      <li> <a href="#dom"> DOM Manipulation </a></li>
 	   <li> <a href="#scrolltop"> scrolltop </a> </li>
       <li> <a href="#add-remove"> add remove </a> </li>
 		<li> <a href="#test"> Angular Test casing  </a> </li>
@@ -193,6 +195,8 @@ Module / Feature
 <p> “We also implemented features like searching, filtering by category or status, pagination, and sorting. For example, on the product list module, I received JSON data from the backend, and used RxJS operators like map and filter to manipulate it before rendering.” </p>
 
 <p> “In forms, I also handled data for creating or updating a product — like uploading product images, selecting categories from dropdowns, and validating inputs using Angular Reactive Forms.”</p>
+
+<p> <strong> Thank you for your time. Do you have any suggestions on how I could strengthen my profile for this kind of role? </strong> </p>
 
 </div>
 
@@ -2880,6 +2884,8 @@ div appChangeBg>Div 2 /div>
         }
         &lt;p cdirective color="red"&gt; Form &lt;/p&gt;
     -------------------------
+
+   <h2>// onclick change the background color or toggle  </h2> 
     
     import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
@@ -3006,8 +3012,50 @@ export class AppComponent {}
     <h2> @Input, @output </h2>
     <p> @Input and @Output are used for communication between parent and child components </p>
 
-<h2>  Sharing data between parent and multiple child components </h2>
+<h2> Step-by-Step: Parent to Child Data Sharing </h2>
+<h2>  Child Component (child.component.ts) </h2>
+<pre>
+  <code>
+    import { Component, Input } from '@angular/core';
 
+@Component({
+  selector: 'app-child',
+  template: `<p>Message from Parent: {{ message }}</p>`
+})
+export class ChildComponent {
+  @Input() message: string = '';
+}
+
+  </code>
+</pre>
+<p> <strong> 2. Parent Component (parent.component.ts) </strong> </p>
+<pre>
+  <code>
+    import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: `
+    h2>Parent Component/h2>
+    app-child [message]="parentMessage">/app-child>
+  `
+})
+export class ParentComponent {
+  parentMessage: string = 'Hello from Parent!';
+}
+
+
+//output 
+Parent Component
+Message from Parent: Hello from Parent!
+  </code>
+</pre>
+<p> @Input() is used in child to receive data. <br>
+[] square brackets used in parent HTML to bind a variable. </p>
+
+============
+
+<h2>  Sharing data between parent and multiple child components </h2>
 <pre>
   <code>
     1. Parent Component (Holds the Button & Shared State)
@@ -3305,6 +3353,81 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 <h2> What is Pipe transform Interface in Angular? </h2>
 <p> An interface used by pipes to accomplish a transformation. Angular calls the transform function with the value of a binding as the first argument and any arguments as the second parameter in list form. This interface is used to implement custom pipes. </p>
 
+<h2> 1. Capitalize First Letter Pipe </h2>
+
+<pre>
+  <code>
+capitalize.pipe.ts
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'capitalize'
+})
+export class CapitalizePipe implements PipeTransform {
+  transform(value: string): string {
+    if (!value) return '';
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+}
+
+
+HTML 
+
+p> {{ 'hello' | capitalize }} /p>  <!-- Output: Hello -->
+
+  </code>
+</pre>
+
+<h2> 2. Shorten Text Pipe </h2>
+
+<pre>
+  <code>
+shorten.pipe.ts
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'shorten'
+})
+export class ShortenPipe implements PipeTransform {
+  transform(value: string, limit: number = 10): string {
+    if (!value) return '';
+    return value.length > limit ? value.substring(0, limit) + '...' : value;
+  }
+}
+
+Use in HTML 
+
+p> {{ 'Angular is awesome!' | shorten:7 }}  /p>  <!-- Output: Angular... -->
+
+  </code>
+</pre>
+
+<h2> 3. Multiply Number Pipe </h2>
+
+<pre>
+  <code>
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'multiply'
+})
+export class MultiplyPipe implements PipeTransform {
+  transform(value: number, factor: number): number {
+    return value * factor;
+  }
+}
+
+// Use in HTML 
+
+p> {{ 5 | multiply:3 }} /p>  <!-- Output: 15 -->
+
+  </code>
+</pre>
+
+<br>
+
   <pre>
     <code>
       Uppercase: {{ 'hello world' | uppercase }}
@@ -3312,8 +3435,8 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 today: Date = new Date();
 &lt;p&gt;Full Date: {{ today | date:'fullDate' }}&lt;/p&gt;
 
-<pre>
-  <code>
+========== 
+
     import { Pipe, PipeTransform } from '@angular/core';
  @Pipe({
   name: 'tranformpipe'
@@ -3327,15 +3450,36 @@ export class TranformpipePipe implements PipeTransform {
   </code>
 </pre>
 
+<br>
+
+<pre>
+  <code>
+
  <strong> custom Pipe, PipeTransform </strong>
 
+pipeTransform use - PipeTransform is an interface from the @angular/core package that allows you to create custom pipes. 
+transform(value: string): string
+----------- 
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'genderTitle'
+})
+
+export class GenderTitlePipe implements PipeTransform {
+
   transform(value: string, gender: string): string {
-    if(gender.toLowerCase()=="male")
-      return "Mr. "+value;
-      else
-      return "Miss. "+value
-    } 
-    {{employee.name | mypipe:employee.gender }}
+    if (gender.toLowerCase() === 'male') {
+      return 'Mr. ' + value;
+    } else {
+      return 'Miss. ' + value;
+    }
+  }
+
+}
+
+    {{employee.name | genderTitle:employee.gender }}
 
     </code>
   </pre>
@@ -3530,6 +3674,38 @@ ul>
 
   <div class="box shadow p-2 mb-3" id="di">
     <h2> Dependency Injection (DI) in Angular  </h2>
+
+    <p> <strong> Dependency Injection in Angular means providing a class its dependencies (like services) from outside rather than creating them itself. </strong></p>
+    <h2> How it Works </h2>
+1. Create a Service (Dependency) <br> 
+A service contains logic or data that you want to use across components.
+<pre>
+  <code>
+    @Injectable({
+  providedIn: 'root'  // Angular will create a single instance (singleton)
+})
+export class UserService {
+  getUser() {
+    return 'John Doe';
+  }
+}
+  </code>
+</pre>
+2. Inject Service into a Component <br>
+You "inject" the service into the component’s constructor.
+
+<pre><code>
+@Component({...})
+export class UserComponent {
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    console.log(this.userService.getUser());
+  }
+}
+
+</code></pre>
+
     <p>  DI is a design pattern in Angular used for managing dependencies (services, components, etc.). <br>
       * Instead of creating objects manually, Angular injects them automatically. <br>
       * Uses @Injectable() decorator for services. <br>
@@ -3924,6 +4100,88 @@ button (click)="saveData()">Save Data</button>
   
   <p> <strong> Authorization means "What are you allowed to do?"</strong> </p>
   <p> Once you're logged into the application, you have access to a database — but can you delete tables, update records, insert new data, or are you limited to just read only ? This control over what you can or cannot do within the system is called Authorization. </p>
+
+
+  <p> <strong> Authentication </strong> Who are you? (Login verification) </p>
+  <p> <strong> Authorization </strong> What are you allowed to do? (Role-based access) </p>
+
+  <p> <strong> Step-by-Step: How Authentication & Authorization Work in Angular </strong></p>
+   <h2> 1. User Logs In (Authentication) </h2>
+   <ul>
+    <li> User fills out login form (email/password). </li>
+    <li> Angular sends login data to a backend API. </li>
+    <li> Backend validates the credentials and returns a token (usually JWT). </li>
+   </ul>
+<pre>
+  <code>
+// auth.service.ts
+login(email: string, password: string) {
+  return this.http.post('/api/login', { email, password });
+}
+  </code>
+</pre>
+<h2> 🔹 2. Token is Stored (Typically in LocalStorage) </h2>
+<pre>
+  <code> // After login success
+localStorage.setItem('token', tokenFromServer);
+</code>
+</pre>
+<h2> 3. Include Token in Future Requests (with HTTP Interceptor) </h2>
+<pre>
+  <code>
+    // token.interceptor.ts
+intercept(req: HttpRequest<any>, next: HttpHandler): Observable HttpEvent<any>> {
+  const token = localStorage.getItem('token');
+  if (token) {
+    req = req.clone({
+      setHeaders: { Authorization: `Bearer ${token}` }
+    });
+  }
+  return next.handle(req);
+}
+  </code>
+</pre>
+<h2> 🔹 4. Protect Routes (Authorization) </h2>
+<p> Using Angular Route Guards like AuthGuard to protect certain pages. </p>
+<pre>
+  <code>
+    // auth.guard.ts
+canActivate(): boolean {
+  return !!localStorage.getItem('token'); // or check user role
+}
+  </code>
+</pre>
+<p> Add guard to routes: </p>
+<pre>
+  <code>
+    {
+  path: 'dashboard',
+  component: DashboardComponent,
+  canActivate: [AuthGuard]
+}
+  </code>
+</pre>
+<h2> 🔹 5. Optional: Role-Based Authorization
+If token contains role info (e.g. admin, user), you can check that too: </h2>
+<pre>
+  <code>
+    [Login Form]
+     |
+     v
+[AuthService] --POST--> [Backend API] --Valid--> [JWT Token]
+     |
+     v
+[Store Token in LocalStorage]
+     |
+     v
+[Include Token in Headers via Interceptor]
+     |
+     v
+[Access Protected Route] -- [AuthGuard Checks Token]
+
+  </code>
+</pre>
+
 
   <p> <strong> LOGIN PROCESS </strong></p>
   <p> Login -> Username and Password -> API CALL -> In Backend match with database -> Verified -> the Provide the token - token stores in localStorage by fronted - then each request we have to provide token - backend match token that token is correct or not - than login </p>
@@ -5201,6 +5459,370 @@ export class CrudApiComponent {
 
             </code>
           </pre>
+
+          <h2> Dabase check validation </h2>
+
+          <pre>
+            <code>
+  isDuplicateProduct(title: string): boolean {
+    return this.products?.some((product: any) => product.title.trim().toLowerCase() === title.trim().toLowerCase());
+  }
+  
+
+   saveProduct(){
+      const title = this.product_form.value.title;
+  
+        // Check: If editing, and title hasn't changed, skip duplicate check
+      if (this.product_details?.id && title === this.product_details.title.trim().toLowerCase()) {
+      this.productUpdate();
+      return;
+     }
+  
+      if (this.isDuplicateProduct(title)) {
+        this.toaster.error('Product title already exists!');
+        return;
+      }
+  
+        // Create or Update
+    if (this.product_details?.id) {
+      this.productUpdate();
+    } else {
+      this.createProduct();
+    }
+  
+    }
+
+
+    //
+
+            </code>
+          </pre>
+
+          </div>
+
+
+          <div class="box shadow p-2 mb-3" id="emp-dynamic">
+          <h2> Employee crud with API Dynamic Form </h2>
+
+          <pre>
+            <code>
+              import { Component } from '@angular/core';
+import { HeaderComponent } from "../../header/header.component";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpSharedService } from '../../http-shared.service';
+import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-crud-form-dynamic',
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
+  templateUrl: './crud-form-dynamic.component.html',
+  styleUrl: './crud-form-dynamic.component.css'
+})
+export class CrudFormDynamicComponent {
+
+  products: any
+  product_form!: FormGroup
+  product_details: any
+
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpSharedService,
+    private toaster: ToastrService
+  ) { }
+
+  productform_fields = [
+    { name: 'title', label: 'Product Title', required: true },
+    { name: 'category', label: 'Product Category', required: true },
+    { name: 'brand', label: 'Brand', required: true },
+    { name: 'description', label: 'Description', required: true },
+    { name: 'price', label: 'Price', required: true }
+  ];
+
+  ngOnInit() {
+    this.initializeForm()
+    this.getProduct()
+  }
+
+  initializeForm() {
+    const group: any = {};
+    this.productform_fields.forEach(field => {
+      group[field.name] = field.required ? ['', Validators.required] : [''];
+    });
+    this.product_form = this.fb.group(group);
+  }
+
+  resetForm() {
+    this.initializeForm()
+    this.product_details = null;
+  }
+
+  saveProduct() {
+    if (this.product_details?.id) {
+      this.productUpdate();
+    } else {
+      this.createProduct();
+    }
+  }
+
+  getProduct() {
+    this.http.get('products').subscribe((response: any) => {
+      this.products = response.products;
+    })
+  }
+
+  setPayLoad(form: any) {
+    const payload: any = {};
+    this.productform_fields.forEach(field => {
+      payload[field.name] = form[field.name];
+    });
+    return payload;
+  }
+
+
+  createProduct() {
+    this.http.post('products/add', this.setPayLoad(this.product_form.value)).subscribe((response: any) => {
+      this.resetForm()
+      this.toaster.success('Product has been created')
+    })
+  }
+
+  patchForm() {
+    const patch: any = {};
+    this.productform_fields.forEach(field => {
+      patch[field.name] = this.product_details[field.name];
+    });
+    this.product_form.patchValue(patch);
+  }
+
+
+  productUpdate() {
+    this.http.put('products/' + this.product_details.id, this.setPayLoad(this.product_form.value)).subscribe((response: any) => {
+      this.resetForm()
+      this.toaster.success('Product has been updated')
+    })
+  }
+
+  setProduct(product: any) {
+    this.product_details = product
+    this.patchForm()
+  }
+
+  deleteProduct(product: any) {
+    this.http.delete('products/' + product.id).subscribe((response: any) => {
+      this.toaster.success('Product has been deleted')
+    })
+  }
+}
+
+
+
+======================
+
+HTML 
+
+form class="shadow-lg rounded mb-5 p-3" [formGroup]="product_form" (ngSubmit)="saveProduct()">
+div class="row">
+  div class="col-lg-2" *ngFor="let field of productform_fields">
+    input [placeholder]="field.label" class="form-control" [formControlName]="field.name" />
+    span class="text-danger" *ngIf="product_form.get(field.name)?.touched && product_form.get(field.name)?.hasError('required')"> 
+    {{ field.label }} is invalid  /span>
+  /div>
+  div class="col-lg-2 d-flex align-items-end">
+    button type="submit" class="btn btn-success w-100">Add Product /button>
+  /div>
+/div>
+/form>
+
+
+tr *ngFor="let product of products">
+                td> {{product.title}} /td>
+                td> {{product.category}} /td>
+                td> {{product.brand}} /td>
+                td> {{product.description}} /td>
+                td> {{product.price}} /td>
+                td> 
+                    div class="d-flex"> 
+                    button class="btn btn-info me-2" (click)="setProduct(product)"> Edit /button>
+                    button class="btn btn-danger" (click)="deleteProduct(product)"> Delete /button>
+                    /div>
+                /td>
+            /tr>
+
+
+            </code>
+          </pre>
+            
+          </div>
+
+
+          <div class="box shadow p-2 mb-3" id="emp-withoutdynamic">
+          <h2> Employee crud without API Dynamic Form </h2>
+
+          <pre>
+            <code>
+              import { Component } from '@angular/core';
+import { HeaderComponent } from "../../header/header.component";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+
+@Component({
+  selector: 'app-crud-form-dynamic-localhost',
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, HeaderComponent],
+  templateUrl: './crud-form-dynamic-localhost.component.html',
+  styleUrl: './crud-form-dynamic-localhost.component.css'
+})
+export class CrudFormDynamicLocalhostComponent {
+
+  
+  emp_form!: FormGroup
+  emp_details: any = []
+  empUpdateRecored: any
+
+  constructor(
+    private fb: FormBuilder,
+    private toaster: ToastrService
+  ){}
+
+    // Dynamic form fields
+  dynamic_fields = [
+  { label: 'Employee Name', key: 'emp_name', type: 'text', required: true },
+  { label: 'Email', key: 'emp_email', type: 'email', required: true },
+  { label: 'Role', key: 'emp_role', type: 'text', required: true },
+  { label: 'Phone No', key: 'emp_phone', type: 'text', required: true }
+];
+
+  ngOnInit(){
+    this.initializeForm()
+    let empdata = localStorage.getItem('employee_data')
+    if(empdata){
+      this.emp_details = JSON.parse(empdata)
+    }
+  }
+
+  initializeForm() {
+   const formControls: any = {};
+  this.dynamic_fields.forEach(field => {
+    formControls[field.key] = field.required ? ['', Validators.required] : [''];
+  });
+  this.emp_form = this.fb.group(formControls);
+  }
+
+  resetForm(){
+    this.initializeForm()
+    this.empUpdateRecored = null;
+  }
+
+  empSaveData(){
+    if(this.empUpdateRecored){
+      this.updateEmp()
+    } else {
+      this.getEmp()
+    }
+  }
+
+  getEmp(){
+    const emp_id = (this.emp_details.at(-1)?.id ?? 0) + 1
+    const formValue = this.emp_form.value;
+
+    this.emp_details.push({
+      id: emp_id,
+      ...formValue
+    });
+
+    this.resetForm();
+    this.toLocalSaveData();
+    this.toaster.success("Employee data has been added");
+
+  }
+
+  updateEmp(){
+    const formValue = this.emp_form.value;
+    const found = this.emp_details.find((emp: any) => emp.id == this.empUpdateRecored);
+
+    if (found) {
+      Object.assign(found, formValue);
+    }
+
+    this.resetForm()
+    this.toLocalSaveData()
+    this.toaster.success("Employee data has been updated")
+  }
+
+empEditUpdate(emp_id: any) {
+  this.empUpdateRecored = emp_id;
+  const data = this.emp_details.find((emp: any) => emp.id === emp_id);
+  if (data) {
+    // Only pick the fields that exist in the form
+    const patchValues: any = {};
+    this.dynamic_fields.forEach(field => {
+      patchValues[field.key] = data[field.key];
+    });
+
+    this.emp_form.patchValue(patchValues);
+  }
+}
+
+  deleteEmp(emp_id: any){
+    this.emp_details = this.emp_details.filter((emp_data: any) => emp_data.id != emp_id)
+    this.toLocalSaveData()
+    this.toaster.success("Employee data has been deleted")
+  }
+
+  toLocalSaveData(){
+    localStorage.setItem('employee_data', JSON.stringify(this.emp_details))
+  }
+
+}
+
+
+
+====================
+
+HTML 
+
+form [formGroup]="emp_form" (ngSubmit)="empSaveData()" class="mb-4 p-3 shadow-sm rounded bg-light">
+  div class="row">
+    div class="col-md-4 mb-3" *ngFor="let field of dynamic_fields">
+      input
+        class="form-control"
+        [placeholder]="field.label"
+        [formControlName]="field.key"
+      />
+      div class="text-danger" *ngIf="emp_form.get(field.key)?.touched && emp_form.get(field.key)?.invalid">
+        {{ field.label }} is required
+      /div>
+    /div>
+    div class="col-md-2 d-flex align-items-end">
+      button type="submit" class="btn btn-primary w-100"> {{ empUpdateRecored ? 'Update' : 'Add' }} Employee /button>
+    /div>
+  /div>
+/form>
+
+table class="table table-bordered">
+  thead>
+    tr>
+      th>#ID /th>
+      th *ngFor="let field of dynamic_fields">{{ field.label }} /th>
+      th>Actions /th>
+    /tr>
+  /thead>
+  tbody>
+    tr *ngFor="let emp of emp_details">
+      td>{{ emp.id }}  /td>
+      td *ngFor="let field of dynamic_fields">{{ emp[field.key] }} /td>
+      td>
+        button class="btn btn-sm btn-info me-2" (click)="empEditUpdate(emp.id)">Edit  /button>
+        button class="btn btn-sm btn-danger" (click)="deleteEmp(emp.id)">Delete  /button>
+      /td>
+    /tr>
+  /tbody>
+/table>
+
+            </code>
+          </pre>
+
           </div>
 
 

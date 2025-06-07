@@ -91,6 +91,7 @@ pre {
       <li> <a href="#function"> function statement and function expression </a></li>
       <li> <a href="#primitive"> Primitive Data Types / Null, Undefined </a></li>
        <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
+        <li> <a href="#break-continue">  Break and Continue  </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#filter"> filter </a> </li>
@@ -122,8 +123,9 @@ pre {
       <li> <a href="#debugging">  Debugging </a></li>
       <li> <a href="#frontend">  Frontend Performance </a></li>
 	  <li> <a href="#database">  Database Mysql </a></li>
-     <h5> HTML AND JAVASCRIPT</h5>
+     <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
      <li> <a href="#htmljs"> HTMLJS</a></li>
+      <li> <a href="#formvalidation"> Form Validation </a></li>
      <hr>
      <li> <a href="#typescript"> TypeScript </a> </li>
      <li> <a href="#enums"> Enums </a> </li>
@@ -849,7 +851,8 @@ Timeout callback <br>
 
 <div class="box shadow p-2 mb-3" id="dom">
 <h2> DOM </h2>
-<P> DOM allows JavaScript to interact with HTML dynamically. </P>
+<P> Document Object Model allows JavaScript to interact with HTML dynamically. </P>
+
 <pre>
     <code>
         let heading = document.getElementById("heading");
@@ -863,6 +866,104 @@ document.getElementById("heading").innerHTML = "span style='color: red;'>Updated
 
     </code>
 </pre>
+
+<p> <strong> The getElementById Method </strong> The most common way to access an HTML element is to use the id of the element. </p>
+<p> <strong> The innerHTML Property </strong> The easiest way to get the content of an element is by using the innerHTML property. </p>
+
+<pre>
+  <code>
+p id="demo"> /p>
+document.getElementById("demo").innerHTML = "Hello World!";
+  </code>
+</pre>
+
+<p> <strong> document.getElementById(id)	</strong> Find an element by element id </p>
+<p> <strong> document.getElementsByTagName(name)	</strong> Find elements by tag name </p>
+<p> <strong> document.getElementsByClassName(name)	</strong> Find elements by class name </p>
+
+<pre>
+  <code>
+h2> JavaScript can Change HTML /h2>
+p id="p1">Hello World!  /p>
+document.getElementById("p1").innerHTML = "New Changes";
+  </code>
+</pre>
+
+<h2> Form validation </h2>
+<pre>
+  <code>
+    function validateForm() {
+  let x = document.forms["myForm"]["fname"].value;
+  if (x == "") {
+    alert("Name must be filled out");
+    return false;
+  }
+}
+
+form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Name: input type="text" name="fname">
+  input type="submit" value="Submit">
+/form>
+
+  </code>
+</pre>
+
+===
+<pre>
+  <code>
+    <p>Changing the HTML style:</p>
+
+
+p id="p1">Hello World! /p>
+p id="p2">Hello World! /p>
+
+
+document.getElementById("p2").style.color = "blue";
+document.getElementById("p2").style.fontFamily = "Arial";
+document.getElementById("p2").style.fontSize = "larger";
+
+
+  </code>
+</pre>
+
+<h2> Onclick Attribute </h2>
+
+<pre>
+  <code>
+
+h2 onclick="changeText(this)">Click on this text! /h2>
+
+function changeText(id) {
+  id.innerHTML = "Ooops!";
+}
+
+  </code>
+</pre>
+
+<h2> addEvent Listener </h2>
+
+<pre>
+  <code>
+button id="myBtn"> Try it /button>
+
+document.getElementById("myBtn").addEventListener("click", myFunction);
+function myFunction() {
+  alert ("Hello World!");
+}
+  </code>
+</pre>
+
+<h2>  From DOM Text Content </h2>
+
+<pre>
+  <code>
+p id="para">This is a paragraph. /p>
+
+let text = document.getElementById("para").textContent;
+console.log(text); // Output: This is a paragraph.
+  </code>
+</pre>
+
 </div>
 
 
@@ -955,6 +1056,38 @@ Difference
     </code>
 </pre>
 </div>
+
+
+<div class="box shadow p-2 mb-3" id="break-continue">
+    <h2> Break Continue  </h2>
+    <p> The break statement stops the current loop completely and exits it. </p>
+<pre>
+  <code>
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    break; // stops the loop when i is 3
+  }
+  console.log(i); // Output: 1, 2
+}
+  </code>
+</pre>
+
+<p> The continue statement skips the current iteration of the loop and moves to the next iteration. </p>
+
+<pre>
+  <code>
+    for (let i = 1; i <= 5; i++) {
+  if (i === 3) {
+    continue; // skips only when i is 3
+  }
+  console.log(i); // Output: 1, 2, 4, 5
+}
+
+  </code>
+</pre>
+</div>
+
+
 
 <div class="box shadow p-2 mb-3" id="this">
     <h2> This </h2>
@@ -2942,6 +3075,68 @@ document.getElementById('myButton').addEventListener('click', function() {
       });
     });
 
+
+  </code>
+</pre>
+
+</div>
+
+
+<div id="formvalidation"> 
+<h2> Form Validation </h2>
+
+<pre>
+  <code>
+    
+HTML 
+
+form id="myForm" onsubmit="return validateForm()">
+  label>Name: /label>
+  input type="text" id="name" /> br />
+
+  label>Email: /label>
+  input type="text" id="email" />  br />
+
+  label>Phone: /label>
+  input type="text" id="phone" /> br />
+
+  button type="submit">Submit /button>
+/form>
+p id="errorMsg" style="color: red;"> /p>
+
+
+JS 
+
+function validateForm() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const errorMsg = document.getElementById("errorMsg");
+
+  // Name validation
+  if (name === "") {
+    errorMsg.textContent = "Name is required.";
+    return false;
+  }
+
+  // Email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    errorMsg.textContent = "Please enter a valid email.";
+    return false;
+  }
+
+  // Phone validation (10 digits)
+  const phonePattern = /^[0-9]{10}$/;
+  if (!phonePattern.test(phone)) {
+    errorMsg.textContent = "Phone must be 10 digits.";
+    return false;
+  }
+
+  errorMsg.textContent = ""; // Clear error if everything is valid
+  alert("Form submitted successfully!");
+  return true;
+}
 
   </code>
 </pre>
