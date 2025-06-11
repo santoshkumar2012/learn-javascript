@@ -90,12 +90,14 @@ pre {
       <li> <a href="#operator"> Rest, Spread Operator </a> </li>
       <li> <a href="#function"> function statement and function expression </a></li>
       <li> <a href="#primitive"> Primitive Data Types / Null, Undefined </a></li>
-       <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
-        <li> <a href="#break-continue">  Break and Continue  </a></li>
+      <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
+      <li> <a href="#break-continue">  Break and Continue  </a></li>
+      <li> <a href="#synchronous">  synchronous and asynchronous  </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#filter"> filter </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
+	   <li> <a href="#secondlargestnumber"> Second largestnumber </a> </li>
       <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
       <li> <a href="#find"> find sum number </a> </li>
       <li> <a href="#sum"> sum - 123456 </a> </li>
@@ -111,6 +113,10 @@ pre {
       <li> <a href="#digitalroot"> Digital Root repeatedly </a></li>
 	    <li> <a href="#true"> True and False </a></li>
       <li> <a href="#dpstring">  Remove duplicate string </a></li>
+      <li> <a href="#primenumber">  Finding Prime Numbers </a></li>
+      <li> <a href="#fibonacci">  Fibonacci Sequence </a></li>
+      <li> <a href="#secondHighestsalarys"> Second Highest Salary (Angular)</a></li>
+
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#html"> HTML </a> </li>
       <li> <a href="#less"> Less, Sass, Scss </a> </li>
@@ -124,8 +130,11 @@ pre {
       <li> <a href="#frontend">  Frontend Performance </a></li>
 	  <li> <a href="#database">  Database Mysql </a></li>
      <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
-     <li> <a href="#htmljs"> HTMLJS</a></li>
+     <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
       <li> <a href="#formvalidation"> Form Validation </a></li>
+      <li> <a href="#increasevalue"> Increase & decrease value </a></li>
+      <li> <a href="#cartbtn"> Update Cart Button </a></li>
+      <li> <a href="#outoffinput"> Display text outof input </a></li>
      <hr>
      <li> <a href="#typescript"> TypeScript </a> </li>
      <li> <a href="#enums"> Enums </a> </li>
@@ -747,6 +756,11 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
     </code>
 </pre>
 
+<h2> Hoisting  </h2>
+<p> <strong> Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes. </strong></p>
+<h2> Callback </h2>
+<p> Callback Function - A callback is a function passed as an argument to another function. </p>
+
 <h2> Lexical Scope </h2>
 <p> In JavaScript, "lexical" refers to how things are organized and scoped based on the structure of the code when it's written (at compile time), rather than when it's executed (runtime).</p> 
 
@@ -781,7 +795,7 @@ let sum = 0;
 numbers.forEach(num => {
     sum += num;
 });
-console.log(sum);
+console.log(sum); //100
     </code>
 </pre>
 </div>
@@ -1088,6 +1102,44 @@ for (let i = 1; i <= 5; i++) {
 </div>
 
 
+
+<div class="box shadow p-2 mb-3" id="synchronous">
+    <h2> Synchronous and Asynchronous  </h2>
+<p> <strong>  synchronous and asynchronous refer to how code is executed — whether one line waits for the previous one to finish (synchronous) or not (asynchronous). </strong></p>
+
+<h2> Synchronous (Blocking) </h2>
+<ul>
+  <li>Executes code line by line, in order. </li>
+  <li> Each operation waits for the previous one to complete. </li>
+</ul>
+
+<pre>
+  <code>
+    console.log("1");
+    console.log("2");
+    console.log("3");
+  </code>
+</pre>
+
+<h2> Asynchronous (Non-blocking) </h2>
+<ul>
+  <li> Executes without waiting for previous tasks. </li>
+  <li> Useful for tasks that take time, like API calls, reading files, timers. </li>
+  <li> Uses: setTimeout, fetch, Promises, async/await. </li>
+</ul>
+
+<pre>
+  <code>
+    console.log("1");
+setTimeout(() => {
+  console.log("2");
+}, 1000);
+console.log("3");
+
+  </code>
+</pre>
+
+</div>
 
 <div class="box shadow p-2 mb-3" id="this">
     <h2> This </h2>
@@ -1543,8 +1595,38 @@ function greet() {
 </pre>
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="secondlargestnumber">
+<h2> Second LARGEST NUMBER </h2>
+<pre>
+    <code>
+numbers = [3,4,5,6,2,34,54,23,63,18,46]
+
+  largest = numbers[0]
+  secondLargest = numbers[0]
+    
+  for(let i = 1; i < numbers.length; i++) {
+      
+   if (numbers[i] > largest) {
+    secondLargest = largest; // update secondLargest before largest
+    largest = numbers[i];
+    
+   } else if (numbers[i] > secondLargest && numbers[i] !== largest) {
+    secondLargest = numbers[i];
+  }
+     
+    }
+    
+console.log("Largest:", largest);
+console.log("Second Largest:", secondLargest);
+</code>
+</pre>
+</div>
+
+
+
 <div class="box shadow p-2 mb-3" id="duplicatenumber">
-    <h2> DUPLICATE NUMBER</h2>
+    <h2> Find DUPLICATE NUMBER</h2>
     <pre>
         <code>
         function findDuplicates(arr) {
@@ -1563,6 +1645,24 @@ function greet() {
           console.log(findDuplicates([1, 2, 3, 4, 2, 5, 6, 3, 8, 1])); // [1, 2, 3]  
     </code>
 </pre>
+
+<h2> Remove Duplicates from an Array </h2>
+
+<pre>
+  <code>
+    function removeDuplicatesFilter(arr) {
+  return arr.filter((value, index, self) => {
+    return self.indexOf(value) === index;
+  });
+}
+
+// Test cases
+console.log(removeDuplicatesFilter([1, 2, 2, 3, 4, 4, 5])); // Output: [1, 2, 3, 4, 5]
+console.log(removeDuplicatesFilter(["apple", "banana", "apple", "orange"])); // Output: ["apple", "banana", "orange"]
+console.log(removeDuplicatesFilter([])); // Output: []
+  </code>
+</pre>
+
     </div>
 
     <div class="box shadow p-2 mb-3" id="find">
@@ -1600,10 +1700,10 @@ function greet() {
     </div>
 
 <div class="box shadow p-2 mb-3" id="count">
-<h2> count Word Fequency in a string  </h2>
+<h2> Count Word Fequency in a string  </h2>
 <pre>
     <code>
-        function wordCount(str) {
+    function wordCount(str) {
             let words = str.split(' ');
             let map = {};
             for (let word of words) {
@@ -1612,7 +1712,27 @@ function greet() {
             return map;
         }
         console.log(wordCount("the quick brown fox jumps over the lazy dog the")); 
+        // the: 3, quick: 1, brown: 1, fox: 1, jumps: 1, over: 1, lazy: 1, dog: 1
     </code>
+</pre>
+
+<h2> Counting Character Occurrences </h2>
+
+<pre>
+  <code>
+function countCharacters(str) {
+  const charCount = {};
+  for (const char of str) {
+    charCount[char] = (charCount[char] || 0) + 1;
+  }
+  return charCount;
+}
+
+// Test cases
+console.log(countCharacters("hello")); // Output: { h: 1, e: 1, l: 2, o: 1 }
+console.log(countCharacters("Mississippi")); // Output: { M: 1, i: 4, s: 4, p: 2 }
+console.log(countCharacters("")); // Output: {}
+  </code>
 </pre>
 </div>
 
@@ -1784,7 +1904,6 @@ console.log(numOfVowels)
 
   <div class="box shadow p-2 mb-3" id="dpstring">
   <h2> Remove Dublicate </h2>
-
   <pre>
     <code>
     const killers = [
@@ -1797,8 +1916,90 @@ console.log(numOfVowels)
     console.log(result);
     </code>
   </pre>
+  </div>
+
+
+
+  <div class="box shadow p-2 mb-3" id="primenumber">
+  <h2> Finding Prime Numbers  </h2>
+  <pre>
+    <code>
+   function isPrime(n) {
+  if (n <= 1) return false;
+  if (n === 2) return true;
+  if (n % 2 === 0) return false;
+
+  const sqrt = Math.sqrt(n);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+console.log(isPrime(7));  // true
+console.log(isPrime(10)); // false
+    </code>
+  </pre>
+
+  <h2> Primes Up to a Limit </h2>
+  <pre>
+    <code>
+      function generatePrimesUpTo(limit) {
+  const sieve = new Array(limit + 1).fill(true);
+  sieve[0] = sieve[1] = false;
+  
+  for (let i = 2; i <= Math.sqrt(limit); i++) {
+    if (sieve[i]) {
+      for (let j = i * i; j <= limit; j += i) {
+        sieve[j] = false;
+      }
+    }
+  }
+  
+  return sieve
+    .map((isPrime, num) => isPrime ? num : null)
+    .filter(num => num !== null);
+}
+
+// Usage:
+console.log(generatePrimesUpTo(30)); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+    </code>
+  </pre>
+  </div>
+
+
+
+  <div class="box shadow p-2 mb-3" id="fibonacci">
+  <h2>  Fibonacci Sequence  </h2>
+
+  <pre>
+    <code>
+      function fibonacciSequence(n) {
+  if (n <= 0) {
+    return [];
+  }
+  if (n === 1) {
+    return [0];
+  }
+  let sequence = [0, 1];
+  for (let i = 2; i < n; i++) {
+    sequence.push(sequence[i - 1] + sequence[i - 2]);
+  }
+  return sequence;
+}
+
+// Test cases
+console.log(fibonacciSequence(0)); // Output: []
+console.log(fibonacciSequence(1)); // Output: [0]
+console.log(fibonacciSequence(5)); // Output: [0, 1, 1, 2, 3]
+console.log(fibonacciSequence(10)); // Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+
+    </code>
+  </pre>
 
   </div>
+
+
 
 			
     <div class="box shadow p-2 mb-3" id="true">
@@ -1866,7 +2067,32 @@ true + true → 1 + 1 = 2
 10 > 9 → true
 true > 8 → 1 > 8 → false
 false === true → false		   
-            
+
+
+Arrays are objects, and when you compare objects (including arrays), you are comparing references, not values.
+both [1] look the same, they are two separate array instances in memory. 
+[1] == [1]        // false (different references)
+[1] === [1]       // false (also different references)
+
+
+Nullish coalescing operator (??) returns the right-hand value only if the left-hand value is null or undefined.
+let value = null ?? 'Default';
+console.log(value); // 'Default'
+
+
+let userInput = null;
+let username = userInput ?? "Guest";
+console.log(username);  // Guest
+
+
+let apiResponse = undefined;
+let data = apiResponse ?? "No data available";
+console.log(data);  // No data available
+
+let count = 0;
+let result = count ?? 10;
+console.log(result);  // 0 ✅
+
             </code>
             </pre>
             </div>			
@@ -2686,7 +2912,7 @@ Foreign Key	Creates a relationship between tables<br>
 						
 						
 						
-<div class="box shadow p-2 mb-3">
+<div class="box shadow p-2 mb-3" id="secondHighestsalarys">
                             <h2> Second Highest Salary </h2>
 
                             <pre>
@@ -3144,6 +3370,98 @@ function validateForm() {
 </div>
 
 
+
+<div id="increasevalue"> 
+<h2> On click Increase and Decrease Value </h2>
+
+<pre>
+  <code>
+  HTML 
+
+  div class="quantity-control">
+  button class="minus-btn"> -  /button>
+  input type="number" id="quantity" value="0">
+  button class="plus-btn"> +  /button>
+/div>
+
+JAVASCRIPT
+
+
+  const quantityInput = document.getElementById('quantity');
+	const minusButton = document.querySelector('.minus-btn');
+	const plusButton = document.querySelector('.plus-btn');
+
+	minusButton.addEventListener('click', () => {
+	  let currentValue = parseInt(quantityInput.value);
+	  if (currentValue > 0) {
+		quantityInput.value = currentValue - 1;
+	  }
+	});
+
+	plusButton.addEventListener('click', () => {
+	  let currentValue = parseInt(quantityInput.value);
+	  quantityInput.value = currentValue + 1;
+	});
+
+
+  </code>
+</pre>
+
+</div>
+
+
+<div id="cartbtn"> 
+<h2> Update Cart Button </h2>
+
+<pre>
+  <code>
+    HTML 
+
+div class="cart-icon"> span id="cart-quantity">0  /span> /div>
+button class="add-to-cart">Add to Cart  /button>
+
+JAVASCRIPT 
+
+const cartIcon = document.querySelector(".cart-icon");
+const cartQuantity = document.getElementById("cart-quantity");
+const addToCartButton = document.querySelector(".add-to-cart");
+
+let cartItems = 0; // Initialize the cart item count
+
+addToCartButton.addEventListener("click", () => {
+  cartItems++;
+  cartQuantity.textContent = cartItems; // Update the icon with the new quantity
+  // Add additional logic here to persist the cart data (e.g., using local storage or an API)
+});
+
+  </code>
+</pre>
+
+</div>
+
+
+<div id="outoffinput"> 
+<h2> Display text outof input </h2>
+
+<pre>
+  <code>
+    HTML
+    input type="text" id="myInput" placeholder="Type something...">
+    p id="displayArea"> /p>
+
+    javascript
+
+    const inputElement = document.getElementById("myInput");
+    const displayElement = document.getElementById("displayArea");
+
+    inputElement.oninput = function() {
+      displayElement.innerText = inputElement.value;
+    };
+
+  </code>
+</pre>
+
+</div>
 
 <div id="sql">
 <h2> 1. What is the difference between DELETE, TRUNCATE, and DROP? </h2>
