@@ -978,6 +978,64 @@ console.log(text); // Output: This is a paragraph.
   </code>
 </pre>
 
+
+<h2> DOM Method </h2>
+
+<pre>
+  <code>
+    Element Selection
+getElementById(id) – Selects an element by its unique ID.
+getElementsByClassName(class) – Selects all elements with the given class.
+getElementsByTagName(tag) – Selects all elements with the given tag name.
+querySelector(selector) – Returns the first element that matches a CSS selector.
+querySelectorAll(selector) – Returns all elements matching a CSS selector.
+
+
+📄 Element Manipulation
+createElement(tag) – Creates a new HTML element.
+appendChild(node) – Adds a child node to the end of a parent.
+removeChild(node) – Removes a specified child from the parent.
+replaceChild(newNode, oldNode) – Replaces one child node with another.
+cloneNode(deep) – Clones an element, optionally with its child nodes.
+
+
+✏️ Content & Attribute Manipulation
+innerHTML – Gets or sets the HTML content inside an element.
+textContent – Gets or sets the text content of an element.
+setAttribute(name, value) – Sets an attribute and its value on an element.
+getAttribute(name) – Gets the value of an attribute.
+removeAttribute(name) – Removes an attribute from an element.
+
+🎨 Style & Class
+element.style.property – Sets or gets inline CSS styles.
+classList.add(class) – Adds a class to an element.
+classList.remove(class) – Removes a class from an element.
+classList.toggle(class) – Toggles a class on/off.
+classList.contains(class) – Checks if an element contains a specific class.
+
+🧏 Event Handling
+addEventListener(event, handler) – Attaches an event handler to an element.
+removeEventListener(event, handler) – Removes an event handler from an element.
+
+Difference between document and element in JavaScript
+
+Document
+Represents the entire HTML page loaded in the browser.
+It's the entry point to access and manipulate any part of the DOM.
+You use it to select elements, create elements, or access metadata like title or URL.
+
+document.getElementById("myDiv");
+
+element
+Refers to an individual HTML tag or node in the page (like div>, p>, button>, etc.).
+Once selected (using document), you can modify, style, or listen to events on that element.
+
+let myDiv = document.getElementById("myDiv");
+myDiv.style.color = "red";
+
+  </code>
+</pre>
+
 </div>
 
 

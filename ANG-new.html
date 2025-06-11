@@ -777,8 +777,19 @@ You should upgrade step by step from Angular 15 → 16 → 17 → 18 → 19 rath
 If You Try Directly Updating from 15 to 19? <br>
 1. dependency conflicts and errors. <br>
 2. Some configurations (like angular.json) might break due to missing intermediate updates. <br>
-3. Third-party libraries might not support Angular 19 <br>
+3. Third-party libraries might not support Angular 19<br>
 </div>
+
+<div>
+  <h2> During angular project update 15 to 17 version, How to know which third party tools I have to update in angular ? </h2>
+  <p> review third-party dependencies  </p>
+  1. Use ng update command<br>
+  2. Check official Angular update guide<br>
+  3. Look into package.json manually<br>
+  4. Run npm outdated, This command shows all outdated packages, including third-party ones:<br>
+  Check GitHub Issues or Docs for Major Libs<br>
+</div>
+
 </div>
 
 
@@ -4031,6 +4042,15 @@ getLeads(){
       2. Some configurations (like angular.json) might break due to missing intermediate updates.<br>
       3. Third-party libraries might not support Angular 19<br>
     </div>
+    <div class="mt-5">
+  <h2> During angular project update 15 to 17 version, How to know which third party tools I have to update in angular ? </h2>
+  <p> review third-party dependencies  </p>
+  1. Use ng update command<br>
+  2. Check official Angular update guide<br>
+  3. Look into package.json manually<br>
+  4. Run npm outdated, This command shows all outdated packages, including third-party ones:<br>
+  Check GitHub Issues or Docs for Major Libs<br>
+</div>
     </div>
 
 
