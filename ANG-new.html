@@ -107,6 +107,7 @@ pre, code {
       <li> <a href="#decorator"> decorator </a> </li>
       <li> <a href="#directive"> directive </a> </li>
       <li> <a href="#input"> @input() </a> </li>
+      <li> <a href="#datatransferinput"> Data Transfer </a></li>
       <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle, @HostListener  </a> </li>
       <li> <a href="#pipe"> pipe, pure, impure </a> </li>
       <li> <a href="#viewchild"> viewchild </a> </li>
@@ -119,7 +120,7 @@ pre, code {
     <li> <a href="#emp-dynamic"> Emp crud API Dynamic Form </a> </li>
      <li> <a href="#emp-withoutdynamic"> Emp crud WITHOUT API Dynamic Form </a> </li>
     <li> <a href="#reusable"> Component Reusable </a> </li>
-    <li> <a href="#apiservices"> Rest API / Web API </a> </li>
+    <li> <a href="#apiservices"> <strong> API </strong> Rest API / Web API </a> </li>
     
       <li class="borderline"><a href="#">  </a></li>
 	  <li> <a href="#rxjs"> Rxjs </a> </li>
@@ -622,6 +623,46 @@ Fully supports all control structures. <br>
 
 
 <div class="box shadow p-2 mb-3" id="apiservices">
+<P> <strong> When you call multiple APIs in the same Angular component, and one of them fails, it's important to handle errors gracefully so the app doesn’t break and other successful calls can still work. </strong></P>
+
+<p> <strong> Best Practices to Manage Multiple API Calls </strong></p> 
+
+<ul>
+  <strong> 1. Use forkJoin (if all APIs must succeed)  </strong>
+  <li> forkJoin waits for all observables to complete. </li>
+  <li> If one fails, the whole call fails — so use it only when all APIs are required. </li>
+  <li> To manage failure: use catchError inside each observable to prevent the failure from breaking others. </li>
+</ul>
+
+<ul>
+  <strong> 2. Use combineLatest (if continuous data updates are expected)  </strong>
+  <li> Emits when any observable emits, but keeps the latest value of all. </li>
+  <li> Suitable when you expect real-time data or need non-blocking behavior. </li>
+</ul>
+
+<ul>
+  <strong> 3. Use individual API calls separately  </strong>
+  <li> Call APIs one by one using .subscribe() or chained observables. </li>
+  <li> Use try/catch (with catchError from RxJS) to handle each API separately.  </li>
+</ul>
+
+<h2> Error Handling Strategy </h2> 
+<ol>
+  <li> Use catchError() operator from RxJS to handle individual failures. </li>
+  <li> Show fallback UI or messages for the failed API section only. </li>
+  <li> Do not block the component’s UI for one API failure. </li>
+  <li> Log error for debugging or notify users gracefully. </li>
+</ol>
+
+<h2> What To Do When One Fails? </h2>
+<ul>
+  <li> Don’t stop the other API calls — fail gracefully. </li>
+  <li> Use default data, loading/error messages, or retry mechanism. </li>
+  <li> Keep user experience smooth — show success sections even if one section has error. </li>
+</ul>
+
+<hr>
+
 <h2> API CALL RESTful APIs -- API serives  </h2>
 <p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
 
@@ -1953,7 +1994,50 @@ createUser() {
     </code>
   </pre>
 
-  <h2> Replay Subject </h2>
+
+<h2 class="mt-4"> Subject and Behavior Subject </h2>
+
+1. Subject
+<ul>
+  <li> No Initial Value </li>
+  <li> Does not emit the last value to new subscribers. </li>
+  <li> Starts emitting only after next() is called. </li>
+  <li> Think of it as a broadcast system — it only pushes what it gets at that moment. </li>
+</ul>
+2. BehaviorSubject
+<ul>
+  <li> Requires an initial value </li>
+  <li> Always emits the latest value to new subscribers. </li>
+  <li> Useful for storing and broadcasting state. </li>
+</ul>
+
+<pre>
+  <code>
+    1. Subject Example
+    const sub = new Subject<number>();
+    sub.subscribe(val => console.log('Sub1:', val));
+    sub.next(1); // Sub1: 1
+    sub.next(2); // Sub1: 2
+
+    sub.subscribe(val => console.log('Sub2:', val)); 
+    sub.next(3); // Sub1: 3, Sub2: 3 (but Sub2 missed 1 & 2)
+
+  </code>
+</pre>
+
+<pre>
+  <code>
+    2. BehaviorSubject Example
+    const bSub = new BehaviorSubject number>(0); // initial value is 0
+    bSub.subscribe(val => console.log('BSub1:', val)); // BSub1: 0
+    bSub.next(1); // BSub1: 1
+    bSub.next(2); // BSub1: 2
+
+    bSub.subscribe(val => console.log('BSub2:', val)); // BSub2: 2 (latest value)
+  </code>
+</pre>
+
+  <h2 class="mt-4"> Replay Subject </h2>
   <p> Replay subject is a variant of subject. It emits old value adn emit those value to new subscribe. </p>
 <pre>
   <code>
@@ -2267,6 +2351,28 @@ export class DemoComponent {
 <p><strong> Standalone components in Angular are components that can operate independently without requiring a module. <br> This feature, introduced in Angular 14 and becoming the default in Angular 17. <br>
 This feature simplifies component development and reuse, making it easier to build and maintain large-scale applications. </strong></p>
 
+
+<h2> Standalone components Advantages </h2>
+
+<ol>
+  <li> No Need for NgModules <br>
+You can directly define and use a component without declaring it inside a module. </li>
+<li> Simpler and Faster Setup <br>
+Less boilerplate code — cleaner and more readable. </li>
+<li> Improved Code Reusability <br>
+Standalone components are easier to reuse across different modules or lazy-loaded routes. </li>
+<li> Better Tree-Shaking & Performance <br>
+Smaller bundle size because Angular includes only what is actually used. </li>
+<li> Easier Lazy Loading <br> 
+Great for routing — components can be directly lazy-loaded without a wrapper module. </li>
+<li> Aligns with Modern Frontend Practices <br>
+Makes Angular more similar to other frameworks like React or Vue (component-first design). </li>
+<li> standalone: true </li>
+<li> Use in Rounting <br> 
+  { path: 'home', component: HomeComponent } // if HomeComponent is standalone
+</li>
+</ol>
+
   <h2> NEW FEATURES IN ANGULAR  </h2>
   <p> <strong>  => New Features and Updates in Angular 15 </strong></p>
   <ol>
@@ -2369,6 +2475,33 @@ decrement() { this.count.set(this.count() - 1); }
           <li> Default Change Detection </li>
           <li> OnPush Change Detection </li>
         </ol>
+
+<h2> OnPush Change Detection </h2>
+<p> In Angular, OnPush Change Detection is a strategy used to optimize performance by reducing how often Angular checks for changes in the component's view. </p>
+<p> <strong> How It Works: </strong></p>
+<ul>
+  <li> By default, Angular uses the Default strategy, which checks the whole component tree whenever any event happens (like user input, HTTP calls, etc.). </li>
+  <li> With OnPush, Angular will only check the component and its children if specific conditions are met. </li>
+</ul>
+
+<p> <strong> When Angular triggers OnPush detection: </strong></p>
+<ol>
+  <li> @Input() reference changes: <br>
+        If a component receives a new reference via an @Input(), Angular will trigger change detection. </li>
+  <li> Observable emits new value: <br>
+        If the component uses async pipe with an observable, and the observable emits a new value, it updates the view.  </li>
+  <li> Manually triggered: <br> You can manually mark a component for check using services like ChangeDetectorRef.markForCheck() or force an update with detectChanges(). </li>
+  <li> Events inside the component: <br> DOM events (clicks, input) inside the component still trigger detection. </li>
+</ol>
+
+<h2> Why use OnPush? </h2>
+<ul>
+  <li> Better performance, especially in large apps. </li>
+  <li> Fewer unnecessary change detection cycles. </li>
+</ul>
+It’s most useful in high-performance apps, large lists, or components with infrequent changes.
+
+
         <p> <strong> Default Change Detection Examples :-  </strong></p>
         <pre>
           <code> 
@@ -6065,6 +6198,266 @@ export class AppComponent {
                   </code>
                 </pre>
               </div>
+
+            <div class="box shadow p-2 mb-3" id="datatransferinput">
+            <h2> Data Transfer by @Input and @Output </h2>
+
+
+<h2> Data Transfer by Parent to Child </h2>
+
+<pre>
+  <code>
+    1. Parent.component.ts 
+
+    import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+parentMessage: string = 'Hello from Parent Component!';
+}
+
+==============
+
+2. parent.component.html 
+
+h1> Parent Component /h1>
+app-childs [message]="parentMessage"> /app-childs>
+
+=========================
+
+1. Child.component.ts 
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-childs',
+  imports: [],
+  templateUrl: './childs.component.html',
+  styleUrl: './childs.component.css'
+})
+export class ChildsComponent {
+
+  @Input() message: string = ''; // receives data from parent
+
+}
+
+==========
+
+2. child.component.html 
+
+h1> Child Component  /h1>
+h3>Message from Parent: {{ message }}  /h3>
+
+  </code>
+</pre>
+
+
+<p> 
+@Output() creates a custom event. <br>
+.emit(value) triggers that event and sends the value to the parent.<br>
+EventEmitter	A special class to emit events<br>
+$event	The data received in parent component<br>
+</p>
+
+              <h2> @Output Child to Parent </h2>
+            <pre>
+              <code>
+                1. Child.Compoent.ts
+
+                import { Component } from '@angular/core';
+                import { EventEmitter, Output } from '@angular/core';
+
+                @Component({
+                  selector: 'app-childs',
+                  imports: [],
+                  templateUrl: './childs.component.html',
+                  styleUrl: './childs.component.css'
+                })
+                export class ChildsComponent {
+
+                  @Output() sendMessage = new EventEmitter<string>();
+
+                  sendToParent(){
+                    this.sendMessage.emit('Hello from Child component!');
+                  }
+
+                }
+
+                ========
+
+2. child.component.html 
+
+h1> Child Component /h1>
+button class="btn btn-success" (click)="sendToParent()"> Send Message to Parent  /button>
+
+
+=================
+
+
+1. Parent.component.ts 
+
+import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+
+  messageFromChild: string ='';
+
+  receiveMessage(msg: string) {
+    this.messageFromChild = msg;
+  }
+  
+}
+
+===========
+
+2. parent.component.html
+
+h1> Parent Component /h1>
+app-childs (sendMessage)="receiveMessage($event)">   /app-childs>
+p>Message from Child: {{ messageFromChild }} /p>
+
+
+              </code>
+            </pre>
+
+
+<hr>
+
+<div class="mt-5">
+
+  <h2> <strong> Create a Service that Provides a Message </strong> </h2>
+
+  @Injectable({ providedIn: 'root' }) — What It Does
+  <p class="p-0 m-0"> Angular how and where to provide (register) the service so it can be used across your app. </p>
+  <p class="p-0 m-0"> @Injectable() is a decorator that marks a class as available for dependency injection. </p>
+  <p class="p-0 m-0"> providedIn: 'root' means: Make this service available application-wide, as a singleton. </p>
+  <p class="p-0 m-0"> Without providedIn: 'root' You would have to register it manually in a module: @NgModule({
+  providers: [MessageService]
+})
+export class AppModule { } </p>
+  <pre>
+    <code>
+1. run command - ng generate service message
+
+2. message.service.ts 
+
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+export class MessageService {
+  constructor() { }
+  getMessage(): string {
+    return 'Hello from the Message Service!';
+  }
+}
+
+
+3. Use the Service in a Component
+app.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from './message.service';  // import service
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent implements OnInit {
+  message: string = '';
+
+  constructor(private messageService: MessageService) {}
+
+  ngOnInit() {
+    this.message = this.messageService.getMessage();
+  }
+}
+
+
+4. app.component.html
+h1> {{ message }} /h1>
+
+    </code>
+  </pre>
+
+</div>
+
+
+<hr>
+
+<div class="mt-5">
+
+  <h2> <strong> Create a Directive that Highlights Text with Background Color </strong></h2>
+  <ul>
+    <li> selector: '[appHighlight]'	Use it like an attribute </li>
+    <li> ElementRef	Access the element it’s attached to </li>
+    <li> Renderer2	Safely modify DOM styles </li>
+    <li> @HostListener	React to DOM events like mouseenter/mouseleave </li>
+  </ul>
+
+  <pre>
+    <code>
+    1. run command : ng generate directive highlight
+
+    2. highlight.directive.ts
+
+import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]' // This is the directive selector
+})
+export class HighlightDirective {
+
+  constructor(private el: ElementRef, private renderer: Renderer2) {}
+
+  // When mouse enters
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight('#fc7510'); // orange highlight
+  }
+
+  // When mouse leaves
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight('transparent');
+  }
+
+  private highlight(color: string) {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
+  }
+}
+
+==================
+
+3. Use the Directive in Any Component
+app.component.html
+
+h2 appHighlight>Hover me to see the highlight effect /h2>
+p> Normal paragraph (no directive) /p>
+
+// When you hover over the h2>, the background color will change to orange.
+When you move the mouse away, it will go back to normal.
+    </code>
+  </pre>
+
+</div>
+
+            </div>
+
+              
+
+
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>
