@@ -133,6 +133,7 @@ pre {
      <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
       <li> <a href="#formvalidation"> Form Validation </a></li>
       <li> <a href="#increasevalue"> Increase & decrease value </a></li>
+      <li> <a href="#dynamicinput">  dynamically adding multiple input </a></li>
       <li> <a href="#cartbtn"> Update Cart Button </a></li>
       <li> <a href="#outoffinput"> Display text outof input </a></li>
      <hr>
@@ -3460,6 +3461,66 @@ JAVASCRIPT
 	  let currentValue = parseInt(quantityInput.value);
 	  quantityInput.value = currentValue + 1;
 	});
+
+
+  </code>
+</pre>
+
+</div>
+
+
+<div id="dynamicinput"> 
+<h2> Dynamic Input Field </h2>
+
+<pre>
+  <code>
+
+  div id="inputContainer">
+    div class="inputGroup">
+      input type="text" placeholder="Enter value" />
+      button onclick="removeInput(this)"> Remove /button>
+    /div>
+  /div>
+
+  br>
+  button onclick="addMore()">Add More /button>
+
+  ==== Script ====
+
+  script>
+    function addMore() {
+      const container = document.getElementById('inputContainer');
+
+      // Create a new div to hold the input and button
+      const inputGroup = document.createElement('div');
+      inputGroup.className = 'inputGroup';
+
+      // Create input element
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Enter value';
+
+      // Create remove button
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = 'Remove';
+      removeBtn.onclick = function () {
+        removeInput(removeBtn);
+      };
+
+      // Append to the group
+      inputGroup.appendChild(input);
+      inputGroup.appendChild(removeBtn);
+
+      // Append the group to the container
+      container.appendChild(inputGroup);
+    }
+
+    function removeInput(button) {
+      const inputGroup = button.parentNode;
+      inputGroup.remove();
+    }
+  /script>
+
 
 
   </code>

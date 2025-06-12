@@ -140,13 +140,16 @@ pre, code {
       <li> <a href="#vresion-upgrade"> how to upgrade </a> </li>
 	   <li class="borderline"><a href="#">  </a></li>
 
-        <li> <a href="#chart"> chart </a> </li>
+     <li> <a href="#counter"> Counter </a> </li>
+     <li> <a href="#dynamicInput"> Dynamic Input Field </a> </li>
+    <li> <a href="#chart"> chart </a> </li>
 	  <li> <a href="#microfronted"> Microfronted </a> </li>
 	  <li> <a href="#material"> Angular Material </a> </li> 
 	  <li> <a href="#prime"> PrimeNg </a> </li>
       <li> <a href="#filter"> Filter </a> </li>
       <li> <a href="#pagination"> pagination </a> </li>
       <li> <a href="#login-setup"> login-setup </a> </li>
+      <li> <a href="#register-setup"> Register-setup </a> </li>
       <li> <a href="#json"> json </a> </li>
       <li> <a href="#dom"> DOM Manipulation </a></li>
 	   <li> <a href="#scrolltop"> scrolltop </a> </li>
@@ -3761,6 +3764,121 @@ export class GenderTitlePipe implements PipeTransform {
 </div>
 
 
+<div class="box shadow p-2 mb-3" id="counter">
+  <h2> Counter  </h2>
+
+  <pre>
+    <code>
+1. ng generate component counter
+
+2. counter.component.ts
+   import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-counter',
+  templateUrl: './counter.component.html',
+})
+export class CounterComponent {
+  count = 0;
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    this.count--;
+  }
+}
+
+============
+
+3. counter.component.html
+
+div style="text-align: center; margin-top: 50px;">
+  h2>Counter Example /h2>
+  h3>{{ count }} /h3>
+  button (click)="increment()">+ /button>
+  button (click)="decrement()">- /button>
+/div>
+
+----------
+
+4. Use this component in app.component.html
+app-counter> /app-counter>
+
+    </code>
+  </pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="dynamicInput">
+  <h2> Dynamic Input Field Add More   </h2>
+  <pre>
+    <code>
+      1. ng generate component dynamic-input
+
+      2. dynamic-input.component.ts
+
+      import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-dynamic-input',
+  templateUrl: './dynamic-input.component.html',
+})
+export class DynamicInputComponent implements OnInit {
+  myForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.myForm = this.fb.group({
+      inputs: this.fb.array([this.fb.control('')]) // default one input field
+    });
+  }
+
+  get inputs(): FormArray {
+    return this.myForm.get('inputs') as FormArray;
+  }
+
+  addInput(): void {
+    this.inputs.push(this.fb.control(''));
+  }
+
+  removeInput(index: number): void {
+    this.inputs.removeAt(index);
+  }
+
+  onSubmit(): void {
+    console.log(this.myForm.value);
+  }
+}
+
+--------------
+
+3. dynamic-input.component.html
+
+div style="padding: 20px;">
+  form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    div formArrayName="inputs">
+      div *ngFor="let input of inputs.controls; let i = index">
+        input [formControlName]="i" placeholder="Enter value {{ i + 1 }}" />
+        button type="button" (click)="removeInput(i)" *ngIf="inputs.length > 1"> Remove /button>
+      /div>
+    /div>
+
+    button type="button" (click)="addInput()">Add More /button>
+
+    button type="submit"> Submit /button>
+  /form>
+/div>
+
+    </code>
+  </pre>
+</div>
+
+
 <div class="box shadow p-2 mb-3" id="routeguards">
   <h2> Route Guards in Angular  </h2>
   <p> Angular Guards are services that control access to routes in an Angular application. They are used to protect routes from unauthorized access or to prevent unwanted navigation. Common types of guards include: </p>
@@ -4752,6 +4870,125 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
   </pre>
 
 </div>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="register-setup">
+<h2> Register Setup </h2>
+
+<pre>
+  <code>
+    1. Create a Register Component
+    ng generate component register
+    -----------
+    2. Update register.component.html
+
+      div class="container">
+      h2>Register /h2>
+      form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        div>
+          input formControlName="name" type="text" />
+        /div>
+        div>
+          input formControlName="email" type="email" />
+        /div>
+        div>
+          input formControlName="password" type="password" />
+        /div>
+        button type="submit">Register /button>
+      /form>
+    /div>
+
+    -----------
+    3. Update register.component.ts
+
+    import { Component, OnInit } from '@angular/core';
+    import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+})
+export class RegisterComponent implements OnInit {
+  registerForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    });
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.valid) {
+      console.log('Form Data:', this.registerForm.value);
+      alert('Registered successfully!');
+    } else {
+      alert('Please fill in all fields correctly.');
+    }
+  }
+}
+
+---------- 
+4. Add Route to Register page 
+
+const routes: Routes = [
+  { path: 'register', component: RegisterComponent },
+  { path: '', redirectTo: 'register', pathMatch: 'full' }, // default route
+];
+
+---- End ------- 
+
+* To Save the Register Data, You Have Two Options:
+
+1. Temporary Save in localStorage (Browser)
+
+onSubmit(): void {
+  if (this.registerForm.valid) {
+    const userData = this.registerForm.value;
+    localStorage.setItem('user', JSON.stringify(userData));
+    alert('Registered successfully!');
+  } else {
+    alert('Please fill in all fields correctly.');
+  }
+}
+
+----------- 
+
+2. Permanent Save via Backend API
+
+ (a) user.service.ts 
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  constructor(private http: HttpClient) {}
+
+  registerUser(userData: any) {
+    return this.http.post('http://localhost:3000/users', userData);
+  }
+}
+
+(b) Call in Component:
+
+constructor(private fb: FormBuilder, private userService: UserService) {}
+
+onSubmit(): void {
+  if (this.registerForm.valid) {
+    this.userService.registerUser(this.registerForm.value).subscribe(() => {
+      alert('User registered successfully!');
+    });
+  }
+}
+
+  </code>
+</pre>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="material">
