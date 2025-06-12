@@ -574,6 +574,50 @@ Fully supports all control structures. <br>
           button click="fun()"> click me button
         </code>
       </pre>
+
+      <h2 class="mt-5">  Where I should variable write in constructor or ngOnInit in angular and why ? </h2>
+
+      <p> <strong> Constructor - Use constructor() when: </strong></p>
+      <ul>
+        <li> You want to inject dependencies (services, etc.). </li>
+        <li> You need to initialize simple variables  </li>
+        <li> constructor(private userService: UserService) {
+  this.title = 'Hello World'; // simple assignment is okay here
+}</li>
+      </ul>
+
+      <p> <strong> Use ngOnInit() when : </strong></p>
+      <ul>
+        <li> You want to run code after the component is fully initialized. </li>
+        <li> You need to access @Input properties, DOM elements, or perform API calls. </li>
+        <li> You need to call functions that rely on bindings or Angular lifecycle hooks. </li>
+        <li> ngOnInit() {
+  this.userService.getUsers().subscribe(data => {
+    this.users = data;
+  });
+}
+</li>
+      </ul>
+
+      <p><strong> Difference between constructor and ngOnInit </strong></p>
+      <ul>
+        <li> <strong> Constructor </strong></li>
+        <li> A TypeScript feature (not Angular-specific). </li>
+        <li> Called immediately when the class is instantiated. </li>
+        <li> Used mainly for dependency injection. </li>
+        <li> Cannot access Angular bindings like @Input(), DOM elements, etc. </li>
+        <li> Runs before Angular initializes the component. </li>
+      </ul>
+
+      <ul>
+        <li> <strong> ngOnInit() </strong></li>
+        <li> An Angular lifecycle hook (part of OnInit interface). </li>
+        <li> Called by Angular after the constructor and after input properties (@Input()) are set. </li>
+        <li> Fetching data from APIs</li>
+        <li> Accessing @Input() values </li>
+        <li> Running component initialization logic </li>
+      </ul>
+
       </div>
 
 
