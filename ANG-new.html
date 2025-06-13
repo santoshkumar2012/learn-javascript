@@ -391,6 +391,48 @@ button (click)="childComp.doSomething()">Call Method button>
 
 </code>
 </pre>
+
+<p class="mt-4"> <strong> Angular Template ( ng-template>) </strong> </p>
+<p> Used to define HTML fragments that are not rendered immediately, but can be conditionally or programmatically displayed. </p>
+ng-template> is a placeholder for content. <br>
+Used in structural directives like *ngIf, *ngFor.
+<pre>
+<code>
+
+ng-template #noData>
+p>No data available.</p>
+/ng-template>
+
+div *ngIf="data.length === 0; else showData">
+  ng-container *ngTemplateOutlet="noData"> /ng-container>
+/div>
+
+ng-template #showData>
+  p>Data is loaded. /p>
+/ng-template>
+
+</code>
+</pre>
+
+<p class="mt-4"> <strong> 2. Angular Router Outlet (<router-outlet>) </strong></p>
+<p> Acts as a placeholder for rendering components based on the current route. </p>
+router-outlet> /router-outlet>
+Dynamically load components via routing <br>
+Full Angular components <br>
+Automatically based on route URL <br>
+Angular Router Module <br>
+
+<pre>
+  <code>
+    const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent }
+];
+
+  </code>
+</pre>
+
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="jse">
@@ -2517,20 +2559,62 @@ decrement() { this.count.set(this.count() - 1); }
       </div>
 
       <div class="box shadow p-2 mb-3" id="change">
-        <h2> CHANGE DETECTION  </h2>
-        <p>  Change Detection in Angular is the process of updating the DOM when the application state changes. Angular automatically detects changes and updates the UI accordingly. </p>
+
+<h2> CHANGE DETECTION </h2>
+
+<p> Change Detection in Angular is the mechanism that keeps the view (HTML) in sync with the component's data (TypeScript). <br>
+Whenever data in your component changes (like a variable value), Angular automatically updates the DOM to reflect the new value.
+This is what we call Change Detection. </p>
+
+<p> <strong> Simply Analogy - </strong> Think of your component as a "control room" and your HTML view as the "TV screen".
+Whenever something changes in the control room, Angular sends a signal to the screen to update it. </p>
+
+<h2> <strong> How Change Detection Works in Angular? </strong> </h2>
+<p> Angular uses a Change Detection Tree that checks every component: </p>
+<ol>
+  <li> Angular checks component properties (variables). </li>
+  <li> If anything changes, Angular re-renders that component’s view. </li>
+  <li> This checking is triggered automatically by: 
+    <ul>
+      <li> Events (e.g., button click) </li>
+      <li> Timers (e.g., setTimeout, setInterval) </li>
+      <li> Observables (e.g., HttpClient, RxJS) </li>
+      <li> User input (e.g., form changes)  </li>
+    </ul>
+  </li>
+</ol>
+
+<h2> What Triggers Change Detection? </h2>
+<ul>
+  <li> Event Binding	 -  (click), (keyup) etc. </li>
+  <li> setTimeout / setInterval	- Timed logic </li>
+  <li> HTTP calls (HttpClient)	- API Response </li>
+  <li> @Input() property change - Data passed from parent </li>
+  <li> Angular lifecycle	 - ngOnInit, ngDoCheck, etc. </li>
+</ul>
+
+
+<h2> Change Detection Strategy (Default vs OnPush) </h2>
+Angular offers two strategies for change detection:
         <ol>
           <li> Default Change Detection </li>
           <li> OnPush Change Detection </li>
         </ol>
 
-<h2> OnPush Change Detection </h2>
+<h2> 1. Default (default behavior) </h2>
+<ol>
+  <li> Angular checks the component and all children every time. </li>
+  <li> More automatic, but may be less efficient in large apps. </li>
+</ol>
+
+<h2> 2. OnPush Change Detection </h2>
 <p> In Angular, OnPush Change Detection is a strategy used to optimize performance by reducing how often Angular checks for changes in the component's view. </p>
-<p> <strong> How It Works: </strong></p>
 <ul>
-  <li> By default, Angular uses the Default strategy, which checks the whole component tree whenever any event happens (like user input, HTTP calls, etc.). </li>
-  <li> With OnPush, Angular will only check the component and its children if specific conditions are met. </li>
+  <li> Angular checks a component only if: An @Input() changes by reference, An event inside the component triggers it </li>
 </ul>
+
+<h2> Manual Change Detection (Advanced) </h2>
+<p> You can manually tell Angular to detect changes using ChangeDetectorRef. </p>
 
 <p> <strong> When Angular triggers OnPush detection: </strong></p>
 <ol>
@@ -2549,6 +2633,86 @@ decrement() { this.count.set(this.count() - 1); }
 </ul>
 It’s most useful in high-performance apps, large lists, or components with infrequent changes.
 
+        <h2 class="mt-4">  OnPush Change Detection with Live Data Examples </h2>
+
+        <small>
+For Below code how it work = In this component, I’ve implemented ChangeDetectionStrategy.OnPush to optimize performance by avoiding automatic change detection.
+When I fetch user data from an API using HttpClient, Angular doesn't automatically detect the changes due to the OnPush strategy. So, I manually call ChangeDetectorRef.detectChanges() after a short delay to force Angular to update the view.
+This demonstrates how OnPush doesn’t track internal changes unless triggered by new references or manual change detection. It’s useful when working with large apps or when you want to avoid unnecessary checks for performance optimization.
+        </small>
+        <pre>
+          <code>
+
+ 1. change-detection.component.ts 
+
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, inject, OnInit } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-change-detection',
+  imports: [HeaderComponent, CommonModule],
+  templateUrl: './change-detection.component.html',
+  styleUrl: './change-detection.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ChangeDetectionComponent {
+
+  http = inject(HttpClient);
+  users:any[] = [];
+
+  constructor(
+    // private cdRef: ChangeDetectorRef // For Manually Trigger
+  ){}
+
+  ngOnInit(){
+    this.getUser()
+  }
+
+  getUser(){
+    this.http.get('https://dummyjson.com/users').subscribe((response: any) => {
+      this.users = response.users;
+      // setTimeout(() => {
+      //   this.cdRef.detectChanges() // For Manually Trigger
+      // }, 5000);
+    })
+  }
+  reloadUI(){} //manually trigger change detection
+}
+
+==============
+
+ 2. change-detection.component.html 
+
+div class="container mt-5">
+h1 class="mb-4"> Change Detection /h1>
+table class="table table-bordered">
+    thead>
+        tr>
+            th> First Name /th>
+            th> Last Name /th>
+            th> Email Address /th>
+            th> Phone Number /th>
+        /tr>
+    /thead>
+    tbody>
+        tr *ngFor="let user of users">
+            td> {{user.firstName}} /td>
+            td> {{user.lastName}} /td>
+            td> {{user.email}} /td>
+            td> {{user.phone}} /td>
+        /tr>
+    /tbody>
+/table>
+button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
+/div>
+           
+            
+          </code>
+        </pre>
+
+
 
         <p> <strong> Default Change Detection Examples :-  </strong></p>
         <pre>
@@ -2560,16 +2724,6 @@ It’s most useful in high-performance apps, large lists, or components with inf
           </code>
           Count: {{ count }}
           button (click)="increment()">Increment</button>
-        </pre>
-       
-        <h2>  OnPush Change Detection Examples </h2>
-        <pre>
-          <code>
-            import ChangeDetectionStrategy, Input 
-            {{ data }}
-            @component({ changeDetection: ChangeDetectionStrategy.OnPush})
-            @Input() data: string;
-          </code>
         </pre>
 
         <h2> Onpush </h2>
@@ -3986,6 +4140,72 @@ ul>
     <h2> How it Works </h2>
 1. Create a Service (Dependency) <br> 
 A service contains logic or data that you want to use across components.
+
+<h2> Simple Example in Angular </h2>
+<pre>
+  <code>
+    1. Create a Service (Dependency)
+
+    // logger.service.ts
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class LoggerService {
+  log(message: string) {
+    console.log('Log:', message);
+  }
+}
+
+2. Inject Service in Component
+
+// user.component.ts
+import { Component } from '@angular/core';
+import { LoggerService } from './logger.service';
+
+@Component({
+  selector: 'app-user',
+  template: ``
+})
+export class UserComponent {
+  constructor(private logger: LoggerService) {}
+  createUser() {
+    this.logger.log('User created');
+  }
+}
+
+=========
+
+HTML 
+button (click)="createUser()"> Create User /button>
+
+  </code>
+</pre>
+<p> Now Angular will automatically inject an instance of LoggerService into UserComponent. </p>
+
+<h2> How Dependency Injection Works in Angular </h2>
+<ol>
+  <li> You mark a class as @Injectable. </li>
+  <li> Angular maintains a container (Injector). </li>
+  <li> When a component needs a service, Angular looks into the container. </li>
+  <li> Angular creates and injects the dependency when needed. </li>
+</ol>
+
+<h2> <strong> What does providedIn: 'root' do in Angular? </strong> </h2>
+
+<P>
+  "providedIn: 'root' registers the service with the root injector automatically, making it a singleton throughout the app. It's part of Angular's tree-shakable providers system, reducing boilerplate and improving performance by only including the service in the bundle if it's actually used."
+</P>
+<ul>
+  <li> providedIn: 'root' tells Angular to automatically create and provide the service in the root injector (i.e., application-wide). </li>
+  <li> So you don’t need to add the service manually in the providers array of any module. </li>
+</ul>
+
+<h2> <strong> How it works: </strong></h2>
+<ul>
+  <li> Angular creates a single instance (singleton) of the service and shares it across the whole app. </li>
+  <li> This is part of tree-shakable providers — Angular only includes the service if it’s used somewhere. </li>
+</ul>
+
 <pre>
   <code>
     @Injectable({
@@ -5004,7 +5224,6 @@ onSubmit(): void {
         sfdgsdfg
         /mat-card-content>
       /mat-card>
-      
     </code>
   </pre>
 
@@ -5015,6 +5234,201 @@ onSubmit(): void {
   <li> You can pass data to and receive data from modals. </li>
   <li> Ideal for confirmation dialogs, forms, and popups. </li>
 </ul>
+
+<p> install Angular Material using the Angular CLI: ng add @angular/material </p>
+
+<p> <strong> What is a Material Module and why do we use a separate one ? </strong> </p>
+<p> Creating a separate MaterialModule is a common practice where we import and export all required Material components in one module and reuse it across the app. This improves modularity and code cleanliness. </p>
+<pre>
+  <code> @NgModule({
+  exports: [
+    MatButtonModule,
+    MatInputModule,
+    MatCardModule
+  ]
+})
+export class MaterialModule {}
+</code>
+</pre>
+
+<p class="mt-4"> <strong> How is Angular Material different from Bootstrap ? </strong> </p>
+
+<table>
+  <tr>
+    <td> Angular Material </td>
+    <td> Bootstrap </td>
+  </tr>
+<tr>
+    <td> Based on Material Design <br> Deeply integrated <br> Angular-specific </td>
+    <td> Based on custom grid system <br> Requires manual integration <br> HTML/CSS/JS  </td>
+  </tr>
+</table>
+
+
+<p class="mt-4"> <strong> What are some commonly used Angular Material components? </strong> </p>
+<table>
+  <tr>
+    <td> MatInput – For input fields </td>
+    <td> MatButton – For buttons </td>
+  </tr>
+  <tr> 
+    <td> MatDialog – Modal popups </td>
+    <td> MatTable – Data tables </td>
+  </tr>
+<tr>
+    <td> MatCard – For card layout </td>
+    <td> MatToolbar – Top app bar  </td>
+  </tr>
+  <tr>
+    <td> MatPaginator & MatSort – Table features </td>
+    <td> MatFormField – Form controls wrapper </td>
+  </tr>
+  <tr>
+        <td> MatSelect – Dropdown/select control </td>
+    <td> </td>
+  </tr>
+</table>
+
+<p class="mt-4"> <strong> How do you use Angular Material Dialog? </strong> </p>
+<pre>
+  <code>
+Open Dialog: ts 
+constructor(private dialog: MatDialog) {}
+openDialog() {
+  this.dialog.open(DialogComponent);
+}
+  </code>
+</pre>
+
+<pre>
+  <code>
+    Dialog Component:
+    @Component({
+  selector: 'app-dialog',
+  template: `h2 mat-dialog-title>Hello /h2>`
+})
+export class DialogComponent {}
+  </code>
+</pre>
+
+<p class="mt-4"> <strong> What is MatFormField and how is it used? </strong></p>
+MatFormField is a wrapper for form controls to apply Material styling, floating labels, and error messages.
+<pre>
+  <code>
+
+mat-form-field>
+  mat-label>Email  /mat-label>
+  input matInput placeholder="Enter email">
+/mat-form-field>
+
+  </code>
+</pre>
+
+<p> <strong> How do you implement Angular Material Table with pagination and sorting? </strong></p>
+
+<pre>
+  <code>
+    html
+
+table mat-table [dataSource]="dataSource" matSort>
+  <!-- Columns here -->
+/table>
+mat-paginator [length]="100" [pageSize]="10"> /mat-paginator>
+
+TS 
+
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
+
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
+}
+
+
+  </code>
+</pre>
+
+
+<p class="mt-4"> <strong> How to change theme or apply custom themes in Angular Material? </strong></p>
+<p> Angular Material supports predefined themes like indigo-pink, deeppurple-amber, etc. You can also define a custom theme in SCSS: </p>
+<pre>
+  <code>
+    @use '@angular/material' as mat;
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$orange-palette),
+    accent: mat.define-palette(mat.$cyan-palette),
+  )
+));
+
+@include mat.all-component-themes($my-theme);
+
+  </code>
+</pre>
+
+<p> <strong>  Can Angular Material be used with Reactive Forms? </strong></p>
+<pre><code>
+
+  form [formGroup]="form">
+  mat-form-field>
+    mat-label>Username /mat-label>
+    input matInput formControlName="username">
+  /mat-form-field>
+/form>
+
+</code></pre>
+
+
+<h2> ✅ 1. Material Dialog with Data (Open, Close, Pass Data) </h2>
+<pre>
+  <code>
+    ts  Trigger Component
+
+import { MatDialog } from '@angular/material/dialog';
+import { MyDialogComponent } from './my-dialog.component';
+
+constructor(private dialog: MatDialog) {}
+
+openDialog() {
+  const dialogRef = this.dialog.open(MyDialogComponent, {
+    data: { name: 'Santosh', role: 'Developer' }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialog closed with:', result);
+  });
+}
+
+============
+
+ts Dialog  component 
+
+@Component({
+  selector: 'app-my-dialog',
+  template: `
+    h2 mat-dialog-title>Hello {{data.name}} /h2>
+    mat-dialog-content>Your role: {{data.role}} /mat-dialog-content>
+    mat-dialog-actions>
+      button mat-button (click)="close()">Close /button>
+    /mat-dialog-actions>
+  `
+})
+export class MyDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef  MyDialogComponent>
+  ) {}
+
+  close() {
+    this.dialogRef.close('Confirmed');
+  }
+}
+
+  </code>
+</pre>
+
   </div>
 
   <div class="box shadow p-2 mb-3" id="json">
