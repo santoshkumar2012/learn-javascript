@@ -95,6 +95,7 @@ pre {
       <li> <a href="#synchronous">  synchronous and asynchronous  </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
+      <li> <a href="#nesteArray"> Nested Array </a></li>
       <li> <a href="#filter"> filter </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
 	   <li> <a href="#secondlargestnumber"> Second largestnumber </a> </li>
@@ -1818,7 +1819,36 @@ console.log(citiesAbove30);
 </pre>
 </div>
 
+<div class="box shadow p-2 mb-3" id="filter">
+<h2> Nested Array  </h2>
+<pre>
+  <code>
+let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
+let flatArray = array.flat();
+console.log(flatArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  </code>
+</pre>
+<br>
+<pre>
+  <code>
+let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
+let flatArray = [];
 
+for (let item of array) {
+  if (Array.isArray(item)) {
+    for (let subItem of item) {
+      flatArray.push(subItem);
+    }
+  } else {
+    flatArray.push(item);
+  }
+}
+
+console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  </code>
+</pre>
+</div>
 
 <div class="box shadow p-2 mb-3" id="function">
 <h2> Function Statement and Function Expression </h2>
@@ -2612,12 +2642,15 @@ protected - allows access to the class member from itself and any classes that i
                             </code>
                         </pre>
 						
-						<h2>What is the difference between “display: none” and “visibility: hidden”, when used as attributes to the HTML element. </h2>
+						<h2 class="mt-5">What is the difference between “display: none” and “visibility: hidden”, when used as attributes to the HTML element. </h2>
 						<p> When we use the attribute “visibility: hidden” for an HTML element then that element will be hidden from the webpage but still takes up space. Whereas, if we use the “display: none” attribute for an HTML element then the element will be hidden, and also it won’t take up any space on the webpage.</p>
 						
 						<h2> How to specify the metadata in HTML5? </h2>
 						<p> To specify we can use <meta> tag which is a void tag,i.e., it does not have a closing tag. Some of the attributes used with meta tags are name, content, http-equiv, etc. The below image tells how to specify the metadata. </p>
-                        
+              
+            <h2> Paddding and Margin </h2>
+            <p> Adds space inside the box (between content and border). </p>
+            <p> Adds space outside the box (between this element and others). </p>
                        
                         
                         <h2> P and span tag difference </h2>
@@ -2629,7 +2662,23 @@ protected - allows access to the class member from itself and any classes that i
                         <p> <strong> Pseudo-Elements (::, ::before, ::after) , Pseudo-Classes (:, :hover, :focus, :nth-child()) </strong></p>
                         
                         <p><strong> Box Model </strong> Box Model defines how an element’s size and spacing are calculated. </p>
-                        
+                        ====
+                        <h2> Box Sizing </h2>
+                        <p> The box-sizing property in CSS defines how the width and height of an element are calculated </p>
+                        1. content-box (default) <br>
+                        <ul>
+                          <li> Width & height include only content. </li>
+                          <li> Padding and border are added outside the content size. </li>
+                        </ul>
+                        <pre>
+                          <code>
+                            width: 100px;
+                            padding: 10px;
+                            border: 5px solid;
+                            📏 Final size: 100 + 102 + 52 = 130px total
+                          </code>
+                        </pre>
+                        =====
                        
                         </div>
 

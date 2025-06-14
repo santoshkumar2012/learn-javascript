@@ -2506,6 +2506,7 @@ Makes Angular more similar to other frameworks like React or Vue (component-firs
 </div>
 
 <div class="box shadow p-2 mb-3" id="state">
+
   <h2> State Management in Angular </h2>
   <p> State management in Angular is the process of handling application data efficiently across components, services, and routes. Local State, Component State, Service State (App-Level State) </p>
 
@@ -2516,11 +2517,289 @@ You want a simple reactive way to subscribe to changes </p>
 <p> Intermediate: Services + Local Storage </p>
 <p> Advanced: NgRx (Redux for Angular) </p>
 
-NgRx Key Concepts:
-<p> Store = global state container </p>
-<p> Actions = events that describe state changes </p>
-<p> Reducers = functions that update state based on actions </p>
-<p> Effects = handle async operations (e.g., API calls) </p>
+<h2> <strong> NgRx One-Page Revision Sheet </strong></h2>
+
+<p> 
+🏪 <strong> 1. STORE </strong><br>
+Definition: <br>
+Global storage for all app data (state).<br>
+Easy Line:<br>
+The store is like a central database where all Angular components share and get data.
+</p>
+
+
+<p> 
+🏪 <strong> 1. ACTIONS </strong><br>
+Definition: <br>
+Objects that tell what event just happened in the app. <br>
+Easy Line:<br>
+Actions are commands like “ADD_USER” or “DELETE_TODO” that tell the store something needs to change. <br>
+Examples <br>
+ts - { type: '[Todo] Add Task', task: 'Learn NgRx' }
+</p>
+
+<p> 
+🏪 <strong> 1. EFFECTS </strong><br>
+Definition: <br>
+Used to perform external work (like API calls) after an action. <br>
+Easy Line:<br>
+When an action needs to fetch data from server, effects do that job and send back results.
+</p>
+
+<p> 
+🏪 <strong> 1. REDUCERS </strong><br>
+Definition: <br>
+Pure functions that receive an action and return the new state. <br>
+Easy Line:<br>
+Reducers decide how the state should change when an action happens. <br>
+Important Rule: <br>
+Reducers never do API calls, they just return new state.
+</p>
+
+<p> 
+🏪 <strong> 1. SELECTORS </strong><br>
+Definition: <br>
+Functions to get specific parts of the state from the store.
+<br>
+Easy Line:<br>
+Selectors help you easily pick data like user name, cart count, etc., from the global store.
+</p>
+
+
+<h2> What is state management? </h2>
+<p> State refers to the data or UI condition of your application at any given point in time. </p>
+<p> <strong> State Management </strong> is the process of: </p>
+<ul>
+  <li> Keeping track of the application’s state, </li>
+  <li> Updating it based on user interaction or API calls, </li>
+  <li> Ensuring that components reflect the updated state. </li>
+</ul>
+<h2> 2. Local Component State vs Global State </h2>
+<ul>
+  <li> <strong> Local State </strong></li>
+  <li> Stored within a single component using @Input(), @Output(), or local variables	 </li>
+  <li> Easy to manage for small apps	</li>
+  <li> No reusability	 </li>
+</ul>
+
+<ul>
+  <li> <strong> Global State </strong></li>
+  <li> Shared across multiple components via services or libraries like NgRx </li>
+  <li> Best for large apps with shared data like user info, cart, auth </li>
+  <li> Reusable and consistent across the app </li>
+</ul>
+
+<p> <strong> Example: </strong></p>
+<ul>
+  <li> Local: Form input field </li>
+  <li> Global: Logged-in user info used in header, sidebar, and profile page </li>
+</ul>
+
+<p> <strong> 3. Why is State Management Needed in Angular Applications? </strong></p>
+<ul>
+  <li> <strong> As applications grow: </strong> </li>
+  <li> More components start sharing and modifying the same data </li>
+  <li> Manual data flow becomes hard to manage and leads to bugs </li>
+  <li> You need centralized control and predictable updates </li>
+</ul>
+
+<ul>
+  <li> <strong> State management (like NgRx) helps by: </strong></li>
+  <li> Centralizing data in a single place (store) </li>
+  <li> Using actions to update it predictably </li>
+  <li> Making state traceable (via Redux DevTools) </li>
+  <li> Improving maintainability and scalability </li>
+</ul>
+
+<p> <strong> NgRx is based on the Redux pattern, which has 3 main principles: </strong></p>
+<ul>
+  <li> <strong> Actions </strong> Events that describe what happened (e.g. loadUsers, addToCart) </li>
+  <li> <strong> Reducers </strong> Pure functions that take state + action and return new state </li>
+  <li> <strong> Store </strong> A single object that holds the state of your application </li>
+</ul>
+
+<p> <strong> Flow </strong></p>
+<ol>
+  <li> Component dispatches an Action </li>
+  <li> Reducer handles it and returns new state </li>
+  <li> Store updates and components subscribe to it </li>
+</ol>
+
+<table>
+  <tr>
+    <td> 
+   <strong> Component   </strong> <br>
+   dispatch(action) 
+    </td>
+  </tr>
+  <tr>
+    <td> 
+  <strong>  Action   </strong> <br>
+   Example: loadUsers
+    </td>
+  </tr>
+   <tr>
+    <td> 
+   <strong> Effect  </strong> <br>
+   (optional async logic like API call)
+    </td>
+  </tr>
+  <tr>
+    <td> 
+  <strong>  Reducer    </strong> <br>
+  Handles the action, updates the state
+    </td>
+  </tr>
+  <tr>
+    <td> 
+   <strong> Store </strong> <br>
+  Central state container
+    </td>
+  </tr>
+  <tr>
+    <td> 
+   <strong> Selector  </strong>  <br>
+   Used to read state in components
+    </td>
+  </tr>
+   <tr>
+    <td> 
+   <strong>Component </strong> <br>
+   (subscribed to state changes)
+    </td>
+  </tr>
+</table>
+
+<p class="mt-4"> <strong> Q: Can you explain the NgRx flow with an example? </strong></p>
+<p>  <strong> User list feature. </strong> When the component initializes, it dispatches an action like loadUsers(). This triggers an NgRx effect, which calls the user API using HttpClient. On success, it dispatches loadUsersSuccess({ users }). The reducer listens to this action and updates the store with the fetched user list. The component then uses a selector like selectAllUsers to access and display this data. </p>
+
+<p> <strong> Visual Example: Shopping Cart Feature </strong></p>
+<pre>
+  <code>
+    📦 Actions:
+    addItem({ product })
+    removeItem({ productId })
+    clearCart()
+
+    🧠 Reducer:
+    on(addItem, (state, { product }) => ({
+      ...state,
+      items: [...state.items, product]
+    }))
+
+    🏪 Store (State):
+    {
+      cart: {
+        items: [/* array of products */],
+        total: 3
+      }
+    }
+
+    🔍 Selector:
+    export const selectCartItems = createSelector(
+      selectCartState,
+      (cart) => cart.items
+    );
+
+    💡 Usage in Component:
+
+    this.store.select(selectCartItems).subscribe(items => {
+    this.productsInCart = items;
+  });
+
+  </code>
+</pre>
+
+
+<h2 class="mt-5"> <strong> Mini Project — "NgRx To-Do List App" </strong> </h2>
+<p> <strong> Manage a list of tasks using NgRx Store, Actions, Reducers, Selectors, and Effects </strong></p>
+
+<pre>
+  <code>
+1. Action (todo.actions.ts)
+
+import { createAction, props } from '@ngrx/store';
+import { Todo } from '../models/todo.model';
+
+export const loadTodos = createAction('[Todo] Load Todos');
+export const loadTodosSuccess = createAction('[Todo] Load Todos Success', props<{ todos: Todo[] }>());
+export const addTodo = createAction('[Todo] Add Todo', props<{ todo: Todo }>());
+export const deleteTodo = createAction('[Todo] Delete Todo', props<{ id: number }>());
+
+=========
+
+ 2. Reducer (todo.reducer.ts)
+
+import { createReducer, on } from '@ngrx/store';
+import { addTodo, deleteTodo, loadTodosSuccess } from '../actions/todo.actions';
+import { Todo } from '../models/todo.model';
+
+export const initialState: Todo[] = [];
+
+export const todoReducer = createReducer(
+  initialState,
+  on(loadTodosSuccess, (_, { todos }) => todos),
+  on(addTodo, (state, { todo }) => [...state, todo]),
+  on(deleteTodo, (state, { id }) => state.filter(t => t.id !== id))
+);
+
+=====
+
+3. Selector (todo.selectors.ts) 
+
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Todo } from '../models/todo.model';
+
+export const selectTodos = createFeatureSelector<Todo[]>('todos');
+
+=========
+
+4. Effect (todo.effects.ts) — for fake API
+
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { loadTodos, loadTodosSuccess } from '../actions/todo.actions';
+import { of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
+
+@Injectable()
+export class TodoEffects {
+  loadTodos$ = createEffect(() => this.actions$.pipe(
+    ofType(loadTodos),
+    switchMap(() =>
+      of([
+        { id: 1, title: 'Buy milk' },
+        { id: 2, title: 'Learn NgRx' }
+      ]).pipe(delay(1000)) // simulate API
+    ),
+    map(todos => loadTodosSuccess({ todos }))
+  ));
+
+  constructor(private actions$: Actions) {}
+}
+
+  </code>
+</pre>
+
+
+<p class="mt-4"> Q1: What is the purpose of the Store in NgRx? </p>
+<p> ✅ A: The store holds the entire state of the application and provides a way to dispatch actions and subscribe to state updates.</p>
+
+<p class="mt-4"> Q2: What is an Action? </p>
+<p> ✅ A: Actions are events that describe something that happened, like addTodo or loadUsers.</p>
+
+<p class="mt-4"> Q3: How do Effects help in NgRx?</p>
+<p> ✅ A: Effects listen for actions and handle side effects like HTTP calls. They don't update the state directly, but dispatch success/failure actions that the reducer handles.</p>
+
+<p class="mt-4"> Q4: Why should reducers be pure functions? </p>
+<p> ✅ A: So they are predictable, testable, and only depend on their inputs—no API calls or randomness. </p>
+
+<p class="mt-4"> Q5: How would you structure state for a large app (e.g., Auth + Products + Cart)?</p>
+<p> ✅ A: Use feature modules with their own slice of state. Register them using StoreModule.forFeature(...) and organize selectors/actions/reducers accordingly. </p>
+
+<p class="mt-4"> Q6: What are meta-reducers? </p>
+<p> ✅ A: Functions that wrap other reducers to add common logic like logging, hydration, or error handling. </p>
+
   </div>
 
 
@@ -7332,7 +7611,70 @@ When you move the mouse away, it will go back to normal.
 
 </div>
 
-            </div>
+
+<hr>
+
+<div class="mt-4">
+<h2> Create custom Pipe </h2>
+
+<pre>
+  <code>
+pipeTransform use - PipeTransform is an interface from the @angular/core package that allows you to create custom pipes. 
+transform(value: string): string
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'genderTitle'
+})
+
+export class GenderTitlePipe implements PipeTransform {
+
+  transform(value: string, gender: string): string {
+    if (gender.toLowerCase() === 'male') {
+      return 'Mr. ' + value;
+    } else {
+      return 'Miss. ' + value;
+    }
+  }
+
+}
+
+  </code>
+</pre>
+
+<h2> Secone example in custom pipe </h2>
+
+<pre>
+  <code>
+    ng generate pipe prefix
+
+TS.
+import { Pipe, PipeTransform } from '@angular/core';
+@Pipe({
+  name: 'prefix'
+})
+export class PrefixPipe implements PipeTransform {
+  transform(value: string, prefixText: string): string {
+    return `${prefixText} ${value.toUpperCase()}`;
+  }
+}
+====
+
+html 
+
+{{ 'angular developer' | prefix:'Hello' }}
+
+// Hello ANGULAR DEVELOPER
+
+
+  </code>
+</pre>
+
+</div>
+
+
+</div>
 
               
 
