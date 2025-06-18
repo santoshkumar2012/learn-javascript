@@ -117,6 +117,12 @@ pre {
       <li> <a href="#primenumber">  Finding Prime Numbers </a></li>
       <li> <a href="#fibonacci">  Fibonacci Sequence </a></li>
       <li> <a href="#secondHighestsalarys"> Second Highest Salary (Angular)</a></li>
+      <li> <a href="#firstLetter"> Capitalize the first letter </a></li>
+      <li> <a href="#unique"> First non-repeating (unique) character </a></li>
+      <li> <a href="#transform"> Convert array to object based on a key </a></li>
+      <li> <a href="#fizzBuzz"> FizzBuzz </a></li>
+      <li> <a href="#anagram"> Anagram </a></li>
+      <li> <a href="#even"> Even Number </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#html"> HTML </a> </li>
@@ -1645,13 +1651,27 @@ function greet() {
 <pre>
     <code>
     numbers = [3,4,5,6,2,34,54,23,63,18,46]
-    argest = numbers[0]
+    largest = numbers[0]
     for(let i = 1; i < numbers.length; i++) {
     if(numbers[i] > largest){
     largest = numbers[i]
      }
     }
     console.log(largest);
+
+    ==============
+
+    // SMALLEST NUMBER 
+
+     numbers = [3,4,5,6,2,34,54,23,63,18,46]
+    smallest = numbers[0]
+    for(let i = 1; i < numbers.length; i++) {
+    if(numbers[i] < smallest){
+    smallest = numbers[i]
+     }
+    }
+    console.log(smallest);
+
 </code>
 </pre>
 </div>
@@ -1800,8 +1820,8 @@ console.log(countCharacters("")); // Output: {}
 <div class="box shadow p-2 mb-3" id="filter">
 <h2> Filter  </h2>
 <pre>
-    <code>
-      const objects = [
+<code>
+  const objects = [
   { name: "Alice", age: 30, city: "New York" },
   { name: "Bob", age: 25, city: "Los Angeles" },
   { name: "Charlie", age: 35, city: "Chicago" },
@@ -1815,11 +1835,41 @@ const citiesAbove30 = objects
 
 console.log(citiesAbove30);
 
-    </code>
+</code>
 </pre>
+
+<h2> Filter By For Loop  </h2>
+
+<pre>
+<code>
+  const objects = [
+  { name: "Alice", age: 30, city: "New York" },
+  { name: "Bob", age: 25, city: "Los Angeles" },
+  { name: "Charlie", age: 35, city: "Chicago" },
+  { name: "David", age: 40, city: "Houston" },
+  { name: "Eve", age: 28, city: "Miami" }
+];
+
+for (let i=0; i < objects.length; i++){
+    if(objects[i].age > 25 && objects[i].age < 35){
+      console.log(objects[i])
+    }
+}
+
+===================
+
+ for(i=0; i < objects.length; i++){
+  if( objects[i].age > 30 ) {
+    console.log(objects[i])
+  }
+} 
+
+</code>
+</pre>
+
 </div>
 
-<div class="box shadow p-2 mb-3" id="filter">
+<div class="box shadow p-2 mb-3" id="nesteArray">
 <h2> Nested Array  </h2>
 <pre>
   <code>
@@ -1829,6 +1879,7 @@ console.log(flatArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
   </code>
 </pre>
 <br>
+<h2> Nested Array By Loop  </h2>
 <pre>
   <code>
 let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
@@ -2232,6 +2283,18 @@ console.log(result);  // 0 ✅
 			console.log(isPalindrome(input));
 			</code>
 			</pre>
+
+      <hr>
+
+      <pre>
+        <code>
+      //Palindrome
+      =====
+        const arr = [1, 2, 3, 2, 1];
+        const isPalindrome = arr.join() === arr.slice().reverse().join();
+        console.log(isPalindrome); // Output: true
+        </code>
+      </pre>
 			
             </div>
 
@@ -2286,6 +2349,15 @@ console.log(final) // Ramuk hsotnas
   let strs = [1,2,3]
   stroess = strs.reverse();
   console.log(stroess) // [ 3, 2, 1 ]
+
+  ---------------------
+
+const arr = [1, 2, 3, 4];
+const reversed = [];
+for (let i = arr.length - 1; i >= 0; i--) {
+  reversed.push(arr[i]);
+}
+console.log(reversed); // Output: [4, 3, 2, 1]
 
   -------------- 
 
@@ -3017,8 +3089,135 @@ Foreign Key	Creates a relationship between tables<br>
                                 </code>
                             </pre>
                         </div>
+
+<div class="box shadow p-2 mb-3" id="even">
+<h2> Even Number </h2>
+
+<pre>
+  <code>
+let array = [1,2,3,4,5,6,7,8,9]
+let evenNumber = array.filter((x) => x % 2 == 0)
+
+============ 
+Sum of All Even Numbers from 1 to 50
+
+let sum = 0; 
+for(let i=1; i <= 50; i++){
+if ( i % 2 === 0 ) {
+  sum += i
+}
+}
+console.log(sum)
+
+  </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="anagram">
+<h2> Anagram </h2>
+
+<pre>
+<code>
+const a = "listen", b = "silent";
+function isAnagram(str1, str2) {
+  return str1.split('').sort().join('') === str2.split('').sort().join('');
+}
+
+console.log(isAnagram(a, b)); // Output: true
+  </code>
+</pre>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="fizzBuzz">
+<h2> 1. FizzBuzz </h2>
+<ul>
+ <li> Print numbers from 1 to 20. </li> 
+ <li> If divisible by 3 → print "Fizz" </li>
+ <li> If divisible by 5 → print "Buzz" </li>
+ <li> If divisible by both → print "FizzBuzz" </li>
+</ul>
+
+<pre>
+  <code>
+  for (let i = 1; i <= 20; i++) {
+  if (i % 3 === 0 && i % 5 === 0) {
+    console.log("FizzBuzz");
+  } else if (i % 3 === 0) {
+    console.log("Fizz");
+  } else if (i % 5 === 0) {
+    console.log("Buzz");
+  } else {
+    console.log(i);
+  }
+}
+  </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="transform">
+<h2> Convert array to object based on a key </h2>
+
+<pre>
+  <code>
+    const arr = [
+  { id: 1, name: 'a' },
+  { id: 2, name: 'b' }
+];
+
+const result = arr.reduce((obj, item) => {
+  obj[item.id] = item.name;
+  return obj;
+}, {});
+
+console.log(result); // Output: { 1: 'a', 2: 'b' }
+  </code>
+</pre>
+
+</div>
+
 						
-						
+<div class="box shadow p-2 mb-3" id="unique">
+<h2> First non-repeating (unique) character </h2>
+
+<pre>
+  <code>
+    const str = "aabbcde";
+
+function firstUniqueChar(s) {
+  for (let i = 0; i < s.length; i++) {
+    if (s.indexOf(s[i]) === s.lastIndexOf(s[i])) {
+      return s[i];
+    }
+  }
+  return null;
+}
+
+console.log(firstUniqueChar(str)); // Output: "c"
+  </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="firstLetter">
+<h2> Capitalize the first letter of each word </h2>
+
+<pre>
+  <code>
+    const str = "hello world";
+  const transformed = str
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+  console.log(transformed); // Output: "Hello World"
+
+  </code>
+</pre>
+
+</div>
 						
 						
 <div class="box shadow p-2 mb-3" id="secondHighestsalarys">

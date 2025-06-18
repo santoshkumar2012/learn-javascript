@@ -7491,6 +7491,316 @@ p>Message from Child: {{ messageFromChild }} /p>
               </code>
             </pre>
 
+<hr>
+
+
+<div class="mt-5"> 
+<h2> @Input Parent to child with real API data </h2>
+
+<pre>
+  <code>
+
+1. ParentComponent.ts
+  
+import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+import { HttpSharedService } from '../../http-shared.service';
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+
+apiData: any [] = [];
+
+constructor( private http: HttpSharedService){}
+
+ngOnInit(){
+  this.getUser()
+}
+
+getUser(){
+  this.http.get('users').subscribe((response: any) => {
+    this.apiData = response.users
+  })
+}
+
+}
+
+=================
+
+2. ParentComponent.html 
+
+h1> Parent Components /h1>
+app-childs [users]="apiData">  /app-childs>
+
+=================
+
+3. Child Compoent ts 
+
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-childs',
+  imports: [CommonModule],
+  templateUrl: './childs.component.html',
+  styleUrl: './childs.component.css'
+})
+export class ChildsComponent {
+
+  @Input() users: any[] = [];
+
+}
+
+=============
+
+4. child Component html 
+
+h1> Child Component /h1>
+p>Received Data live data : /p>
+ul>
+  li *ngFor="let user of users">
+    {{ user.firstName }}
+  /li>
+/ul>
+
+  </code>
+</pre>
+</div>
+
+<div class="mt-5"> 
+<h2> @Output child to parent with real API data </h2>
+
+<pre>
+  <code>
+
+1. Parent.ts 
+
+import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+import { HttpSharedService } from '../../http-shared.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent, CommonModule, ReactiveFormsModule],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+
+receivedData: any[] = [];
+onApiDataReceived(data: any[]) {
+    this.receivedData = data;
+    console.log("Received from child:", data);
+  }
+
+}
+
+
+===========
+
+2. parent.html 
+
+app-childs (dataFetched)="onApiDataReceived($event)"> /app-childs>
+
+div *ngIf="receivedData.length > 0">
+  h3>Data received from Child: /h3>
+  ul>
+    li *ngFor="let user of receivedData">{{ user.firstName }} /li>
+  /ul>
+/div>
+
+div *ngIf="receivedData.length === 0">
+  p>Loading or no data found... /p>
+/div>
+
+===========
+
+3. child.ts 
+
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpSharedService } from '../../http-shared.service';
+
+@Component({
+  selector: 'app-childs',
+  imports: [CommonModule],
+  templateUrl: './childs.component.html',
+  styleUrl: './childs.component.css'
+})
+export class ChildsComponent {
+
+   @Output() dataFetched = new EventEmitter<any[]>();
+
+   constructor( private http: HttpSharedService){}
+
+  ngOnInit(){
+    this.getDataFetch()
+  }
+
+  getDataFetch(){
+    this.http.get('users').subscribe((data: any) => {
+      this.dataFetched.emit(data.users);
+    })
+  }
+
+}
+
+==========
+
+4. Child.html 
+
+h1> Child Component /h1>
+p> Child is fetching data from API and sending to Parent... /p>
+
+
+  </code>
+</pre>
+
+</div>
+
+<hr>
+
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from Parent to Child </h2>
+
+<pre>
+<code>
+
+  1. Parent.ts 
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html'
+})
+export class ParentComponent {
+  numbers: number[] = [1, 2, 3];
+}
+
+=========
+
+2. Parent.html 
+
+h2>Parent Component /h2>
+app-child [inp]="numbers"> /app-child>
+
+======
+
+3. child.component.ts
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html'
+})
+export class ChildComponent {
+  @Input() inp: number[] = [];
+}
+
+
+============
+
+4. child.component.html
+
+h3>Child Component/h3>
+ul>
+  li *ngFor="let num of inp"> {{ num }} /li>
+/ul>
+
+
+output 
+http://localhost:4200/parents
+Child Component
+- 1
+- 2
+- 3
+
+
+</code>
+</pre>
+
+</div>
+
+<hr>
+
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from child to Parent </h2>
+
+<pre>
+  <code>
+    1. child component.ts 
+
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html'
+})
+export class ChildComponent implements OnInit {
+  @Output() sendData = new EventEmitter<number[]>();
+
+  ngOnInit() {
+    const numbers = [1, 2, 3];
+    this.sendData.emit(numbers);
+  }
+}
+
+==========
+
+2. child.component.html
+
+h3>Child Component /h3>
+p>Sending data to Parent.../p>
+
+==========
+
+3. parent.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html'
+})
+export class ParentComponent {
+  receivedData: number[] = [];
+
+  onChildData(data: number[]) {
+    this.receivedData = data;
+  }
+}
+
+========
+
+4. parent.component.html
+h2>Parent Component /h2>
+app-child (sendData)="onChildData($event)"> /app-child>
+
+ul>
+  li *ngFor="let num of receivedData">{{ num }} /li>
+/ul>
+
+//// output
+Parent Component
+- 1
+- 2
+- 3
+
+  </code>
+</pre>
+
+</div>
+
+
 
 <hr>
 
