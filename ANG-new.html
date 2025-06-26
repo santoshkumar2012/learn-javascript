@@ -713,10 +713,62 @@ Fully supports all control structures. <br>
 
 
 <div class="box shadow p-2 mb-3" id="apiservices">
+
+<h2> API CALL RESTful APIs -- API serives  </h2>
+<p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
+
+<h2 class="mt-4"> Why Do We Use APIs in Angular Projects ? </h2>
+API = Application Programming Interface <br>
+In Angular (a frontend framework), APIs allow your app to talk to a backend server or external services to:<br>
+<strong> 1. Get Data </strong><br>
+Example: Fetch product details, user info, or blog posts from a database through an API.<br>
+<strong> 2. Send Data </strong><br>
+Example: When a user submits a form (like login, registration), the data is sent via an API to the server.<br>
+<strong> 3. Update or Delete Data </strong><br>
+API allows your app to update or delete something in the backend (e.g., edit a profile, delete a comment).<br>
+<strong> 4. Secure & Scalable </strong><br>
+APIs enforce security, validation, and rules.<br>
+<h2 class="mt-3"> <strong> How Important is API in Angular? </strong> </h2>
+<p class="m-0 p-0"> Without APIs : Your Angular app is static – it can't fetch or update live data. </p>
+<p class="m-0 p-0"> You can’t store user info, login users, or interact with databases. </p>
+
+<h2 class="mt-3"> <strong> Common API Tools in Angular : </strong>  </h2>
+<p class="m-0 p-0"> HttpClientModule for making API requests </p>
+<p class="m-0 p-0"> HttpClient.get(), post(), put(), delete() </p>
+<p class="m-0 p-0"> Uses Observables to handle async responses </p>
+<br>
+          <pre><code>
+            ngOnInit() {
+              this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
+                this.user = resposne.user
+                console.log(resposne);
+              })
+            }
+          </code></pre>
+
+<p class="mt-4"> <strong> What is different between Web API and Rest API </strong></p>
+<P> <strong> Web API (Web Application Programming Interface) </strong></P>
+<ul>
+<li> Definition: A Web API is a general term for any API that can be accessed over the web using the HTTP protocol. </li>
+<li> Purpose: It allows communication between client and server applications. </li>
+<li> Format: Can use any format like JSON, XML, or even HTML. </li>
+<li> Architecture: Can follow any architecture style, such as REST, SOAP, GraphQL, etc. </li>
+</ul>
+
+<P> <strong> REST API (Representational State Transfer API) </strong></P>
+<ul>
+<li> Definition: A specific type of Web API that follows the REST architecture. </li>
+<li> Stateless (each request is independent) </li>
+<li> Uses HTTP methods: GET, POST, PUT, DELETE </li>
+<li> Resource-based (each URL represents a resource) </li>
+<li> Uses standard response codes (like 200, 404, etc.) </li>
+<li> Data Format: Typically uses JSON, but can also support XML. </li>
+</ul>
+
+<hr>
+
 <P> <strong> When you call multiple APIs in the same Angular component, and one of them fails, it's important to handle errors gracefully so the app doesn’t break and other successful calls can still work. </strong></P>
-
 <p> <strong> Best Practices to Manage Multiple API Calls </strong></p> 
-
 <ul>
   <strong> 1. Use forkJoin (if all APIs must succeed)  </strong>
   <li> forkJoin waits for all observables to complete. </li>
@@ -753,62 +805,30 @@ Fully supports all control structures. <br>
 
 <hr>
 
-<h2> API CALL RESTful APIs -- API serives  </h2>
-<p> Angular, RESTful APIs allow the frontend to communicate with a backend server by making HTTP requests. Angular provides the HttpClient module to perform CRUD (Create, Read, Update, Delete) operations with APIs. </p>
+<h2> <strong> API security </strong> </h2>
+<p class="m-0 p-0"> While it’s a frontend framework and can’t directly secure APIs, you can implement best practices to enhance frontend-side API security and communication. </p>
 
-<h2> Why Do We Use APIs in Angular Projects? </h2>
-API = Application Programming Interface <br>
-In Angular (a frontend framework), APIs allow your app to talk to a backend server or external services to:<br>
-✅ 1. Get Data<br>
-Example: Fetch product details, user info, or blog posts from a database through an API.<br>
-✅ 2. Send Data<br>
-Example: When a user submits a form (like login, registration), the data is sent via an API to the server.<br>
-<br>
-✅ 3. Update or Delete Data<br>
-API allows your app to update or delete something in the backend (e.g., edit a profile, delete a comment).<br>
-<br>
-✅ 4. Secure & Scalable<br>
-APIs enforce security, validation, and rules.<br>
-<br>
-The backend handles heavy logic, so Angular only deals with UI/UX.<br>
-<h2> How Important is API in Angular? </h2>
-<p> <strong> Very Important! </strong></p>
-<p> Without APIs: Your Angular app is static – it can't fetch or update live data. </p>
-<p> You can’t store user info, login users, or interact with databases. </p>
+<h2 class="mt-3"> Use Authentication (e.g., JWT) </h2>
+<p class="m-0 p-0"> Login flow: User logs in → Backend sends a JWT token → Save in Angular (e.g., in memory or localStorage). </p>
+<p class="m-0 p-0"> Attach token to each request using an HTTP interceptor. </p>
 
-<h2> Common API Tools in Angular: </h2>
-<p> HttpClientModule for making API requests </p>
-<p> HttpClient.get(), post(), put(), delete() </p>
-<p> Uses Observables to handle async responses </p>
+<h2 class="mt-3"> Use HTTPS </h2>
+<p class="m-0 p-0"> Always serve your Angular app and API over HTTPS. </p>
+<p class="m-0 p-0"> Prevents Man-in-the-Middle (MITM) attacks. </p>
 
-          <pre><code>
-            ngOnInit() {
-              this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
-                this.user = resposne.user
-                console.log(resposne);
-              })
-            }
-          </code></pre>
+<h2 class="mt-3"> Restrict CORS on Backend </h2>
+<p class="m-0 p-0"> Backend should only allow requests from your trusted domain. </p>
+<p class="m-0 p-0"> E.g., allow only https://yourapp.com in CORS settings. </p>
 
-<p class="mt-4"> <strong> What is different between Web API and Rest API </strong></p>
-<P> <strong> Web API (Web Application Programming Interface) </strong></P>
-<ul>
-<li> Definition: A Web API is a general term for any API that can be accessed over the web using the HTTP protocol. </li>
-<li> Purpose: It allows communication between client and server applications. </li>
-<li> Format: Can use any format like JSON, XML, or even HTML. </li>
-<li> Architecture: Can follow any architecture style, such as REST, SOAP, GraphQL, etc. </li>
-</ul>
+<h2 class="mt-3"> Avoid Storing Sensitive Data in LocalStorage </h2>
+<p class="m-0 p-0"> Tokens in localStorage are accessible via JavaScript and vulnerable to XSS attacks. </p>
+<p class="m-0 p-0"> Use HttpOnly cookies if possible (requires backend support), or store JWTs in memory during a session. </p>
 
-<P> <strong> REST API (Representational State Transfer API) </strong></P>
-<ul>
-<li> Definition: A specific type of Web API that follows the REST architecture. </li>
-<li> Stateless (each request is independent) </li>
-<li> Uses HTTP methods: GET, POST, PUT, DELETE </li>
-<li> Resource-based (each URL represents a resource) </li>
-<li> Uses standard response codes (like 200, 404, etc.) </li>
-<li> Data Format: Typically uses JSON, but can also support XML. </li>
-</ul>
-
+<h2 class="mt-3"> Use Angular Route Guards </h2>
+<p class="m-0 p-0"> Protect certain routes in your Angular app using CanActivate. 
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+  return this.authService.isLoggedIn();
+}</p>
 
           </div>
 
@@ -7490,6 +7510,316 @@ p>Message from Child: {{ messageFromChild }} /p>
 
               </code>
             </pre>
+
+<hr>
+
+
+<div class="mt-5"> 
+<h2> @Input Parent to child with real API data </h2>
+
+<pre>
+  <code>
+
+1. ParentComponent.ts
+  
+import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+import { HttpSharedService } from '../../http-shared.service';
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+
+apiData: any [] = [];
+
+constructor( private http: HttpSharedService){}
+
+ngOnInit(){
+  this.getUser()
+}
+
+getUser(){
+  this.http.get('users').subscribe((response: any) => {
+    this.apiData = response.users
+  })
+}
+
+}
+
+=================
+
+2. ParentComponent.html 
+
+h1> Parent Components /h1>
+app-childs [users]="apiData">  /app-childs>
+
+=================
+
+3. Child Compoent ts 
+
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-childs',
+  imports: [CommonModule],
+  templateUrl: './childs.component.html',
+  styleUrl: './childs.component.css'
+})
+export class ChildsComponent {
+
+  @Input() users: any[] = [];
+
+}
+
+=============
+
+4. child Component html 
+
+h1> Child Component /h1>
+p>Received Data live data : /p>
+ul>
+  li *ngFor="let user of users">
+    {{ user.firstName }}
+  /li>
+/ul>
+
+  </code>
+</pre>
+</div>
+
+<div class="mt-5"> 
+<h2> @Output child to parent with real API data </h2>
+
+<pre>
+  <code>
+
+1. Parent.ts 
+
+import { Component } from '@angular/core';
+import { ChildsComponent } from "../childs/childs.component";
+import { HttpSharedService } from '../../http-shared.service';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-parents',
+  imports: [ChildsComponent, CommonModule, ReactiveFormsModule],
+  templateUrl: './parents.component.html',
+  styleUrl: './parents.component.css'
+})
+export class ParentsComponent {
+
+receivedData: any[] = [];
+onApiDataReceived(data: any[]) {
+    this.receivedData = data;
+    console.log("Received from child:", data);
+  }
+
+}
+
+
+===========
+
+2. parent.html 
+
+app-childs (dataFetched)="onApiDataReceived($event)"> /app-childs>
+
+div *ngIf="receivedData.length > 0">
+  h3>Data received from Child: /h3>
+  ul>
+    li *ngFor="let user of receivedData">{{ user.firstName }} /li>
+  /ul>
+/div>
+
+div *ngIf="receivedData.length === 0">
+  p>Loading or no data found... /p>
+/div>
+
+===========
+
+3. child.ts 
+
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpSharedService } from '../../http-shared.service';
+
+@Component({
+  selector: 'app-childs',
+  imports: [CommonModule],
+  templateUrl: './childs.component.html',
+  styleUrl: './childs.component.css'
+})
+export class ChildsComponent {
+
+   @Output() dataFetched = new EventEmitter<any[]>();
+
+   constructor( private http: HttpSharedService){}
+
+  ngOnInit(){
+    this.getDataFetch()
+  }
+
+  getDataFetch(){
+    this.http.get('users').subscribe((data: any) => {
+      this.dataFetched.emit(data.users);
+    })
+  }
+
+}
+
+==========
+
+4. Child.html 
+
+h1> Child Component /h1>
+p> Child is fetching data from API and sending to Parent... /p>
+
+
+  </code>
+</pre>
+
+</div>
+
+<hr>
+
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from Parent to Child </h2>
+
+<pre>
+<code>
+
+  1. Parent.ts 
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html'
+})
+export class ParentComponent {
+  numbers: number[] = [1, 2, 3];
+}
+
+=========
+
+2. Parent.html 
+
+h2>Parent Component /h2>
+app-child [inp]="numbers"> /app-child>
+
+======
+
+3. child.component.ts
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html'
+})
+export class ChildComponent {
+  @Input() inp: number[] = [];
+}
+
+
+============
+
+4. child.component.html
+
+h3>Child Component/h3>
+ul>
+  li *ngFor="let num of inp"> {{ num }} /li>
+/ul>
+
+
+output 
+http://localhost:4200/parents
+Child Component
+- 1
+- 2
+- 3
+
+
+</code>
+</pre>
+
+</div>
+
+<hr>
+
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from child to Parent </h2>
+
+<pre>
+  <code>
+    1. child component.ts 
+
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html'
+})
+export class ChildComponent implements OnInit {
+  @Output() sendData = new EventEmitter<number[]>();
+
+  ngOnInit() {
+    const numbers = [1, 2, 3];
+    this.sendData.emit(numbers);
+  }
+}
+
+==========
+
+2. child.component.html
+
+h3>Child Component /h3>
+p>Sending data to Parent.../p>
+
+==========
+
+3. parent.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  templateUrl: './parent.component.html'
+})
+export class ParentComponent {
+  receivedData: number[] = [];
+
+  onChildData(data: number[]) {
+    this.receivedData = data;
+  }
+}
+
+========
+
+4. parent.component.html
+h2>Parent Component /h2>
+app-child (sendData)="onChildData($event)"> /app-child>
+
+ul>
+  li *ngFor="let num of receivedData">{{ num }} /li>
+/ul>
+
+//// output
+Parent Component
+- 1
+- 2
+- 3
+
+  </code>
+</pre>
+
+</div>
+
 
 
 <hr>
