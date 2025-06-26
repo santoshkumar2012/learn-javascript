@@ -66,6 +66,7 @@ pre {
       <li> <a href="#d3"> D3, canvas, svg </a> </li>
       <li> <a href="#es6"> Es6 </a> </li>
 	    <li> <a href="#arrow"> Arrow Function vs Normal Function: this Behavior </a> </li>
+      <li> <a href="#this"> This </a> </li>
       <li> <a href="#async"> Async </a> </li>
       <li> <a href="#default"> Default Paramerter </a> </li>
       <li> <a href="#generators"> Generators </a> </li>
@@ -85,7 +86,6 @@ pre {
       <li> <a href="#infinityloop"> Infinity Loop </a> </li>
       <li> <a href="#hash"> hash </a> </li>
       <li> <a href="#hoisting"> Hoisting </a> </li>
-      <li> <a href="#this"> This </a> </li>
       <li> <a href="#promise"> Promise </a> </li>
       <li> <a href="#operator"> Rest, Spread Operator </a> </li>
       <li> <a href="#function"> function statement and function expression </a></li>
@@ -93,9 +93,8 @@ pre {
       <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
       <li> <a href="#break-continue">  Break and Continue  </a></li>
       <li> <a href="#synchronous">  synchronous and asynchronous  </a></li>
-
       <li class="borderline"> <a href="#hoisting"> </a> </li>
-      <li> <a href="#nesteArray"> Nested Array </a></li>
+      <li> <a href="#nesteArray"> Nested Array, Object </a></li>
       <li> <a href="#filter"> filter </a> </li>
       <li> <a href="#largestnumber"> largestnumber </a> </li>
 	   <li> <a href="#secondlargestnumber"> Second largestnumber </a> </li>
@@ -1899,6 +1898,33 @@ console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   </code>
 </pre>
+
+<h2 class="mt-4"> Nested Objects </h2>
+<p> A nested object in JavaScript is simply an object inside another object. This is useful for representing complex data structures like user profiles, configurations, form data, etc.
+</p>
+<pre>
+  <code>
+const person = {
+  name: "John",
+  age: 30,
+  address: {
+    street: "123 Main St",
+    city: "New York",
+    zip: {
+      code: "10001",
+      area: "Manhattan"
+    }
+  }
+};
+========
+console.log(person.name); // "John"
+console.log(person.address.city); // "New York"
+console.log(person.address.zip.code); // "10001"
+console.log(person.address?.city); // Output: "New York"
+
+  </code>
+</pre>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="function">
