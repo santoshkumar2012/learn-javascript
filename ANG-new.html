@@ -112,7 +112,9 @@ pre, code {
       <li> <a href="#pipe"> pipe, pure, impure </a> </li>
       <li> <a href="#viewchild"> viewchild </a> </li>
 	  <li> <a href="#global-variable"> global-variable </a> </li>
+    <li class="borderline"><a href="#">  </a></li>
     <li> <a href="#form"> Form, reactiveform </a> </li>
+    <li> <a href="#datapush"> Simple data push </a> </li>
     <li> <a href="#crud"> crud </a> </li>
     <li> <a href="#form-crud"> form validation, crud </a> </li>
     <li> <a href="#empw-api"> Employee crud without api </a> </li>
@@ -5972,169 +5974,253 @@ export class ShowMoreComponent {
 
   </code>
 </pre>
+</div>
 
 
+<div class="box shadow p-2 mb-3" id="datapush">
+<h2> Simple Data Push </h2>
 
-      </div>
+<pre>
+  <code>
+TS--- 
+import { Component } from '@angular/core';
+import { HeaderComponent } from "../../header/header.component";
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-console-crud',
+  imports: [HeaderComponent, ReactiveFormsModule, CommonModule],
+  templateUrl: './console-crud.component.html',
+  styleUrl: './console-crud.component.css'
+})
+export class ConsoleCrudComponent {
+
+  emp_form!: FormGroup
+  emp_details: any = []
+
+  constructor( private fb: FormBuilder){}
+
+  emp_fields = {
+    name : [''],
+    email: [''],
+    phone: ['']
+  }
+
+  ngOnInit(){
+    this.initializeForm()
+  }
+
+  initializeForm(){
+    this.emp_form = this.fb.group(this.emp_fields)
+  }
+
+  onSubmit(){
+    this.emp_details.push({
+      "name" : this.emp_form.value.name,
+      "email": this.emp_form.value.email,
+      "phone": this.emp_form.value.phone
+    })
+    console.log(this.emp_form.value)
+  }
+}
+
+HTML --- 
+
+div class="container mt-5">
+form action="" [formGroup]="emp_form" 
+(ngSubmit)="onSubmit()">
+div class="row">
+div class="col-lg-3"> 
+input type="text" class="form-control" placeholder="Name" formControlName="name"> /div>
+div class="col-lg-3"> 
+input type="text" class="form-control" placeholder="Email" formControlName="email"> /div>
+div class="col-lg-3"> 
+input type="text" class="form-control" placeholder="Phone Number" formControlName="phone"> /div>
+div class="col-lg-3"> 
+button type="submit" class="btn btn-success"> Submit /button> /div>
+/div>
+/form>
+
+  table class="table table-bordered mt-5">
+  thead>
+    tr>
+      th> Name /th>
+      th> Email /th>
+      th> Phone Number /th>
+    /tr>
+  /thead>
+  tbody>
+    tr *ngFor="let emp of emp_details">
+      td>{{emp.name}}/td>
+      td>{{emp.email}}/td>
+      td>{{emp.phone}}/td>
+    /tr>
+  /tbody>
+  /table>
+/div>
+  </code>
+</pre>
+
+</div>
 
     
-      <div class="box shadow p-2 mb-3" id="empw-api">
-        <h2> Employee crud without API </h2>
+<div class="box shadow p-2 mb-3" id="empw-api">
+<h2> Employee crud without API </h2>
+<pre>
+<code>
+import { Component } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+            
+@Component({
+selector: 'app-dynamic-crud',
+imports: [HeaderComponent, CommonModule, FormsModule, ReactiveFormsModule],
+templateUrl: './dynamic-crud.component.html',
+styleUrl: './dynamic-crud.component.css'
+})
 
-        <pre>
-          <code>
-            import { Component } from '@angular/core';
-            import { HeaderComponent } from "../header/header.component";
-            import { CommonModule } from '@angular/common';
-            import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+
+export class DynamicCrudComponent {
             
-            @Component({
-              selector: 'app-dynamic-crud',
-              imports: [HeaderComponent, CommonModule, FormsModule, ReactiveFormsModule],
-              templateUrl: './dynamic-crud.component.html',
-              styleUrl: './dynamic-crud.component.css'
-            })
-            export class DynamicCrudComponent {
+employee_form!: FormGroup
+employee_Toggle = false
             
-            employee_form!: FormGroup
-            employee_Toggle = false
+employee_details: any = []
+updateRecordId: any
+operation: any = "Add"
             
-            employee_details: any = []
-            updateRecordId: any
-            operation: any = "Add"
+employeeFormToggle(){
+this.employee_Toggle = !this.employee_Toggle
+}
             
-            employeeFormToggle(){
-              this.employee_Toggle = !this.employee_Toggle
-            }
+constructor( private fb: FormBuilder){}
             
-              constructor( private fb: FormBuilder){}
+empform_fields = {
+emp_id  : [''],
+emp_name: ['', Validators.required],
+emp_email:['', Validators.required],
+emp_role :['', Validators.required]
+}
             
-              empform_fields = {
-                emp_id  : [''],
-                emp_name: ['', Validators.required],
-                emp_email:['', Validators.required],
-                emp_role :['', Validators.required]
-              }
+ngOnInit(){ 
+this.initializeForm()
+let emp_data = localStorage.getItem('employeeData')
+if(emp_data){
+this.employee_details = JSON.parse(emp_data)
+}
+}
             
-              ngOnInit(){ 
-                this.initializeForm()
-                let emp_data = localStorage.getItem('employeeData')
-                if(emp_data){
-                  this.employee_details = JSON.parse(emp_data)
-                }
-              }
+initializeForm(){
+this.employee_form = this.fb.group(this.empform_fields)
+}
             
-              initializeForm(){
-                this.employee_form = this.fb.group(this.empform_fields)
-              }
+saveEmployee() {
+if (this.updateRecordId) {
+this.updateEmployee();
+} else {
+this.addEmployee();
+}
+}
             
-              saveEmployee() {
-                if (this.updateRecordId) {
-                  this.updateEmployee();
-                } else {
-                  this.addEmployee();
-                }
-              }
+addEmployee() {      
+const emp_id = (this.employee_details.at(-1)?.id ?? 0) + 1;
+this.employee_details.push({
+"id"       : emp_id,
+"emp_name" : this.employee_form.value.emp_name,
+"emp_email": this.employee_form.value.emp_email,
+"emp_role" : this.employee_form.value.emp_role
+})      
+this.resetForm()
+this.saveToLocalStorage()
+}
             
-              addEmployee() {
-                
-                const emp_id = (this.employee_details.at(-1)?.id ?? 0) + 1;
-            
-                this.employee_details.push({
-                  "id"       : emp_id,
-                  "emp_name" : this.employee_form.value.emp_name,
-                  "emp_email": this.employee_form.value.emp_email,
-                  "emp_role" : this.employee_form.value.emp_role
-                })
-            
-                this.resetForm()
-                this.saveToLocalStorage()
-              }
-            
-              updateEmployee() {
-                
-                const found = this.employee_details.filter((empData: any) => empData.id == this.updateRecordId);
-            
-                if (found) {
-                  found[0].emp_name = this.employee_form.value.emp_name;
-                  found[0].emp_email = this.employee_form.value.emp_email;
-                  found[0].emp_role = this.employee_form.value.emp_role;
-                }
+updateEmployee() {
+const found = this.employee_details.filter((empData: 
+any) => empData.id == this.updateRecordId);
+
+if (found) {
+found[0].emp_name = this.employee_form.value.emp_name;
+found[0].emp_email = this.employee_form.value.emp_email;
+found[0].emp_role = this.employee_form.value.emp_role;
+}
+this.saveToLocalStorage();
+this.resetForm();
+}
               
-                this.saveToLocalStorage();
-                this.resetForm();
-              }
-              
+getDataForEdit(emp_id: any){
+this.updateRecordId = emp_id
+let data = this.employee_details
+.filter((empData: any) => empData.id == emp_id)
+
+this.employee_form.patchValue(data[0])
+this.operation = "Update"
+this.employee_Toggle = true
+}
             
-              getDataForEdit(emp_id: any){
-                this.updateRecordId = emp_id
-                let data = this.employee_details.filter((empData: any) => empData.id == emp_id)
-                this.employee_form.patchValue(data[0])
-                this.operation = "Update"
-                this.employee_Toggle = true
-              }
+deleteEmployee(emp_id: any){
+this.employee_details = this.employee_details
+.filter((empData: any) => empData.id != emp_id);
+
+this.saveToLocalStorage();
+}
             
-              deleteEmployee(emp_id: any){
-                this.employee_details = this.employee_details.filter((empData: any) => empData.id != emp_id);
-                this.saveToLocalStorage();
-              }
+resetForm() {
+this.employee_form.reset();
+this.updateRecordId = null;
+this.operation = 'Add';
+this.employee_Toggle = false;
+}
             
-              resetForm() {
-                this.employee_form.reset();
-                this.updateRecordId = null;
-                this.operation = 'Add';
-                this.employee_Toggle = false;
-              }
+saveToLocalStorage(){
+localStorage.setItem('employeeData', 
+JSON.stringify(this.employee_details))
+}
             
-              saveToLocalStorage(){
-                localStorage.setItem('employeeData', JSON.stringify(this.employee_details))
-              }
-            
-            }
-            
-          </code>
-        </pre>
+}
+
+
+=====
+
+HTML 
+
+button (click)="employeeFormToggle()"> {{ !employee_Toggle ? 'Add Employee':'Close Form' }} button
+
+form [formGroup]="employee_form" (ngSubmit)="saveEmployee()" *ngIf="employee_Toggle">
+input type="text" class="form-control" formControlName="emp_name" placeholder="Employee Name">
+*ngIf="employee_form.get('emp_name')?.touched && employee_form.get('emp_name')?.hasError('required')"> Employee Name is Invalid
+
+button class="btn btn-primary" type="submit" [disabled]="!employee_form.valid"> {{ operation }} Submit /button>
+
+*ngIf="!employee_details.length"  No Data 
+
+table class="table table-bordered mt-3" *ngIf="employee_details.length">
+thead>
+tr>
+th> Employee ID /th>
+th> Employee Name /th>
+th> Employee Email /th>
+th> Employee Role /th>
+th> Actions /th>
+/tr>
+/thead>
+tbody>
+tr *ngFor="let employee of employee_details">
+td> {{employee.id}} /td>
+td> {{employee.emp_name}} /td>
+td> {{employee.emp_email}} /td>
+td> {{employee.emp_role}} /td>
+td>
+button class="btn btn-sm btn-warning me-2" (click)="getDataForEdit(employee.id)">Edit/button>
+button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete/button>
+/td>
+/tr>
+/tbody>
+/table>
+</code>
+</pre>
 <hr>
-        <pre> 
-          <code>
-          button (click)="employeeFormToggle()"> {{ !employee_Toggle ? 'Add Employee':'Close Form' }} button
-          form [formGroup]="employee_form" (ngSubmit)="saveEmployee()" *ngIf="employee_Toggle">
-          input type="text" class="form-control" formControlName="emp_name" placeholder="Employee Name">
-           *ngIf="employee_form.get('emp_name')?.touched && employee_form.get('emp_name')?.hasError('required')"> Employee Name is Invalid
-
-           button class="btn btn-primary" type="submit" [disabled]="!employee_form.valid"> {{ operation }} Employee 
-
-          <hr>
-
-           *ngIf="!employee_details.length"  No Data 
-
-          table class="table table-bordered mt-3" *ngIf="employee_details.length">
-              thead>
-                tr>
-                  th>Employee ID </th>
-                  th>Employee Name</th>
-                  th>Employee Email</th>
-                  th>Employee Role</th>
-                  th>Actions</th>
-                /tr>
-              /thead>
-              tbody>
-                tr *ngFor="let employee of employee_details">
-                  td> {{employee.id}} </td>
-                  td> {{employee.emp_name}} </td>
-                  td> {{employee.emp_email}} </td>
-                  td> {{employee.emp_role}} </td>
-                  td>
-                    button class="btn btn-sm btn-warning me-2" (click)="getDataForEdit(employee.id)">Edit</button>
-                    button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delete</button>
-                  /td>
-                /tr>
-              /tbody>
-            /table>
-
-          </code>
-        </pre>
-      
 
         <h2> Only Add and Delete </h2>
 
