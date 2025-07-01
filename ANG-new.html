@@ -70,6 +70,7 @@ pre, code {
       <li> <a href="#angularrun"> angular Run </a> </li>
 	  <li> <a href="#why"> why angular </a> </li>
     <li> <a href="#angularjs"> Angular and Angular JS </a> </li>
+    <li> <a href="#jstype"> JavaScript vs TypeScript </a> </li>
       <li> <a href="#architecture"> architecture </a> </li>
 	  <li> <a href="#modules"> Modules, bootstrap </a> </li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
@@ -239,6 +240,40 @@ Module / Feature
 </p>
   </div>
 
+<div class="box shadow p-2 mb-3" id="jstype">
+  <h2> JavaScript vs TypeScript </h2>
+
+  <ul>
+    <li> <strong> JavaScript </strong></li>
+    <li> A scripting language used to create dynamic web content.	 </li>
+    <li> Dynamically typed (types are checked at runtime). </li>
+    <li> Interpreted directly by the browser.	 </li>
+    <li> </li>
+    <li> <strong> TypeScript </strong></li>
+    <li> A superset of JavaScript that adds static typing. </li>
+    <li> Statically typed (types are checked at compile time). </li>
+    <li> Compiled to JavaScript before running in the browser. </li>
+
+  </ul>
+
+
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
+    <code>
+      // JavaScript
+function add(a, b) {
+  return a + b;
+}
+-------------
+// TypeScript
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+    </code>
+  </pre>
+
+  </div>
+
 <div class="box shadow p-2 mb-3" id="asetup">
   <h2> ANGULAR Setup </h2>
   
@@ -331,7 +366,7 @@ React
 <h2 id="component"> COMPONENTS </h2>
 <div class="box shadow p-2 mb-3" id="component">
 <p> Angular Component is the building block of every Angular application. Every angular application is made up of one more Angular Component. </p>
-<pre><code> 
+<pre style="white-space: pre-wrap; word-wrap: break-word;"> 
   import { Component } from '@angular/core';
 
   @Component({
@@ -380,7 +415,7 @@ Angular provides View Encapsulation to help isolate component styles. </p>
   
 <h2> Template Variable </h2>
 <p>  template variable is a reference to a DOM element or Angular component/directive defined in your HTML template, and it is used within that template only. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 input #myInput type="text">
 ---------
@@ -398,7 +433,7 @@ button (click)="childComp.doSomething()">Call Method button>
 <p> Used to define HTML fragments that are not rendered immediately, but can be conditionally or programmatically displayed. </p>
 ng-template> is a placeholder for content. <br>
 Used in structural directives like *ngIf, *ngFor.
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 
 ng-template #noData>
@@ -424,7 +459,7 @@ Full Angular components <br>
 Automatically based on route URL <br>
 Angular Router Module <br>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -460,7 +495,7 @@ Fully supports all control structures. <br>
 <div class="box shadow p-2 mb-3" id="modules">
 <h2>  MODULES, Bootstrap </h2>
 <p> Angular Module is basically a collection of related features/functionality. It groups multiple components and services under a single context. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { BrowserModule } from '@angular/platform-browser'; 
     import { NgModule } from '@angular/core'; 
@@ -546,7 +581,7 @@ Fully supports all control structures. <br>
       <p> I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. </p>
 
     <h2> SHARED SERVICES  </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         genders = [
             {"id": "male", "name": "Male"},
@@ -600,7 +635,7 @@ Fully supports all control structures. <br>
 	  <p> For examples - User input (input> typing) <br> Events (click, submit, etc.) <br> HTTP responses <br> setTimeout, setInterval <br>  Promise or Observable resolution <br> Manually triggered with ChangeDetectorRef.detectChanges()</p>
 	  <p> if you click a button 5 times, ngDoCheck() will run 5 times.</p>
 	  
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
           <h2> ngOnChanges() </h2>
           Examples - 
@@ -691,7 +726,7 @@ Fully supports all control structures. <br>
           <li> Optimize CSS & Styles, Otimize http, Minimize CSS & Use Critical CSS, CSS minification, Web Workers </li>
           <li> USE track by </li>
         </ol>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}
               this.http.get('https://api.example.com/data', { cache: 'force-cache' });
@@ -707,7 +742,7 @@ Fully supports all control structures. <br>
           <p> Use ARIA attributes for better screen reader support. </p>
           <p> Ensure high color contrast for readability </p>
           <p> Minify CSS, JS and enable Gzip compression. </p>
-          <pre><code> const routes: Routes = [
+          <pre style="white-space: pre-wrap; word-wrap: break-word;"><code> const routes: Routes = [
             { path: 'feature', loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule) },
             { path: '**', redirectTo: 'feature' } // Wildcard route (optional)
           ]; </code></pre>
@@ -739,7 +774,7 @@ APIs enforce security, validation, and rules.<br>
 <p class="m-0 p-0"> HttpClient.get(), post(), put(), delete() </p>
 <p class="m-0 p-0"> Uses Observables to handle async responses </p>
 <br>
-          <pre><code>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
             ngOnInit() {
               this._http.get('users/user/details/'+this.user_id).subscribe((resposne: any) => {
                 this.user = resposne.user
@@ -836,7 +871,7 @@ APIs enforce security, validation, and rules.<br>
 
 
           <div class="box shadow p-2 mb-3" id="validation">
-            <pre><code>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
               lead_form!: FormGroup
 lead_fields = {
   name     : ['', Validators.required],
@@ -867,7 +902,7 @@ getLeads(){
           <div class="box shadow p-2 mb-3" id="crud">
   <h2> CRUD </h2>
   CREATE 
-  <pre><code>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
     
   createLead(){
     this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
@@ -981,7 +1016,7 @@ If You Try Directly Updating from 15 to 19? <br>
     <p> Rxjs operator - map, filter, etc </p>
     <p> Benefits - Powerful data transformation using operators</p>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       <h2> Simple examples </h2>
 
@@ -1016,7 +1051,7 @@ observable.subscribe({
 // Observable can be cancel using unscribe method <br>
 
 <h2 class="mt-4"> * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never. </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     let myPromise = new Promise((resolve, reject) => {
       let success = true; // Change this to false to see the reject case
@@ -1036,7 +1071,7 @@ observable.subscribe({
 
 <p> <strong> Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values. </strong></p>
 
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   myObservable: Observable<number>;
     ngOnInit() {
       this.myObservable = new Observable(observer => {
@@ -1055,7 +1090,7 @@ observable.subscribe({
 <h2> RxJS Operators </h2>
 <p><strong> Filtered Values: {{ values }} </strong></p>
 
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   ngOnInit() {
     const numbers$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9);
     numbers$.pipe(
@@ -1068,7 +1103,7 @@ observable.subscribe({
   }
 </code></pre>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     let observable = new Observable((observer) => {
       setTimeout(() => {
@@ -1085,7 +1120,7 @@ observable.subscribe({
 </pre>
 
 <h2> Example: Converting Promise to Observable </h2>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   const promise = new Promise((resolve) => {
     setTimeout(() => resolve('Promise resolved!'), 2000);
   });
@@ -1097,7 +1132,7 @@ observable.subscribe({
 </code></pre>
 
 <h2> Handling HTTP Request with Observable vs Promise </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     getData(): void {
       fetch('https://jsonplaceholder.typicode.com/posts')
@@ -1109,7 +1144,7 @@ observable.subscribe({
 </pre>
 
 <h2> Observable with Multiple Values </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const myObservable = new Observable(observer => {
       observer.next('Value 1');
@@ -1124,7 +1159,7 @@ observable.subscribe({
 </pre>
 
 <h2>  Cancelling an Observable </h2>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   const observable$ = interval(1000); // Emits values every second
   const subscription: Subscription = observable$.subscribe(value => console.log(value));
   setTimeout(() => {
@@ -1161,7 +1196,7 @@ observable.subscribe({
 <p> Switch map - Only latest is processed, rest are canceled	 </p>
 <p> ExhaustMap - Only first is processed, others are ignored </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     Switch Map - 
     this.searchInput.valueChanges.pipe(
@@ -1174,7 +1209,7 @@ observable.subscribe({
   </code>
 </pre>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     exhaustMap -
     this.loginForm.valueChanges.pipe(
@@ -1198,7 +1233,7 @@ observable.subscribe({
   <p> <strong> From </strong>  Basically coverts array data (any data iterable) into an observable. meaning it will emit each item if the array one by one, in sequence </p>
   
 <hr>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 
 export class MapComponent {
@@ -1398,7 +1433,7 @@ employeeDetails(){
 
 <h2> Forkjoin </h2>
 <p><strong> forkJoin is used to run multiple HTTP requests in parallel and get all their results once all are completed. </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 ngOnInit() {
     this.loadData();
@@ -1428,7 +1463,7 @@ ngOnInit() {
   <p> switchMap is an RxJS operator used to switch to a new observable every time the source emits a value. If a new value comes in before the previous inner observable completes, switchMap cancels the previous one and switches to the latest. </p>
   <h2> Basic Examples </h2>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       
 import { Component } from '@angular/core';
@@ -1501,7 +1536,7 @@ input
   </pre>
 
   <h2>  Another Example switchMap : Chained API Calls </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code> this.route.params.pipe(
     switchMap(params => this.userService.getUserById(params['id']))
   ).subscribe(user => {
@@ -1521,7 +1556,7 @@ cancatMap = Waits for the previous inner observable to complete <br>
 meregeMap = Faster overall <br>
 cancatMap = Slower, but ordered <br>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { from } from 'rxjs';
 import { concatMap, delay } from 'rxjs/operators';
@@ -1537,7 +1572,7 @@ from([1, 2, 3]).pipe(
 </pre>
 
 <h2> Real World Example </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     saveUser(userData: any) {
       return this.http.post('/api/saveUser', userData);
@@ -1559,7 +1594,7 @@ from([1, 2, 3]).pipe(
   </code>
 </pre>
 <h2> File upload que </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     uploadFiles(files: File[]) {
       from(files).pipe(
@@ -1578,7 +1613,7 @@ from([1, 2, 3]).pipe(
 mergeMap emitted value to inner observable and will subscribe to all observables and merge. </p>
 
 <h2> Simple Examples </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 export class MergemapComponent {
 
@@ -1627,7 +1662,7 @@ export class MergemapComponent {
 </pre>
 
 <h2> Real-world Example in Angular: Parallel API Calls </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     getUserById(id: number) {
       return this.http.get(`/api/users/${id}`);
@@ -1652,7 +1687,7 @@ export class MergemapComponent {
 <p> <strong>  DebounceTime is an RxJS operator It waits for the user to stop typing for a certain time before doing anything. </strong> </p>
 
 <h2> Basic Examples </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { fromEvent } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
@@ -1670,7 +1705,7 @@ fromEvent(input, 'input').pipe(
 </pre>
 
 <h2> Real-World Angular DebounceTime Example: Search Box </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -1701,7 +1736,7 @@ export class SearchComponent {
 <h2> pluck </h2>
 <p> pluck is an RxJS operator that lets you pull out a specific property (or nested property) from each emitted object. </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { from } from 'rxjs';
 import { pluck } from 'rxjs/operators';
@@ -1725,7 +1760,7 @@ Charlie
 </pre>
 
 <h2> Another Example: From DOM Events </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { fromEvent } from 'rxjs';
 import { pluck } from 'rxjs/operators';
@@ -1745,7 +1780,7 @@ fromEvent(input, 'input').pipe(
 
 ForkJoin is an RxJS operator that takes in multiple observables and returns a single observable that emits the last emitted value from each of the input observables, once all input observables complete.
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code> 
 import { forkJoin, of, timer } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -1764,7 +1799,7 @@ forkJoin([obs1, obs2]).subscribe({
 <h2> Filter operator </h2>
 filter operator in RxJS is used to emit values from an observable that pass a certain condition (predicate). It works like the Array.prototype.filter() method but on an observable stream.
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code> 
 import { from } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -1796,7 +1831,7 @@ from(employees).pipe(
 
 <div class="box shadow p-2 mb-3" id="rxjsoperatorlive">
   <h2> Map Example </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -1831,7 +1866,7 @@ export class UsersComponent {
     </code>
   </pre>
 <p></p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       // example.service.ts
 
@@ -1859,7 +1894,7 @@ export class ExampleService {
   </pre>
 
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       // Filter
       // 1. Service: Making API Call
@@ -1949,7 +1984,7 @@ Redirect to another page
 
 <p> <strong> Manually Globally error handle </strong> </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { ErrorHandler, inject } from "@angular/core";
 
@@ -2004,7 +2039,7 @@ In main.ts
 
 <p> <strong> Normal Error Handling with API call </strong> </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 this.http.get('/api/data').subscribe({
   next: res => console.log(res),
@@ -2022,7 +2057,7 @@ this.http.get('/api/data').subscribe({
 </code>
 </pre>
 <br> 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -2091,7 +2126,7 @@ createUser() {
   <h2> Behavior SUBJECT </h2>
   <p> BehaviorSubject is a special type of Subject. A Behavior Subject holds one value. When it is subscribed it emits the value immediately. </p>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       import { BehaviorSubject } from 'rxjs';
       behaviorSubject = new BehaviorSubject<number>(0); // initial value is 0
@@ -2123,7 +2158,7 @@ createUser() {
   <li> Useful for storing and broadcasting state. </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Subject Example
     const sub = new Subject<number>();
@@ -2137,7 +2172,7 @@ createUser() {
   </code>
 </pre>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     2. BehaviorSubject Example
     const bSub = new BehaviorSubject number>(0); // initial value is 0
@@ -2151,7 +2186,7 @@ createUser() {
 
   <h2 class="mt-4"> Replay Subject </h2>
   <p> Replay subject is a variant of subject. It emits old value adn emit those value to new subscribe. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { ReplaySubject } from 'rxjs';
     replaySubject = new ReplaySubject(2); // buffer size = 2
@@ -2168,7 +2203,7 @@ createUser() {
   <h2> Async Subject </h2>
   <p> Emits last value after completion </p>
   
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       asyncSubject = new AsyncSubject()
 
@@ -2197,7 +2232,7 @@ createUser() {
 
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <strong>
 import { BehaviorSubject } from 'rxjs';
 
@@ -2217,7 +2252,7 @@ export class DataService {
   <h2> RxJS SUBJECT //Create a Shared Service </h2>
   <p>  Subject in RxJS is a special type of Observable that allows values to be multicasted to multiple subscribers. </p>
 <p> <strong>  Create a Shared Service </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     private dataSubject = new Subject<string>(); // Create Subject
       data$ = this.dataSubject.asObservable(); // Expose as Observable
@@ -2260,14 +2295,14 @@ export class DataService {
   <p><strong>  NgRx is a state management library for Angular applications that implements the Redux pattern using RxJS.
     Uses Actions, Reducers, Store, Effects, and Selectors. </strong></p>
     <strong> TS Actions examples -  </strong>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         export const addItem = createAction('[Cart] Add Item', props<{ item: string }>());
         export const removeItem = createAction('[Cart] Remove Item', props<{ item: string }>());
       </code>
     </pre>
     <h2> STATE OF STRUCTURE </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
           export const initialState = { count: 0 };
           export const counterReducer = createReducer(
@@ -2278,7 +2313,7 @@ export class DataService {
       </code>
     </pre>
     <h2> NGXS (Simpler alternative to NgRx) </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         @State<number>({ name: 'counter', defaults: 0 })
           export class CounterState {
@@ -2292,7 +2327,7 @@ export class DataService {
     </pre>
     <h2> SignalStore </h2>
     <p> Introduced in Angular 17 as a lightweight, reactive state management solution. Uses signals instead of Observables. </p>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         count = signal(0);
         increment() {
@@ -2315,7 +2350,7 @@ export class DataService {
       <li> <strong> Selectors – </strong> Retrieve specific data from the store. </li>
       <li> <strong> Effects – </strong> Handle asynchronous operations like API calls. </li>
     </ol>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         <strong>
           Installation <br>
@@ -2374,7 +2409,7 @@ export class CounterComponent {
     </pre>
 	
 <h2>Transition Between Two States in Angular</h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -2388,7 +2423,7 @@ export class AppModule {}
 </pre>
 <h2> Create Animation in the Component </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { Component } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
@@ -2444,7 +2479,7 @@ export class DemoComponent {
   <h2> CHALLENGING WORK / SHARED SERVICES </h2>
   <p> I was working on an Angular project where we used a reactive form with a select box for gender (Male and Female) multiple times across different components. Later, we realized that instead of repeating the same logic, we could create a reusable service for gender options, making the implementation more efficient and maintainable. </p>
   <h2> Shared Servcies </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     genders = [
     {"id": "male", "name": "Male"},
@@ -2494,7 +2529,7 @@ Makes Angular more similar to other frameworks like React or Vue (component-firs
     <li> Improved Performance with Better Tree Shaking </li>
     <li> Enhanced Router Features
       * Lazy loading components directly (without NgModule).
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
           const routes: Routes = [
           { path: 'dashboard', loadComponent: () => import('./dashboard.component').then(m => m.DashboardComponent) }];
@@ -2696,7 +2731,7 @@ Selectors help you easily pick data like user name, cart count, etc., from the g
 <p>  <strong> User list feature. </strong> When the component initializes, it dispatches an action like loadUsers(). This triggers an NgRx effect, which calls the user API using HttpClient. On success, it dispatches loadUsersSuccess({ users }). The reducer listens to this action and updates the store with the fetched user list. The component then uses a selector like selectAllUsers to access and display this data. </p>
 
 <p> <strong> Visual Example: Shopping Cart Feature </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     📦 Actions:
     addItem({ product })
@@ -2736,7 +2771,7 @@ Selectors help you easily pick data like user name, cart count, etc., from the g
 <h2 class="mt-5"> <strong> Mini Project — "NgRx To-Do List App" </strong> </h2>
 <p> <strong> Manage a list of tasks using NgRx Store, Actions, Reducers, Selectors, and Effects </strong></p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 1. Action (todo.actions.ts)
 
@@ -2828,7 +2863,7 @@ export class TodoEffects {
   <div class="box shadow p-2 mb-3" id="signals">
     <h2> SIGNALS </h2>
     <p> Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables. </p>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         <h2>Counter: {{ count() }}</h2>
 
@@ -2848,7 +2883,7 @@ decrement() { this.count.set(this.count() - 1); }
      <p> Lazy loading in Angular is a design pattern that improves the performance of an application by loading feature modules only when they are needed. Instead of loading all modules during the initial load of the application, Angular delays the loading of certain modules until the user navigates to a route associated with that module. This reduces the initial bundle size, resulting in faster application load times and a more responsive user experience. </p>
      <p>  To implement lazy loading, you define your feature modules with their own routing configuration and set them up in the main routing file using the loadChildren property. This property tells Angular to load the module dynamically. For example, in your app-routing.module.ts, you might add a route like this: </p>
      <p> For example, suppose you have an Angular application with multiple feature modules, like a dashboard, user profile, settings, and reports. Instead of loading all these modules when the application starts, you can "configure lazy loading" to load these modules only when the user navigates to them. </p>
-     <pre>
+     <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         {
           path: 'admin',
@@ -2941,7 +2976,7 @@ For Below code how it work = In this component, I’ve implemented ChangeDetecti
 When I fetch user data from an API using HttpClient, Angular doesn't automatically detect the changes due to the OnPush strategy. So, I manually call ChangeDetectorRef.detectChanges() after a short delay to force Angular to update the view.
 This demonstrates how OnPush doesn’t track internal changes unless triggered by new references or manual change detection. It’s useful when working with large apps or when you want to avoid unnecessary checks for performance optimization.
         </small>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
 
  1. change-detection.component.ts 
@@ -3016,7 +3051,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
 
 
         <p> <strong> Default Change Detection Examples :-  </strong></p>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code> 
             count = 0;
             increment() {
@@ -3028,7 +3063,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
         </pre>
 
         <h2> Onpush </h2>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             app-onpush [data]="message"></app-onpush>
             button (click)="updateMessage()">Update Message</button>
@@ -3066,7 +3101,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
             <h2> How to use multiple API in angular ? + AOT JIT </h2>
             <p> Angular, We can use multiple APIs in different ways.
               Using forkJoin (Parallel API Calls - Best for Independent APIs) </p>
-              <pre>
+              <pre style="white-space: pre-wrap; word-wrap: break-word;">
                 <code>
                   forkJoin([
                   this.http.get('https://api.example.com/users'),
@@ -3101,7 +3136,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
 <h2> @VIEW Child </h2>
 <p> @ViewChild is a decorator in Angular that allows us to access and interact with child components, directives, </p>
 <h2> @view child examples </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @ViewChild('heading') headingElement!: ElementRef;
     ngAfterViewInit() {
@@ -3122,7 +3157,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
 
 <H2>@ViewChildren (Multiple Element or Component References) </H2>
 <p><strong> child.component.ts  </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     greet() {
       return 'Hello from Child Component!';
@@ -3137,7 +3172,7 @@ app-child></app-child> <br>
 button (click)="callChildrenMethods()">Call All Child Methods</button>
 
 <p><strong> parent.component ts  </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @ViewChildren(ChildComponent) children!: QueryList<ChildComponent>;
       ngAfterViewInit() {
@@ -3159,7 +3194,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 
 <h2> Event Binding </h2>
 <p><strong> Event binding is the process of targeting an event in a HTML element. </strong></p>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   TS
   clickEvent(){
     console.log("event binding")
@@ -3174,7 +3209,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 </code>
 </pre>
 <h2> Property Binding </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     TS 
     isDisabled = true
@@ -3188,7 +3223,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
   </code>
 </pre>
 <h2> Attribute Binding </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     TS 
     columnSpan = 3
@@ -3200,7 +3235,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
   </code>
 </pre>
 <h2> Class Binding </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     TS
     isActive = true
@@ -3215,7 +3250,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
 </pre>
 
 <h2> Style Binding </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     TS
     bgColor = 'yellow'
@@ -3228,7 +3263,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
   <P> Data binding is one of the most elements for creating communication between the DOM and the component. </P>
   <h2> Two-way Binding Example </h2>
   <p>  when the data in the model changes, the changes are reflected in the view and when the data in the view changes it is reflected in the model - [(ngModel)]</p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       userInput: string = '';  // Model property
       input type="text" [(ngModel)]="userInput" placeholder="Type something..." />
@@ -3239,7 +3274,7 @@ button (click)="callChildrenMethods()">Call All Child Methods</button>
   
   <div class="box shadow p-2 mb-3" id="datatransfer">
     <h2> Using a Shared Service with a Subject/BehaviorSubject  </h2>
-	<pre>
+	<pre style="white-space: pre-wrap; word-wrap: break-word;">
 	<code>
 	Create a shared service:
 	// data.service.ts
@@ -3260,7 +3295,7 @@ export class DataService {
 	</code>
 	</pre>
 	<h2>  In Component A (sending component): </h2>
-	<pre>
+	<pre style="white-space: pre-wrap; word-wrap: break-word;">
 	<code>
 	
 	 
@@ -3273,7 +3308,7 @@ export class DataService {
 	</code>
 	</pre>
 	<h2> In Component B (receiving component): </h2>
-	<pre>
+	<pre style="white-space: pre-wrap; word-wrap: break-word;">
 	<code>
 	dataFromA: any;
 
@@ -3290,7 +3325,7 @@ ngOnInit() {
 
 <h2> Using Angular Router (if navigating with data) </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 -sender component
 this.router.navigate(['/target'], { state: { message: 'Hello' } });
@@ -3341,7 +3376,7 @@ Used to decorate properties inside classes. <br>
 </div>
 
 
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         import { Component } from '@angular/core';
         @Component({
@@ -3371,7 +3406,7 @@ Used to decorate properties inside classes. <br>
       <li> <strong> Attribute Directives </strong> (Modify the appearance or behavior of elements) 
       
      <p> Attribute directives change the styling or behavior of elements without altering the structure. </p>
-     <pre>
+     <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         constructor(private el: ElementRef) {
           el.nativeElement.style.backgroundColor = 'yellow';
@@ -3393,7 +3428,7 @@ Used to decorate properties inside classes. <br>
     <h2> Custom Directive </h2>
 
     <h2> Simple Angular custom directive </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         ng generate directive changeBg
         ------
@@ -3429,7 +3464,7 @@ Used to decorate properties inside classes. <br>
 
     <h2> Accept dynamic color as input </h2>
 
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         @Input('appChangeBg') color = 'yellow'; // default
 
@@ -3450,7 +3485,7 @@ Used to decorate properties inside classes. <br>
 
     <h2> Work on multiple elements (like multiple buttons or divs) <br> Accept a color as input <br> Apply or remove a CSS class (instead of inline styles) </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Create Class 
     .custom-bg {
@@ -3518,7 +3553,7 @@ div appChangeBg>Div 2 /div>
 
     <br>
 
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         custom Directive Command - ng g d directive-name (cdirective)
         @Input() color!:string;
@@ -3589,7 +3624,7 @@ div appChangeBg>Div 2 /div>
 
     <br>
 
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         //highlight-india.directive.ts
 
@@ -3661,7 +3696,7 @@ export class AppComponent {}
 
 <h2> Step-by-Step: Parent to Child Data Sharing </h2>
 <h2>  Child Component (child.component.ts) </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { Component, Input } from '@angular/core';
 
@@ -3676,7 +3711,7 @@ export class ChildComponent {
   </code>
 </pre>
 <p> <strong> 2. Parent Component (parent.component.ts) </strong> </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { Component } from '@angular/core';
 
@@ -3703,7 +3738,7 @@ Message from Parent: Hello from Parent!
 ============
 
 <h2>  Sharing data between parent and multiple child components </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Parent Component (Holds the Button & Shared State)
 
@@ -3750,14 +3785,14 @@ export class ChildComponent {
 
 
     <p> <strong> example child ts </strong></p>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code class="whitespace-pre! language-html">
         @Input() message!: string; 
         template: `&lt;p&gt; Message from Parent: {{ message }} &lt;/p&gt; `,  
       </code>
     </pre>
     <p> <strong> parent ts </strong></p>
-    <pre><code> parentMessage = 'Hello, Child!'; </code></pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;"><code> parentMessage = 'Hello, Child!'; </code></pre>
 
   <p> <strong>   @output examples - child ts - </strong></p> 
      @Output() messageEvent = new EventEmitter<string>();
@@ -3768,7 +3803,7 @@ export class ChildComponent {
 template : `
     app-child (messageEvent)="receiveMessage($event)"> - app-child
     <p>Received Message: {{ receivedMessage }}</p>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         receivedMessage = ''; <br>
     receiveMessage(message: string) {
@@ -3778,7 +3813,7 @@ template : `
     </pre>
 	
 	<h2> @input Examples </h2>
-	<pre>
+	<pre style="white-space: pre-wrap; word-wrap: break-word;">
 	<code>
 	child.component.ts
 	import { Component, Input } from '@angular/core';
@@ -3800,7 +3835,7 @@ app-child [name]="'Angular Learner'"> app-child>
 	
 	<h2> @output Examples </h2>
 	<p> It allows a child component to send data to the parent component using an event. </p>
-	<pre>
+	<pre style="white-space: pre-wrap; word-wrap: break-word;">
 	<code>
 	child.component.ts
 	import { Component, Output, EventEmitter } from '@angular/core';
@@ -3845,7 +3880,7 @@ export class ParentComponent {
 
   <div class="box shadow p-2 mb-3" id="ngfor">
     <h2> Ngfor, forloop </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         employees = [
     {
@@ -3864,7 +3899,7 @@ export class ParentComponent {
     </pre>
 
     <h2> Ngfor and NgIf </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         TS 
         public staffs = [
@@ -3929,7 +3964,7 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 
   <div class="box shadow p-2 mb-3" id="scrolltop">
     <h2> SCROLLTOP</h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         private showClass = 'show-scroll-button';
   constructor(private el: ElementRef, private renderer: Renderer2) {}
@@ -3953,7 +3988,7 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 
   <div class="box shadow p-2 mb-3" id="add-remove">
     <h2> ADD AND REMOVE CLASS  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @HostListener('click') onClick() {
       this.isHighlighted = !this.isHighlighted;
@@ -4002,7 +4037,7 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 
 <h2> 1. Capitalize First Letter Pipe </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 capitalize.pipe.ts
 
@@ -4028,7 +4063,7 @@ p> {{ 'hello' | capitalize }} /p>  <!-- Output: Hello -->
 
 <h2> 2. Shorten Text Pipe </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 shorten.pipe.ts
 
@@ -4053,7 +4088,7 @@ p> {{ 'Angular is awesome!' | shorten:7 }}  /p>  <!-- Output: Angular... -->
 
 <h2> 3. Multiply Number Pipe </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 import { Pipe, PipeTransform } from '@angular/core';
 
@@ -4075,7 +4110,7 @@ p> {{ 5 | multiply:3 }} /p>  <!-- Output: 15 -->
 
 <br>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       Uppercase: {{ 'hello world' | uppercase }}
 
@@ -4099,7 +4134,7 @@ export class TranformpipePipe implements PipeTransform {
 
 <br>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
  <strong> custom Pipe, PipeTransform </strong>
@@ -4133,7 +4168,7 @@ export class GenderTitlePipe implements PipeTransform {
 
 
   <p> <strong> FILTER IMPURE PIPE EXAMPLES </strong></p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       pure: false
       transform(items: any[], searchText: string): any[] {
@@ -4162,7 +4197,7 @@ export class GenderTitlePipe implements PipeTransform {
 
   <div class="box shadow p-2 mb-3" id="global-variable">
     <h2> Using a Global Variable for data transfer </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         ts - let sharedData: any;
         Sender - sendData() {
@@ -4182,7 +4217,7 @@ export class GenderTitlePipe implements PipeTransform {
   It does not depend on any external libraries and is commonly used for unit testing in Angular. <br>
   In Angular unit testing, spying on methods is a common practice to track method calls, prevent actual execution, and return mock values. This is done using Jasmine’s spyOn function.
 </p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       export class MyComponent {
         myMethod() {
@@ -4223,7 +4258,7 @@ export class GenderTitlePipe implements PipeTransform {
 <div class="box shadow p-2 mb-3" id="counter">
   <h2> Counter  </h2>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 1. ng generate component counter
 
@@ -4270,7 +4305,7 @@ app-counter> /app-counter>
 
 <div class="box shadow p-2 mb-3" id="dynamicInput">
   <h2> Dynamic Input Field Add More   </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       1. ng generate component dynamic-input
 
@@ -4343,7 +4378,7 @@ div style="padding: 20px;">
     <li> CanDeactivate: Prevent Leaving the Route <br> CanDeactivate is used to ask the user before navigating away from a component, typically if a form is dirty/unsaved </li>
     <li> CanLoad: Determines if a module can be loaded lazily. </li>
   </ul>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       constructor(private router: Router) {}
       canActivate(): boolean {
@@ -4357,7 +4392,7 @@ div style="padding: 20px;">
     </code>
   </pre>
   <p> <strong> Applying Route Guard to Routes </strong></p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] }
@@ -4367,7 +4402,7 @@ div style="padding: 20px;">
 
   <h2> Dynamic Menu </h2>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       TS
       role = 'admin'; // or 'client'
@@ -4443,7 +4478,7 @@ ul>
 A service contains logic or data that you want to use across components.
 
 <h2> Simple Example in Angular </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Create a Service (Dependency)
 
@@ -4507,7 +4542,7 @@ button (click)="createUser()"> Create User /button>
   <li> This is part of tree-shakable providers — Angular only includes the service if it’s used somewhere. </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @Injectable({
   providedIn: 'root'  // Angular will create a single instance (singleton)
@@ -4522,7 +4557,7 @@ export class UserService {
 2. Inject Service into a Component <br>
 You "inject" the service into the component’s constructor.
 
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
 @Component({...})
 export class UserComponent {
   constructor(private userService: UserService) {}
@@ -4538,7 +4573,7 @@ export class UserComponent {
       * Instead of creating objects manually, Angular injects them automatically. <br>
       * Uses @Injectable() decorator for services. <br>
       <strong> => Create Serives  </strong>
-      <pre><code>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
       getData() {
         return ['Angular', 'React', 'Vue'];
       }
@@ -4590,7 +4625,7 @@ export class UserComponent {
 </ul>
 
 <h2> 1. Template-driven Form Example </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
       input name="username" ngModel required />
@@ -4605,7 +4640,7 @@ export class UserComponent {
     </form>
   </code>
   <h2> 2. Reactive Form Example </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 
     </code>
@@ -4616,7 +4651,7 @@ export class UserComponent {
 
 <div class="box shadow p-2 mb-3" id="form-crud">
 <h2> FORM validation </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     lead_form!: FormGroup
 lead_fields = {
@@ -4645,7 +4680,7 @@ getLeads(){
 
 <p> Full Crud Operation </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     export class CmsComponent {
 
@@ -4763,7 +4798,7 @@ getLeads(){
 
 
 <p> <strong> Create </strong></p>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   createLead(){
     this._http.post('leads/leads/', this.setPayload(this.lead_form.value)).subscribe((response: any) => {
       this.afterAction("Lead Saved")
@@ -4773,7 +4808,7 @@ getLeads(){
 </pre>
 
 <p> <strong> setpayLoad </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     setPayloadForEdit(form: any){
       return {
@@ -4786,7 +4821,7 @@ getLeads(){
 
 <p> <strong> Edit </strong></p>
 
-<pre> 
+<pre style="white-space: pre-wrap; word-wrap: break-word;"> 
   <code> 
   editLead(){
     let params = [{"key": "tenant_id", "value": this.tenant_id}]
@@ -4799,7 +4834,7 @@ getLeads(){
 </pre>
 
 <p> <strong> Updated Crud </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     updateLead(){
       let params = [{"key": "tenant_id", "value": this.tenant_id}]
@@ -4812,7 +4847,7 @@ getLeads(){
 </pre>
 
 <p> <strong> Delete Crud </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     deleteLead(){
       let params = [{"key": "tenant_id", "value": this.tenant_id}]
@@ -4889,7 +4924,7 @@ getLeads(){
   <li> Store temporary data like form input, session-based UI state, etc.	 </li>
  </ul>
 
- <pre>
+ <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // Store data
     localStorage.setItem('username', 'Santosh');
@@ -4904,12 +4939,12 @@ getLeads(){
  </pre>
 
  <h2> USING SESSION STORAGE </h2>
- <pre><code>
+ <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   sessionStorage.setItem('sessionUser', 'JohnDoe');
  </code></pre>
 
 Using the Service in a Component
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code> 
   saveData() {
     this.storageService.setLocalStorage('user', { name: 'Santosh', role: 'Admin' });
@@ -4949,7 +4984,7 @@ button (click)="saveData()">Save Data</button>
     <li> Angular sends login data to a backend API. </li>
     <li> Backend validates the credentials and returns a token (usually JWT). </li>
    </ul>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 // auth.service.ts
 login(email: string, password: string) {
@@ -4958,13 +4993,13 @@ login(email: string, password: string) {
   </code>
 </pre>
 <h2> 🔹 2. Token is Stored (Typically in LocalStorage) </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code> // After login success
 localStorage.setItem('token', tokenFromServer);
 </code>
 </pre>
 <h2> 3. Include Token in Future Requests (with HTTP Interceptor) </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // token.interceptor.ts
 intercept(req: HttpRequest<any>, next: HttpHandler): Observable HttpEvent<any>> {
@@ -4980,7 +5015,7 @@ intercept(req: HttpRequest<any>, next: HttpHandler): Observable HttpEvent<any>> 
 </pre>
 <h2> 🔹 4. Protect Routes (Authorization) </h2>
 <p> Using Angular Route Guards like AuthGuard to protect certain pages. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // auth.guard.ts
 canActivate(): boolean {
@@ -4989,7 +5024,7 @@ canActivate(): boolean {
   </code>
 </pre>
 <p> Add guard to routes: </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     {
   path: 'dashboard',
@@ -5000,7 +5035,7 @@ canActivate(): boolean {
 </pre>
 <h2> 🔹 5. Optional: Role-Based Authorization
 If token contains role info (e.g. admin, user), you can check that too: </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     [Login Form]
      |
@@ -5027,7 +5062,7 @@ If token contains role info (e.g. admin, user), you can check that too: </h2>
 <div class="box shadow p-2 mb-3" id="filter"> 
 <h2> Filter </h2>
 
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   ng generate pipe filter
   name: 'filter'
   transform(items: any[], searchText: string): any[] {
@@ -5050,7 +5085,7 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 
 <div class="box shadow p-2 mb-3" id="pagination">
 <h2> Pagination </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     export class AppComponent implements OnInit {
 
@@ -5112,7 +5147,7 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 <div class="box shadow p-2 mb-3" id="login-setup">
 <h2> Login with api and username and password </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -5221,7 +5256,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
   Auth Guard: Prevents unauthorized users from accessing Dashboard <br>
   -----------------
   Create Authentication Service ( auth.service.ts)
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       constructor(private router: Router) {}
   
@@ -5247,7 +5282,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 
   <h2> login.component.ts </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     username: string = '';
     password: string = '';
@@ -5262,7 +5297,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 </pre>
 
 <h2>  login.component.html </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     input type="text" placeholder="Username" [(ngModel)]="username" />
     input type="password" placeholder="Password" [(ngModel)]="password" />
@@ -5272,7 +5307,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 </pre>
  
 <h2> dashboard.component.ts: </h2>    
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     constructor(private authService: AuthService) {}
     logout() {
@@ -5281,7 +5316,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
   </code>
 </pre>
   <h2> dashboard.html  </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       <div class="dashboard-container">
         <h2>Welcome to Dashboard</h2>
@@ -5292,7 +5327,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 
   <h2> Login with DUMMY API </h2>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       loginForm!: FormGroup
       show_password: boolean = false
@@ -5398,7 +5433,7 @@ form class="space-y-4 md:space-y-6" [formGroup]="loginForm" (ngSubmit)="login()"
 <div class="box shadow p-2 mb-3" id="register-setup">
 <h2> Register Setup </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Create a Register Component
     ng generate component register
@@ -5517,7 +5552,7 @@ onSubmit(): void {
   <h2> Angular Material </h2>
   <p> Angular Material is a User Interface (UI) component library that we can use in their Angular projects to speed up the development of  consistent user interfaces.</p>
   <p> Angular Material offers you reusable and beautiful UI components like Cards, Inputs, Data Tables, Datepickers, </p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       mat-card>
         mat-card-title>SVG Line Reveal Animation /mat-card-title>
@@ -5540,7 +5575,7 @@ onSubmit(): void {
 
 <p> <strong> What is a Material Module and why do we use a separate one ? </strong> </p>
 <p> Creating a separate MaterialModule is a common practice where we import and export all required Material components in one module and reuse it across the app. This improves modularity and code cleanliness. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code> @NgModule({
   exports: [
     MatButtonModule,
@@ -5591,7 +5626,7 @@ export class MaterialModule {}
 </table>
 
 <p class="mt-4"> <strong> How do you use Angular Material Dialog? </strong> </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 Open Dialog: ts 
 constructor(private dialog: MatDialog) {}
@@ -5601,7 +5636,7 @@ openDialog() {
   </code>
 </pre>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     Dialog Component:
     @Component({
@@ -5614,7 +5649,7 @@ export class DialogComponent {}
 
 <p class="mt-4"> <strong> What is MatFormField and how is it used? </strong></p>
 MatFormField is a wrapper for form controls to apply Material styling, floating labels, and error messages.
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
 mat-form-field>
@@ -5627,7 +5662,7 @@ mat-form-field>
 
 <p> <strong> How do you implement Angular Material Table with pagination and sorting? </strong></p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     html
 
@@ -5653,7 +5688,7 @@ ngAfterViewInit() {
 
 <p class="mt-4"> <strong> How to change theme or apply custom themes in Angular Material? </strong></p>
 <p> Angular Material supports predefined themes like indigo-pink, deeppurple-amber, etc. You can also define a custom theme in SCSS: </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @use '@angular/material' as mat;
 
@@ -5670,7 +5705,7 @@ $my-theme: mat.define-light-theme((
 </pre>
 
 <p> <strong>  Can Angular Material be used with Reactive Forms? </strong></p>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
 
   form [formGroup]="form">
   mat-form-field>
@@ -5683,7 +5718,7 @@ $my-theme: mat.define-light-theme((
 
 
 <h2> ✅ 1. Material Dialog with Data (Open, Close, Pass Data) </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     ts  Trigger Component
 
@@ -5759,7 +5794,7 @@ export class MyDialogComponent {
   <p> DOM Manipulation means changing elements, structure, or content of a webpage using JavaScript (or frameworks like Angular, React, etc.).
   </p>
   <p> <strong> For example, changing text, styles, adding/removing elements, etc. </strong></p>
-  <pre><code>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
     // Select an element
 let heading = document.getElementById("title");
 
@@ -5809,7 +5844,7 @@ heading.remove();
     <strong> toEqual() </strong>	Checks deep equality (objects) <br>
     <strong> toContain() </strong>	Checks if a string/array contains <br>
 
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         num1 = 0;
         num2 = 0;
@@ -5842,7 +5877,7 @@ heading.remove();
 
 <h2> Add a Token to Every Request </h2>
 1. Create the interceptor service
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // auth.interceptor.ts
 import { Injectable } from '@angular/core';
@@ -5867,7 +5902,7 @@ export class AuthInterceptor implements HttpInterceptor {
   </code>
 </pre>
 2. Provide it in you app.module.ts
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
@@ -5891,7 +5926,7 @@ export class AppModule {}
   <h2> 1. Global Error Handling Interceptor </h2>
   <p> This interceptor catches HTTP errors and lets you handle them in one place (like showing a toast, redirecting on 401, etc.) </p>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       // error.interceptor.ts
 import { Injectable } from '@angular/core';
@@ -5935,7 +5970,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       <div class="box shadow p-2 mb-3" id="reusable">
 <h2> Reusable Component </h2>
 <h2> show more </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 // show-more.component.ts
 import { Component, Input, booleanAttribute, signal } from '@angular/core';
@@ -5980,7 +6015,7 @@ export class ShowMoreComponent {
 <div class="box shadow p-2 mb-3" id="datapush">
 <h2> Simple Data Push </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 TS--- 
 import { Component } from '@angular/core';
@@ -6067,7 +6102,7 @@ button type="submit" class="btn btn-success"> Submit /button> /div>
     
 <div class="box shadow p-2 mb-3" id="empw-api">
 <h2> Employee crud without API </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
@@ -6224,7 +6259,7 @@ button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)">Delet
 
         <h2> Only Add and Delete </h2>
 
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -6320,7 +6355,7 @@ table class="table table-bordered mt-5">
 
         <h2> Crud Operation with Static Data </h2>
 
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
@@ -6489,7 +6524,7 @@ HTML
 
         <div class="box shadow p-2 mb-3" id="emp-api">
           <h2> Employee crud with API </h2>
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
              
 import { Component } from '@angular/core';
@@ -6605,7 +6640,7 @@ export class CrudApiComponent {
 
           <hr>
 
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
 
            div class="container mt-5">
@@ -6696,7 +6731,7 @@ export class CrudApiComponent {
 
           <h2> Dabase check validation </h2>
 
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
   isDuplicateProduct(title: string): boolean {
     return this.products?.some((product: any) => product.title.trim().toLowerCase() === title.trim().toLowerCase());
@@ -6738,7 +6773,7 @@ export class CrudApiComponent {
           <div class="box shadow p-2 mb-3" id="emp-dynamic">
           <h2> Employee crud with API Dynamic Form </h2>
 
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
               import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
@@ -6893,7 +6928,7 @@ tr *ngFor="let product of products">
           <div class="box shadow p-2 mb-3" id="emp-withoutdynamic">
           <h2> Employee crud without API Dynamic Form </h2>
 
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
               import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
@@ -7070,7 +7105,7 @@ Example: Math.max(1, 3, 2) → 3</p>
 <p> this.emp_details.length > 0 ? ... : 1
 If emp_details array is empty, it will return 1 as the first ID </p>
 
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
               1. CRUD STATIC DATA ( crud-static.ts )
 
@@ -7250,7 +7285,7 @@ div class="container">
               In Angular, classes are used everywhere — especially with decorators like @Component, @Injectable, and @NgModule. </p>
 
               <h2> class in Angular </h2>
-              <pre>
+              <pre style="white-space: pre-wrap; word-wrap: break-word;">
                 <code>
                   export class User {
                     constructor(
@@ -7353,7 +7388,7 @@ console.log(user.greet());  // "Hello, my name is John"
             Observable<T> (from RxJS)
             
             Promise<T></p>
-          <pre>
+          <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
               data = new Promise(resolve => {
                 setTimeout(() => resolve('Loaded from Promise!'), 1500);
@@ -7382,7 +7417,7 @@ console.log(user.greet());  // "Hello, my name is John"
           button (click)="loadData()"> Load /button
         </pre>
 
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             Example with Observable (RxJS)
             import { of, delay } from 'rxjs';
@@ -7444,7 +7479,7 @@ export class AppComponent {
                 <h2> angular.json </h2>
                 <p> Project structure, Build options </p>
                 <p> File paths (e.g. index.html, styles, assets) </p>
-                <pre>
+                <pre style="white-space: pre-wrap; word-wrap: break-word;">
                   <code>
                     "projects": {
                       "my-angular-app": {
@@ -7469,7 +7504,7 @@ export class AppComponent {
 
 <h2> Data Transfer by Parent to Child </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. Parent.component.ts 
 
@@ -7530,7 +7565,7 @@ $event	The data received in parent component<br>
 </p>
 
               <h2> @Output Child to Parent </h2>
-            <pre>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;">
               <code>
                 1. Child.Compoent.ts
 
@@ -7603,7 +7638,7 @@ p>Message from Child: {{ messageFromChild }} /p>
 <div class="mt-5"> 
 <h2> @Input Parent to child with real API data </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
 1. ParentComponent.ts
@@ -7681,7 +7716,7 @@ ul>
 <div class="mt-5"> 
 <h2> @Output child to parent with real API data </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
 1. Parent.ts 
@@ -7776,7 +7811,7 @@ p> Child is fetching data from API and sending to Parent... /p>
 <div class="mt-5">
 <h2> Pass [1, 2, 3] from Parent to Child </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 
   1. Parent.ts 
@@ -7841,7 +7876,7 @@ Child Component
 <div class="mt-5">
 <h2> Pass [1, 2, 3] from child to Parent </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     1. child component.ts 
 
@@ -7922,7 +7957,7 @@ Parent Component
   providers: [MessageService]
 })
 export class AppModule { } </p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 1. run command - ng generate service message
 
@@ -7982,7 +8017,7 @@ h1> {{ message }} /h1>
     <li> @HostListener	React to DOM events like mouseenter/mouseleave </li>
   </ul>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
     1. run command : ng generate directive highlight
 
@@ -8033,7 +8068,7 @@ When you move the mouse away, it will go back to normal.
 <div class="mt-4">
 <h2> Create custom Pipe </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 pipeTransform use - PipeTransform is an interface from the @angular/core package that allows you to create custom pipes. 
 transform(value: string): string
@@ -8061,7 +8096,7 @@ export class GenderTitlePipe implements PipeTransform {
 
 <h2> Secone example in custom pipe </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     ng generate pipe prefix
 
