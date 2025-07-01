@@ -183,7 +183,7 @@ pre {
 <p> JavaScript (JS) is a high-level, interpreted programming language used to create interactive and dynamic web pages. It is the core language of the web, allowing developers to manipulate HTML, CSS. </p>
 <h2> HOW WORK ON BROWSER  </h2>
 <p> When a user opens a web page, the browser loads HTML, CSS, and JavaScript. The JavaScript Engine inside the browser processes JavaScript code.  </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         h1 id="message">Hello, World! h1
         document.getElementById('message').innerHTML = 'Hello from JavaScript!';
@@ -212,7 +212,7 @@ pre {
     <li> Large datasets, real-time rendering </li>
 </ol>
 <h2> Using D3 with Canvas </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
   const canvas = d3.select("body")
   .append("canvas")
@@ -262,7 +262,7 @@ ctx.fill();
   Arrow functions: this is lexical, inherits from the parent scope </p>
 
 <h2> 1: this in a regular function </h2>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   const user = {
     name: "Alice",
     sayHi: function () {
@@ -274,7 +274,7 @@ ctx.fill();
 </code>
 </pre>
 <h2> this in an arrow function </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const user = {
       name: "Bob",
@@ -288,7 +288,7 @@ ctx.fill();
   </code>
 </pre>
 <h2> Use case where arrow function is helpful: </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     function Person() {
       this.age = 0;
@@ -314,7 +314,7 @@ ctx.fill();
 <p> <strong> Normal Function: </strong> Has its own arguments </p>
 <p> <strong> Arrow Function: </strong> Does NOT have its own arguments </p> 
 <p> <strong> Destructuring </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         for loop examples 
         const numbers = [10, 20, 30];
@@ -333,7 +333,7 @@ Otherwise, it returns the second operand. It is a logical operator introduced in
 
 <h2 class="mt-3"> ES2022 </h2>
 <p> <strong> await , Class Fields & Private Methods ( # ), </strong> </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         const data = await fetch("https://api.example.com/data").then(res => res.json());
         console.log(data);
@@ -341,7 +341,7 @@ Otherwise, it returns the second operand. It is a logical operator introduced in
 </pre>
 <h2> ES2023 </h2>
 <p><strong>  Array.prototype.findLast() & findLastIndex() </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
             const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
             console.log(numbers.findLast(n => n % 2 === 0)); // 8
@@ -349,7 +349,7 @@ Otherwise, it returns the second operand. It is a logical operator introduced in
     </code>
 </pre>
 <p> <strong> Array.prototype.toSorted(), toSpliced(), toReversed() (ES2023) </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 const arr = [3, 1, 4, 2];
 console.log(arr.toSorted()); // [1, 2, 3, 4] (original array unchanged)
@@ -360,7 +360,7 @@ console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
 </pre>
   
 <p> <strong> ES 2024  </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
     Object.groupBy()
     Map.groupBy()
@@ -374,7 +374,7 @@ console.log(arr); // Original remains unchanged: [3, 1, 4, 2]
 <h2> What is Async / Await </h2>
 <p>  Async is used to declare a function that returns a Promise. await is used inside a function wait for promise.
 </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 	async function myDisplay() {
   let myPromise = new Promise(function(resolve, reject) {
@@ -406,7 +406,7 @@ myDisplay();
     </code>
 </pre>
 <h2> Traditional Promise vs async/await </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         with promise 
     fetch('https://api.example.com/data')
@@ -416,7 +416,7 @@ myDisplay();
     </code>
 </pre>
 <h2> With async/await </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         async function getData() {
             try {
@@ -431,7 +431,7 @@ myDisplay();
     </code>
 </pre>
 <h2> Error Handling <br> use try...catch to handle errors in async functions. </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         async function example() {
             try {
@@ -445,7 +445,7 @@ myDisplay();
 </pre>
   
 <h2> Combining with Promise.all <br> You can still use Promise.all with async/await for parallel async operations: </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         async function loadMultiple() {
             const [user, posts] = await Promise.all([
@@ -463,7 +463,7 @@ myDisplay();
 <div class="box shadow p-2 mb-3" id="default">
 <h2> DEFAULT PARAMETER </h2>
 <p> Assigns default values to function parameters </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function greet(name = "Guest") {
             console.log(`Hello, ${name}!`);
@@ -485,7 +485,7 @@ Use <strong> **apply** </strong> when you want to immediately invoke a function 
 Use <strong> **bind** </strong> when you want to create a new function with this permanently set, but not execute it immediately. <br>
 </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 const person = {
 name: 'Alice'
@@ -535,7 +535,7 @@ greetAlice();
   <li> Immutable: Values cannot be changed directly (any modification creates a new value). </li>
   <li> Less memory: They take up minimal memory, which improves performance. </li>
   <li> Value-based comparison: Two primitive values are equal if their values match, not their references. </li>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code> 
       let a = 5;
 let b = 5;
@@ -566,7 +566,7 @@ Null is an assignment value that represents the intentional absence of any objec
 <h2> GENERATORS </h2>
 <p> Functions that can pause and resume execution <br>
     Generator Examples </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function* generator() {
             yield 1;
@@ -587,7 +587,7 @@ Null is an assignment value that represents the intentional absence of any objec
 <p> <strong>   Ans. Destructuring in JavaScript is a shorthand syntax for extracting values from arrays or properties from objects and assigning them to variables. 
 </strong></p>
 <strong> Array Destructuring </strong>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         const arr = [1, 2, 3];
         const [a, b] = arr;
@@ -605,7 +605,7 @@ Null is an assignment value that represents the intentional absence of any objec
 <div class="box shadow p-2 mb-3" id="classes">
 <h2> CLASSES </h2>
 <p> Classes - class is a blueprint for creating objects with properties and methods. </p>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
     class Person {
         constructor(name, age) {
           this.name = name;
@@ -625,7 +625,7 @@ Null is an assignment value that represents the intentional absence of any objec
 <h2> Map Method </h2>
 <p> The map() method creates a new array by calling a callback function on each element of the original array.
 It does not modify the original array. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 const numbers = [1, 2, 3, 4];
 const squared = numbers.map(num => num * num);
@@ -635,7 +635,7 @@ console.log(squared); // [1, 4, 9, 16]
 
 <h2> Map and Set  </h2>
 <p> * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. ) </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         let myMap=new Map();
     myMap.set('name', 'Santosh');
@@ -657,7 +657,7 @@ forEach - Just loops through the array <br>
 map - Transforms each element <br>
 filter - Keeps elements that match a condition <br>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code> 
 ForEach
 const numbers = [1, 2, 3];
@@ -693,7 +693,7 @@ console.log(even); // [2, 4]
 </ul>
 
 <p> Object Examples </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 let obj = {
    name: "John",
@@ -706,7 +706,7 @@ console.log(obj.toString());  // [object Object]
 </pre>
 <p> // In above example, we have created an object named obj with properties name and age. We also have used toString() method which is available by default in object prototype. </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 <strong> Built-in Prototype </strong>
 let arr = [1, 2, 3, 4, 5];
@@ -724,7 +724,7 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
 <h2> Why Use Prototypes? </h2>
 <p> 1. Methods are shared across instances., 2. Enables objects to inherit behavior., 3. You can add methods to existing constructors even after objects are created.</p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function Person(name, age) {
             this.name = name;
@@ -744,7 +744,7 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
 <h2> CLOSURE  </h2>
 <p> A closure in JavaScript is a function that has access to variables in its parent scope. 
     Inner function retain access to the variable. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function outerFunction() {
             let count = 0;  // count is in the lexical scope of innerFunction
@@ -772,7 +772,7 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
 <h2> Lexical Scope </h2>
 <p> In JavaScript, "lexical" refers to how things are organized and scoped based on the structure of the code when it's written (at compile time), rather than when it's executed (runtime).</p> 
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 function outer() {
   let name = "ChatGPT";
@@ -796,7 +796,7 @@ outer();
 <p> ForEach method is used to iterate over arrays and execute a provided function once for each element. </p>
 <p> ForEach is faster because it doesn’t create a new array. </p>
 <p> map is slightly slower because it returns a new array. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         let numbers = [10, 20, 30, 40];
 let sum = 0;
@@ -812,7 +812,7 @@ console.log(sum); //100
 <div class="box shadow p-2 mb-3" id="event">
 <h2> Event  </h2>
 <p> An event in JavaScript is an action in the browser, user clicking a button, typing in an input field, or scrolling a page. JavaScript can detect these events and execute functions accordingly. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 button onclick="alert('Button clicked!')" Click Me button
 --------------------
@@ -850,7 +850,7 @@ input type="text" id="textInput" placeholder="Type something...">
 </ol>
 
 <strong> Examples </strong>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
 console.log("Start");
 
 setTimeout(() => {
@@ -875,7 +875,7 @@ Timeout callback <br>
 <h2> DOM </h2>
 <P> Document Object Model allows JavaScript to interact with HTML dynamically. </P>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         let heading = document.getElementById("heading");
         console.log(heading.textContent);  // Output: "Hello, World!"
@@ -892,7 +892,7 @@ document.getElementById("heading").innerHTML = "span style='color: red;'>Updated
 <p> <strong> The getElementById Method </strong> The most common way to access an HTML element is to use the id of the element. </p>
 <p> <strong> The innerHTML Property </strong> The easiest way to get the content of an element is by using the innerHTML property. </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 p id="demo"> /p>
 document.getElementById("demo").innerHTML = "Hello World!";
@@ -903,7 +903,7 @@ document.getElementById("demo").innerHTML = "Hello World!";
 <p> <strong> document.getElementsByTagName(name)	</strong> Find elements by tag name </p>
 <p> <strong> document.getElementsByClassName(name)	</strong> Find elements by class name </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 h2> JavaScript can Change HTML /h2>
 p id="p1">Hello World!  /p>
@@ -912,7 +912,7 @@ document.getElementById("p1").innerHTML = "New Changes";
 </pre>
 
 <h2> Form validation </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     function validateForm() {
   let x = document.forms["myForm"]["fname"].value;
@@ -931,7 +931,7 @@ form name="myForm" action="/action_page.php" onsubmit="return validateForm()" me
 </pre>
 
 ===
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     <p>Changing the HTML style:</p>
 
@@ -950,7 +950,7 @@ document.getElementById("p2").style.fontSize = "larger";
 
 <h2> Onclick Attribute </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
 h2 onclick="changeText(this)">Click on this text! /h2>
@@ -964,7 +964,7 @@ function changeText(id) {
 
 <h2> addEvent Listener </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 button id="myBtn"> Try it /button>
 
@@ -977,7 +977,7 @@ function myFunction() {
 
 <h2>  From DOM Text Content </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 p id="para">This is a paragraph. /p>
 
@@ -989,7 +989,7 @@ console.log(text); // Output: This is a paragraph.
 
 <h2> DOM Method </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     Element Selection
 getElementById(id) – Selects an element by its unique ID.
@@ -1050,7 +1050,7 @@ myDiv.style.color = "red";
 <div class="box shadow p-2 mb-3" id="currying">
 <h2> CURRYING </h2>
 <p>   Transforming a function with multiple arguments into a sequence of functions. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function add(a) {
             return function(b) {
@@ -1067,7 +1067,7 @@ myDiv.style.color = "red";
 <h2> Debouncing & Throttling </h2>
 <p> Debouncing limits the execution of a function until after a certain delay. <br> 
     Throttling ensures a function runs at most once in a specified interval. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function debounce(func, delay) {
             let timer;
@@ -1089,7 +1089,7 @@ myDiv.style.color = "red";
 </pre>
 
 <h2> Trhotting Examples </h2>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
     function throttle(func, interval) {
         let lastExecutedTime = 0;
         return function (...args) {
@@ -1121,13 +1121,13 @@ Difference
 <p> sh - Changes in the copy affect the original, deep - Changes in the copy do NOT affect the original </p>
 <p>  sh - Faster (less memory used)	, deep - Slower (more memory used) </p>
 <p> <strong> shallow examples </strong></p>
-<pre><code>  let obj1 = { name: "John", details: { age: 25 } };
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>  let obj1 = { name: "John", details: { age: 25 } };
     let obj2 = obj1; // Copies reference
     obj2.details.age = 30;
     console.log(obj1.details.age); // Output: 30 (Changes reflect in obj1) </code></pre>
 
 <p> <strong> Deep examples </strong></p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         let obj1 = { name: "John", details: { age: 25 } };
         let obj2 = structuredClone(obj1);
@@ -1141,7 +1141,7 @@ Difference
 <div class="box shadow p-2 mb-3" id="break-continue">
     <h2> Break Continue  </h2>
     <p> The break statement stops the current loop completely and exits it. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 for (let i = 1; i <= 5; i++) {
   if (i === 3) {
@@ -1154,7 +1154,7 @@ for (let i = 1; i <= 5; i++) {
 
 <p> The continue statement skips the current iteration of the loop and moves to the next iteration. </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     for (let i = 1; i <= 5; i++) {
   if (i === 3) {
@@ -1179,7 +1179,7 @@ for (let i = 1; i <= 5; i++) {
   <li> Each operation waits for the previous one to complete. </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     console.log("1");
     console.log("2");
@@ -1194,7 +1194,7 @@ for (let i = 1; i <= 5; i++) {
   <li> Uses: setTimeout, fetch, Promises, async/await. </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     console.log("1");
 setTimeout(() => {
@@ -1210,7 +1210,7 @@ console.log("3");
 <div class="box shadow p-2 mb-3" id="this">
     <h2> This </h2>
     <p> In JavaScript, this is a keyword that refers to an object. The value of this depends on how the function or code where it's used is called. </p>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
             Global Scope
             console.log(this); // In browsers, this === window
@@ -1251,7 +1251,7 @@ const user = {
 // Observable can be cancel using unscribe method <br>
 
 <h2 class="mt-4"> * Promises - A Promise in JavaScript represents a value that may be available now, in the future, or never. </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     let myPromise = new Promise((resolve, reject) => {
       let success = true; // Change this to false to see the reject case
@@ -1271,7 +1271,7 @@ const user = {
 
 <p> <strong> Observable is a stream of data that can emit multiple values over time. You can subscribe to an Observable to receive these values. </strong></p>
 
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   myObservable: Observable<number>;
     ngOnInit() {
       this.myObservable = new Observable(observer => {
@@ -1294,7 +1294,7 @@ const user = {
 
 <div class="box shadow p-2 mb-3" id="objectclone">
 <h2> OBJECT CLONE </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>   
         const personss = { first_name: "Santosh", last_name: "Kumar", age: 25 };
         const clone1 = { ...persons };
@@ -1335,7 +1335,7 @@ const user = {
 <li> lastIndexOf()	Returns index of last match </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 	
 1. push() – Add to the end
@@ -1584,7 +1584,7 @@ console.log(sum);
 
 <div class="box shadow p-2 mb-3" id="infinityloop">
 <h2> INFINITY LOOP  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         while (true) {
             console.log("This will run forever!");
@@ -1604,7 +1604,7 @@ console.log(sum);
 <div class="box shadow p-2 mb-3" id="hash">
 <h2> HASH FUNCTION IN JAVASCRIPT  </h2>
 <p>  -- A hash function in JavaScript is a function that takes an input (string, number, or object) and returns a fixed-size string or number (hash). Hash functions are commonly used for hashing passwords. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function simpleHash(str) {
             let hash = 0;
@@ -1620,7 +1620,7 @@ console.log(sum);
 </pre>
 <p>Custom Hash Function for Objects (Key-Value Hashing) </p>
 <p>hash objects (since objects don’t have a native hash function), you can convert them into strings and then hash the string. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         function objectHash(obj) {
             return simpleHash(JSON.stringify(obj));
@@ -1634,7 +1634,7 @@ console.log(sum);
 <div class="box shadow p-2 mb-3" id="hoisting">
 <h2> HOISTING </h2>
 <p> "Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         greet(); // Output: Hello, World!
 function greet() {
@@ -1647,7 +1647,7 @@ function greet() {
 
 <div class="box shadow p-2 mb-3" id="largestnumber">
 <h2> LARGEST NUMBER </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
     numbers = [3,4,5,6,2,34,54,23,63,18,46]
     largest = numbers[0]
@@ -1678,7 +1678,7 @@ function greet() {
 
 <div class="box shadow p-2 mb-3" id="secondlargestnumber">
 <h2> Second LARGEST NUMBER </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
 numbers = [3,4,5,6,2,34,54,23,63,18,46]
 
@@ -1707,7 +1707,7 @@ console.log("Second Largest:", secondLargest);
 
 <div class="box shadow p-2 mb-3" id="duplicatenumber">
     <h2> Find DUPLICATE NUMBER</h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
         function findDuplicates(arr) {
             arr.sort((a, b) => a - b);
@@ -1728,7 +1728,7 @@ console.log("Second Largest:", secondLargest);
 
 <h2> Remove Duplicates from an Array </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     function removeDuplicatesFilter(arr) {
   return arr.filter((value, index, self) => {
@@ -1747,7 +1747,7 @@ console.log(removeDuplicatesFilter([])); // Output: []
 
     <div class="box shadow p-2 mb-3" id="find">
         <h2> FIND SUM NUMBER </h2>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
             const findsum = [2,5,43,76,10]
             const totalFind = (findsum) => {
@@ -1766,7 +1766,7 @@ console.log(removeDuplicatesFilter([])); // Output: []
 
    <div class="box shadow p-2 mb-3" id="sum">
     <h2> Sum Number  </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
             let number = 45678123465;
             let numStr = number.toString();
@@ -1781,7 +1781,7 @@ console.log(removeDuplicatesFilter([])); // Output: []
 
 <div class="box shadow p-2 mb-3" id="count">
 <h2> Count Word Fequency in a string  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
     function wordCount(str) {
             let words = str.split(' ');
@@ -1798,7 +1798,7 @@ console.log(removeDuplicatesFilter([])); // Output: []
 
 <h2> Counting Character Occurrences </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 function countCharacters(str) {
   const charCount = {};
@@ -1818,7 +1818,7 @@ console.log(countCharacters("")); // Output: {}
 
 <div class="box shadow p-2 mb-3" id="filter">
 <h2> Filter  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
   const objects = [
   { name: "Alice", age: 30, city: "New York" },
@@ -1839,7 +1839,7 @@ console.log(citiesAbove30);
 
 <h2> Filter By For Loop  </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
   const objects = [
   { name: "Alice", age: 30, city: "New York" },
@@ -1870,7 +1870,7 @@ for (let i=0; i < objects.length; i++){
 
 <div class="box shadow p-2 mb-3" id="nesteArray">
 <h2> Nested Array  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
 let flatArray = array.flat();
@@ -1879,7 +1879,7 @@ console.log(flatArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 </pre>
 <br>
 <h2> Nested Array By Loop  </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
 let flatArray = [];
@@ -1902,7 +1902,7 @@ console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 <h2 class="mt-4"> Nested Objects </h2>
 <p> A nested object in JavaScript is simply an object inside another object. This is useful for representing complex data structures like user profiles, configurations, form data, etc.
 </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 const person = {
   name: "John",
@@ -1932,7 +1932,7 @@ console.log(person.address?.city); // Output: "New York"
 <p> function statement(Declaration) and function expression are two different ways to define functions </p>
 <h2> Function Statement (Declaration )</h2>
 <p> Function Statement defines a named using the function keywords, <br> Function declaration are hoisted to the top of their scope. Means we can calll the function even before and defined the code. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // declare name only
     function greet() {
@@ -1952,7 +1952,7 @@ console.log(person.address?.city); // Output: "New York"
 <p>  function expression defines a function and assigns it to a variable. <br>
    Not hoisted: Function expressions are not hoisted. </p>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const greet = function(){
       console.log("Good Morning")
@@ -1969,7 +1969,7 @@ console.log(person.address?.city); // Output: "New York"
 
 <div class="box shadow p-2 mb-3" id="vowel">
 <h2> VOWEL </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
         let str = "Hey JS you are AMAZING"
 const vowels = ['a','e','i','o','u']
@@ -1990,7 +1990,7 @@ console.log(numOfVowels)
 
 <div class="box shadow p-2 mb-3" id="sumnumber">
     <h2> SUM NUMBER </h2>
-    <pre>
+    <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
             let array = [2,3,5,6,5]
             let sum = 0
@@ -2004,7 +2004,7 @@ console.log(numOfVowels)
 
     <div class="box shadow p-2 mb-3" id="factorial">
       <h2> Factorial Calculation </h2>
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
             let n = 5;
             let result = 1;
@@ -2021,7 +2021,7 @@ console.log(numOfVowels)
 
      <div class="box shadow p-2 mb-3" id="median">
       <h2> Median Logic </h2>
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
            function findMedian(arr) {
             arr.sort((a, b) => a - b);
@@ -2042,7 +2042,7 @@ console.log(numOfVowels)
 
     <div class="box shadow p-2 mb-3" id="digitalroot">
       <h2> Digital Root repeatedly adding its digits</h2>
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
           
             function toSingleDigit(num) {
@@ -2071,7 +2071,7 @@ console.log(numOfVowels)
 
   <div class="box shadow p-2 mb-3" id="dpstring">
   <h2> Remove Dublicate </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
     const killers = [
       "Laziness kills Consistency",
@@ -2089,7 +2089,7 @@ console.log(numOfVowels)
 
   <div class="box shadow p-2 mb-3" id="primenumber">
   <h2> Finding Prime Numbers  </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
    function isPrime(n) {
   if (n <= 1) return false;
@@ -2109,7 +2109,7 @@ console.log(isPrime(10)); // false
   </pre>
 
   <h2> Primes Up to a Limit </h2>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       function generatePrimesUpTo(limit) {
   const sieve = new Array(limit + 1).fill(true);
@@ -2139,7 +2139,7 @@ console.log(generatePrimesUpTo(30)); // [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
   <div class="box shadow p-2 mb-3" id="fibonacci">
   <h2>  Fibonacci Sequence  </h2>
 
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       function fibonacciSequence(n) {
   if (n <= 0) {
@@ -2171,7 +2171,7 @@ console.log(fibonacciSequence(10)); // Output: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 			
     <div class="box shadow p-2 mb-3" id="true">
       <h2> True and False Logic </h2>
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
           <code>
            
 1 == '1'         // true  (type coercion happens)
@@ -2269,7 +2269,7 @@ console.log(result);  // 0 ✅
 
     <div class="box shadow p-2 mb-3" id="triangle">
         <h2>  Triangle Pattern </h2>
-        <pre>
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
             <code>
                 let n = 5; // Number of rows
                 for (let i = 1; i <= n; i++) {
@@ -2285,7 +2285,7 @@ console.log(result);  // 0 ✅
 
         <div class="box shadow p-2 mb-3" id="palindrome">
             <h2> Palindrome </h2>
-            <pre>
+            <pre style="white-space: pre-wrap; word-wrap: break-word;">
                 <code>
                     function isPalindrome(str) {
                         const reversed = str.split('').reverse().join('');
@@ -2299,7 +2299,7 @@ console.log(result);  // 0 ✅
             </pre>
 			<hr>
 			
-			<pre>
+			<pre style="white-space: pre-wrap; word-wrap: break-word;">
 			<code>
 			var isPalindrome = function(s) {
 				 s = s.replace(/[^a-z0-9]/gi, '').toLowerCase();
@@ -2312,7 +2312,7 @@ console.log(result);  // 0 ✅
 
       <hr>
 
-      <pre>
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
       //Palindrome
       =====
@@ -2326,7 +2326,7 @@ console.log(result);  // 0 ✅
 
             <div class="box shadow p-2 mb-3" id="booble">
                 <h2>  Booble sort </h2>
-                <pre>
+                <pre style="white-space: pre-wrap; word-wrap: break-word;">
                     <code>
                         function bubbleSort(arr) {
                             let n = arr.length;
@@ -2348,7 +2348,7 @@ console.log(result);  // 0 ✅
                 <div class="box shadow p-2 mb-3" id="reverse">
                     <h2>  REVERSE  </h2>
 
-                    <pre>
+                    <pre style="white-space: pre-wrap; word-wrap: break-word;">
                         <code>
                             let str ="LOVE"
                             let totalstr = ""
@@ -2393,7 +2393,7 @@ console.log(reversed); // Output: [4, 3, 2, 1]
                         </code>
                     </pre>
 					
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 const input = "Santosh Kumar";
 const output = input
@@ -2409,7 +2409,7 @@ console.log(output); // Output: Hsotnas Ramuk
 </code>
 </pre>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const str = "I am sam";
 const result = str.split(' ').map(word => word.split('').reverse().join('')).join(' ');
@@ -2418,7 +2418,7 @@ console.log(result); // "I ma mas"
 </pre>
 
 <hr>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 var reverseWords = function(s) {
     return s
@@ -2476,7 +2476,7 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                       
                       <h2> Interfaces </h2>
                       <p> Interface is a way to define the structure of an object, function etc. </p>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                           interface Info {
                               name:string,
@@ -2512,7 +2512,7 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                       
                       <h2> Generics </h2>
                       <p> Generics in TypeScript allow you to create reusable components or functions that can work with multiple data types.</p>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                        // fruits(name:string | number):string | number {
                           //   return name
@@ -2529,7 +2529,7 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                       
                       <h2> Modifiers </h2>
                       <p> Modifiers are keywords that you can use to control access, behavior, or properties of classes, methods, properties, and constructors. </p>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                           public (default)
                           class Person {
@@ -2590,7 +2590,7 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                        <div class="box shadow p-2 mb-3" id="enums">
                         <h2> Enums </h2>
                         <p> Enums are used to define a set of named constants.</p>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                             enum Direction {
   Up,
@@ -2608,7 +2608,7 @@ let move: Direction = Direction.Up;
  <div class="box shadow p-2 mb-3" id="tuple">
   <h2> Tuple </h2>
   <p> A tuple is a fixed-length array with specific types for each element.</p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       let user: [string, number] = ['Alice', 30];
     </code>
@@ -2618,7 +2618,7 @@ let move: Direction = Direction.Up;
    <div class="box shadow p-2 mb-3" id="typeguards">
   <h2> What are Type Guards in TypeScript? </h2>
   <p> Type guards are used to narrow down types within a conditional block. </p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       function print(value: string | number) {
   if (typeof value === 'string') {
@@ -2635,7 +2635,7 @@ let move: Direction = Direction.Up;
  <div class="box shadow p-2" id="readonly"> 
 <h2> readonly </h2>
 <p> readonly marks properties as immutable after initialization. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     interface Car {
   readonly brand: string;
@@ -2647,7 +2647,7 @@ let move: Direction = Direction.Up;
 <div class="box shadow p-2" id="never"> 
 <h2> never </h2>
 <p> never represents a value that never occurs (e.g., function throws an error or infinite loop). </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 function fail(): never {
   throw new Error("Something went wrong");
@@ -2660,7 +2660,7 @@ function fail(): never {
 <div class="box shadow p-2" id="union"> 
 <h2> Union | (OR) </h2>
 <p> Union types are used when a value can be more than a single type. </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 function printStatusCode(code: string | number) {
   console.log(`My status code is ${code}.`)
@@ -2676,7 +2676,7 @@ printStatusCode('404');
 <p> Casting is the process of overriding a type. </p>
 <p> A straightforward way to cast a variable is using the as keyword, which will directly change the type of the given variable.
 </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     let x: unknown = 'hello';
 console.log((x as string).length);
@@ -2689,7 +2689,7 @@ console.log((x as string).length);
 <p> The members of a class (properties & methods) are typed using type annotations, similar to variables.
  </p>
 </p>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     class Person {
   name: string;
@@ -2726,7 +2726,7 @@ protected - allows access to the class member from itself and any classes that i
                         <p> <strong> Void Element </strong>	Element with no content/closing tag	<img />, <br /></p>
 
                         <h2> Attribute </h2>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                             <code>
                                 img
                                     src="cat.jpg"
@@ -2768,7 +2768,7 @@ protected - allows access to the class member from itself and any classes that i
                           <li> Width & height include only content. </li>
                           <li> Padding and border are added outside the content size. </li>
                         </ul>
-                        <pre>
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                             width: 100px;
                             padding: 10px;
@@ -2834,7 +2834,7 @@ Chrome DevTools: Network tab, performance tab, coverage tab. <br>
 
 <h2> Geolocation API </h2>
 <p> Get user's location </p>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   navigator.geolocation.getCurrentPosition((pos) => {
     console.log(pos.coords.latitude, pos.coords.longitude);
   });  
@@ -2846,7 +2846,7 @@ Chrome DevTools: Network tab, performance tab, coverage tab. <br>
 <p> sessionStorage: clears on tab close </p>
 
 <h2> Canvas API </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     canvas id="myCanvas" width="200" height="100"> canvas>
 script>
@@ -2858,7 +2858,7 @@ script>
 </pre>
 
 <h2> Notification API </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     Notification.requestPermission().then((perm) => {
       if (perm === "granted") {
@@ -2869,7 +2869,7 @@ script>
 </pre>
 
 <h2> Audio/Video API </h2>
-<pre><code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
   video controls>
     source src="video.mp4" type="video/mp4">
   /video>  
@@ -2888,7 +2888,7 @@ script>
   <h2> Semantic </h2>
   <h2> Semantic HTML elements </h2>
   <p> Semantic HTML elements are tags in HTML, They help define what the content is, such as a header, footer, main content, or a list item.</p>
-  <pre><code> article>, aside>, header>, nav>, and section>.  </code></pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;"><code> article>, aside>, header>, nav>, and section>.  </code></pre>
   <h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
   Improved SEO, Enhanced Accessibility, Clearer Structure
   
@@ -2923,7 +2923,7 @@ SCSS (Sassy CSS) – most popular and looks like regular CSS with added power<br
 
   <h2> Less, Sass, and SCSS </h2>
   <p> Less, Sass, and SCSS are all CSS preprocessors that extend CSS by adding features like variables, nesting, mixins, and functions.  </p>
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       // scss variable
       $primary-color: blue;
@@ -2934,7 +2934,7 @@ SCSS (Sassy CSS) – most popular and looks like regular CSS with added power<br
     </code>
   </pre>
   
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       // nesting in scss  
       .navbar {
@@ -2963,7 +2963,7 @@ SCSS (Sassy CSS) – most popular and looks like regular CSS with added power<br
     </code>
   </pre>
   
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       //Mixins in SCSS
     
@@ -2986,7 +2986,7 @@ SCSS (Sassy CSS) – most popular and looks like regular CSS with added power<br
     </code>
   </pre>
   
-  <pre>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
       //sass
     $primary-color: blue
@@ -3066,7 +3066,7 @@ Foreign Key	Creates a relationship between tables<br>
                         <div class="box shadow p-2 mb-3" id="operator">
                             <h2> Rest Operator </h2>
                             <p> Collects multiple values into a single array or object. </p>
-                            <pre>
+                            <pre style="white-space: pre-wrap; word-wrap: break-word;">
                                 <code>
                                     Function 
                                     function sum(...numbers) {
@@ -3098,7 +3098,7 @@ Foreign Key	Creates a relationship between tables<br>
                             <p> Expands an array or object into individual elements or key-value pairs. </p>
                             <p> Array </p>
 
-                            <pre>
+                            <pre style="white-space: pre-wrap; word-wrap: break-word;">
                                 <code>
                                             const arr1 = [1, 2];
                                             const arr2 = [...arr1, 3, 4]; 
@@ -3119,7 +3119,7 @@ Foreign Key	Creates a relationship between tables<br>
 <div class="box shadow p-2 mb-3" id="even">
 <h2> Even Number </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 let array = [1,2,3,4,5,6,7,8,9]
 let evenNumber = array.filter((x) => x % 2 == 0)
@@ -3142,7 +3142,7 @@ console.log(sum)
 <div class="box shadow p-2 mb-3" id="anagram">
 <h2> Anagram </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 const a = "listen", b = "silent";
 function isAnagram(str1, str2) {
@@ -3164,7 +3164,7 @@ console.log(isAnagram(a, b)); // Output: true
  <li> If divisible by both → print "FizzBuzz" </li>
 </ul>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
   for (let i = 1; i <= 20; i++) {
   if (i % 3 === 0 && i % 5 === 0) {
@@ -3186,7 +3186,7 @@ console.log(isAnagram(a, b)); // Output: true
 <div class="box shadow p-2 mb-3" id="transform">
 <h2> Convert array to object based on a key </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const arr = [
   { id: 1, name: 'a' },
@@ -3208,7 +3208,7 @@ console.log(result); // Output: { 1: 'a', 2: 'b' }
 <div class="box shadow p-2 mb-3" id="unique">
 <h2> First non-repeating (unique) character </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const str = "aabbcde";
 
@@ -3231,7 +3231,7 @@ console.log(firstUniqueChar(str)); // Output: "c"
 <div class="box shadow p-2 mb-3" id="firstLetter">
 <h2> Capitalize the first letter of each word </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     const str = "hello world";
   const transformed = str
@@ -3249,7 +3249,7 @@ console.log(firstUniqueChar(str)); // Output: "c"
 <div class="box shadow p-2 mb-3" id="secondHighestsalarys">
                             <h2> Second Highest Salary </h2>
 
-                            <pre>
+                            <pre style="white-space: pre-wrap; word-wrap: break-word;">
                                 <code>
 								
 const salaries = [5000, 7000, 6000, 8000, 9000];
@@ -3260,7 +3260,7 @@ console.log(secondHighest); // Output: 8000
 								</code>
 								</pre>
 								
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 const employees = [
   { name: "Alice", salary: 5000 },
@@ -3281,7 +3281,7 @@ console.log(secondHighest); // Output: 8000
 							
 <h2> Angular </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 import { Component, OnInit } from '@angular/core';
 
@@ -3356,7 +3356,7 @@ export class EmployeeComponent implements OnInit {
 <h2> HTML JS </h2>
 
 <h2> Simple Toggle sidebar menu </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
     //CSS 
@@ -3418,7 +3418,7 @@ div id="sidebar" class="sidebar">
 
 <h2> Add and remove class </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     //css 
 .box {
@@ -3448,7 +3448,7 @@ document.getElementById('myButton').addEventListener('click', function() {
 
 <h2> Menu with dropdown </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     /CSS 
     nav {
@@ -3563,7 +3563,7 @@ document.getElementById('myButton').addEventListener('click', function() {
 </pre>
 <h2> Tabs </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     //css 
 
@@ -3645,7 +3645,7 @@ document.getElementById('myButton').addEventListener('click', function() {
 <div id="formvalidation"> 
 <h2> Form Validation </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     
 HTML 
@@ -3706,7 +3706,7 @@ function validateForm() {
 <div id="increasevalue"> 
 <h2> On click Increase and Decrease Value </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
   HTML 
 
@@ -3743,7 +3743,7 @@ JAVASCRIPT
 
 <div id="dynamicinput"> 
 <h2> Dynamic Input Field </h2>
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
   div id="inputContainer">
@@ -3802,7 +3802,7 @@ JAVASCRIPT
 <div id="cartbtn"> 
 <h2> Update Cart Button </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     HTML 
 
@@ -3832,7 +3832,7 @@ addToCartButton.addEventListener("click", () => {
 <div id="outoffinput"> 
 <h2> Display text outof input </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     HTML
     input type="text" id="myInput" placeholder="Type something...">
@@ -4032,7 +4032,7 @@ addToCartButton.addEventListener("click", () => {
 <div id="cssAnimation"> 
 <h2> CSS Animation </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     /** Animation **/
 Animation - Used to create complex animations with multiple keyframes.
@@ -4106,7 +4106,7 @@ Promises & Async/Await (Handle Async Code Better)
 
 <h2> Animation Code </h2>
 
-<pre>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     // code 
 
