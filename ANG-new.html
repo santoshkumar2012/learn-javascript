@@ -242,7 +242,6 @@ Module / Feature
 
 <div class="box shadow p-2 mb-3" id="jstype">
   <h2> JavaScript vs TypeScript </h2>
-
   <ul>
     <li> <strong> JavaScript </strong></li>
     <li> A scripting language used to create dynamic web content.	 </li>
@@ -253,13 +252,10 @@ Module / Feature
     <li> A superset of JavaScript that adds static typing. </li>
     <li> Statically typed (types are checked at compile time). </li>
     <li> Compiled to JavaScript before running in the browser. </li>
-
   </ul>
-
-
-  <pre style="white-space: pre-wrap; word-wrap: break-word;">
-    <code>
-      // JavaScript
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+// JavaScript
 function add(a, b) {
   return a + b;
 }
@@ -268,16 +264,13 @@ function add(a, b) {
 function add(a: number, b: number): number {
   return a + b;
 }
-
-    </code>
-  </pre>
-
-  </div>
+</code>
+</pre>
+</div>
 
 <div class="box shadow p-2 mb-3" id="asetup">
-  <h2> ANGULAR Setup </h2>
-  
-  npm install -g @angular/cli <br>
+<h2> ANGULAR Setup </h2>
+npm install -g @angular/cli <br>
 ng new project-name> <br>
 cd my-first-angular-app <br>
 npm start<br>
@@ -8050,11 +8043,21 @@ export class HighlightDirective {
 ==================
 
 3. Use the Directive in Any Component
-app.component.html
+app.component.ts
+
+import { HighlightDirective } from '../highlight.directive';
+
+@Component({
+  selector: 'app-interview',
+  imports: [ HighlightDirective],
+  templateUrl: './interview.component.html',
+  styleUrl: './interview.component.css'
+})
 
 h2 appHighlight>Hover me to see the highlight effect /h2>
 p> Normal paragraph (no directive) /p>
 
+app.component.html
 // When you hover over the h2>, the background color will change to orange.
 When you move the mouse away, it will go back to normal.
     </code>
