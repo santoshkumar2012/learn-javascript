@@ -839,7 +839,7 @@ input type="text" id="textInput" placeholder="Type something...">
     </code>
 </pre>
 
-<h2> Event Loop </h2>
+<h2 class="mt-4"> <strong> Event Loop  </strong></h2>
 <p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and processing events.  <br> It makes asynchronous programming (like setTimeout, Promises, and async/await) 
 </p>
 <h2> How it works (step by step):</h2>
@@ -897,6 +897,99 @@ counter(); // 3
 </code>
 </pre>
 
+<h2 class="mt-4"> Event Object </h2>
+<p> When an event occurs, JavaScript creates an event object that contains information about the event (like which key was pressed or which element was clicked).</p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+document.addEventListener("click", function (event) {
+  console.log("Clicked element:", event.target);
+});
+</code>
+</pre>
+
+
+<h2 class="mt-4"> Event Propagation </h2>
+<p> Event propagation in JavaScript describes the mechanism by which events travel through the Document Object Model (DOM) tree when an event occurs on an element.  </p>
+
+Events in the DOM tree go through 3 phases: <br>
+<strong> 1. Capturing phase (top to target) </strong> <br>
+<strong>  2. Target phase </strong> <br>
+<strong> 3. Bubbling phase (target back to top)  </strong><br>
+You can control propagation using: <br>
+event.stopPropagation() — Stops the event from bubbling up or down <br>
+event.preventDefault() — Prevents default behavior (like form submission) <br>
+
+<p> <strong> Capturing Phase: </strong> The click event would first be captured by window, then document, then html, then body, then the div, and finally the button. </p>
+<p> <strong> Bubbling Phase: </strong> The click event would then bubble up from the button to the div, then body, then html, then document, and finally window. </p>
+<p> <strong> Target Phase: </strong> The event reaches the actual element on which it was triggered. </p>
+
+<p class="mt-4"> <strong> What is event.preventDefault()? </strong></p>
+<p> This method is called on an event object to stop the browser's default behavior for that event.</p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+    Examples 
+    1. Prevent form submission
+
+HTML 
+form id="myForm">
+  input type="text" required />
+  button type="submit">Submit/button>
+/form>
+
+script>
+  document.getElementById("myForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Stop the form from submitting
+    alert("Form submission prevented!");
+  });
+/script>
+
+==========
+Examples 
+
+2. Prevent link navigation
+
+a href="https://example.com" id="myLink">Go to Example/a>
+
+script>
+  document.getElementById("myLink").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevents navigation to the URL
+    alert("Link click prevented!");
+  });
+/script>
+
+  </code>
+</pre>
+
+
+<p> <strong> Special Methods by Event Type </strong></p>
+🔸 Mouse Events (MouseEvent) <br>
+event.clientX, event.clientY: Mouse position <br>
+event.button: Which mouse button was pressed <br>
+🔸 Keyboard Events (KeyboardEvent) <br>
+event.key: The key pressed <br>
+event.code: Physical key on the keyboard <br>
+🔸 Input/Form Events <br>
+event.target: The form/input element that triggered the event <br>
+event.currentTarget: The element the event handler is bound to
+
+<br>
+<p class="mt-4"> 
+| **`preventDefault()`**  | Prevents the browser's default action (e.g., form submission, link navigation).      
+<br>                               |
+| **`stopPropagation()`**  | Stops the event from bubbling up the DOM tree. 
+<br>                                                                      |
+| **`stopImmediatePropagation()`** | Stops the event from bubbling and prevents other listeners of the same event on the same element from being called. 
+<br> 
+| **`initEvent()`**  | Initializes a new event (older method, rarely used now).    
+<br>                                                         |
+| **`composedPath()`**  | Returns the event's path (all elements it passed through). 
+<br>                                                          |
+| **`clone()`** | Not available in native events, but used in custom events in some libraries.  
+<br>                                       |
+| **`isTrusted`** *(property)* | Checks if the event was triggered by the browser (true) or script (false).                                          |
+</p>
 </div>
 
 <div class="box shadow p-2 mb-3" id="dom">
