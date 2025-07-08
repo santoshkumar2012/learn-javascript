@@ -122,6 +122,7 @@ pre {
       <li> <a href="#fizzBuzz"> FizzBuzz </a></li>
       <li> <a href="#anagram"> Anagram </a></li>
       <li> <a href="#even"> Even Number </a></li>
+      <li> <a href="#counter"> Counter using Closure (No Global Variable) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#html"> HTML </a> </li>
@@ -869,6 +870,33 @@ Start <br>
 End <br>
 Promise callback <br>
 Timeout callback <br>
+</div>
+
+<div class="box shadow p-2 mb-3" id="counter">
+<h2> Counter using Closure (No Global Variable) </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+
+function createCounter() {
+  let count = 0; // private variable
+
+  return function () {
+    count++;
+    console.log(count);
+    return count;
+  };
+}
+
+const counter = createCounter();
+
+counter(); // 1
+counter(); // 2
+counter(); // 3
+
+</code>
+</pre>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="dom">

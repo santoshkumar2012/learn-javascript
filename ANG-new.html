@@ -79,7 +79,7 @@ pre, code {
       <li> <a href="#root"> root </a> </li>
 	  <li> <a href="#jse"> AngularJS Expression - JS Expressions </a> </li>
       <li> <a href="#component"> components </a> </li>
-      <li> <a href="#template"> template </a> </li>
+      <li> <a href="#template"> template / router-outlet </a> </li>
       <li> <a href="#metadata"> metadata </a> </li>
       <li> <a href="#angularcli"> angular CLI </a> </li>
       <li> <a href="#angularcontroller"> controllers </a> </li>
@@ -402,12 +402,14 @@ Angular provides View Encapsulation to help isolate component styles. </p>
 
 <div class="box shadow p-2 mb-3" id="template">
 <h2> TEMPLATE </h2>
-<p>   Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements. <br> 
+<p>   
+Template is basically a super set of HTML. Template includes all the features of HTML and provides additional functionality to bind the component data into the HTML and to dynamically generate HTML DOM elements. <br> 
 <strong> Template can be categorised into two items :- </strong> <br> 
-  Data binding {{ title }}, Directives *ngIf="canShow" </p>
+Data binding {{ title }}, Directives *ngIf="canShow" </p>
   
 <h2> Template Variable </h2>
 <p>  template variable is a reference to a DOM element or Angular component/directive defined in your HTML template, and it is used within that template only. </p>
+
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 input #myInput type="text">
@@ -444,13 +446,13 @@ ng-template #showData>
 </code>
 </pre>
 
-<p class="mt-4"> <strong> 2. Angular Router Outlet (<router-outlet>) </strong></p>
-<p> Acts as a placeholder for rendering components based on the current route. </p>
-router-outlet> /router-outlet>
-Dynamically load components via routing <br>
-Full Angular components <br>
-Automatically based on route URL <br>
-Angular Router Module <br>
+<p class="mt-4"> <strong> 2. Angular Router Outlet (router-outlet>) </strong></p>
+
+<p> 
+router-outlet> is a placeholder directive that tells Angular where to render the component associated with the current route. 
+<br> Loads different components dynamically based on route.
+</p>
+
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
