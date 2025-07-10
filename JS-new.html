@@ -1458,6 +1458,69 @@ const user = {
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
+slice() – Copy a portion
+let array = [1,2,3,4,5,6,7]
+let array1 = array.slice(2)
+console.log(array1) // [ 3, 4, 5, 6, 7 ]
+
+splice() - Add, remove
+Add 
+let array = [1,2,4,5,6,7]
+array.splice(2,0, 3)
+console.log(array) // [ 3, 4, 5, 6, 7 ]
+Remove
+array.splice(2,1, 3)
+
+Map 
+let array = [1,2,4,5,6,7]
+let array1 = array.map((x) => x * 2)
+console.log(array1)
+
+Filter( Odd, Even )
+Odd Number
+let array = [1,2,4,5,6,7]
+let array1 = array.filter((x) => x % 2)
+console.log(array1)
+
+Even Number
+let array = [1,2,4,5,6,7]
+let array1 = array.filter((x) => x % 2 === 0)
+console.log(array1)
+
+Reduce(Sum)
+let array = [1,2,4,5,6,7]
+let sum = array.reduce((x, y) => x + y )
+console.log(sum)
+
+//Sorting 
+// Ascending
+let array = [10,24,3,4,55,6,7,8,9]
+array.sort((a,b) => a - b)
+console.log(array) // 3,  4,  6,  7, 8, 9, 10, 24, 55
+
+//Descending
+let array1 = [10,24,3,4,55,6,7,8,9]
+array1.sort((a,b) => b - a)
+console.log(array1) // 55, 24, 10, 9, 8, 7,  6,  4, 3
+
+//MaxNumber
+let array2 = [10,24,3,4,55,6,7,8,9]
+array2.sort((a,b) => b - a)
+let maxnumber = array2[0]
+console.log(maxnumber) // 55
+
+//forEach forEach() method performs an action on every item in a list.
+let numbers = [10, 20, 30, 40];
+let sum = 0;
+numbers.forEach(num => {
+    sum += num;
+});
+console.log(sum);
+      </code>
+      </pre>
+<br>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+    <code>
 	
 1. push() – Add to the end
 let fruits = ["apple", "banana"];

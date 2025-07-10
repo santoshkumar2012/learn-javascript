@@ -621,6 +621,8 @@ Fully supports all control structures. <br>
       </ol>
 	  <p> You should use <strong> ngAfterViewInit() </strong> when: <br> You need to interact with the DOM (e.g., via @ViewChild) <br> You need to trigger logic that depends on the fully initialized view <br> Like measuring elements, integrating third-party libraries, animations, etc. </p>
 	  
+	  <p> <strong> ngOnChanges() </strong> is only triggered when there are changes to input (@Input) properties. If a component has no input properties, or if no changes are made to them, the ngOnChanges() lifecycle hook will not be called. </p>
+	  
 	  <p> <strong> ngOnChanges() </strong> <strong> ngDoCheck()  </strong> Different Between = </p>
 	  <p> <strong> ngOnChanges() </strong> Automatically called when Angular detects changes to input properties (@Input()). </p>
 	  <p> Reacting to updated input data from parent components.</p> 
