@@ -63,8 +63,10 @@ pre {
 
     <ul class="index">
       <li> <a href="#js"> javascript </a> </li>
+      <li> <a href="#excon"> Execution Context </a></li>
       <li> <a href="#d3"> D3, canvas, svg </a> </li>
       <li> <a href="#es6"> Es6 </a> </li>
+      <li> <a href="#mainfunction"> Function </a></li>
 	    <li> <a href="#arrow"> Arrow Function vs Normal Function: this Behavior </a> </li>
       <li> <a href="#this"> This </a> </li>
       <li> <a href="#async"> Async </a> </li>
@@ -74,22 +76,24 @@ pre {
       <li> <a href="#classes"> classes </a> </li>
       <li> <a href="#map"> map and set, forEach, filter </a> </li>
       <li> <a href="#prototype"> prototype </a> </li>
-      <li> <a href="#closure"> closure, Lexical </a> </li>
+      <li> <a href="#closure"> closure, Scope & Lexical Environment </a> </li>
+      <li> <a href="#hoisting"> Hoisting </a> </li>
+      <li> <a href="#null"> Null, Undefined </a></li>
       <li> <a href="#foreach"> foreach </a> </li>
       <li> <a href="#event"> <strong> event </strong> </a> </li>
+      <li> <a href="#garbage"> Garbage Collection </a></li>
       <li> <a href="#dom"> dom </a> </li>
       <li> <a href="#currying"> currying </a> </li>
       <li> <a href="#debounce"> debounce </a> </li>
       <li> <a href="#deep"> Deep copy and shallow copy </a> </li>
       <li> <a href="#objectclone"> Object Clone </a> </li>
-      <li> <a href="#arraymethod"> Array Method </a> </li>
+      <li> <a href="#arraymethod"> <strong> Array Method </strong> </a> </li>
       <li> <a href="#infinityloop"> Infinity Loop </a> </li>
       <li> <a href="#hash"> hash </a> </li>
-      <li> <a href="#hoisting"> Hoisting </a> </li>
       <li> <a href="#promise"> Promise </a> </li>
       <li> <a href="#operator"> Rest, Spread Operator </a> </li>
       <li> <a href="#function"> function statement and function expression </a></li>
-      <li> <a href="#primitive"> Primitive Data Types / Null, Undefined </a></li>
+      <li> <a href="#primitive"> Primitive Data Types </a></li>
       <li> <a href="#method"> Method(call(),apply(),bind() ) </a></li>
       <li> <a href="#break-continue">  Break and Continue  </a></li>
       <li> <a href="#synchronous">  synchronous and asynchronous  </a></li>
@@ -107,7 +111,7 @@ pre {
       <li> <a href="#triangle"> Triangle Pattern </a> </li>
       <li> <a href="#palindrome"> Palindrome </a> </li>
       <li> <a href="#booble"> Booble sort </a> </li>
-      <li> <a href="#reverse"> Reverse </a> </li>
+      <li> <a href="#reverse"> <strong> Reverse </strong> </a> </li>
       <li> <a href="#factorial"> Factorial </a></li>
       <li> <a href="#median"> Median logic </a></li>
       <li> <a href="#digitalroot"> Digital Root repeatedly </a></li>
@@ -126,6 +130,7 @@ pre {
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#html"> HTML </a> </li>
+      <li> <a href="#cssoptimize"> CSS Optimization Techniques </a></li>
       <li> <a href="#cssAnimation"> CSS Animation </a></li>
       <li> <a href="#less"> Less, Sass, Scss </a> </li>
       <li> <a href="#position"> Position style </a> </li>
@@ -192,6 +197,19 @@ pre {
 </pre>
 </div>
 
+
+<div class="box shadow p-2 mb-3 mt-4" id="excon">
+ <h2 id="component"> WHAT IS THE Execution Context? </h2>
+<p> An execution context is like a big box where JavaScript code is evaluated and executed. It has two main components: </p>
+<p> <strong> Memory Component (also called the Variable Environment) </strong> <br> This is where all variables and function declarations are stored in memory during the initial phase.</p>
+<p> <strong> Code Component (also called the Thread of Execution) </strong> <br> This is where the code is executed line by line, values are assigned, and functions are invoked. </p>
+<p> JavaScript can only execute one command at a time. It is a synchronous, single-threaded language, which means: </p>
+<p> Code runs one line at a time, in order. It can’t move to the next line until the current line is completely executed. <br> 
+This is what we mean when we say JavaScript is a synchronous single-threaded language.
+</p>
+ </div>
+
+
 <div class="box shadow p-2 mb-3" id="d3">
     <h2 id="component"> D3.js and Canvas Rendering </h2>
 <p> D3.js (Data-Driven Documents) is a powerful JavaScript library used for creating dynamic and interactive data visualizations in web browsers. It leverages SVG (Scalable Vector Graphics) and Canvas for rendering charts, graphs, and complex visualizations. </p>
@@ -232,8 +250,183 @@ ctx.fill();
 </pre>
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="mainfunction">
+<h2 class="mb-4 mt-4"> <strong> FUNCTION </strong> </h2>
+<h2> <strong> Function Statement </strong> </h2>
+<p class="m-0 p-0"> A Function Statement (is also called a Function Declaration) is a way to define a named function using the function keyword. </p>
+<p> Function declaration are hoisted to the top of their scope. Means we can calll the function even before and defined the code.</p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+  // Declare Name only
+  function a() {
+    console.log("a called")
+  }
+  a()
+  ---------
+  // After hosted top 
+  a(); // Works, even before definition
+  function a() {
+    console.log("a called")
+  }
+  </code>
+</pre>
+
+<h2 class="mt-4"> <strong> Function Expression </strong> </h2>
+<p> Function expression defines a function and assigns it to a variable.
+Not hoisted: Function expressions are not hoisted. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+ const b = function() {
+  console.log("B called")
+ }
+ b()
+
+ -------
+ Not hoisted: Example 
+  b()
+  const b = function() {
+  console.log("B called")  // ReferenceError
+ }
+  </code>
+  </pre>
+
+  <hr>
+
+<h2 class="mt-4"> <strong> Anonymous Function </strong> </h2>
+<p class="m-0 p-0"> Anonymous function is a function without a name, used as a value (assigned to a variable, passed as an argument, or invoked immediately). </p>
+<p> Anonymous functions cannot be hoisted like named function statements. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function() {
+  // code
+}
+
+<strong> 1. Assigned to a variable: </strong>
+const greet = function() {
+  console.log("Hello!");
+};
+greet(); // Output: Hello!
+
+<strong> 2. Passed as a callback: </strong>
+setTimeout(function() {
+  console.log("Executed after 2 seconds");
+}, 2000);
+
+<strong> 3. Immediately Invoked Function Expression (IIFE): </strong>
+(function() {
+  console.log("IIFE executed!");
+})();
+
+</code>
+</pre>
+
+<hr>
+
+<h2 class="mt-4"> <strong> Difference between Parameters & Arguments </strong> </h2>
+<p class="m-0 p-0"> <strong> Parameters </strong>  Variables defined in a function declaration or definition </p>
+<p class="m-0 p-0"> <strong> Arguments </strong>  Values passed to a function when it is called or invoked </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+var b = function (param1, param2) {
+console.log("b called")
+}
+b(1,2)
+
+-----------
+param1, param2 → Parameters (defined in the function) |
+1, 2 → Arguments (passed to the function call) |
+</code>
+</pre>
+<hr>
+
+<h2 class="mt-4"> <strong> Callback Function </strong> </h2>
+<p> A callback function is a function passed as an argument to another function. </p>
+<ul>
+  <li> Synchronous callback: Runs immediately (e.g., in array methods like map, forEach) </li>
+  <li> Asynchronous callback: Runs later (e.g., setTimeout, API calls) </li>
+</ul>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function calc(num1, num2, callback) {
+return callback(num1, num2); // callback is a function passed as an argument
+}
+function add(add1, add2) {
+  return add1 + add2; // simply adds two numbers
+}
+let result = calc(25, 65, add); // calling calc with add as callback
+console.log(result); // Output: 90
+
+========
+
+Second Examples with setTimeout
+
+setTimeout(function () {
+console.log("Timer");
+}, 1000)
+
+function x(y){
+console.log("x")
+y() //// calling the passed function (callback)
+}
+
+x(function y(){
+ console.log("y")
+})
+
+// output 
+x
+y
+Timer
+
+</code>
+</pre>
+
+<hr>
+
+<h2 class="mt-4"> <strong> First Class function </strong> </h2>
+<p class="m-0 p-0"> First class function means that functions are treated like any other variable or value. 
+This concept allow function. </p>
+<p> Means - Assigned a variable, Passed as an argument to another function, Returned from another function. this makes javascript programming language. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+<strong> Example 1 - Assigning a function to a variable </strong>
+const greet = function() {
+  console.log("Hello!");
+};
+greet(); // Output: Hello!
+
+----------
+
+<strong> Example 2 - Passing a function as an argument </strong>
+function calc(num1, num2, callback) {
+  return callback(num1, num2); // callback = add, so it becomes add(25, 65)
+}
+function add(add1, add2) {
+  return add1 + add2; // returns 90
+}
+let result = calc(25, 65, add); // calls calc with add as the callback
+console.log(result); // Output: 90
+
+----------
+
+<strong> Example 3 - Returning a function from another function </strong>
+function outerFunction() {
+  return function() {
+    console.log("I'm a returned function!");
+  };
+}
+const inner = outerFunction();
+inner(); // Output: I'm a returned function!
+</code>
+</pre>
+</div>
+
+
 <div class="box shadow p-2 mb-3" id="arrow">
-  <h2> Arrow Function vs Normal Function : this Behavior </h2>
+<h2> Arrow Function vs Normal Function : this Behavior </h2>
 <div class="row">
   <div class="col-lg-6"> 
     <ul>
@@ -552,16 +745,30 @@ console.log(a === b); // true
   <li> Functions </li>
   <li> Dates, RegExps, etc. </li>
 </ol>
+</div>  
 
+<div class="box shadow p-2 mb-3" id="null"> 
 <h2> Null and Undefined </h2>
-<p> In JavaScript, both null and undefined represent the absence of a value, but they are used in slightly different <br> 
+<p> In JavaScript, both null and undefined represent the absence of a value, but they are used in slightly different <br> <br> 
 Null is an assignment value that represents the intentional absence of any object value. <br>
  It represents an absence of value, the typeof operator returns "object" for values that are null <br>
  A variable has been declared but not yet assigned a value.
 </p>
 
-  </div>  
+<p> Javascript is also create window is big object and it has lot's of function and method. this variable and function created by javascript engine.
+<br>
+window and this keyword both are global lavel <br>
+window === this // true <br>
+<br>
+<strong> Undefined </strong> is very special keyword in javascript. variable has been declared, but no value has been assigned yet.
+<br>
+var x; <br>
+console.log(x); // 👉 undefined </p>
 
+<p> <strong> Not defined </strong> is variable was never declared at all. <br>
+console.log(y); // ❌ ReferenceError: y is not defined </p>
+
+</div>
 
 <div class="box shadow p-2 mb-3" id="generators">
 <h2> GENERATORS </h2>
@@ -743,21 +950,18 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
 
 <div class="box shadow p-2 mb-3" id="closure">
 <h2> CLOSURE  </h2>
-<p> A closure in JavaScript is a function that has access to variables in its parent scope. 
-    Inner function retain access to the variable. </p>
+<p> A closure in JavaScript is a function that has access to variables in its parent scope. Inner function retain access to the variable. </p>
+
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
-        function outerFunction() {
-            let count = 0;  // count is in the lexical scope of innerFunction
-        
-            function innerFunction() {
-                count++;  // innerFunction remembers 'count'
-                console.log(count);
-            }
-        
-            return innerFunction;  // Returns the inner function
-        }
-        
+  function outerFunction() {
+    let count = 0;  // count is in the lexical scope of innerFunction
+    function innerFunction() {
+      count++;  // innerFunction remembers 'count'
+      console.log(count);
+      }
+      return innerFunction;  // Returns the inner function
+  }
         const counter = outerFunction();  // outerFunction executes and returns innerFunction
         counter(); // Output: 1
         counter(); // Output: 2
@@ -813,8 +1017,9 @@ console.log(sum); //100
 <div class="box shadow p-2 mb-3" id="event">
 <h2> Event  </h2>
 <p> An event in JavaScript is an action in the browser, user clicking a button, typing in an input field, or scrolling a page. JavaScript can detect these events and execute functions accordingly. </p>
+
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
-    <code>
+<code>
 button onclick="alert('Button clicked!')" Click Me button
 --------------------
 button id="btn">Click Me button
@@ -838,6 +1043,43 @@ input type="text" id="textInput" placeholder="Type something...">
 
     </code>
 </pre>
+
+<h2 class="mt-4"> <strong> Add EventListener </strong> </h2>
+<p> addEventListener is a method in JavaScript used to register a function (called an event handler) that will be called whenever a specified event occurs on a specific HTML element. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+button id="myBtn">Click Me/button>
+  document.getElementById("myBtn").addEventListener("click", function () {
+    alert("Button was clicked!");
+  });
+
+</code>
+</pre>
+
+<h2 class="mt-4"> <strong> removeEventListener  </strong> </h2>
+<p> removeEventListener is used to remove an event listener that was previously added using addEventListener. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+button id="btn"> Click Me /button>
+function handleClick() {
+  console.log("Button clicked!");
+}
+
+const button = document.getElementById("btn");
+
+// Add event listener
+button.addEventListener("click", handleClick);
+
+// Remove event listener after 5 seconds
+setTimeout(function () {
+  button.removeEventListener("click", handleClick);
+  console.log("Event listener removed.");
+}, 5000);
+
+  </code>
+</pre>
+
 
 <h2 class="mt-4"> <strong> Event Loop  </strong></h2>
 <p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and processing events.  <br> It makes asynchronous programming (like setTimeout, Promises, and async/await) 
@@ -870,32 +1112,8 @@ Start <br>
 End <br>
 Promise callback <br>
 Timeout callback <br>
-</div>
 
-<div class="box shadow p-2 mb-3" id="counter">
-<h2> Counter using Closure (No Global Variable) </h2>
-
-<pre style="white-space: pre-wrap; word-wrap: break-word;">
-<code>
-
-function createCounter() {
-  let count = 0; // private variable
-
-  return function () {
-    count++;
-    console.log(count);
-    return count;
-  };
-}
-
-const counter = createCounter();
-
-counter(); // 1
-counter(); // 2
-counter(); // 3
-
-</code>
-</pre>
+===========
 
 <h2 class="mt-4"> Event Object </h2>
 <p> When an event occurs, JavaScript creates an event object that contains information about the event (like which key was pressed or which element was clicked).</p>
@@ -990,6 +1208,62 @@ event.currentTarget: The element the event handler is bound to
 <br>                                       |
 | **`isTrusted`** *(property)* | Checks if the event was triggered by the browser (true) or script (false).                                          |
 </p>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="garbage">
+<h2> Garbage Collection ( GC ) </h2>
+<p> Garbage Collection (GC) is the process by which JavaScript automatically frees up memory that is no longer needed, so your program doesn’t run out of memory. </p>
+<p> You don’t need to manually deallocate memory in JavaScript. It handles memory management automatically. </p>
+
+<strong> How It Works: </strong>
+<p> JavaScript uses a garbage collector (part of the JS engine like V8, SpiderMonkey, etc.) which finds and removes unreachable values in memory. </p>
+Mark-and-Sweep Algorithm
+<ol>
+  <li> The garbage collector starts with a "root" (like global scope or local variables in functions). </li>
+  <li> It marks all objects that are reachable from the root. </li>
+  <li> Anything not marked (not reachable) is considered garbage and gets removed from memory. </li>
+</ol>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function demo() {
+  let user = {
+    name: "Alice"
+  };
+}
+
+demo();
+// After the function ends, `user` is no longer reachable → garbage collected
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="counter">
+<h2> Counter using Closure (No Global Variable) </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+
+function createCounter() {
+  let count = 0; // private variable
+
+  return function () {
+    count++;
+    console.log(count);
+    return count;
+  };
+}
+
+const counter = createCounter();
+
+counter(); // 1
+counter(); // 2
+counter(); // 3
+
+</code>
+</pre>
 </div>
 
 <div class="box shadow p-2 mb-3" id="dom">
@@ -1818,14 +2092,61 @@ console.log(sum);
 <div class="box shadow p-2 mb-3" id="hoisting">
 <h2> HOISTING </h2>
 <p> "Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top of their scope before the code executes. </p>
+<p> Hoisting means JavaScript moves declarations to the top of their scope before execution. </p>
+
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
-    <code>
-        greet(); // Output: Hello, World!
+<code>
+greet(); // Output: Hello, World!
 function greet() {
   console.log("Hello, World!");
 }
-    </code>
+
+=======
+
+----
+console.log(x); // undefined
+var x = 10;
+----
+var x;
+console.log(x); // undefined
+x = 10;
+
+=========
+
+Hoisting in Global Scope:
+
+console.log(name); // undefined
+var name = "Santosh";
+
+=========
+
+Hoisting in Function Scope:
+
+function greet() {
+  console.log(msg); // undefined
+  var msg = "Hello";
+}
+greet();
+
+=========
+
+BUT: let and const are not hoisted the same way
+Accessing them before declaration causes a ReferenceError.
+
+console.log(age); // ❌ ReferenceError
+let age = 25;
+
+==========
+
+function b() {
+ var x = 10
+}
+console.log(x)// ReferenceError
+
+
+</code>
 </pre>
+
 </div>
 
 
@@ -2963,6 +3284,126 @@ protected - allows access to the class member from itself and any classes that i
                         =====
                        
                         </div>
+
+<div class="box shadow p-2 mb-3" id="cssoptimize">
+<h2>CSS Optimization Techniques </h2>
+
+1. Minify CSS <br>
+🔧 What: <br>
+Remove spaces, comments, line breaks<br>
+
+🔨 Tools:<br>
+Angular CLI does it automatically in production (ng build --prod)
+<br>
+Or use: cssnano, clean-css, PostCSS
+<br>
+💡 Example:<br>
+/* Before */<br>
+.button {
+  color: white;
+  padding: 10px;
+}
+/* After */<br>
+.button{color:#fff;padding:10px}
+✅ 2. Remove Unused CSS<br>
+🔧 What:<br>
+Remove CSS rules not used in your app
+
+🔨 Tools:<br>
+PurgeCSS  <br>
+TailwindCSS built-in purge feature<br>
+<br>
+@angular/cli + @angular-devkit/build-angular (for lazy-loaded styles)
+<br>
+💡 Angular Example:
+In angular.json:
+<br>
+"optimization": true,
+"buildOptimizer": true<br>
+✅ 3. Use CSS Shorthand Properties<br>
+💡 Instead of:<br>
+margin-top: 10px;
+margin-right: 10px;
+margin-bottom: 10px;
+margin-left: 10px;
+✅ Use:<br>
+margin: 10px;
+Saves space and improves readability.<br>
+
+✅ 4. Use Critical CSS<br>
+🔧 What:<br>
+Inline only the CSS needed to render the first visible part of the page (above-the-fold content)
+
+🔨 Tools:<br>
+critical npm package
+<br>
+Angular Universal (for SSR apps)
+<br>
+Tools like Next.js, Gatsby (for React SSR)
+<br>
+✅ 5. Defer Non-Critical CSS
+🔧 What:
+Load non-essential CSS asynchronously
+<br>
+💡 Example:
+<br>
+link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'"> <br>
+✅ 6. Use CSS Variables (Custom Properties)
+Reduce repetition and make themes easier.
+
+:root {
+  --primary-color: #0066ff;
+}<br>
+.button {
+  color: var(--primary-color);
+}<br>
+✅ 7. Combine Files (Bundle CSS)<br>
+Reduce the number of HTTP requests by bundling styles.
+<br>
+Angular: already handled via CLI
+<br>
+Tools: Webpack, Parcel, Vite
+<br>
+✅ 8. Use Logical Properties<br>
+Use margin-inline-start, padding-block-end, etc., for better internationalization (RTL/LTR).
+<br>
+✅ 9. Avoid !important<br>
+Avoid !important unless absolutely necessary — it increases specificity and makes debugging harder.
+<br>
+✅ 10. Use Lightweight CSS Frameworks<br>
+Use Tailwind, Bulma, or Skeleton instead of full Bootstrap if you only need small utility classes.
+<br>
+✅ 11. Media Query Optimization<br>
+Use mobile-first breakpoints:
+<br>
+/* Mobile styles first */<br>
+.card { font-size: 14px; }<br>
+
+@media (min-width: 768px) {<br>
+  .card { font-size: 16px; }
+}
+✅ 12. Lazy Load Styles<br>
+Load heavy CSS (like charts or dashboards) only when a module/route is active.
+
+Angular Example:<br>
+In angular.json, use "lazy" for style entry:
+
+<br>
+"styles": [
+  {
+    "input": "src/styles/chart.css",
+    "lazy": true,
+    "bundleName": "chart"
+  }
+]
+Then in component:
+<br>
+<br>
+constructor(private styleManager: ɵDomSharedStylesHost) {
+  import('src/styles/chart.css');
+}
+
+</div>
 
 <div id="frontend">
   <h2> Frontend Performance Tips </h2>

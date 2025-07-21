@@ -84,8 +84,8 @@ pre, code {
       <li> <a href="#angularcli"> angular CLI </a> </li>
       <li> <a href="#angularcontroller"> controllers </a> </li>
       <li> <a href="#ssr"> SSR </a> </li>
-      <li> <a href="#optimize"> optimization </a> </li>
-      <li> <a href="#lazy"> lazy loading </a> </li>
+      <li> <a href="#optimize"> <strong> Optimization </strong> </a> </li>
+      <li> <a href="#lazy"> <strong> lazy loading </strong> </a> </li>
       <li> <a href="#change"> Change Detection </a> </li>
       <li> <a href="#accessibility"> accessibility </a> </li>
       <li> <a href="#newfeatures" style="background:green; color:#fff;"> New featurs </a> </li>
@@ -98,7 +98,7 @@ pre, code {
      <li> <a href="#storage"> Local Storage </a> </li>
      <li> <a href="#packages"> packages.json, angular.json </a> </li>
      <li> <a href="#async"> Async, Async pipe, promise </a> </li>
-     <li> <a href="#authentication"> Authentication, Authorization </a> </li>
+     <li> <a href="#authentication"> <strong> Authentication, Authorization </strong> </a> </li>
       <li> <a href="#encapsulation">  View Encapsulation </a> </li>
     
      
@@ -135,13 +135,16 @@ pre, code {
       <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
 	  <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#services"> Services </a> </li>
-      <li> <a href="#interceptor"> Interceptor  </a> </li>
+      <li> <a href="#interceptor"> <strong> Interceptor </strong>  </a> </li>
       <li> <a href="#di"> Dependancy injection </a> </li>
       <li> <a href="#class"> Class </a> </li>
       <li> <a href="#aot"> AOT </a> </li>
-      <li> <a href="#signals"> signals </a> </li>   
+      <li> <a href="#signals"> <strong> signal </strong> </a> </li>   
 		<li> <a href="#graphql"> graphql </a> </li>	  
       <li> <a href="#vresion-upgrade"> how to upgrade </a> </li>
+      <li> <a href="#webpack"> Webpack </a></li>
+      <li> <a href="#pitfalls"> Best Practices vs. Common Pitfalls </a></li>
+      <li> <a href="#aggrid"> ag-Grid vs. ngx-datatable (Angular Table Libraries) </a></li>
 	   <li class="borderline"><a href="#">  </a></li>
 
      <li> <a href="#counter"> Counter </a> </li>
@@ -2857,37 +2860,665 @@ export class TodoEffects {
   </div>
 
 
-  <div class="box shadow p-2 mb-3" id="signals">
-    <h2> SIGNALS </h2>
-    <p> Signals in Angular provide a reactive way to manage and track state changes in a component. They are similar to RxJS observables. </p>
-    <pre style="white-space: pre-wrap; word-wrap: break-word;">
-      <code>
-        <h2>Counter: {{ count() }}</h2>
+<div class="box shadow p-2 mb-3" id="signals">
+<h2> <strong> SIGNALS </strong> </h2>
 
+<p><strong> Signal introduced? </strong></p>
+<ul>
+  <li> Angular 16 (Released in May 2023) – Signals were introduced as a developer preview. </li>
+  <li> Angular 17 & 18 – Signals became more stable and integrated in the framework. </li>
+  <li> Angular 18+ – Angular continues to enhance signals (like with @model, if, etc.) </li>
+</ul>
+
+<p><strong> Signal Defination </strong></p>
+<p> A signal is a wrapper around a value that notifies interested consumers when that value changes. <br> A signal can contain any value, from primitives to complex data structures. </p>
+<p> You read a signal's value by calling its getter function, which allows Angular to keep track of where the signal is being used. </p>
+<p> It like a special variable that automatically updates your UI when its value changes. </p>
+
+<p class="mt-4"> <strong> Angular (before Signals) </strong></p>
+<p> Normally in Angular, when a value changes, Angular uses Zone.js and change detection to update the DOM: </p>
+Example - title = 'Angular';
+<ul>
+  <li> If you update it like this.title = 'New Title'; </li>
+  <li> Angular checks the whole component tree to see what bindings changed </li>
+  <li> Then it updates the DOM </li>
+</ul>
+
+<p> <strong> signal() — UI Updates Automatically </strong></p>
+<p>
+  @Component({ <br>
+  selector: 'app-demo',<br>
+  template: `
+    h2>{{ title() }} /h2><br>
+    button (click)="changeTitle()">Change /button><br>
+  `<br>
+})
+<br> export class DemoComponent {<br>
+  title = signal('Hello Angular');<br>
+
+  changeTitle() {<br>
+    this.title.set('Angular Signals');<br>
+  }<br>
+}
+</p>
+<p> What happens here </p>
+<ul>
+  <li> title() is bound to the template </li>
+  <li> When you call this.title.set(...): </li>
+  <li> The signal notifies Angular </li>
+  <li> Only the DOM part using title() is re-rendered </li>
+  <li>No need for Zone.js or change detection manually </li>
+</ul>
+
+<p class="mt-4"> <strong> Why should I use Signals? </strong></p>
+<p> Because Signal Easier to understand than observables and RxJS and Signals automatically track dependencies <br> 
+Signal works Fast change detection, For signal No need to subscribe/unsubscribe manually like in observables
+</p>
+
+<p><strong> Explanation </strong></p>
+<ul>
+  <li> <strong> signal(0) </strong> – creates a signal with initial value 0. </li>
+  <li> <strong> count() </strong> – used like a function to read the value. </li>
+  <li> <strong> count.set() </strong> – used to update the value. </li>
+  <li> UI will auto-update when signal changes. </li>
+</ul>
+
+<p> <strong>Writable vs Computed Signals? </strong></p>
+<ul>
+  <li> Writable Signal	- A signal you can directly .set() or .update(), create - signal()</li>
+  <li> Computed Signal	- A read-only signal based on other signals, computed()  </li>
+</ul>
+
+<p><strong> Computed & Effects </strong></p>
+<ul>
+  <li> <strong> computed() </strong> Create derived signals like computed properties. </li>
+  <li> <strong> effect() </strong> Run side effects when signal value changes. </li>
+</ul>
+
+<p class="mt-4"> <strong> What problem do Signals solve in Angular? </strong></p>
+<ul>
+  <li> <strong> Angular relies on Zone.js to patch async operations and check the entire component tree after any event (e.g., button click, HTTP call). </strong> <br> Signals remove the need for Zone.js <br> Only the parts of the UI that depend on a signal re-render </li>
+  <li> 
+    <strong> Problem </strong> : Angular lacked a native reactive state management like Vue (ref, computed) or React (useState, useEffect). Developers had to use: @Input() / @Output(), Services with BehaviorSubject <br>
+    <strong> help </strong> : Built-in reactivity via signal(), computed(), effect(), No need for external libraries or RxJS unless needed
+  </li>
+  <li> Complex derived state	 <br> computed() makes it declarative & clean </li>
+</ul>
+
+<p class="mt-4"> <strong> Can Signals be used in Services or just in Components? </strong> </p>
+<p> Yes! Signals can absolutely be used in Angular Services, not just in components — and in fact, using Signals in services is one of the best ways to manage shared state across your application. </p>
+
+
+<p> An <strong> interface </strong> is a TypeScript feature used to define the shape of an object. </p>
+
+<p class="m-0 p-0"> <strong> Angular 18 Signal with @signal Decorator </strong></p>
+<p> Instead of count = signal(0), you write @signal count = 0. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<h2>signal Basic Scenario Example – Counter </h2>
+<code>
+<h2>Counter: {{ count() }}</h2>
 button (click)="increment()">Increment</button>
 button (click)="decrement()">Decrement</button>
-
 TS - 
-count: Signal<number> = signal(0);
-increment() { this.count.set(this.count() + 1); }
+count: Signal<number> = signal(0); // define signal 
+increment() { this.count.set(this.count() + 1); } // update Signal 
 decrement() { this.count.set(this.count() - 1); }
-      </code>
-    </pre>
-    </div>
+</code>
+</pre>
+
+<h2 class="mt-4"> How to use Signals with Angular Forms? ( computed() Example  ) </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+** computed() Example 
+
+Form.ts 
+
+import { Component, signal, computed } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-product-filter',
+  imports: [HeaderComponent, CommonModule],
+  templateUrl: './product-filter.component.html',
+  styleUrl: './product-filter.component.css'
+})
+export class ProductFilterComponent {
+
+  firstName = signal('');
+  lastName = signal('');
+  fullName = computed(()=> this.firstName() + this.lastName())
+
+}
+
+HTML FILE 
+
+div class="mt-5">
+div class="flex"> 
+input type="text" class="form-control" #firstNameField [value]="firstName()" (input)="firstName.set(firstNameField.value)" placeholder="First Name">
+input type="text" class="form-control" #lastNameField [value]="lastName()" (input)="lastName.set(lastNameField.value)" placeholder="Last Name">
+/div>
+h3> Full Name : {{fullName()}} /h3>
+/div>
+
+</code>
+</pre>
+
+<h2 class="mt-4"> Effect Example </h2>
+<p> It reactively runs the function whenever any used signal changes.</p>
+<pre>
+  <code>
+    //counter.component.ts 
+
+import { Component, signal, effect } from '@angular/core';
+@Component({
+  selector: 'app-counter',
+  template: `
+    h3>Counter: {{ count() }} /h3>
+    button (click)="increment()">Increment /button>
+  `
+})
+export class CounterComponent {
+  count = signal(0);
+
+  constructor() {
+    // 👀 Effect runs whenever `count()` changes
+    effect(() => {
+      console.log('Counter changed to:', this.count());
+    });
+  }
+
+  increment() {
+    this.count.set(this.count() + 1);
+  }
+}
+
+///output 
+Counter changed to: 0
+Counter changed to: 1
+Counter changed to: 2
+
+  </code>
+</pre>
+
+<p class="mt-4"> <strong> Angular 18 Signal Create, Update, Access Signal Value </strong></p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+<h2 class="m-0 p-0"> Create and Access, Use computed, Array, Obj </h2>
+
+TS FILE
+
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+
+@Component({
+  selector: 'app-signal',
+  imports: [HeaderComponent],
+  templateUrl: './signal.component.html',
+  styleUrl: './signal.component.css',
+})
+export class SignalComponent {
+  
+  firstName = signal("Santosh");
+  lastName = signal("Chandarvanshi");
+  rollNumber = signal<number>( 123 )
+
+  fullName = computed(()=> this.firstName() + this.lastName())
+
+// Access City List
+  cityList = signal(["Delhi" , "Delhi NCR"])
+
+// Access Object Name
+   studentObj = signal({
+    name: "Pragyansh",
+    city: "Delhi"
+  })
+
+==========
+
+ // Change First Name ( Uses set used to update the value )
+
+ changeName(){
+    this.firstName.set("Anjali")
+  }
+
+
+// Add city Name ( Uses Rest Operator )  
+addCity(){
+    this.cityList.set([...this.cityList(), "Jaipur"])
+   }
+
+// Change city Name ( Uses Rest Operator ) 
+changeStudentCity(){
+    this.studentObj.set({...this.studentObj(), city:"Noida"})
+   }
+
+
+}
+
+==== 
+
+IN HTML 
+
+div class="container mt-5">
+<p class="m-0 p-0"> <strong> For Access only </strong> </p>
+div class="row">
+    div class="col-lg-3"> {{firstName()}} {{lastName()}} /div>
+    div class="col-lg-1"> {{rollNumber()}} /div>
+    div class="col-lg-3"> {{fullName()}}  /div>
+    div class="col-lg-3"> {{cityList()}}  /div>
+    div class="col-lg-2">  {{studentObj().name}}, {{studentObj().city}} /div>
+/div>
+
+<hr>
+
+div class="row mt-5">
+    div class="col-lg-7"> button class="btn btn-success" (click)="changeName()"> Change First Name /button>/div>
+    div class="col-lg-3"> button class="btn btn-success" (click)="addCity()"> Add City Name /button>/div>
+    div class="col-lg-2"> button class="btn btn-success" (click)="changeStudentCity()"> Change City Name /button>
+/div>
+
+
+/div>
+
+  </code>
+</pre>
+<hr>
+<h2> signal with changeDetection </h2>
+<pre>
+  <code>
+
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+
+@Component({
+  selector: 'app-signal',
+  imports: [HeaderComponent],
+  templateUrl: './signal.component.html',
+  styleUrl: './signal.component.css',
+   //changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class SignalComponent {
+  
+  firstName = signal("Santosh");
+  lastName = signal("Chandarvanshi");
+
+//courseName: string = "JAVA";
+
+ constructor(){
+    const fname = this.firstName();
+    setTimeout(() => {
+      
+      this.firstName.set("Dot Net");
+      //this.courseName = "HTML"
+
+    }, 3000);
+  }
+
+}
+
+====
+
+In HTML 
+
+div class="col-lg-3"> 
+  {{firstName()}} {{lastName()}} 
+       // {{courseName}}
+  /div>
+
+  </code>
+</pre>
+
+
+<h2 class="mt-4"> Signals vs @Input() </h2>
+<p> Signals and @Input() are both used to pass or manage data in Angular, but they serve different purposes and can also be used together. </p>
+<p> Use @Input() for parent-to-child communication, and use Signals when you need local reactivity, derived state, </p>
+<h2> Can You Use Both Together? </h2>
+<p> Yes, You can receive an @Input() and wrap it into a Signal for further reactive processing. </p>
+
+<pre>
+  <code>
+TS 
+@Input() title = '';
+titleSignal = computed(() => this.title); // reactive
+HTML 
+child [title]="titleSignal()" />
+  </code>
+</pre>
+
+<h2 class="mt-4"> Signals vs BehaviorSubject </h2>
+<ul>
+<li> Reactivity Type - Signal Synchronous, BehaviorSubject - Push-based, observable stream </li>
+<li> Data Access - Signal .value() and BehaviorSubject - .value() </li>
+<li> Subscriptions - Signal Automatic via computed, effect , BehaviorSubject  Manual via .subscribe() </li>
+</ul>
+
+<h2 class="mt-4"> Traditional Change Detection in Angular? </h2>
+<p> <strong> Traditional CD Flow: </strong></p>
+<ul>
+  <li> You change some value (e.g., this.name = 'John') </li>
+  <li> Zone.js detects the change (via events, setTimeout, etc.) </li>
+  <li> Angular checks the whole component tree </li>
+  <li> Updates DOM if bindings changed </li>
+</ul>
+
+<p> <strong> Signals </strong></p>
+<p> Angular Signals are a reactive state management system built into Angular (v17+), offering: </p>
+<ul>
+  <li> Fine-grained reactivity </li>
+  <li> Synchronous updates </li>
+  <li> No reliance on Zone.js </li>
+  <li> Can work in "zone-less" apps </li>
+</ul>
+
+
+<h2 class="mt-3"> <strong> sharing data in component using signal </strong></h2>
+<p> <strong> Scenario </strong></p>
+<ul>
+  <li> Parent sends name to child using @Input() </li>
+  <li> Child wraps name as a signal() for reactive use </li>
+</ul>
+
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+  1. Parent Component (app.component.ts)
+  @Component({
+  selector: 'app-root',
+  template: ``
+})
+export class AppComponent {}
+====
+2. Prent Component (app,component.html)
+app-user-card [name]="'Angular Developer'"> /app-user-card>
+===
+3.  Child Component (user-card.component.ts)
+
+import { Component, Input, signal, OnChanges, SimpleChanges } from '@angular/core';
+@Component({
+  selector: 'app-user-card',
+  template: `<p>Hello, {{ nameSignal() }}!</p>`
+})
+export class UserCardComponent implements OnChanges {
+  @Input() name: string = '';
+
+  nameSignal = signal(''); // signal for local reactivity
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['name']) {
+      this.nameSignal.set(this.name); // update signal on input change
+    }
+  }
+}
+====
+4. user-card.component.html 
+Hello, {{ nameSignal() }}!
+========
+Output 
+Hello, Angular Developer!
+
+</code>
+</pre>
+
+
+
+
+<h2> Product List with Category Filters using Angular Signals </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+
+    *product-filter.ts
+
+import { Component, signal, computed } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { CommonModule } from '@angular/common';
+
+interface Product {
+  id: number;
+  name: string;
+  category: 'electronics' | 'clothing' | 'home';
+}
+
+@Component({
+  selector: 'app-product-filter',
+  imports: [HeaderComponent, CommonModule],
+  templateUrl: './product-filter.component.html',
+  styleUrl: './product-filter.component.css'
+})
+export class ProductFilterComponent {
+
+  products = signal Product[]>([
+    { id: 1, name: 'Laptop', category: 'electronics' },
+    { id: 2, name: 'T-Shirt', category: 'clothing' },
+    { id: 3, name: 'Microwave', category: 'home' },
+    { id: 4, name: 'Shoes', category: 'clothing' },
+    { id: 5, name: 'Fan', category: 'home' }
+  ]);
+
+  selectedCategory = signal<'all' | 'electronics' | 'clothing' | 'home'>('all');
+
+  filteredProducts = computed(() => {
+    const category = this.selectedCategory();
+    if (category === 'all') return this.products();
+    return this.products().filter(p => p.category === category);
+  });
+
+  setFilter(cat: 'all' | 'electronics' | 'clothing' | 'home') {
+    this.selectedCategory.set(cat);
+  }
+
+}
+
+====
+
+*Product Filter 
+
+div class="container mt-5">
+h2>Product List with Filters (Signals) /h2>
+div class="filters">
+  strong>Filter by Category: /strong>
+  button (click)="setFilter('all')">All /button>
+  button (click)="setFilter('electronics')">Electronics /button>
+  button (click)="setFilter('clothing')">Clothing /button>
+  button (click)="setFilter('home')">Home /button>
+/div>
+ul>
+  li *ngFor="let product of filteredProducts()">
+    {{ product.name }} ({{ product.category }})
+  /li>
+/ul>
+/div>
+
+  </code>
+</pre>
+
+
+<h2> Reactive Task Manager (Using Angular Signals) </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+   * Core Logic (task-manager.component.ts)
+
+    import { Component, signal, computed, effect } from '@angular/core';
+import { HeaderComponent } from "../header/header.component";
+import { CommonModule } from '@angular/common';
+
+interface Task {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+@Component({
+  selector: 'app-task-manager',
+  imports: [HeaderComponent, CommonModule],
+  templateUrl: './task-manager.component.html',
+  styleUrl: './task-manager.component.css'
+})
+export class TaskManagerComponent {
+
+newTaskTitle = signal('');
+  tasks = signal<Task[]>([]);
+
+  // Computed signals
+  completedTasks = computed(() => this.tasks().filter(task => task.completed));
+  pendingTasks = computed(() => this.tasks().filter(task => !task.completed));
+
+  // Log updates
+  constructor() {
+    effect(() => {
+      console.log('Task List Updated:', this.tasks());
+    });
+  }
+
+  addTask() {
+    if (!this.newTaskTitle().trim()) return;
+    const newTask: Task = {
+      id: Date.now(),
+      title: this.newTaskTitle(),
+      completed: false
+    };
+    this.tasks.update(tasks => [...tasks, newTask]);
+    this.newTaskTitle.set('');
+  }
+
+  toggleTask(taskId: number) {
+    this.tasks.update(tasks =>
+      tasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
+  }
+
+  deleteTask(taskId: number) {
+    this.tasks.update(tasks => tasks.filter(task => task.id !== taskId));
+  }
+
+  updateTaskTitle(event: Event) {
+  const input = event.target as HTMLInputElement;
+  this.newTaskTitle.set(input.value);
+}
+
+}
+
+
+====
+
+Template (task-manager.component.html)
+
+div class="container">
+div class="task-container">
+h2>Signal-based Task Manager /h2>
+div class="d-flex">
+input class="form-control" type="text" [value]="newTaskTitle()" (input)="updateTaskTitle($event)" placeholder="Add a task"/>
+button (click)="addTask()" class="btn btn-success">Add Task /button>
+/div>
+ul>
+    li *ngFor="let task of tasks()">
+      input type="checkbox" [checked]="task.completed" (change)="toggleTask(task.id)" />
+      span [class.completed]="task.completed">{{ task.title }} /span>
+      button (click)="deleteTask(task.id)">❌ /button>
+    /li>
+  /ul>
+  div class="stats">
+    ✅ Completed: {{ completedTasks().length }} |
+    🔄 Pending: {{ pendingTasks().length }}
+  /div>
+/div>
+/div>
+
+  </code>
+</pre>
+
+
+
+
+</div>
 
     <div class="box shadow p-2 mb-3" id="lazy">
       <h2> Lazy Loading </h2>
      <p> Lazy loading in Angular is a design pattern that improves the performance of an application by loading feature modules only when they are needed. Instead of loading all modules during the initial load of the application, Angular delays the loading of certain modules until the user navigates to a route associated with that module. This reduces the initial bundle size, resulting in faster application load times and a more responsive user experience. </p>
      <p>  To implement lazy loading, you define your feature modules with their own routing configuration and set them up in the main routing file using the loadChildren property. This property tells Angular to load the module dynamically. For example, in your app-routing.module.ts, you might add a route like this: </p>
      <p> For example, suppose you have an Angular application with multiple feature modules, like a dashboard, user profile, settings, and reports. Instead of loading all these modules when the application starts, you can "configure lazy loading" to load these modules only when the user navigates to them. </p>
+
+  <h2> <strong> Why Use Lazy Loading? </strong></h2>
+     <ul>
+      <li> Faster initial load </li>
+      <li> Better performance </li>
+      <li> Improves scalability </li>
+     </ul>
+     <p> <strong> app-routing.module.ts (after running above) </strong></p>
      <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
-        {
-          path: 'admin',
-          loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-        }
+        const routes: Routes = [
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then(m => m.ProductsModule),
+  },
+];
       </code>
      </pre>
+<p> loadChildren → tells Angular to load the module only when route is accessed. </p>
+
+<h2>  What Happens Behind the Scenes? </h2>
+<ul>
+  <li> App loads only AppModule </li>
+  <li> User clicks /products </li>
+  <li> Angular fetches the ProductsModule asynchronously </li>
+  <li> Displays the component </li>
+</ul>
+
+<h2> <strong> 1: Lazy Load Module with Route Guard </strong></h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+    app-routing.module.ts
+    import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './auth.guard'; // create this
+
+const routes: Routes = [
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard], // ✅ Guard applied here
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+
+  </code>
+</pre>
+
+<h2> <strong> 2: Create Auth Guard </strong></h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+    import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+
+  canActivate(): boolean {
+    const isLoggedIn = true; // simulate login
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
+  }
+}
+
+    </code>
+    </pre>
+   
     
       </div>
 
@@ -3074,7 +3705,7 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
         </div>
 
         <div class="box shadow p-2 mb-3" id="microfronted">
-          <h2> Micro Frontend </h2>
+          <h2> <strong> Micro Frontend </strong> </h2>
           <p> Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications. </p>
           <p> <strong> Why Use Micro Frontend in Angular? </strong></p>
           <p> Scalability: Large applications can be split into smaller manageable parts. </p>
@@ -3086,7 +3717,200 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
           Shell App (Host Application) → Main container that loads micro frontends. <br>
           Remote App 1 (Micro App 1) <br>
           Remote App 2 (Micro App 2) <br>
+
+          <h2 class="mt-4"> <strong> How It Works (High Level) </strong></h2>
+          <ul>
+            <li> Host App (Shell): Loads layout + micro-frontends </li>
+            <li> Remote Apps: Micro-frontends built and exposed as modules </li>
+            <li> Use Module Federation (Webpack 5) to load remotes dynamically </li>
+          </ul>
+
+          <h2> <strong> Micro-Frontend in Angular (via Module Federation) </strong></h2>
+          <p> <strong> Step 1: </strong> Install Webpack Module Federation Plugin <br> ng add @angular-architects/module-federation </p>
+          <p> <strong> Step 2: </strong> Create Shell & Remote Apps <br> 
+            ng new shell --routing --style=scss <br>
+            ng generate application mfe-products --routing
+            </p>
+          <p> <strong> Step 3: </strong> Configure Module Federation <br> Update webpack.config.js or webpack.config.mjs for both apps. </p>
+          <p> <strong> Shell App </strong></p>
+          <pre>
+            <code> 
+              // shell/webpack.config.mjs
+remotes: {
+  'mfeProducts': 'mfeProducts@http://localhost:4201/remoteEntry.js'
+}
+            </code>
+          </pre>
+          <p> <strong>  Remote App (mfe-products): </strong></p>
+          <pre>
+            <code>
+              // mfe-products/webpack.config.mjs
+name: 'mfeProducts',
+exposes: {
+  './Module': './src/app/products/products.module.ts',
+}
+            </code>
+          </pre>
+          <p> <strong> Step 4: </strong> Load Remote Module in Shell </p>
+          <pre>
+            <code>
+              app.routes.ts 
+              {
+  path: 'products',
+  loadChildren: () =>
+    loadRemoteModule({
+      type: 'module',
+      remoteEntry: 'http://localhost:4201/remoteEntry.js',
+      exposedModule: './Module',
+    }).then(m => m.ProductsModule)
+}
+
+            </code>
+          </pre>
+
           </div>
+
+
+         <div class="box shadow p-2 mb-3" id="webpack">
+
+<p> Webpack is a module bundler for JavaScript applications. </p>    
+<p> It takes all the code and assets (JavaScript, CSS, images, etc.) in your project, bundles them together, and outputs optimized files for the browser. </p>
+
+<h2> <strong> Webpack in Angular </strong></h2>
+<p> Angular uses Webpack under the hood via the Angular CLI. </p>
+<p> You don’t need to configure it manually unless you’re doing advanced stuff like: </p>
+<ul>
+  <li> Custom builds </li>
+  <li> Micro-frontends (using Module Federation) </li>
+  <li> Third-party integration </li>
+</ul>
+</div>
+
+
+ <div class="box shadow p-2 mb-3" id="pitfalls">
+  <h2> <strong> Best Practices vs. ❌ Common Pitfalls in Angular (Performance Focused) </strong></h2>
+  <ul>
+    <li> <strong> Best Practice </strong></li>
+    <li> Use OnPush change detection strategy </li>
+    <li> Lazy-load feature modules with loadChildren </li>
+    <li> Use trackBy in *ngFor to avoid full DOM re-renders </li>
+    <li> Use pure pipes and avoid heavy logic in templates </li>
+    <li> Use *ngIf and *ngFor together carefully </li>
+    <li> Optimize image loading (lazy load, compress, use srcset) </li>
+     <li> <strong> Common Pitfall </strong></li>
+     <li> Using default change detection everywhere (ChangeDetectionStrategy.Default) </li>
+     <li> Eager loading everything in AppModule </li>
+     <li> Not using trackBy → leads to unnecessary DOM changes </li>
+     <li> Doing complex calculations directly inside the HTML </li>
+  </ul>
+
+ </div>
+
+  <div class="box shadow p-2 mb-3" id="aggrid">
+  <h2> <strong> ag-Grid vs. ngx-datatable (Angular Table Libraries) </strong></h2>
+
+  <p> <strong> 1. ag-Grid (Now called AG Grid) </strong></p>
+  <ul>
+    <li> Large datasets </li>
+    <li> Enterprise-level apps </li>
+    <li> Advanced features like grouping, pivot, Excel export </li>
+  </ul>
+  <p> <strong> Keyfeatures </strong> Virtual Scroll	, Server-side Pagination, Filtering & Sorting, Excel Export, Custom Cell Templates </p>
+  <p> Installation - npm install ag-grid-community ag-grid-angular </p>
+  <pre>
+    <code>
+      Basic Usage:
+      import { AgGridModule } from 'ag-grid-angular';
+
+@NgModule({
+  imports: [AgGridModule.withComponents([])],
+})
+export class AppModule {}
+
+    </code>
+  </pre>
+
+  <pre>
+    <code>
+      import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: `<ag-grid-angular
+               class="ag-theme-alpine"
+               [rowData]="rowData"
+               [columnDefs]="columnDefs"
+               style="width: 100%; height: 400px;">
+             </ag-grid-angular>`,
+})
+export class AppComponent {
+  columnDefs = [
+    { field: 'name' },
+    { field: 'age' },
+    { field: 'email' }
+  ];
+  rowData = [
+    { name: 'John', age: 28, email: 'john@example.com' },
+    { name: 'Jane', age: 34, email: 'jane@example.com' }
+  ];
+}
+
+//support
+gridApi.exportDataAsExcel();
+
+    </code>
+  </pre>
+
+  <h2> 2. ngx-datatable </h2>
+Best For:
+Mid-size apps
+Simple use cases
+Quick, styled data tables
+<p> Installation : npm install @swimlane/ngx-datatable </p>
+<p> <strong>  Basic Usage </strong></p>
+<pre>
+  <code>
+    import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+@NgModule({
+  imports: [NgxDatatableModule]
+})
+export class AppModule {}
+
+  </code>
+</pre>
+
+<pre>
+  <code>
+    @Component({
+  selector: 'app-root',
+  template: `
+    <ngx-datatable
+      class="bootstrap"
+      [rows]="rows"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="40"
+      [footerHeight]="40"
+      [rowHeight]="'auto'">
+    </ngx-datatable>
+  `
+})
+export class AppComponent {
+  columns = [{ prop: 'name' }, { name: 'Age' }, { name: 'Email' }];
+  rows = [
+    { name: 'Alice', Age: 23, Email: 'alice@gmail.com' },
+    { name: 'Bob', Age: 30, Email: 'bob@gmail.com' }
+  ];
+}
+
+  </code>
+</pre>
+
+<p> <strong> If you’re building an admin dashboard with thousands of records, go with ag-Grid </strong></p>
+<p> <strong> If you just want a fast, clean, customizable table for CRUD — ngx-datatable is easy to plug in </strong></p>
+  </div>
+
 
           <div class="box shadow p-2 mb-3" id="ssr">
             <h2> SSR </h2>
@@ -4007,7 +4831,7 @@ You use it when you want to react to events like clicks, mouse movements, key pr
 
 
 <div class="box shadow p-2 mb-3" id="pipe">
-  <h2> PIPE, CUSTOM PIPE, PURE, IMPURE </h2>
+  <h2> PIPE, CUSTOM PIPE, PURE, IMPURE <a href="#custompipe-examples"> Example </a></h2>
 
   <p> <strong> Pipes are a special operator in Angular template expressions that allows you to transform data declaratively in your template. </strong></p>
   <h2> What is the difference between a Pipe and a Directive? </h2>
@@ -4189,6 +5013,65 @@ export class GenderTitlePipe implements PipeTransform {
     </code>
   </pre>
 
+
+  <h2> <strong> Impure Pipe: filterByProperty </strong> </h2>
+
+  <pre>
+    <code>
+      filter-by-property.pipe.ts
+
+      import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'filterByProperty',
+  pure: false //  Impure Pipe
+})
+export class FilterByPropertyPipe implements PipeTransform {
+  transform(items: any[], property: string, value: any): any[] {
+    if (!items || !property || value === undefined || value === null) return items;
+    return items.filter(item => item[property] === value);
+  }
+}
+
+// HTML 
+tr *ngFor="let user of users | filterByProperty: 'role': 'admin'">
+  td>{{ user.name }} /td>
+/tr>
+    </code>
+  </pre>
+
+  2. Pure Version Using Component Filtering + trackBy
+
+  <pre>
+    <code>
+      //app.component.ts 
+
+  export class AppComponent {
+  users = [
+    { id: 1, name: 'John', role: 'admin' },
+    { id: 2, name: 'Jane', role: 'user' },
+    { id: 3, name: 'Mike', role: 'admin' }
+  ];
+
+  selectedRole = 'admin';
+
+  get filteredUsers() {
+    return this.users.filter(user => user.role === this.selectedRole);
+  }
+
+  trackById(index: number, item: any) {
+    return item.id;
+  }
+}
+
+//html 
+tr *ngFor="let user of filteredUsers; trackBy: trackById">
+  td>{{ user.name }} /td>
+/tr>
+
+
+    </code>
+  </pre>
   </div>
 
 
@@ -8072,7 +8955,7 @@ When you move the mouse away, it will go back to normal.
 
 <hr>
 
-<div class="mt-4">
+<div class="mt-4" id="custompipe-examples">
 <h2> Create custom Pipe </h2>
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
