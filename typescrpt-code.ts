@@ -1,3 +1,5 @@
-let fname:string = "Santosh"
+function sum(a,b){
+    return a + b
+}
 
-console.log(fname)
+console.log(sum(5,10))

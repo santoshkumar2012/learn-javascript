@@ -129,7 +129,9 @@ pre {
       <li> <a href="#counter"> Counter using Closure (No Global Variable) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
-      <li> <a href="#html"> HTML </a> </li>
+      <li> <a href="#rwd"> Responsive Design </a> </li>
+      <li> <a href="#html"> HTML5 </a> </li>
+      <li> <a href="#grid-flexbox"> <strong> CSS Grid & Flexbox </strong> </a> </li> 
       <li> <a href="#cssoptimize"> CSS Optimization Techniques </a></li>
       <li> <a href="#cssAnimation"> CSS Animation </a></li>
       <li> <a href="#less"> Less, Sass, Scss </a> </li>
@@ -149,6 +151,9 @@ pre {
       <li> <a href="#dynamicinput">  dynamically adding multiple input </a></li>
       <li> <a href="#cartbtn"> Update Cart Button </a></li>
       <li> <a href="#outoffinput"> Display text outof input </a></li>
+    <hr>
+    <li> <a href="#docker"> Docker & Kubernetes </a></li>
+    <li> <a href="#jenkins"> Jenkins Deployment </a></li>
      <hr>
      <li> <a href="#typescript"> TypeScript </a> </li>
      <li> <a href="#enums"> Enums </a> </li>
@@ -4831,6 +4836,215 @@ Promises & Async/Await (Handle Async Code Better)
 
 </div>
 
+
+
+<div id="rwd" class="mt-5"> 
+  <h2> <strong> Responsive Web Design (RWD) ? </strong>  </h2>
+  <p> Responsive Web Design is an approach to web design that makes web pages render well on a variety of devices and window or screen sizes. It uses flexible layouts, media queries, and responsive images to adapt the layout to the viewing environment. </p>
+
+  <h2> <strong> Key components of Responsive Design? </strong></h2>
+  <ul>
+    <li> Flexible grid layouts </li>
+    <li> Flexible images and media </li>
+    <li>  Media queries </li>
+    <li> Viewport meta tag </li>
+  </ul>
+
+  <h2> <strong> Media query </strong></h2>
+  <p> Media queries are a CSS technique used to apply styles based on device characteristics like screen width, height, resolution, and orientation. </p>
+
+  <h2> <strong> Viewport meta tag </strong> </h2>
+  <p class="m-0 p-0"> It controls how a webpage is displayed on mobile devices. </p>
+  meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <h2 class="mt-4"> <strong> Common CSS units used in Responsive Design </strong></h2>
+  <ul>
+    <li> % – Relative to parent element </li>
+    <li> em/rem – Relative to font size </li>
+    <li> vw/vh – Relative to viewport width/height </li>
+    <li> fr – Used in CSS Grid layouts </li>
+  </ul>
+
+  <h2 class="mt-4"> <strong> Images responsive </strong></h2>
+  <p class="m-0 p-0"> Using css <br> 
+  img { max-width: 100%; height: auto; } <br> 
+  Or using the srcset and sizes attributes in HTML: <br>
+  img src="img-small.jpg" srcset="img-large.jpg 1024w, img-small.jpg 480w" sizes="(max-width: 768px) 100vw, 50vw" alt="Responsive">
+</p>
+
+<h2 class="mt-4"> <strong> Mobile-First approach </strong> </h2>
+<p> Designing the mobile layout first, then scaling up to larger screens using media queries (min-width). It promotes performance and usability on smaller devices. </p>
+
+<h2 class="mt-4"> <strong> Flexbox and Grid help in Responsive Layouts </strong> </h2>
+<ul>
+  <li> Flexbox is great for one-dimensional layouts (row or column). </li>
+  <li> Grid is ideal for two-dimensional layouts (rows and columns). Both support reordering, resizing, and flexible arrangements across screen sizes. </li>
+</ul>
+
+<h2 class="mt-4"> <strong> What are some challenges in implementing responsive design? </strong> </h2>
+<ul>
+  <li> Performance on low-end devices </li>
+  <li> Complex UI scaling </li>
+  <li> Consistent UX across devices </li>
+  <li> Cross-browser rendering issues </li>
+  <li> Image optimization </li>
+</ul>
+
+<h2 class="mt-4"> <strong> How do you test responsive design ? </strong> </h2>
+<ul>
+  <li> Chrome DevTools (device toolbar) </li>
+  <li> Real device testing </li>
+  <li> Browser extensions like "Responsive Viewer" </li>
+  <li> Tools like BrowserStack or LambdaTest </li>
+</ul>
+
+<h2 class="mt-4"> <strong>  CSS clamp() help with responsive typography? </strong></h2>
+<p> clamp() lets you set a scalable font size between a minimum and maximum limit: <br> font-size: clamp(1rem, 2vw, 2rem);
+</p>
+
+<h2 class="mt-4"> <strong>  difference between max-width and min-width in media queries? </strong></h2>
+<ul>
+  <li> max-width: Styles apply to screens up to a certain width. </li>
+  <li> min-width: Styles apply to screens from a certain width and up. </li>
+</ul>
+
+<h2 class="mt-4"> <strong>  CSS container queries improve responsiveness? </strong></h2>
+<p> They allow components to respond to the size of their container instead of the viewport, offering more modular and reusable designs. </p>
+
+</div>
+
+
+<div id="grid-flexbox" class="mt-5"> 
+  <h2> <strong> CSS Grid and Flexbox  </strong>  </h2>
+
+  <p class="p-0 m-0"> <strong> Flexbox </strong> Flexbox (Flexible Box) is a CSS layout model that allows items within a container to be aligned and distributed with space efficiency in a one-dimensional layout—either in a row or column. </p>
+
+  <p class="p-0 m-0"> <strong> Grid </strong> CSS Grid is a powerful 2D layout system for creating complex, responsive web designs. It allows for both rows and columns control in layout, unlike Flexbox. </p>
+  <ul>
+    <li> display: grid; </li>
+    <li> grid-template-columns / grid-template-rows </li>
+    <li> grid-gap or gap </li>
+    <li> justify-items, align-items </li>
+    <li> grid-template-areas </li>
+  </ul>
+
+  <p class="mt-4"> <strong> flex-grow, flex-shrink, and flex-basis </strong> <br>
+  flex: 1 1 auto; <br>
+  /* flex-grow: 1, flex-shrink: 1, flex-basis: auto */
+  <br>
+  3 columne =  display: grid; <br>
+  grid-template-columns: repeat(3, 1fr);
+</p>
+
+<h2 class="mt-4"><strong> fr in Grid layout? </strong></h2>
+<p> fr stands for fraction of available space. 1fr 2fr means the first column gets 1 part, the second gets 2 parts of the remaining space. </p>
+
+<h2 class="mt-4"> <strong> responsive columns using Grid? </strong> </h2>
+<p> grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); </p>
+
+</div>
+
+
+<div id="docker" class="mt-5"> 
+  <h2> <strong> Docker & Kubernetes </strong></h2>
+
+  <h2> <strong> What is Docker? </strong></h2>
+  <p class="p-0 m-0"> Docker is a containerization platform that allows developers to package applications and their dependencies into lightweight, portable containers. </p>
+
+  <h2 class="mt-4"> <strong> What is Kubernetes? </strong></h2>
+  <p class="p-0 m-0"> Kubernetes is an open-source container orchestration platform used to automate the deployment, scaling, and management of containerized applications. </p>
+
+  <h2 class="mt-4"> <strong> How is Docker different from a Virtual Machine? </strong></h2>
+  <p> Docker containers share the host OS kernel and are more lightweight. VMs run full OS instances and are more resource-intensive. </p>
+
+  <h2 class="mt-4"><strong> What are the main components of Docker? </strong></h2>
+  <ul>
+    <li> Docker Engine </li>
+    <li> Docker Images </li>
+    <li> Docker Containers </li>
+    <li> Docker Hub </li>
+    <li> Docker Compose </li>
+  </ul>
+
+  <h2 class="mt-4"> <strong> Docker Images and Containers? </strong></h2>
+  <p> Images are read-only templates used to create containers. <br> Containers are the running instances of these images. </p>
+
+<h2 class="mt-4"> <strong> Dockerfile? </strong></h2>
+<p> A Dockerfile is a script containing instructions to build a Docker image. </p>
+
+<h2 class="mt-4"> <strong> Pod in Kubernetes? </strong></h2>
+<p> A Pod is the smallest deployable unit in Kubernetes. It can contain one or more containers sharing network and storage. </p>
+
+<h2 class="mt-4"> <strong> What is the role of the Kubelet in Kubernetes? </strong></h2>
+<p> Kubelet is an agent that runs on each node and ensures containers in a Pod are running as expected. </p>
+
+<h2 class="mt-4"> <strong> What is a ReplicaSet in Kubernetes? </strong></h2>
+<p> It ensures a specified number of pod replicas are running at all times. </p>
+
+<h2 class="mt-4"> <strong> Deployment in Kubernetes?</strong></h2>
+<p> A Deployment manages ReplicaSets and Pods, allowing you to declare and manage updates for stateless applications. </p>
+
+<h2 class="mt-4"> <strong> How does Kubernetes manage service discovery? </strong></h2>
+<p> Kubernetes uses Services, DNS, and labels to enable Pods to discover and communicate with each other. </p>
+
+<h2 class="mt-4"> <strong> What is the difference between a Service and Ingress in Kubernetes? </strong></h2>
+<ul>
+  <li> Service: Exposes a set of Pods (internally or externally) </li>
+  <li> Ingress: Manages HTTP/S access and routes traffic to the correct service </li>
+</ul>
+
+<h2 class="mt-4"> <strong> StatefulSet </strong></h2>
+<p> StatefulSet is used for managing stateful applications that require persistent identity and storage. </p>
+
+<h2 class="mt-4"> <strong> Helm </strong></h2>
+<p> Helm is a Kubernetes package manager that uses Helm Charts to define, install, and upgrade complex Kubernetes applications. </p>
+
+<h2> <strong> ConfigMaps and Secrets </strong></h2>
+<ul>
+  <li> ConfigMaps store non-sensitive configuration data. </li>
+  <li> Secrets store sensitive data like passwords or tokens, in a secure manner. </li>
+</ul>
+
+</div>
+
+
+<div id="jenkins" class="mt-5"> 
+<h2> <strong> Jenkins Deployment </strong></h2>
+<p class="p-0 m-0"> Jenkins deployment refers to the automated process of deploying applications using Jenkins — a popular open-source Continuous Integration/Continuous Delivery (CI/CD) tool. </p>
+<p class="p-0 m-0"> Jenkins Deployment is the process where Jenkins automates the steps required to push your application to different environments (like development, staging, or production) after building and testing it. </p>
+
+<h2 class="mt-4"> <strong> Jenkins Deployment Workflow: </strong></h2>
+<ul>
+  <li> Developer pushes code to Git </li>
+  <li> Jenkins is triggered via Webhook </li>
+  <li> Jenkins pipeline starts : </li>
+  <ol>
+    <li> Build the application </li>
+    <li> Run tests </li>
+    <li> Package the app (e.g., .jar, .zip, Docker image) </li>
+    <li> Deploy to a target environment (server, cloud, Kubernetes, etc.) </li>
+  </ol>
+</ul>
+
+<h2 class="mt-4"> <strong>  Deployment Examples </strong></h2>
+
+<pre>
+  <code>
+     1. Deploy to a remote Linux server using SCP/SSH:
+    pipeline {
+  agent any
+  stages {
+    stage('Deploy') {
+      steps {
+        sh 'scp myapp.war user@server:/opt/tomcat/webapps/'
+      }
+    }
+  }
+}
+  </code>
+</pre>
+
+</div>
 
 </div>
 
