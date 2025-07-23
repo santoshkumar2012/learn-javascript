@@ -163,6 +163,9 @@ pre {
      <li> <a href="#union"> Union </a></li>
      <li> <a href="#classes"> classes </a></li>
      <li> <a href="#casting"> casting </a></li>
+     <li> <a href="#structuraltyping"> structural typing </a></li>
+     <li> <a href="#response"> define types for API responses </a></li>
+    <li> <a href="#annotations"> Type Annotations </a></li>
     <hr>
     <hr>
     <h5> MSQL  </h5>
@@ -2947,14 +2950,14 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                     </div>
 
 
-                    <div class="box shadow p-2 mb-3" id="typescript">
-                        <h2> TYPESCRIPT </h2>
-                      <p>  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. 
-                        Differences between TypeScript and JavaScript </p>
+<div class="box shadow p-2 mb-3" id="typescript">
+<h2> TYPESCRIPT </h2>
+<p>  TypeScript is a superset of JavaScript that adds static typing, interfaces, and advanced features to JavaScript. Differences between TypeScript and JavaScript </p>
 
 <p> <strong> 1. What is TypeScript and how is it different from JavaScript? </strong> </p>
 <p> TypeScript is a superset of JavaScript that adds static typing and compile-time checking. It helps catch errors early and supports modern JavaScript features with additional tools like interfaces, enums, and access modifiers. </p>
-   
+<p><strong> Basic Types </strong> string, number, boolean, null, undefined, void, any, unknown, never, object, array, tuple, enum. </p>
+
 <p> <strong> What are the key features of TypeScript? </strong></p>
 <ul>
   <li> Static type checking </li>
@@ -2966,6 +2969,11 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
   <li> Rich tooling support (e.g., autocompletion, refactoring) </li>
 </ul>
 
+<p><strong> any type </strong></p>
+<p> The any type disables type checking. It should be avoided unless absolutely necessary (e.g., 3rd party JS library without typings). </p>
+<p><strong> any type and unknown </strong></p>
+<p> unknown is safer than any. You can't access properties on unknown without type checking. </p>
+
 <p><strong> 3. What is the difference between interface and type in TypeScript? </strong></p>
 <p> <strong> Both can define object shapes, but: </strong></p>
 <ul>
@@ -2974,15 +2982,8 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
 </ul>
 --------- 
 
-                      <p>
-                        TypeScript - 
-                        Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	<br>
-                        
-                        JavaScript ----- <br>
-                        Dynamically typed <br>
-                        No compilation needed <br>
-                        Limited support <br>
-                      </p>
+<p>TypeScript - Statically typed (optional), Needs to be compiled to JavaScript	, Supports interfaces, generics, and modifiers	<br>
+JavaScript ----- <br> Dynamically typed <br> No compilation needed <br> Limited support <br> </p>
                       
                       <h2> Interfaces </h2>
                       <p> Interface is a way to define the structure of an object, function etc. </p>
@@ -3100,6 +3101,45 @@ console.log(reverseWords(s)); // Output: "blue is sky the"
                        <div class="box shadow p-2 mb-3" id="enums">
                         <h2> Enums </h2>
                         <p> Enums are used to define a set of named constants.</p>
+
+                      <p> Enums in TypeScript are a powerful feature used to define a set of named constants, which can improve code readability, maintainability, and help avoid hardcoded values (aka magic strings/numbers). </p>  
+<pre>
+  <code>
+  Enum Definition in TypeScript
+  You define an enum using the enum keyword:
+
+  enum UserRole {
+  Admin = 'ADMIN',
+  Manager = 'MANAGER',
+  Guest = 'GUEST'
+}
+
+  </code>
+</pre>
+
+<p> <strong> Benefits of Using Enums in a Component </strong></p>
+<ul>
+  <li> Avoid Hardcoded Strings / Magic Values </li>
+  <li> Better Type Safety </li>
+  <li> Improves Code Readability </li>
+  <li> Great for UI Binding </li>
+</ul>
+
+<pre>
+  <code> 
+    Great for UI Binding
+    You can use enums in Angular templates, dropdowns, or table filters:
+    roles = Object.values(UserRole);
+
+HTML 
+select [(ngModel)]="selectedRole">
+option *ngFor="let role of roles" [value]="role">{{ role }} /option>
+/select>
+  </code>
+</pre>
+<br>
+
+
                         <pre style="white-space: pre-wrap; word-wrap: break-word;">
                           <code>
                             enum Direction {
@@ -3152,6 +3192,15 @@ let move: Direction = Direction.Up;
 }
   </code>
 </pre>
+<h2> readonly and optional properties in interfaces. </h2>
+<pre>
+  <code>
+    interface Person {
+  readonly id: number;
+  name?: string;
+}
+  </code>
+</pre>
  </div>
 
 <div class="box shadow p-2" id="never"> 
@@ -3167,7 +3216,7 @@ function fail(): never {
  </div>
 
 
-<div class="box shadow p-2" id="union"> 
+<div class="box shadow p-2 mt-4" id="union"> 
 <h2> Union | (OR) </h2>
 <p> Union types are used when a value can be more than a single type. </p>
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
@@ -3179,9 +3228,18 @@ printStatusCode(404);
 printStatusCode('404');
   </code>
 </pre>
+
+<h2 class="my-3"> What is a union type and an intersection type? </h2>
+<pre>
+  <code>
+type A = string | number; // union
+type B = { name: string } & { age: number }; // intersection
+  </code>
+</pre>
+
  </div>
 
-<div class="box shadow p-2" id="casting"> 
+<div class="box shadow p-2 mt-4" id="casting"> 
 <h2> TypeScript Casting </h2>
 <p> Casting is the process of overriding a type. </p>
 <p> A straightforward way to cast a variable is using the as keyword, which will directly change the type of the given variable.
@@ -3190,6 +3248,64 @@ printStatusCode('404');
   <code>
     let x: unknown = 'hello';
 console.log((x as string).length);
+  </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mt-4" id="structuraltyping"> 
+<h2> structural typing </h2>
+<p>TypeScript uses structural typing (duck typing) — two objects are compatible if their shape matches. </p>
+</div>
+
+<div class="box shadow p-2 mt-4" id="response"> 
+<h2> Define types for API responses </h2>
+<pre>
+  <code>
+1. Define an Interface or Type <br> Assume your API returns a list of users like:
+{
+  "users": [
+    { "id": 1, "name": "Alice", "email": "alice@example.com" }
+  ]
+}
+
+
+//Create a type:
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface UserApiResponse {
+  users: User[];
+}
+
+ 2. Use Proper Typing with HttpClient
+
+getEmp() {
+  this.http.get UserApiResponse> ('users').subscribe((response) => {
+    const users = response.users;
+    console.log(users); // You get full type support here
+  });
+}
+
+  </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mt-4" id="annotations"> 
+<h2> Type Annotations</h2>
+<p> Type annotation is the way you explicitly declare the type of a variable, function parameter, or return value in TypeScript. <br>
+This helps the TypeScript compiler understand what kind of value is expected, even before you assign one. </p>
+<pre>
+  <code>
+    Examples - 
+let name: string = "Alice";     // variable with string type
+let age: number = 25;           // variable with number type
+let isAdmin: boolean = false;   // variable with boolean type
+
   </code>
 </pre>
 </div>

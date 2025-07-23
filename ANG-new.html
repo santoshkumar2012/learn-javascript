@@ -2632,6 +2632,65 @@ Makes Angular more similar to other frameworks like React or Vue (component-firs
       <li> Angular Material: New Time Picker Component </li>
       <li> Two-Dimensional Drag & Drop in CDK </li>
   </ol>
+
+  <p> <strong> Angular 18 – New Features & Highlights </strong></p>
+  <ol>
+    <li> Stable Signals API </li>
+    <li> Signal Inputs in Components </li>
+    <li> Control Flow Syntax (Stable) </li>
+    <li> Zoneless Change Detection (Experimental) </li>
+    <li> Angular CLI & Dev Tools Improvements 
+      <ol>
+        <li> Smaller bundle sizes by default </li>
+        <li> Improved dev-server performance </li>
+        <li> Better diagnostics and error messages </li>
+      </ol>
+    </li>
+  </ol>
+
+  <p> <strong> Stable Signals API </strong></p>
+  <ul>
+    <li> Angular Signals (introduced experimentally in v16) is now fully stable. </li>
+    <li> A reactive state management system that replaces RxJS for many use cases. </li>
+  </ul>
+  <pre>
+    <code>
+import { signal } from '@angular/core';
+const counter = signal(0);
+function increment() {
+  counter.set(counter() + 1);
+}
+
+//Signals automatically trigger UI updates when changed.
+    </code>
+  </pre>
+<h2 class="mt-4"> <strong>  Signal Inputs in Components </strong></h2>
+  <pre>
+    <code>
+      @Component({
+  selector: 'child',
+  standalone: true,
+  template: '{{ name() }}'
+})
+export class ChildComponent {
+  @Input() name = signal('');
+}
+
+
+    </code>
+  </pre>
+<p> <strong>  Control Flow Syntax (Stable) </strong></p>
+  <pre>
+    <code>
+     
+      @for (user of users; track user.id) {
+ {{ user.name }}
+} @empty {
+  No users found
+}
+
+    </code>
+  </pre>
 </div>
 
 <div class="box shadow p-2 mb-3" id="state">
