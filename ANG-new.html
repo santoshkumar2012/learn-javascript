@@ -161,6 +161,7 @@ pre, code {
       <li> <a href="#dom"> DOM Manipulation </a></li>
 	   <li> <a href="#scrolltop"> scrolltop </a> </li>
       <li> <a href="#add-remove"> add remove </a> </li>
+      <li> <a href="#accordion"> Accordion and Tabs </a></li>
 		<li> <a href="#test"> Angular Test casing Jastmine/karma </a> </li>
 		<li> <a href="#spying"> spying </a> </li>
 		<li> <a href="#git"> GIT AND GITHUB </a> </li>
@@ -593,7 +594,45 @@ Fully supports all control structures. <br>
 
 <div class="box shadow p-2 mb-3" id="services">
 <h2>  SERVICES </h2>
-<p>   Services are plain Typescript/JavaScript class providing a very specific functionality. They will do a single task and do it best. The main purpose of the service is to make a certain feature reusable. </p>
+<p>   Services is class providing a very specific functionality. The main purpose of the service is to make a certain feature reusable. </p>
+<h2> Use a Service in a Component </h2>
+<ul>
+  <li> Inject the service in the constructor </li>
+  <li> Call its methods </li>
+</ul>
+<h2> Data Sharing Between Components </h2>
+<ul>
+  <li> Share user data </li>
+  <li> Centralize API calls </li>
+  <li> Store temporary app state </li>
+</ul>
+<h2> <strong> Advantages of Angular Services </strong> </h2>
+<ul>
+  <li> <strong>  Code Reusability </strong> Business logic is reusable across components </li>
+  <li> <strong>  Separation of Concerns </strong> Keeps components clean by offloading logic </li>
+  <li> <strong> Centralized Data Access </strong> Fetch or update data from one place </li>
+  <li> <strong> Dependency Injection </strong> Easy to inject and manage services </li>
+  <li class="mt-2"> <strong> Disadvantages / Things to Watch For </strong></li>
+  <li> <strong> Overuse </strong> Putting everything in a service can make it too bloated </li>
+  <li> <strong> Tight Coupling </strong> Components might become too dependent on services </li>
+  <li> <strong>  Memory Leaks </strong> Unsubscribed Observables in services can cause memory issues </li>
+</ul>
+
+<h2> <strong> Use @Injectable({ providedIn: 'root' }) for global access </strong></h2>
+<h2> <strong> Handle Errors in Service </strong></h2>
+<pre>
+  <code>
+    getUsers(): Observable any[]> {
+  return this.http.get any[]>(this.apiUrl).pipe(
+    catchError(error => {
+      console.error('API error', error);
+      return throwError(() => new Error('Something went wrong!'));
+    })
+  );
+}
+  </code>
+</pre>
+
 </div>
 
 <div class="box shadow p-2 mb-3" id="metadata">
@@ -790,6 +829,24 @@ Fully supports all control structures. <br>
           <strong> Delegate Certain Logic to the Backend for Better Frontend Performance </strong>
           Some logic or conditions should be handled on the backend to reduce the complexity and data load on the frontend. For example, implementing pagination on the backend ensures that only a limited set of data is sent to the frontend at a time. This helps improve performance, reduces loading time, and keeps the frontend code simpler and more efficient.
         </p>
+
+        <h2> <strong> Bundle size </strong></h2>
+        <p> Bundle size refers to the total size of all the JavaScript, CSS, and other assets that are downloaded to run your Angular application in the browser. </p>
+        <p> Minimizing bundle size is critical for: </p>
+        <ul>
+          <li>  Faster load time </li>
+          <li>  Better performance (especially on mobile) </li>
+          <li>  SEO and Core Web Vitals </li>
+        </ul>
+        <h2> Angular Build Optimizations </h2>
+        <p> Angular CLI automatically applies the following during --prod build: </p>
+        <ul>
+          <li> AOT (Ahead-of-Time) Compilation </li>
+          <li> Tree-shaking </li>
+          <li> Minification </li>
+          <li> Dead code elimination </li>
+        </ul>
+
         <ol>
           <li> Optimize Change Detection </li>
           <li> Lazy Loading </li>
@@ -4938,8 +4995,8 @@ You use it when you want to react to events like clicks, mouse movements, key pr
     </pre>
   </div>
 
-  <div class="box shadow p-2 mb-3" id="add-remove">
-    <h2> ADD AND REMOVE CLASS  </h2>
+<div class="box shadow p-2 mb-3" id="add-remove">
+<h2> ADD AND REMOVE CLASS  </h2>
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
     @HostListener('click') onClick() {
@@ -4956,6 +5013,83 @@ You use it when you want to react to events like clicks, mouse movements, key pr
         this.renderer.removeClass(this.el.nativeElement, 'active');
       }
     }
+  </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3" id="accordion">
+<h2> Custom Accordion and Tabs  </h2>
+<pre>
+  <code>
+   // Accordion 
+TS 
+// component.ts
+accordionItems = [
+  { title: 'Section 1', content: 'Content for section 1' },
+  { title: 'Section 2', content: 'Content for section 2' },
+];
+
+activeIndex: number | null = null;
+
+toggle(index: number) {
+  this.activeIndex = this.activeIndex === index ? null : index;
+}
+=====
+HTML 
+div *ngFor="let item of accordionItems; let i = index">
+  div (click)="toggle(i)" style="cursor: pointer; font-weight: bold;">
+    {{ item.title }}
+  /div>
+  div *ngIf="activeIndex === i">
+    {{ item.content }}
+  /div>
+/div>
+
+//TABS 
+HTML 
+ul class="tab-header">
+  li *ngFor="let tab of tabs; let i = index"
+      [class.active]="selectedTab === i"
+      (click)="selectTab(i)">
+    {{ tab.label }}
+  /li>
+/ul>
+
+div class="tab-content">
+  {{ tabs[selectedTab].content }}
+/div>
+
+//TS 
+tabs = [
+  { label: 'Tab 1', content: 'Content 1' },
+  { label: 'Tab 2', content: 'Content 2' }
+];
+
+selectedTab = 0;
+
+selectTab(index: number) {
+  this.selectedTab = index;
+}
+
+//css 
+.tab-header {
+  list-style: none;
+  display: flex;
+}
+.tab-header li {
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.tab-header li.active {
+  background: #007bff;
+  color: white;
+}
+.tab-content {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
   </code>
 </pre>
 </div>
@@ -5597,35 +5731,89 @@ export class UserComponent {
     </code></pre>
     </div>
 
-<div class="box shadow p-2 mb-3" id="form">
-<h2> Form Status </h2>
-<p> In Angular, form status tells you the validation state of a form or form control. </p>
-<p> You can check the status using Reactive Forms <strong> (FormGroup, FormControl) </strong> or Template-driven forms <strong> (NgForm, NgModel) </strong> . </p>
-<h3> Common Form Status Values </h3>
-<p> VALID	All validations passed </p>
-<p> INVALID	At least one validation failed </p>
-<p> PENDING	Async validator is running </p>
-<p> DISABLED	Control is disabled (excluded from validation/status) </p>
 
-<h2> FORMS </h2>
-<p><strong> Difference between Template-driven and Reactive Forms? </strong></p>
+
+<div class="box shadow p-2 mb-3 mt-5" id="form">
+<h2> <strong> Angular Form </strong> </h2>
+<p> Angular, there are three main types of forms : </p>
+
+<h2> <strong> 1. Template-Driven Forms </strong></h2>
 <ul>
-  <li><strong> Template-driven </strong></li>
-  <li> HTML-centric (form logic in template) </li>
-  <li> Structure Based on directives </li>
-  <li> Validation Asynchronous </li>
-  <li> Simple forms </li>
-  <li> Two-way data binding  ([(ngModel)]) </li>
+  <li> Built in the template (HTML) using Angular directives like [(ngModel)]. </li>
+  <li> Suitable for simple forms. </li>
+  <li> Uses FormsModule. </li>
+  <li class="mt-2"> <strong> Features: </strong></li>
+  <li> Easy to use and understand </li>
+  <li> Two-way data binding </li>
+  <li> Validation via HTML and Angular directives </li>
 </ul>
+<p class="mt-2"> <strong> Example </strong></p>
+<pre>
+  <code>
+    form #form="ngForm">
+      input name="username" [(ngModel)]="username" required>
+    /form>
+  </code>
+</pre>
+
+<h2 class="mt-4"> <strong> 2. Reactive Forms (Model-Driven Forms) </strong></h2>
+<p> These forms are built in the component class using FormGroup, FormControl, and FormBuilder, </p>
 <ul>
-  <li><strong>  Reactive Forms </strong></li>
-  <li> TypeScript-centric (logic in TS file) </li>
-  <li>   Structure Based on explicit creation </li>
-  <li> Synchronous </li>
-  <li>   Complex forms </li>
-  <li> One-way, explicit & predictable </li>
+<li> Built in the component class using FormGroup, FormControl, and FormBuilder. </li>
+<li> Suitable for complex or dynamic forms. </li>
+<li> Uses ReactiveFormsModule. </li>
+<li class="mt-2"> <strong> Features : </strong></li>
+<li> More scalable and testable </li>
+<li> Fine-grained control </li>
+<li> Powerful validation and state tracking </li>
+<li> Uses RxJS observables </li>
 </ul>
----
+
+<h2> <strong> Key Building Block </strong></h2>
+<ul>
+  <li> <strong> FormControl </strong> – tracks the value and validation of an individual input. </li>
+  <li> <strong> FormGroup </strong> – groups multiple FormControls. </li>
+  <li> <strong> FormBuilder </strong> – a helper service to simplify form creation. </li>
+  <li> <strong> Validators </strong> – used for form validation (e.g., required, minlength). </li>
+</ul>
+
+<p class="mt-2"> Example </p>
+<pre>
+<code>
+TS 
+loginForm = {
+userform : ['', Validators.required]
+}
+
+HTML 
+
+form [formGroup]="loginForm">
+  input formControlName="username">
+/form>
+</code>
+</pre>
+
+<h2 class="mt-4"> <strong> 3. Dynamic Forms </strong></h2>
+<ul>
+<li> A subtype of Reactive Forms where form fields are generated at runtime, often from a config or API. </li>
+<li class="mt-2"> <strong> Useful for: </strong></li>
+<li> Form builders </li>
+<li> Dynamic UI configurations </li>
+</ul>
+
+<p class="mt-2"> <strong> Example </strong></p>
+<pre>
+  <code>
+fields = [
+{ type: 'text', name: 'email', label: 'Email' },
+{ type: 'password', name: 'password', label: 'Password' }
+];
+  </code>
+</pre>
+
+<h2 class="mt-4"> <strong> Difference between template-driven and reactive forms? </strong></h2>
+<p> Template-driven forms are defined in the HTML using directives like [(ngModel)]. Reactive forms are defined in the component class using FormGroup and FormControl. Reactive forms give more control and are easier to test and validate.</p>
+<hr> 
 <ul>
   <li> <p> .dirty is a property that tells whether the form (or form field) has been modified by the user. 
     <br> .dirty is true if the user has changed the form field or form value <br> .dirty is false if the user hasn’t touched or changed anything
@@ -5634,29 +5822,6 @@ export class UserComponent {
   <li> .touched	- User has focused + left the field </li>
   <li> .untouched	- User has never interacted with field </li>
 </ul>
-
-<h2> 1. Template-driven Form Example </h2>
-<pre style="white-space: pre-wrap; word-wrap: break-word;">
-  <code>
-    form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-      input name="username" ngModel required />
-      input type="email" name="email" ngModel />
-      button type="submit">Submit /button>
-    /form>
-    --------- 
-    onSubmit(form: NgForm) {
-      console.log(form.value);
-    }
-    
-    </form>
-  </code>
-  <h2> 2. Reactive Form Example </h2>
-  <pre style="white-space: pre-wrap; word-wrap: break-word;">
-    <code>
-
-    </code>
-  </pre>
-</pre>
 </div>
 
 
@@ -6156,7 +6321,16 @@ pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 </div>
 
 <div class="box shadow p-2 mb-3" id="login-setup">
-<h2> Login with api and username and password </h2>
+
+<h2> <strong>  Login with token-based authentication JWT (JSON Web Token) </strong></h2>
+<ul>
+<li> Authenticate the user via API </li>
+<li> Store the token (in localStorage or sessionStorage) </li>
+<li> Send the token with every protected API request </li>
+<li> Protect routes using Angular Guards </li>
+</ul>
+
+<h2> <strong> Login with api and username and password </strong> </h2>
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>

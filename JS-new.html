@@ -151,6 +151,21 @@ pre {
       <li> <a href="#dynamicinput">  dynamically adding multiple input </a></li>
       <li> <a href="#cartbtn"> Update Cart Button </a></li>
       <li> <a href="#outoffinput"> Display text outof input </a></li>
+      <hr>
+      <li> <a href="#figma"> <strong> Figma </strong>  </a></li>
+      <li> <a href="#figmaprototype">  prototype </strong>  </a></li>
+      <li> <a href="#auto">  auto Layout   </a></li>
+      <li> <a href="#fonts">  fonts    </a></li>
+      <li> <a href="#assets">  assets   </a></li>
+      <li> <a href="#frame">  frame and group   </a></li>
+      <li> <a href="#vector">  vector   </a></li>
+      <li> <a href="#pen">  Pen   </a></li>
+      <li> <a href="#shadow">  Shadow   </a></li>
+      <li> <a href="#team">  team library   </a></li>
+      <li> <a href="#color">  color   </a></li>
+      <li> <a href="#animate">  animate   </a></li>
+      <li> <a href="#responsive">  responsive   </a></li>
+      <li> <a href="#grid">  grid   </a></li>
     <hr>
     <li> <a href="#docker"> Docker & Kubernetes </a></li>
     <li> <a href="#jenkins"> Jenkins Deployment </a></li>
@@ -3302,10 +3317,9 @@ This helps the TypeScript compiler understand what kind of value is expected, ev
 <pre>
   <code>
     Examples - 
-let name: string = "Alice";     // variable with string type
-let age: number = 25;           // variable with number type
-let isAdmin: boolean = false;   // variable with boolean type
-
+    let name: string = "Alice";     // variable with string type
+    let age: number = 25;           // variable with number type
+    let isAdmin: boolean = false;   // variable with boolean type
   </code>
 </pre>
 </div>
@@ -5128,7 +5142,6 @@ Promises & Async/Await (Handle Async Code Better)
 <h2> <strong> Jenkins Deployment </strong></h2>
 <p class="p-0 m-0"> Jenkins deployment refers to the automated process of deploying applications using Jenkins — a popular open-source Continuous Integration/Continuous Delivery (CI/CD) tool. </p>
 <p class="p-0 m-0"> Jenkins Deployment is the process where Jenkins automates the steps required to push your application to different environments (like development, staging, or production) after building and testing it. </p>
-
 <h2 class="mt-4"> <strong> Jenkins Deployment Workflow: </strong></h2>
 <ul>
   <li> Developer pushes code to Git </li>
@@ -5141,9 +5154,7 @@ Promises & Async/Await (Handle Async Code Better)
     <li> Deploy to a target environment (server, cloud, Kubernetes, etc.) </li>
   </ol>
 </ul>
-
 <h2 class="mt-4"> <strong>  Deployment Examples </strong></h2>
-
 <pre>
   <code>
      1. Deploy to a remote Linux server using SCP/SSH:
@@ -5159,8 +5170,105 @@ Promises & Async/Await (Handle Async Code Better)
 }
   </code>
 </pre>
+</div>
+
+
+<div id="figma" class="mt-5"> 
+<h2> <strong> Figma </strong></h2>
+
+<p class="mt-4 p-0 m-0"> <strong> What is Figma and how does it differ from other design tools? </strong></p>
+<p> Figma is a cloud-based design tool used for interface design, prototyping, and collaboration. Unlike tools like Adobe XD or Sketch, Figma allows real-time collaboration directly within the browser without the need for external software installation. </p>
+
+<p class="mt-4 p-0 m-0"> <strong> Figma designs into Angular components? </strong></p>
+<p> I analyze the layout, spacing, colors, and typography in Figma, then structure the HTML and SCSS accordingly. I use flexbox/grid for layout, and variables for consistent styling. I ensure responsiveness using media queries or utility classes. </p>
+
+<p class="mt-4 p-0 m-0"> <strong> How do you share a Figma file for collaboration? </strong></p>
+<p> I can share a Figma file by clicking the “Share” button at the top-right of the interface and adjusting the sharing settings to allow view-only or edit permissions for collaborators. </p>
+
+<p class="mt-4 p-0 m-0"> <strong> How do you create a reusable component in Figma? </strong></p>
+<p> To create a reusable component, select an object or group of objects, right-click, and choose “Create Component” or press Ctrl + Alt + K. <br> This allows the component to be reused across multiple frames or designs. </p>
+
+
+<p class="mt-4 p-0 m-0"> <strong> Figma frames and used </strong></p>
+<p> Frames in Figma are like artboards in other design tools. They define the boundaries of a design and are used to contain UI elements, creating layouts for different devices or pages. </p>
+
+<p class="mt-4 p-0 m-0" id="figmaprototype"> <strong> Prototype </strong></p>
+<p> Creating prototypes in Figma allows you to simulate the flow and interactions of a real application — without writing code. It's useful for UI/UX design validation, client demos, and developer handoff. </p>
+<ul>
+  <li> Use the Frame Tool (F) to create screens (e.g., Login, Dashboard, Profile). </li>
+  <li> Add buttons, inputs, navigation elements using the toolbar. </li>
+  <li> Click the “Prototype” tab in the right sidebar (next to “Design”). </li>
+  <li> You will now be able to connect elements visually. </li>
+  <li> Select a button or element (e.g., “Login” button). </li>
+  <li> Click and drag the blue node (circle) to the target frame (e.g., Dashboard screen). </li>
+  <li> Set the Starting Frame </li>
+  <li> Click the “Present” button (top-right corner). </li>
+  <li> This opens a preview window where you can click and interact with the prototype as if it's a real app. </li>
+  <li> Share the Prototype, Click “Share” → Set permissions (Anyone with the link can view)</li>
+</ul>
+
+<p class="mt-4 p-0 m-0"> <strong> prototype interactions in Figma? </strong></p>
+<p> In the Prototype tab, select a frame or element, click the blue node, and drag it to the target frame. You can then define the interaction (e.g., “On Click”) and the animation (e.g., “Smart Animate”). </p>
+
+
+<p class="mt-4 p-0 m-0" id="auto"> <strong> What is “Auto Layout” in Figma </strong></p>
+<p> Auto Layout allows dynamic adjustment of component size and positioning based on its content. It is useful for responsive design and creating flexible UI components like buttons, cards, and lists. </p>
+
+
+<p class="mt-4 p-0 m-0" id="fonts"> <strong> Import external fonts into Figma? </strong></p>
+<p> Figma automatically accesses Google Fonts, but to use custom fonts, you need to install the Figma desktop app. Once installed, the app will sync with local fonts on your system. </p>
+
+
+<p class="mt-4 p-0 m-0" id="assets"> <strong>  Export assets from Figma? </strong> </p>
+<p> Select the object or frame you want to export, click on the “Export” section in the right sidebar, choose the format (e.g., PNG, SVG, PDF), and click the “Export” button. </p>
+
+
+<p class="mt-4 p-0 m-0"> <strong>  How can you apply constraints to elements in Figma? </strong> </p>
+<p> Constraints define how elements should behave when a frame is resized. Select an object and set constraints (e.g., left, right, top, bottom) in the right-hand panel to ensure responsive layouts. </p>
+
+<p class="mt-4 p-0 m-0" id="frame"> <strong> Figma frames and groups? </strong></p>
+<p> Groups are used to organize elements without changing their individual behaviors, while frames act as containers that define size, and layout, and are often used for screens, components, or responsive layouts. </p>
+
+<p class="mt-4 p-0 m-0" id="vector"> <strong> use vector networks in Figma? </strong></p>
+<p> Unlike traditional vector paths, vector networks allow paths to branch out in multiple directions from a single node. This makes drawing complex shapes easier, as nodes can have multiple connected segments. </p>
+
+<p class="mt-4 p-0 m-0" id="pen"> <strong> How do you use the “Pen Tool” in Figma? </strong> </p>
+<p> The Pen Tool (P) is used to create vector shapes by plotting points on the canvas. Click to create straight lines, or click and drag to create curves. You can adjust curves using handles after placing points. </p>
+
+<p class="mt-4 p-0 m-0" id="shadow"> <strong> shadows and effects </strong></p>
+<p> Select an object, go to the “Effects” section in the right-hand sidebar, and click the “+” to add shadows, blurs, or inner glows. You can adjust parameters such as blur, spread, and opacity. </p>
+
+<p class="mt-4 p-0 m-0" id="team"> <strong> Team Library </strong> </p>
+<p> The Team Library allows designers to create, share, and reuse components, styles, and assets across multiple projects, ensuring consistency and speeding up collaboration within a team. </p>
+
+<p class="mt-4 p-0 m-0" id="color"> <strong>  create and apply color styles in Figma? </strong></p>
+<p> Select an element, go to the “Fill” section, and choose a color. Click the four dots next to the color and save it as a style. You can then reuse this color style across multiple elements and components. </p>
+
+
+<p class="mt-4 p-0 m-0"> <strong>  collaborate in real-time in Figma? </strong></p>
+<p> Multiple users can collaborate on the same file simultaneously in Figma. Each user’s cursor is displayed in real-time, and any changes made by one user are immediately visible to others. </p>
+
+<p class="mt-4 p-0 m-0"><strong> Handle version control in Figma? </strong></p>
+<p> Figma automatically saves every change. You can also manually create versions by selecting “File” > “Show Version History,” allowing you to restore or view previous states of the design. </p>
+
+<p class="mt-4 p-0 m-0" id="animate"><strong> Smart Animate </strong></p>
+<p> “Smart Animate” in Figma automates the transition of properties (like position, opacity, and size) between two frames during a prototype. It is used to create smooth animations between interactive states. </p>
+
+<p class="mt-4 p-0 m-0" id="responsive"><strong> Responsive designs in Figma? </strong></p> 
+<p> You can use Auto Layout, Constraints, and Frames to create designs that automatically adjust based on screen size, ensuring that your layouts adapt to different device dimensions. </p>
+
+<p class="mt-4 p-0 m-0" id="grid"><strong> Grid systems in Figma ? </strong></p>
+<p> Grid systems help in aligning elements consistently. You can add grids by selecting a frame and clicking on the “Layout Grid” in the right sidebar, where you can define the type (e.g., columns, rows, grid) and spacing. </p>
+
+<p class="mt-4 p-0 m-0"> <strong> Handle inconsistencies between design and implementation? </strong> </p>
+<p> I communicate with the design team to clarify expectations and ensure that user experience and consistency are maintained. Sometimes, small adjustments are made based on feasibility or responsiveness. </p>
+
+<p class="mt-4 p-0 m-0"> <strong> Have you worked with design tokens or Figma variables? </strong> </p>
+<p> Yes, They help maintain consistency in color, typography, spacing, and can be mapped into Angular styles or CSS variables. </p>
+
 
 </div>
+
 
 </div>
 
