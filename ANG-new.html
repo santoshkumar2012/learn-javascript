@@ -181,6 +181,7 @@ pre, code {
     <li> <a href="#sitecore"> sitecore </a></li>
     <li> <a href="#sitecorejss"> Sitecore JSS </a></li>
     <li> <a href="#angreact"> Manage Angular + React in the same project </a></li>
+     <li> <a href="#coreweb"> Core Web Vitals ( improve SEO ) </a></li>
     </ul>
 
  <h2 class="mt-4">INTRO</h2>   
@@ -886,6 +887,31 @@ Fully supports all control structures. <br>
               this.http.get('https://api.example.com/data', { cache: 'force-cache' });
           </code>
         </pre>
+
+<h2 class="mt-4"> Best tools and techniques  for opimization </h2>
+<ol>
+  <li> Angular CLI Built-in Tools 
+    <ul>
+      <li> Enables Ahead-of-Time (AOT) compilation. </li>
+      <li> Minifies JS/CSS, removes dev code. </li>
+      <li> Enables tree-shaking (removes unused code). </li>
+    </ul>
+  </li>
+  <li> Bundle Analysis Tools 
+    <ul>
+      <li> Webpack Bundle Analyzer </li>
+      <li> Visualize bundle sizes. </li>
+      <li> command <br> ng build --stats-json <br>
+npx webpack-bundle-analyzer dist/stats.json </li>
+    </ul>
+  </li>
+  <li> Code Splitting & Lazy Loading </li>
+  <li> Tree Shaking and Dead Code Removal </li>
+  <li> Lazy Load Images and Components <br> img [defaultImage]="placeholder" [lazyLoad]="imageUrl" /> </li>
+  <li> Server-Side Rendering (SSR) with Angular Universal </li>
+  <li> Service Worker and PWA , ng add @angular/pwa</li>
+</ol>
+
         </div>
 
 
@@ -5818,6 +5844,66 @@ form [formGroup]="loginForm">
 </code>
 </pre>
 
+
+<h2 class="mt-4"> Restrict only numbers in an input field </h2>
+<p> Using Validators.pattern with Reactive Forms </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-number-input',
+  templateUrl: './number-input.component.html',
+})
+export class NumberInputComponent {
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      numberField: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+    });
+  }
+
+  get numberField() {
+    return this.form.get('numberField');
+  }
+}
+
+
+//html
+form [formGroup]="form">
+  input type="text" formControlName="numberField" />
+  div *ngIf="numberField?.invalid && numberField?.touched">
+    Only numbers are allowed.
+  /div>
+/form>
+
+  </code>
+</pre>
+
+<h2 class="mt-4"> Method 2: Prevent Non-Numeric Keystrokes (Optional) keypress </h2>
+<pre>
+  <code>
+    input
+  type="text"
+  formControlName="numberField"
+  (keypress)="allowOnlyNumbers($event)"
+/>
+
+//ts
+allowOnlyNumbers(event: KeyboardEvent) {
+  const charCode = event.which ? event.which : event.keyCode;
+  if (charCode < 48 || charCode > 57) {
+    event.preventDefault();
+  }
+}
+
+
+  </code>
+</pre>
+
 <h2 class="mt-4"> <strong> 3. Dynamic Forms </strong></h2>
 <ul>
 <li> A subtype of Reactive Forms where form fields are generated at runtime, often from a config or API. </li>
@@ -9712,6 +9798,19 @@ cy.url().should('include', '/dashboard');
   <li> CI/CD can build and deploy each frontend module independently. </li>
 </ul>
 
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="coreweb">
+<h2> Core Web Vitals </h2>
+<p> Core Web Vitals are a set of performance metrics defined by Google that measure real-world user experience related to loading performance, interactivity, and visual stability. If you're working with Angular, optimizing for Core Web Vitals is important to improve SEO and user satisfaction. </p>
+<h2> How to Monitor Core Web Vitals in Angular </h2>
+<ul>
+  <li> Use Google Tools , Devtool </li>
+  <li> PageSpeed Insights </li>
+  <li> Chrome DevTools → "Performance" & "Lighthouse" </li>
+  <li> Web Vitals Chrome Extension </li>
+</ul>
 </div>
 
 
