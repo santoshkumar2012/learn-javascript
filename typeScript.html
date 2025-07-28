@@ -13,20 +13,413 @@
    <div class="container-fluid">
     <ul class="index">
       <li> <a href="#typescript"> TypeScript </a> </li>
+      <li> <a href="#typeannotations"> Type Annotations </a> </li>
+      <li> <a href="#boolean"> Type Boolean </a> </li>
+      <li> <a href="#any"> ANY vs UNKOWN Types </a> </li>
+      <li> <a href="#function"> Function Types </a> </li>
+      <li> <a href="#inference"> Type Inference </a> </li>
+      <li> <a href="#inference"> Type Array </a> </li>
     </ul>
 
 <div class="box shadow p-2 mb-3 mt-4" id="typescript">
-<h2 id="component"> WHAT IS THE TYPESCRIPT? </h2>
+<h2> WHAT IS THE TYPESCRIPT? </h2>
 <p> TypeScript is a superset of JavaScript that adds static typing and other features to enhance JavaScript development. It was developed by Microsoft on oct 1, 2012, and is now an opensource project with a large community of contributors.   </p>
-
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
-        h1 id="message">Hello, World! h1
-        document.getElementById('message').innerHTML = 'Hello from JavaScript!';
+h1 id="message">Hello, World! h1
+document.getElementById('message').innerHTML = 'Hello from JavaScript!';
+---
+function sum(a: number, b: number):number {
+    return a + b
+}
+console.log(sum(5,10))
     </code>
 </pre>
 </div>
+
+<div class="box shadow p-2 mb-3 mt-4" id="typeannotations">
+<h2> Type Annotations  </h2>
+<p> TypeScript is a superset of JavaScript that adds static typing and other features to enhance JavaScript development. It was developed by Microsoft on oct 1, 2012, and is now an opensource project with a large community of contributors.   </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+h1 id="message">Hello, World! h1
+document.getElementById('message').innerHTML = 'Hello from JavaScript!';
+---
+function sum(a: number, b: number):number {
+    return a + b
+}
+console.log(sum(5,10))
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="boolean">
+<h2 class="mt-4"> <strong> boolean type and Bigint Types </strong>   </h2>
+<p> <strong> boolean </strong>In TypeScript, the boolean data type is used to represent true/false values. </p>
+<p> let isMyNameSantosh:boolean = true <br> let isDone:boolean = true </p>
+
+<p class="mt-2"> <strong> BigInt </strong>  is a built-in type that allows you to work with numbers that are larger than the range supported by the regular number type. <br> BigInt literals are written by appending the n suffix to an integer Literal. </p>
+<ul>
+  <li> Introduced in ES2020 </li>
+  <li> Not supported in JSON.stringify() </li>
+  <li> Use ** for exponentiation, not Math.pow() with bigint </li>
+</ul>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+let num: number = 42;
+let big: bigint = 42n;
+let sum = BigInt(num) + big;
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="any">
+<h2 class="mt-4"> <strong> Differences ANY vs UNKOWN Types  </strong>   </h2>
+<p> The any type is the most flexible type in TypeScript. It essentially turns of all type checking for the variables it is applied to.  
+<br>
+<strong> Example - </strong>  <br>
+let myFavNum:any = 5 <br>
+myFavNum:any = "Santosh"
+</p>
+
+<p> <strong> The unknown type </strong> is a safer alternative to any because it still enforces type checking and type safety. <br>
+// Variable of type unknown can hold values of any type, but you must perform type checks or type assertions before using them in specific ways. </p>
+
+any = "I give up" <br>
+unknown = "I accept anything, but I’ll check before using it"
+<br>
+<ul class="mt-4">
+  <li> <strong> any </strong> </li>
+  <li> No type safety (unsafe) </li>
+  <li> Assign anything	 </li>
+  <li> No runtime checks required </li>
+   <li> <strong> unknown </strong> </li>
+   <li> Type-safe </li>
+   <li> When you want to accept any type safely, but still enforce checks before usage </li>
+</ul>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+let value: any = "hello";
+value.toFixed(); // ✅ No error, but will crash at runtime!
+---
+let value: unknown = "hello";
+value.toFixed(); // ❌ Error: Object is of type 'unknown'
+if (typeof value === 'string') {
+  console.log(value.toUpperCase()); // ✅ Safe
+}
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="function">
+<h2 class="mt-4"> <strong> Function Declaration (Definition)  </strong>   </h2>
+<p> A function is declared with a name, parameters, and an optional return type:  </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+//name: string → parameter with type
+//: string → return type
+</code>
+</pre>
+<h2 class="mt-4"> Optional and Default Parameters </h2>
+Optional Parameter (?) <br>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+//Optional Parameter (?)
+function greetUser(name?: string): string {
+  return `Hi, ${name ?? 'Guest'}`;
+}
+//Default Parameter
+function multiply(a: number, b: number = 2): number {
+  return a * b;
+}
+//Arow Function 
+const add = (a: number, b: number) => a + b
+
+// Declaration 
+function greet(name: string): string
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="inference">
+<h2 class="mt-4"> <strong> Type Inference in TypeScript  </strong>   </h2>
+<p> TypeScript uses type inference to determine the type of variables, functions, and expressions when types are not explicitly declared. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+let name = "Santosh"; // inferred as string
+let age = 30;          // inferred as number
+let isAdmin = true;    // inferred as boolean
+</code>
+</pre>
+
+<p class="mt-4"> <strong> Why is it a bad idea to rely on inference for function parameters? </strong></p>
+<p class="m-0 p-0"> Function parameters are not inferred by default. If you don't declare them explicitly, they default to any, which defeats the purpose of using TypeScript's safety features. </p>
+
+<p class="mt-4"> <strong> How does TypeScript infer types from context? </strong></p>
+<p> Contextual typing happens when TypeScript uses how a variable is used to infer its type, such as inside callbacks or DOM events. </p>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="array">
+<h2 class="mt-4"> <strong> Type Array in TypeScript  </strong>   </h2>
+<p> In TypeScript, you can create and initialize arrays using various approaches. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+  // Using square brakets:
+const numbers: number[] = [1,2,3,4,5,6,7]
+
+//Using the array constructor:
+const numbers1: number[] = new Array(1,2,3,4,5,6,7);
+
+//Using array of method:
+const names: string[] = Array.of("santosh", "Pragyansh", "Nityansh")
+
+// console.log(names[2]);
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="arraymethod">
+<h2 class="mt-4"> <strong> Type Array in TypeScript Methods and Iterations  </strong>   </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+const fruits: string[] = ["apple", "banana", "orange", "mango"];
+const newUpdatesFruits = fruits.push("Kiwi")
+console.log(newUpdatesFruits)
+console.log(fruits)
+================
+
+const value4 = [true, false, true];
+
+const arr = [1,2,3,4];
+//for...in (iterates over indices)
+for (const index in arr) {
+console.log(index); // Output:0,1,2,3,4
+}
+
+//for..of loop (iterates over values)
+for (const value of arr) {
+ console.log(value); // Output: 1,2,3,4
+}
+
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="map-filter">
+<h2 class="mt-4"> <strong> Type Array Map and Filter Methods  </strong>   </h2>
+<p> <strong> Map Method </strong> The map method creates a new array by applying a provided function to each element of the original array. It transforms each element and returns a new array with the transformed values. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+// Double each number 
+const numbers: number[] = [1,2,3,4,5];
+const doubleData:number[] = numbers.map((curVal:number) => curVal * 2 )
+console.log(doubleData);
+
+// Converting numbers to string
+const numberToString:string[] = numbers.map((curElm:number) => curElm.toString() )
+console.log(numberToString);
+</code>
+</pre>
+</div>
+
+ 
+<div class="box shadow p-2 mb-3 mt-4" id="typescriptObjects">
+<h2 class="mt-4"> <strong> TypeScript Objects  </strong>   </h2>
+<p> In TypeScript, objects are used to represent data with key-value pairs, Each key in the object is a string (or a symbol in ES6) that maps to a value. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+    const person: {
+    name:string;
+    age:number;
+    isStudent:boolean;
+    address:{city:string; country:string}
+  } = {
+    name:'Santosh Kumar',
+    age:35,
+    isStudent:true,
+    address: {
+      city: "Pune",
+      country:'India'
+    }
+  }
+
+  //access
+  console.log(person.address.country)
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="alias">
+<h2 class="mt-4"> <strong>  Type Alias </strong></h2>
+<p> A Type Alias is a way to give a custom name to a type in TypeScript. It helps in making complex types reusable and improves code readability. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+//Basic 
+type Age = number;
+let myAge: Age = 30;
+
+//Object Type 
+type User = {
+  name: string;
+  age: number;
+};
+
+const user1: User = {
+  name: 'Alice',
+  age: 25
+};
+
+</code>
+</pre>
+</div>
+
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="callsignatures">
+<h2 class="mt-4"> <strong> Call Signatures in TypeScript </strong>   </h2>
+<p> A call signature defines the shape of a function type — specifically, it tells what parameters a function accepts and what it returns. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+ //Basic Syntax (Using Type Alias):
+
+type Greet = (name: string) => string;
+
+//Using Call Signature Inside an Object Type: 
+type Logger = {
+  (message: string): void; // call signature
+  logLevel: 'info' | 'error';
+};
+
+const consoleLogger: Logger = (msg: string) => {
+  console.log(msg);
+};
+consoleLogger.logLevel = 'info';
+
+//With Interfaces:
+interface Add {
+  (a: number, b: number): number; // call signature
+}
+const addNumbers: Add = (x, y) => x + y;
+<code>
+</code>
+</pre>
+</div>
+
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="enums">
+<h2 class="mt-4"><strong> Enums in Typescript </strong></h2>
+<p>Enums in typeScript are commonly used when I want to represet a set of related values and choose one value from multiple options. Enums provide a convenient way to define a set of named values and associate them with specific meanings. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+
+enum Roles {
+  user = "user", 
+  admin = "admin"
+}
+
+type LoginDetails = {
+  name?:string;
+  email:string;
+  password:string;
+  role:Roles
+}
+
+const user1:LoginDetails = {
+  name:"Santosh",
+  email:"web.santo2012@gmail.com",
+  password:"websanto",
+  role:Roles.admin
+}
+
+const user2:LoginDetails = {
+  email:"iamsantosh.develooper@gmail.com",
+  password:"santo",
+  role:Roles.user 
+}
+
+const isAdmin : (user: LoginDetails) => void = (user:LoginDetails) : string => {
+  const {name, email, role} = user;
+  return role === "admin" ? `${name} is allow to edit the website` : `${name} is allow to edit the website`
+}
+
+console.log(..data: isAdmin(user:user1))
+console.log(..data: isAdmin(user:user2))
+
+</code>
+</pre>
+</div>
+
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="tuples">
+<h2 class="mt-4"><strong> TypeScript Tuples </strong></h2>
+<p> A tuple is a fixed-length array where each element has a specific type and position. It's useful when you want to group multiple values with different types. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+//Basic Tuple Syntax:
+let user: [string, number];
+user = ['Alice', 30]; // ✅ Correct
+// user = [30, 'Alice']; ❌ Error - type order matters
+
+//Tuple with Labels (for clarity):
+type User = [name: string, age: number];
+let user1: User = ['Bob', 28];
+
+//Optional Tuple Elements:
+let config: [string, number?];
+config = ['timeout'];       // ✅ valid
+config = ['timeout', 3000]; // ✅ valid
+
+//Tuple with Rest Elements:
+let rgb: [number, ...number[]];
+rgb = [255];           // ✅ valid
+rgb = [255, 100, 50];  // ✅ valid
+
+//Tuple Use Case: Returning Multiple Values
+function getUser(): [string, number] {
+  return ['Charlie', 35];
+}
+
+const [name, age] = getUser(); // Destructuring
+
+</code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="unions-intersections">
+<h2 class="mt-4"><strong> TypeScript: Unions (|) and Intersections (&) </strong></h2>
+<p>  These two are powerful type composition tools in TypeScript — they help you combine or narrow down types. </p>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+
+</code>
+</pre>
+</div>
+
+
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>

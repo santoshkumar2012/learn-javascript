@@ -33,7 +33,7 @@
 #toTopBtn:hover {
   background-color: #555;
 }
-h2 { font-size: 18px; font-weight: 600;}
+h2 { font-size: 18px; font-weight: 700;}
 pre {
     display: block;
     margin-top: 0;
@@ -99,6 +99,7 @@ pre, code {
      <li> <a href="#packages"> packages.json, angular.json </a> </li>
      <li> <a href="#async"> Async, Async pipe, promise </a> </li>
      <li> <a href="#authentication"> <strong> Authentication, Authorization </strong> </a> </li>
+     <li> <a href="#jwt"> <strong> JWT </strong> </a> </li>
       <li> <a href="#encapsulation">  View Encapsulation </a> </li>
     
      
@@ -162,7 +163,9 @@ pre, code {
 	   <li> <a href="#scrolltop"> scrolltop </a> </li>
       <li> <a href="#add-remove"> add remove </a> </li>
       <li> <a href="#accordion"> Accordion and Tabs </a></li>
-		<li> <a href="#test"> Angular Test casing Jastmine/karma </a> </li>
+    <li class="borderline"><a href="#">  </a></li>
+
+    <li> <a href="#test"> Angular Test casing Jasmine/karma </a> </li>
 		<li> <a href="#spying"> spying </a> </li>
 		<li> <a href="#git"> GIT AND GITHUB </a> </li>
 		<li> <a href="#google"> Google Cloud </a></li>
@@ -171,7 +174,13 @@ pre, code {
 		<li> <a href="#asetup"> Angular Setup </a></li>
     <li> <a href="#net">  .NET Core / ASP.NET </a></li>
     <li> <a href="#npm"> NPM </a></li>
-		
+    <li> <a href="#cicd"> Tools - CI/CD environments </a> </li>
+    <li> <a href="#azure"> Azure DevOps </a> </li>
+    <li> <a href="#jenkins"> Jenkins </a></li>
+    <li> <a href="#testtools"> Testing Tools </a></li>
+    <li> <a href="#sitecore"> sitecore </a></li>
+    <li> <a href="#sitecorejss"> Sitecore JSS </a></li>
+    <li> <a href="#angreact"> Manage Angular + React in the same project </a></li>
     </ul>
 
  <h2 class="mt-4">INTRO</h2>   
@@ -6251,6 +6260,27 @@ If token contains role info (e.g. admin, user), you can check that too: </h2>
   <p> Login -> Username and Password -> API CALL -> In Backend match with database -> Verified -> the Provide the token - token stores in localStorage by fronted - then each request we have to provide token - backend match token that token is correct or not - than login </p>
 </div>
 
+
+<div class="box shadow p-2 mb-3" id="jwt">
+<h2> <strong> JWT </strong></h2>
+<p> JWT (JSON Web Token) in Angular is commonly used for authentication and authorization when interacting with a backend API. </p>
+<h2> Structural </h2>
+<ul>
+  <li> Header – Contains the signing algorithm and token type. </li>
+  <li> Payload – Contains the claims (user data, roles, etc.). </li>
+  <li> Signature – Used to verify the token’s integrity. </li>
+</ul>
+
+<h2> <strong> Why JWT in Angular? </strong></h2>
+<ul>
+  <li> Authenticate users after login. </li>
+  <li> Store the token (typically in localStorage or sessionStorage). </li>
+  <li> Attach token in Authorization headers for secure API calls. </li>
+  <li> Control access to different parts of the application using guards. </li>
+</ul>
+
+</div>
+
 <div class="box shadow p-2 mb-3" id="filter"> 
 <h2> Filter </h2>
 
@@ -7168,7 +7198,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 
 
-      <div class="box shadow p-2 mb-3" id="reusable">
+<div class="box shadow p-2 mb-3" id="reusable">
 <h2> Reusable Component </h2>
 <h2> show more </h2>
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
@@ -7215,7 +7245,6 @@ export class ShowMoreComponent {
 
 <div class="box shadow p-2 mb-3" id="datapush">
 <h2> Simple Data Push </h2>
-
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 TS--- 
@@ -7723,10 +7752,10 @@ HTML
         </div>
 
 
-        <div class="box shadow p-2 mb-3" id="emp-api">
-          <h2> Employee crud with API </h2>
-          <pre style="white-space: pre-wrap; word-wrap: break-word;">
-            <code>
+<div class="box shadow p-2 mb-3" id="emp-api">
+<h2> Employee crud with API </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
              
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
@@ -7970,13 +7999,11 @@ export class CrudApiComponent {
 
           </div>
 
-
-          <div class="box shadow p-2 mb-3" id="emp-dynamic">
-          <h2> Employee crud with API Dynamic Form </h2>
-
-          <pre style="white-space: pre-wrap; word-wrap: break-word;">
-            <code>
-              import { Component } from '@angular/core';
+<div class="box shadow p-2 mb-3" id="emp-dynamic">
+<h2> Employee crud with API Dynamic Form </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpSharedService } from '../../http-shared.service';
@@ -8126,12 +8153,11 @@ tr *ngFor="let product of products">
           </div>
 
 
-          <div class="box shadow p-2 mb-3" id="emp-withoutdynamic">
-          <h2> Employee crud without API Dynamic Form </h2>
-
-          <pre style="white-space: pre-wrap; word-wrap: break-word;">
-            <code>
-              import { Component } from '@angular/core';
+<div class="box shadow p-2 mb-3" id="emp-withoutdynamic">
+<h2> Employee crud without API Dynamic Form </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+import { Component } from '@angular/core';
 import { HeaderComponent } from "../../header/header.component";
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -8296,9 +8322,9 @@ table class="table table-bordered">
           </div>
 
 
-          <div class="box shadow p-2 mb-3" id="crudstaticdata">
-          <h2> Employee crud static data </h2>
-          <p> Math.max(...)
+<div class="box shadow p-2 mb-3" id="crudstaticdata">
+<h2> Employee crud static data </h2>
+<p> Math.max(...)
 Returns the highest number in the list.
 
 Example: Math.max(1, 3, 2) → 3</p>
@@ -8478,8 +8504,7 @@ div class="container">
 
           </div>
 
-
-          <div class="box shadow p-2 mb-3" id="class"> 
+<div class="box shadow p-2 mb-3" id="class"> 
             <h2> classs </h2>
             <p> A class is a TypeScript feature (and JavaScript ES6) that allows you to create reusable objects with properties and methods.
               <br>
@@ -9343,16 +9368,354 @@ Install, update, or remove packages (libraries/modules) <br>
 Manage project dependencies using package.json <br>
 NPM is the default package manager for Node.js. It is used to manage JavaScript packages, automate build tasks, and handle dependencies.
 </p>
+</div>
 
+
+
+<div class="box shadow p-2 mb-3" id="cicd">
+<h2>  CI/CD Environment? </h2>
+<p> A CI/CD environment is a setup where software changes (like code, design, or config) are automatically built, tested, and deployed to staging or production systems. </p>
+<p class="p-0 m-0"><strong> CI (Continuous Integration) </strong></p>
+<p> Automatically builds and tests your code whenever you make changes (push/commit). </p>
+<p class="p-0 m-0"><strong> CD: Continuous Deployment </strong></p>
+<p> Automatically deploying the tested build to a staging or production environment. </p>
+
+<h2> <strong> Tools have you used for CI/CD? </strong></h2>
+<ul>
+  <li> <strong> GitHub </strong> Actions for automated build and deployment. </li>
+  <li> <strong> Jenkins </strong> to run custom build pipelines. </li>
+  <li> <strong> GitLab </strong> CI/CD for integrated pipelines. </li>
+  <li> <strong> Netlify / Vercel / Firebase Hosting </strong>  for frontend deployments. </li>
+  <li> <strong> Docker </strong> for containerizing Angular apps in some projects. </li>
+</ul>
+
+<h2>  Build pipeline in CI/CD? </h2>
+<p> A build pipeline is a sequence of steps that runs automatically when code is pushed. In frontend (Angular) development, it usually includes: </p>
+<ol>
+  <li> Install dependencies (npm install) </li>
+  <li> Run tests (ng test) </li>
+  <li> Lint the code (ng lint) </li>
+  <li> Build the app (ng build) </li>
+  <li> Deploy to staging/production </li>
+</ol>
+
+<h2>  How do you set up CI/CD for an Angular project? </h2>
+<ol>
+  <li> Push code to GitHub </li>
+  <li> Add a .yml file (like .github/workflows/deploy.yml) </li>
+  <li> In the workflow: 
+    <ul>
+      <li> Install Angular CLI </li>
+      <li> Run tests and build </li>
+      <li> Deploy to Firebase/Netlify/S3/etc. </li>
+    </ul>
+  </li>
+</ol>
+
+<h2> How do you deploy Angular app using GitHub Actions? </h2>
+<ul>
+  <li> Create a workflow file in .github/workflows/deploy.yml </li>
+  <li> Set up build steps </li>
+  <li> Add a deploy step using Firebase CLI / SCP / Netlify CLI / S3 upload </li>
+  <li> Use GitHub secrets to store API keys or tokens </li>
+</ul>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="azure">
+<h2> Azure DevOps </h2>
+<p> Azure DevOps is a Microsoft cloud-based DevOps platform that provides : </p>
+<ul>
+<li> Azure Repos: Git repositories for source control </li>
+<li> Azure Pipelines: Build and release automation (CI/CD) </li>
+<li> Azure Artifacts: Package management </li>
+<li> Azure Boards: Work tracking </li>
+<li> Azure Test Plans: Test management </li>
+</ul>
+
+<h2 class="mt-4"> CI/CD Works in Azure DevOps for Frontend (Angular) Projects </h2>
+<ul>
+  <li> <strong> CI Process: </strong></li>
+  <li> Code pushed to Azure Repos or GitHub </li>
+  <li> CI pipeline triggers automatically </li>
+  <li> Steps performed: 
+    <ul>
+      <li> Install dependencies (npm install) </li>
+      <li> Run unit tests (ng test) </li>
+      <li> Lint checks (ng lint) </li>
+      <li> Build Angular app (ng build) </li>
+  </ul>
+</li>
+<li> <strong> CD  Process: </strong></li>
+<ol> 
+  <li> After successful build, Release pipeline is triggered </li>
+  <li> Deploys code to: </li>
+   <ul>
+    <li> Azure Static Web Apps </li>
+    <li> Azure App Service </li>
+    <li> Firebase, Netlify, or any hosting </li>
+   </ul>
+</ol>
+</ul>
+
+<h2> Benefits of Azure DevOps CI/CD for Angular Projects: </h2>
+<ul>
+  <li> No need to configure your own server </li>
+  <li> Easy to manage for different stages </li>
+  <li> Store API keys securely </li>
+  <li> Can add manual review before deployment </li>
+  <li> 	Visual pipeline logs and job status </li>
+</ul>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="jenkins">
+<h2> <strong> Jenkins? </strong> </h2>
+<p> Jenkins is an open-source automation server used to build, test, and deploy code automatically. <br> It’s one of the most popular tools for Continuous Integration (CI) and Continuous Delivery/Deployment (CD) in modern software development. </p>
+
+<p> CI/CD Tool	- Automates the full frontend build lifecycle <br> 
+  <strong> Plugin Support - </strong> Easily integrate with any tools you use <br> 
+  <strong> Scalable </strong> - Supports big teams and parallel builds <br>
+  <strong> Free/Open Source	 - </strong> No cost, community-supported </p>
+
+<h2 class="mt-4"> Key Features of Jenkins: </h2>
+<ul>
+  <li> Automates the build–test–deploy process. </li>
+  <li> Integrates with Git, GitHub, Bitbucket, Docker, AWS, and more. </li>
+  <li> Supports plugins (1500+ available) to extend functionality. </li>
+  <li> Can run Angular/React/Node or any frontend/backend project builds. </li>
+  <li> Schedules jobs (e.g., build daily or on every code push). </li>
+</ul>
+
+<h2 class="mt-4">  How Jenkins Works (Simplified): </h2>
+<ol>
+  <li> Developer pushes code to a repository (like GitHub) </li>
+  <li> Jenkins is triggered via webhook or schedule </li>
+  <li> Jenkins performs: 
+    <ul>
+    <li> npm install </li>
+    <li> ng build (for Angular) </li>
+    <li> ng test or unit tests </li>
+    <li> Lint check (ng lint) </li>
+    <li> Deploys build to staging or production </li>
+  </ul>
+</li>
+</ol>
+
+<h2 class="mt-4"> Jenkins Pipeline – Example for Angular: </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+    pipeline {
+  agent any
+
+  stages {
+    stage('Install') {
+      steps {
+        sh 'npm install'
+      }
+    }
+
+    stage('Build') {
+      steps {
+        sh 'ng build --configuration=production'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'ng test --watch=false'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        // Deploy to server, Firebase, S3, etc.
+        sh './deploy.sh'
+      }
+    }
+  }
+}
+
+  </code>
+</pre>
+
+<h2 class="mt-3"> Jenkins Architecture: </h2>
+<ul>
+  <li> Master: Controls the jobs and manages schedules. </li>
+  <li> Agents/Slaves: Execute build jobs (can be on other machines). </li>
+  <li>  Jobs: Defined tasks or pipelines. </li>
+  <li> Plugins: Add support for Git, Docker, Slack, etc. </li>
+</ul>
+
+<h2 class="mt-3"> Useful Jenkins Plugins for Frontend Developers: </h2>
+<ul>
+  <li> <strong> Git plugin </strong> Pull code from GitHub/GitLab </li>
+  <li> <strong> NodeJS plugin	</strong> Run Node/Angular/React commands </li>
+  <li> <strong> Slack Notifications	 </strong> Send build status to Slack </li>
+  <li> <strong> Docker Pipeline	</strong> Build apps inside containers </li>
+  <li> <strong> HTML Publisher </strong> Publish frontend reports </li>
+</ul>
+
+<h2> Where to Host Jenkins? </h2>
+<ul>
+  <li> On your local machine </li>
+  <li> On a dedicated server </li>
+  <li> Using cloud (e.g., AWS EC2, DigitalOcean, Azure VM) </li>
+</ul>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="testtools">
+<h2> <strong> Frontend Testing Tools </strong> </h2>
+
+<ol class="mt-4">
+  <li> <strong> Jasmine </strong> </li>
+  <li> Type: Unit testing framework for JavaScript </li>
+  <li> Use with: Angular (default test runner) </li>
+  <li> Key Feature: Behavior-driven testing syntax </li>
+  <li> Examples 
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+    describe('MyComponent', () => {
+      it('should return true', () => {
+        expect(true).toBe(true);
+      });
+    });
+    </code>
+    </pre>
+  </li>
+</ol>
+
+
+<ol class="mt-4">
+  <li> <strong> Cypress </strong> </li>
+  <li> Type: End-to-end testing (E2E) tool for modern web apps </li>
+  <li> Use with: Angular, React, Vue, etc. </li>
+  <li> Key Feature: Runs in real browser; fast and easy to debug </li>
+  <li> Great For: UI automation, user journey tests </li>
+  <li> Examples 
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+   cy.visit('/login');
+cy.get('input[name=username]').type('admin');
+cy.get('button[type=submit]').click();
+cy.url().should('include', '/dashboard');
+
+    </code>
+    </pre>
+  </li>
+</ol>
+
+<ol class="mt-4">
+  <li> <strong> Selenium </strong> </li>
+  <li> Type: Web automation framework </li>
+  <li> Use with: All browsers/languages (Java, Python, C#, JS) </li>
+  <li> Key Feature: Cross-browser testing </li>
+  <li> Note: More complex setup than Cypress </li>
+  <li> Good For: Browser compatibility, enterprise testing </li>
+</ol>
+
+
+<ol class="mt-4">
+  <li> <strong> Appium </strong> </li>
+  <li> Type: Mobile app automation testing </li>
+  <li> Use with: Android & iOS apps </li>
+  <li> Key Feature: Uses Selenium WebDriver internally </li>
+  <li> Good For: Testing hybrid, native, or mobile web apps </li>
+</ol>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="sitecore">
+<h2> Sitecore MVC </h2>
+<p> Sitecore is an enterprise-level .NET-based Content Management System (CMS) and Digital Experience Platform (DXP) used for building and managing dynamic websites. <br> Sitecore MVC (Model-View-Controller) </p>
+</div>
+
+<div class="box shadow p-2 mb-3" id="sitecorejss">
+<h2> Sitecore JSS (JavaScript Services) </h2>
+<p> Sitecore JSS enables developers to build headless apps using modern JavaScript frameworks like React, Angular, Vue. </p>
+<p> Allows frontend-first or disconnected development, independent of the Sitecore backend. </p>
+<h2> When to Use: </h2>
+<ul>
+  <li> For modern SPA (Single Page Applications). </li>
+  <li> When you want to separate frontend/backend or use Jamstack architecture. </li>
+  <li> Teams with React/Angular skills. </li>
+</ul>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="angreact">
+<h2> Use Micro Frontends Architecture </h2>
+
+<h2 class="mt-4">  What is it? </h2>
+<ul>
+  <li> A design pattern where the application is divided into independent frontend modules. </li>
+  <li> Each module (or "micro frontend") can be built with a different framework (like Angular or React). </li>
+</ul>
+
+<h2 class="mt-4"> How it works: </h2>
+<ul>
+  <li> You split your app into multiple independently deployable apps. </li>
+  <li> Example: Angular for dashboard, React for reports. </li>
+  <li> Use tools like: 
+    <ul>
+      <li> Module Federation (Webpack 5) </li>
+      <li> Single-SPA (Framework to combine multiple apps) </li>
+    </ul>
+  </li>
+</ul>
+
+
+<h2 class="mt-4">  Tools </h2>
+<ul>
+  <li> single-spa – Great for managing multiple frameworks. </li>
+  <li> Webpack Module Federation – Integrates micro frontends with dynamic loading. </li>
+</ul>
+
+<h2 class="mt-5"> Embed React Inside Angular </h2>
+<p> You can embed React components into Angular like a widget. </p>
+<ul>
+  <li> <strong> Step </strong></li>
+  <li> Build your React component. </li>
+  <li> Use ReactDOM.render inside an Angular component (using ngOnInit). </li>
+  <li> Pass data via props. </li>
+  <li> Destroy React component on Angular component ngOnDestroy. </li>
+</ul>
+
+<h2 class="mt-5">  Tools Required: </h2>
+<ul>
+  <li> react, react-dom as dependencies in Angular. </li>
+  <li> Custom Angular wrapper component. </li>
+</ul>
+
+
+<h2 class="mt-4"> <strong> 3. Embed Angular Inside React </strong></h2>
+<ul>
+  <li> Less common and more complex. </li>
+  <li> Use Angular Elements (Web Components) to wrap Angular components. </li>
+  <li> Import those custom elements inside React. </li>
+  <li> <strong> Use Case </strong> When most of the app is React and you want to re-use some Angular components. </li>
+</ul>
+
+<h2 class="mt-4"> Migration Use Case </h2>
+<p> If you're migrating from Angular to React (or vice versa): </p>
+<ul>
+  <li> Use micro frontends for step-by-step migration. </li>
+  <li> Gradually replace Angular modules with React. </li>
+</ul>
+
+<h2 class="mt-4"> How to Manage Codebase </h2>
+<ul>
+  <li> Use monorepo tools like Nx (supports both Angular & React). </li>
+  <li> Shared components/utilities can be maintained in a shared library. </li>
+  <li> CI/CD can build and deploy each frontend module independently. </li>
+</ul>
 
 </div>
 
 
 </div>
-
-              
-
-
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>
