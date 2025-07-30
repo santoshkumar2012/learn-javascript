@@ -18,7 +18,18 @@
       <li> <a href="#any"> ANY vs UNKOWN Types </a> </li>
       <li> <a href="#function"> Function Types </a> </li>
       <li> <a href="#inference"> Type Inference </a> </li>
-      <li> <a href="#inference"> Type Array </a> </li>
+      <li> <a href="#array"> Type Array </a> </li>
+      <li> <a href="#arraymethod"> Array Method </a> </li>
+      <li> <a href="#map-filter"> Map Filter </a> </li>
+      <li> <a href="#typescriptObjects"> TypScript Object </a> </li>
+      <li> <a href="#alias"> Alias </a> </li>
+      <li> <a href="#callsignatures"> Call Signature </a> </li>
+      <li> <a href="#enums"> Enums </a> </li>
+      <li> <a href="#tuples"> Tuples </a> </li>
+      <li> <a href="#unions-intersections"> Unions (|) and Intersections (&)  </a> </li>
+      <li> <a href="#generics"> Generics </a></li>
+      <li> <a href="#classes"> Classes </a></li>
+      <li> <a href="#inheritance"> Inheritance </a></li>
     </ul>
 
 <div class="box shadow p-2 mb-3 mt-4" id="typescript">
@@ -55,7 +66,6 @@ console.log(sum(5,10))
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="boolean">
 <h2 class="mt-4"> <strong> boolean type and Bigint Types </strong>   </h2>
 <p> <strong> boolean </strong>In TypeScript, the boolean data type is used to represent true/false values. </p>
@@ -75,7 +85,6 @@ let sum = BigInt(num) + big;
 </code>
 </pre>
 </div>
-
 
 <div class="box shadow p-2 mb-3 mt-4" id="any">
 <h2 class="mt-4"> <strong> Differences ANY vs UNKOWN Types  </strong>   </h2>
@@ -115,7 +124,6 @@ if (typeof value === 'string') {
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="function">
 <h2 class="mt-4"> <strong> Function Declaration (Definition)  </strong>   </h2>
 <p> A function is declared with a name, parameters, and an optional return type:  </p>
@@ -150,7 +158,6 @@ function greet(name: string): string
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="inference">
 <h2 class="mt-4"> <strong> Type Inference in TypeScript  </strong>   </h2>
 <p> TypeScript uses type inference to determine the type of variables, functions, and expressions when types are not explicitly declared. </p>
@@ -171,7 +178,6 @@ let isAdmin = true;    // inferred as boolean
 
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="array">
 <h2 class="mt-4"> <strong> Type Array in TypeScript  </strong>   </h2>
 <p> In TypeScript, you can create and initialize arrays using various approaches. </p>
@@ -190,7 +196,6 @@ const names: string[] = Array.of("santosh", "Pragyansh", "Nityansh")
 </code>
 </pre>
 </div>
-
 
 <div class="box shadow p-2 mb-3 mt-4" id="arraymethod">
 <h2 class="mt-4"> <strong> Type Array in TypeScript Methods and Iterations  </strong>   </h2>
@@ -219,7 +224,6 @@ for (const value of arr) {
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="map-filter">
 <h2 class="mt-4"> <strong> Type Array Map and Filter Methods  </strong>   </h2>
 <p> <strong> Map Method </strong> The map method creates a new array by applying a provided function to each element of the original array. It transforms each element and returns a new array with the transformed values. </p>
@@ -238,7 +242,6 @@ console.log(numberToString);
 </pre>
 </div>
 
- 
 <div class="box shadow p-2 mb-3 mt-4" id="typescriptObjects">
 <h2 class="mt-4"> <strong> TypeScript Objects  </strong>   </h2>
 <p> In TypeScript, objects are used to represent data with key-value pairs, Each key in the object is a string (or a symbol in ES6) that maps to a value. </p>
@@ -266,7 +269,6 @@ console.log(numberToString);
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="alias">
 <h2 class="mt-4"> <strong>  Type Alias </strong></h2>
 <p> A Type Alias is a way to give a custom name to a type in TypeScript. It helps in making complex types reusable and improves code readability. </p>
@@ -290,8 +292,6 @@ const user1: User = {
 </code>
 </pre>
 </div>
-
-
 
 <div class="box shadow p-2 mb-3 mt-4" id="callsignatures">
 <h2 class="mt-4"> <strong> Call Signatures in TypeScript </strong>   </h2>
@@ -322,8 +322,6 @@ const addNumbers: Add = (x, y) => x + y;
 </code>
 </pre>
 </div>
-
-
 
 <div class="box shadow p-2 mb-3 mt-4" id="enums">
 <h2 class="mt-4"><strong> Enums in Typescript </strong></h2>
@@ -369,8 +367,6 @@ console.log(..data: isAdmin(user:user2))
 </pre>
 </div>
 
-
-
 <div class="box shadow p-2 mb-3 mt-4" id="tuples">
 <h2 class="mt-4"><strong> TypeScript Tuples </strong></h2>
 <p> A tuple is a fixed-length array where each element has a specific type and position. It's useful when you want to group multiple values with different types. </p>
@@ -407,19 +403,280 @@ const [name, age] = getUser(); // Destructuring
 </pre>
 </div>
 
-
 <div class="box shadow p-2 mb-3 mt-4" id="unions-intersections">
 <h2 class="mt-4"><strong> TypeScript: Unions (|) and Intersections (&) </strong></h2>
 <p>  These two are powerful type composition tools in TypeScript — they help you combine or narrow down types. </p>
+<h2> Unions (|) </h2>
+<p> Union types allow you to specify that a variable can hold values of multiple types. You use the | (pipe) symbol to define a union type. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+1. A value can be one of several types.
+
+type StringOrNumber = string | number;
+
+let value: StringOrNumber;
+value = "Hello"; // ✅ valid
+value = 42;      // ✅ valid
+value = true;    // ❌ Error
+----------
+
+function printId(id: string | number) {
+  console.log("Your ID is: " + id);
+}
+</code>
+</pre>
+
+<h2 class="mt-4"> Intersection Types (&) </h2>
+<p> Definition: A value must satisfy all types involved. </p>
 
 <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
+type User = { name: string };
+type Admin = { role: string };
+
+type AdminUser = User & Admin;
+
+const admin: AdminUser = {
+  name: "Alice",
+  role: "superadmin",
+}; // ✅ valid
+
+/// When you want a type that has all the properties of multiple types.
+
+function createAdmin(user: User & Admin) {
+  console.log(`${user.name} is an ${user.role}`);
+}
 
 </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="generics">
+<h2 class="mt-4"><strong> Generics </strong></h2>
+<p> Generics in TypeScript allow you to create reusable component or functions that can work with multiple data type. </p>
+
+<pre>
+  <code>
+1. T> is a type parameter (you can name it anything).
+
+function identityT>(value: T): T {
+  return value;
+}
+
+const num = identitynumber>(10);   // T is number
+const str = identity("Hello");      // T inferred as string
+
+//Generic with Arrays
+
+function getFirstElementT>(arr: T[]): T {
+  return arr[0];
+}
+const first = getFirstElement([1, 2, 3]); // T inferred as number
+
+//Generic Interfaces 
+
+interface BoxT> {
+  value: T;
+}
+
+const stringBox: Box string> = { value: "Hello" };
+const numberBox: Box number> = { value: 100 };
+
+//Generic Classes 
+class DataStore<T> {
+  private data: T[] = [];
+
+  add(item: T) {
+    this.data.push(item);
+  }
+
+  getAll(): T[] {
+    return this.data;
+  }
+}
+
+const store = new DataStore<string>();
+store.add("Item1");
+
+  </code>
+</pre>
+
+<h2 class="mt-4"><strong> Generics Multilple type </strong></h2>
+
+<pre>
+  <code>
+    interface Products {
+      name:string; 
+      price:number;
+      quantity:number;
+    }
+
+    const product1:Products = {
+      name:"santosh",
+      price:1000,
+      quantity: 5
+    }
+
+    const calculateTotalPrice: (product: Products) => number = (product: Products) : number => {
+
+      const {price, quantity} = product;
+      return price * quantity
+
+    }
+
+    console.log(...data: calculateTotalPrice(product: product1));
+  </code>
 </pre>
 </div>
 
 
+<div class="box shadow p-2 mb-3 mt-4" id="classes">
+<h2 class="mt-4"><strong> Classes in TypeScript </strong></h2>
+<p> A class is a blueprint to create objects. It encapsulates properties (fields) and methods (functions). </p>
+
+<pre>
+  <code>
+    class Persons {
+      name: string = 'Santosh';
+      age: number = 29;
+      hobbies: string[] = ["reading", "painting"]; 
+
+      constructor(name: string, age: number, hobbies: string[]) {
+        this.name = name; 
+        this.age = age;
+        this.hobbies = hobbies; 
+      }
+    }
+
+    const person1: Persons = new Persons(name: "santosh", age:35, hobbies:["reading", "painting"]);
+    const person2: Persons = new Persons(name: "kumar", age:35, hobbies:["reading", "painting"]);
+    const person3: Persons = new Persons(name: "singh", age:35, hobbies:["reading", "painting"]);
+
+    console.log(...data: person3);
+
+  </code>
+</pre>
+
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="inheritance">
+<h2 class="mt-4"><strong> Inheritance in TypeScript </strong></h2>
+<p> Inheritance allow a class to reuse the functionlity of an existing class without rewriting it. </p>
+<pre>
+  <code>
+class Person {
+constructor(public name: string) {}
+greet() { return `Hi, I'm ${this.name}`; }
+}
+
+class Employee extends Person {
+  constructor(name: string, public id: number) {
+    super(name); // must call super() before using `this`
+  }
+  // method override (TS 4.3+)
+  override greet() { 
+    return `${super.greet()} and my employee id is ${this.id}`;
+  }
+}
+
+const e = new Employee('Asha', 101);
+console.log(e.greet());
+
+  </code>
+</pre>
+</div>
+
+<div class="box shadow p-2 mb-3 mt-4" id="public">
+<h2 class="mt-4"><strong> Public (default) </strong></h2>
+<ol>
+  <li> Accessible anywhere: inside the class, in subclasses, and outside the class (instances). </li>
+  <li> </li>
+</ol>
+<pre>
+  <code>
+    class Person {
+  public name: string;  // public is default
+  constructor(name: string) {
+    this.name = name;
+  }
+  public greet() {
+    console.log(`Hello, I'm ${this.name}`);
+  }
+}
+
+const p = new Person("John");
+console.log(p.name);    // ✅ Accessible
+p.greet();              // ✅ Accessible
+  </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="protected">
+<h2 class="mt-4"><strong> Protected </strong></h2>
+<ol>
+  <li> Accessible inside the class and subclasses (child classes). </li>
+  <li> NOT accessible from outside the class or instance. </li>
+</ol>
+<pre>
+  <code>
+    class Employee {
+  protected department: string;
+  constructor(dept: string) {
+    this.department = dept;
+  }
+}
+
+class Manager extends Employee {
+  getDept() {
+    return this.department;   // ✅ Accessible in subclass
+  }
+}
+
+const m = new Manager("Sales");
+console.log(m.getDept());     // ✅ Accessible via method
+// console.log(m.department); // ❌ Error: cannot access protected member
+  </code>
+</pre>
+</div>
+
+
+<div class="box shadow p-2 mb-3 mt-4" id="private">
+<h2 class="mt-4"><strong> Private </strong></h2>
+<ol>
+  <li> Accessible only inside the same class. </li>
+  <li> NOT accessible in subclasses or from outside. </li>
+</ol>
+<pre>
+  <code>
+    class BankAccount {
+  private balance: number = 0;
+
+  deposit(amount: number) {
+    this.balance += amount;     // ✅ Accessible inside the class
+  }
+  getBalance() {
+    return this.balance;
+  }
+}
+
+class SavingsAccount extends BankAccount {
+  show() {
+    // console.log(this.balance); // ❌ Error: private not accessible in subclass
+  }
+}
+
+const acc = new BankAccount();
+acc.deposit(100);
+console.log(acc.getBalance());  // ✅ Accessible via method
+// console.log(acc.balance);     // ❌ Error: private not accessible outside
+
+  </code>
+</pre>
+</div>
 
 <button id="toTopBtn" title="Go to top">↑</button>
 <script src="script.js"></script>

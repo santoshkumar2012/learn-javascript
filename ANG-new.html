@@ -100,7 +100,8 @@ pre, code {
      <li> <a href="#async"> Async, Async pipe, promise </a> </li>
      <li> <a href="#authentication"> <strong> Authentication, Authorization </strong> </a> </li>
      <li> <a href="#jwt"> <strong> JWT </strong> </a> </li>
-      <li> <a href="#encapsulation">  View Encapsulation </a> </li>
+    <li> <a href="#encapsulation">  View Encapsulation </a> </li>
+    <li> <a href="#async-defer">  async and defer </a> </li>
     
      
       <li class="borderline"><a href="#">  </a></li>
@@ -495,6 +496,37 @@ Angular provides View Encapsulation to help isolate component styles. </p>
 </div>
 
 
+<div class="box shadow p-2 mb-3" id="async-defer">
+<h2> async and defer? </h2>
+<p> They are attributes used with script> tags to control how JavaScript is loaded and executed by the browser. This is especially important in Angular because it improves initial page load (performance). </p>
+<ul>
+  <li> <strong> async Attribute </strong></li>
+  <li> The script is downloaded in parallel (asynchronously) with HTML parsing. </li>
+  <li> Once downloaded, the script executes immediately, pausing HTML parsing. </li>
+  <li> Scripts with async do not wait for other scripts or DOM to be ready. </li>
+  <li> Best for scripts that don’t depend on other scripts and don’t affect DOM structure immediately. </li>
+</ul>
+<pre>
+  <code>
+    Example- 
+    script src="analytics.js" async>/script>
+  </code>
+</pre>
+
+<h2> defer Attribute </h2>
+<ul>
+  <li> The script is downloaded in parallel (like async) but </li>
+  <li> It waits to execute until after the entire HTML document is parsed. </li>
+  <li> Maintains the execution order for multiple scripts. </li>
+  <li> Best for scripts that need the full DOM ready (like Angular’s main scripts). </li>
+</ul>
+<pre>
+  <code>
+    script src="main.js" defer> /script>
+  </code>
+</pre>
+
+  </div>
 
 <div class="box shadow p-2 mb-3" id="scope">
   <h2> SCOPE </h2>
