@@ -29,8 +29,9 @@
       <li> <a href="#unions-intersections"> Unions (|) and Intersections (&)  </a> </li>
       <li> <a href="#generics"> Generics </a></li>
       <li> <a href="#classes"> Classes </a></li>
+      <li> <a href="#interface"> TypeScript Interface </a></li>
       <li> <a href="#inheritance"> Inheritance </a></li>
-      <li> <a href="#public"> Public </a></li>
+      <li> <a href="#public"> Access Modifiers Public </a></li>
       <li> <a href="#protected"> Protected </a></li>
       <li> <a href="#private"> Private </a></li>
     </ul>
@@ -563,6 +564,75 @@ store.add("Item1");
 </pre>
 
 </div>
+
+<div class="box shadow p-2 mb-3 mt-4" id="interface">
+<h2 class="mt-4"><strong> TypeScript Interface </strong></h2>
+<p> In TypeScript, an interface is used to define the shape of an object, specifying the names and types of its properties. Interfaces are helpful in providing structure, enforcing type safety, and enabling consistent coding practices—especially in large projects. </p>
+
+<pre>
+  <code>
+   //Basic Syntax of an Interface
+
+interface Person {
+  name: string;
+  age: number;
+  isStudent: boolean;
+}
+
+const user: Person = {
+  name: "Santosh",
+  age: 30,
+  isStudent: false
+};
+
+//Optional Properties
+interface Product {
+  id: number;
+  name: string;
+  description?: string; // optional
+}
+
+
+//Readonly Properties
+//Use readonly to prevent changes after the object is created:
+interface User {
+  readonly id: number;
+  name: string;
+}
+
+  </code>
+</pre>
+
+2.  Function Type Interface
+
+<pre>
+  <code>
+    interface Greet {
+  (name: string): string;
+}
+
+const sayHello: Greet = (name) => {
+  return `Hello, ${name}`;
+};
+  </code>
+</pre>
+
+3. Interface for Arrays (Indexable Types)
+
+<pre>
+  <code>
+    interface StringArray {
+  [index: number]: string;
+}
+
+let fruits: StringArray = ["Apple", "Banana", "Mango"];
+
+  </code>
+</pre>
+</div>
+
+
+
 
 
 <div class="box shadow p-2 mb-3 mt-4" id="inheritance">

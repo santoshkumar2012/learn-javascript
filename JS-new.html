@@ -158,16 +158,25 @@
       <li> <a href="#counter"> Counter using Closure (No Global Variable) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
-      <li> <a href="#rwd"> Responsive Design </a> </li>
       <li> <a href="#html"> HTML5 </a> </li>
+      <li> <a href="#html5"> HTML5 API, Canvas</a> </li>
+      <li> <a href="#semantic"> Semantic </a> </li>
+      <li> <a href="#div-span"> div and span </a></li>
+      <li> <a href="#id-class"> Id and Class  </a></li>
+      <li> <a href="#altatt"> alt attribute </a></li>
+      <li> <a href="#inblock"> Inline, Block, and Inline-Block </a></li>
+      <li> <a href="#metatag"> meta tag </a></li>
+      <li> <a href="#strongb"> strong and b </a></li>
+      <li> <a href="#void"> void elements </a></li>
+      <li> <a href="#pseudoclass"> Pseudo-class and Pseudo-element</a></li>
+
+
+      <li> <a href="#rwd"> Responsive Design </a> </li>
       <li> <a href="#grid-flexbox"> <strong> CSS Grid & Flexbox </strong> </a> </li>
       <li> <a href="#cssoptimize"> CSS Optimization Techniques </a></li>
       <li> <a href="#cssAnimation"> CSS Animation </a></li>
       <li> <a href="#less"> Less, Sass, Scss </a> </li>
       <li> <a href="#position"> Position style </a> </li>
-      <li> <a href="#semantic"> Semantic </a> </li>
-      <li> <a href="#position"> Position style </a> </li>
-      <li> <a href="#html5"> HTML5 </a> </li>
       <li> <a href="#gridFlex"> Gridflex </a> </li>
       <li> <a href="#sse"> SSE </a></li>
       <li> <a href="#debugging"> Debugging </a></li>
@@ -184,6 +193,16 @@
       <li> <a href="#figma"> <strong> Figma </strong> </a></li>
       <li> <a href="#figmaprototype"> prototype </strong> </a></li>
       <li> <a href="#auto"> auto Layout </a></li>
+
+      <li> <a href="#reusablecompanent"> Reusable Component </a></li>
+      <li> <a href="#componentsss">  Component </strong>  </a></li>
+      <li> <a href="#figmaVariable"> Figma Variable </a></li>
+      <li> <a href="#figmaphotoshop"> Figma and Photoshop </a></li>
+      <li> <a href="#darklight"> light and dark mode </a></li>
+      <li> <a href="#collaboration"> real-time collaboration </a></li>
+      <li> <a href="#plugin-widgets"> Figma Plugins and Widgets </a></li>
+
+
       <li> <a href="#fonts"> fonts </a></li>
       <li> <a href="#assets"> assets </a></li>
       <li> <a href="#frame"> frame and group </a></li>
@@ -237,7 +256,7 @@
 
 
     <div class="box shadow p-2 mb-3 mt-4" id="js">
-      <h2 id="component"> WHAT IS THE JAVASCRIPT? </h2>
+      <h2> WHAT IS THE JAVASCRIPT? </h2>
       <p> JavaScript (JS) is a high-level, interpreted programming language used to create interactive and dynamic web
         pages. It is the core language of the web, allowing developers to manipulate HTML, CSS. </p>
       <h2> HOW WORK ON BROWSER </h2>
@@ -253,7 +272,7 @@
 
 
     <div class="box shadow p-2 mb-3 mt-4" id="excon">
-      <h2 id="component"> WHAT IS THE Execution Context? </h2>
+      <h2> WHAT IS THE Execution Context? </h2>
       <p> An execution context is like a big box where JavaScript code is evaluated and executed. It has two main
         components: </p>
       <p> <strong> Memory Component (also called the Variable Environment) </strong> <br> This is where all variables
@@ -3756,8 +3775,8 @@ script>
         <p> GRID - 2D (Rows & Columns), Aligns items in both rows and columns, Uses grid-gap, row-gap, column-gap </p>
         <p> FLEX BOX - 1D (Row or Column), Aligns items in a single row or column, Uses gap but only for row/column
           spacing </p>
-
       </div>
+
 
       <div id="semantic">
         <h2> Semantic </h2>
@@ -3768,11 +3787,103 @@ script>
           style="white-space: pre-wrap; word-wrap: break-word;"><code> article>, aside>, header>, nav>, and section>.  </code></pre>
         <h2 class="mt-4"> Benefits of Using Semantic HTML </h2>
         Improved SEO, Enhanced Accessibility, Clearer Structure
-
         <h2 class="mt-4"> Non-semantic HTML elements </h2>
         do not provide information about the content <br> like div> div> and span> span>
         <hr>
       </div>
+
+
+<div id="div-span" class="mb-5"> 
+<h2> div and span </h2>
+<ul>
+  <li> <strong> div </strong></li>
+  <li> Block-level element.	 </li>
+  <li> Used for larger container structures. </li>
+  <li> <strong> span </strong></li>
+  <li> Inline element. </li>
+  <li> Used to style small portions of text inline. </li>
+</ul>
+</div>
+
+
+<div id="id-class" class="mb-5"> 
+<h2> ID , class </h2>
+<ul>
+  <li> <strong> ID </strong></li>
+  <li> Unique for each element.	 </li>
+  <li> Syntax: id="header"	</li>
+  <li> Selected with #id in CSS.	 </li>
+  <li> <strong> CLASS </strong></li>
+  <li> Can be used on multiple elements. </li>
+  <li> Syntax: class="btn primary" </li>
+  <li> Selected with .class in CSS. </li>
+</ul>
+</div>
+
+
+
+<div id="altatt" class="mb-5"> 
+<h2> alt attribute </h2>
+<p> The alt attribute provides alternative text for an image if it cannot be displayed. It also helps with SEO and accessibility (screen readers). </p>
+</div>
+
+<div id="inblock" class="mb-5"> 
+<h2> Inline, Block, and Inline-Block </h2>
+<ul>
+  <li> <strong> Inline </strong></li>
+  <li> Does not start on a new line. </li>
+  <li> Width/height can't be set.	 </li>
+  <li> <strong> Block </strong></li>
+  <li> Always starts on a new line.	 </li>
+  <li> Width/height can be set.	 </li>
+  <li> <strong> Inline-Block </strong></li>
+  <li> Like inline but allows setting width/height. </li>
+  <li> Width/height can be set. </li>
+</ul>
+</div>
+
+
+<div id="metatag" class="mb-5"> 
+<h2> Meta Tag </h2>
+<p> The <meta> tag provides metadata about the HTML document (like character set, viewport settings for responsive design, SEO descriptions, etc.) <br> meta name="viewport" content="width=device-width, initial-scale=1.0" </p>
+</div>
+
+
+<div id="strongb" class="mb-5"> 
+<h2> Strong , b </h2>
+<ul>
+  <li> <strong> strong </strong></li>
+  <li> Represents importance (semantic).	</li>
+  <li> Screen readers emphasize it.	 </li>
+  <li> <strong> b </strong></li>
+  <li> Just makes text bold (non-semantic). </li>
+  <li> No special meaning other than visual. </li>
+</ul>
+</div>
+
+
+<div id="void" class="mb-5"> 
+<h2> Void elements </h2>
+<p> Void elements (also called self-closing elements or empty elements) are HTML elements that do not have any content or closing tag. <br>
+They are self-contained and cannot have child elements. </p>
+<p> <strong> Common Void Elements in HTML: </strong> area, br, col, embed, hr</p>
+</div>
+
+
+<div id="pseudoclass" class="mb-5"> 
+<h2> Pseudo-class and Pseudo-element </h2>
+<h2> <strong> pseudo class </strong> </h2>
+<p> A pseudo-class is used to define the special state of an element.
+It targets elements based on their state, position, or user interaction (like hover, focus, visited, etc.). </p>
+<p> Example: :hover, :focus, :nth-child(2), :disabled	 </p>
+
+<h2> <strong> pseudo Elements </strong> </h2>
+<p> A pseudo-element is used to style specific parts of an element's content or inject new content virtually (like before or after the element’s actual content). </p>
+<p> Example : ::before, ::after, </p>
+
+</div>
+
+
 
       <div id="less">
         <p>
@@ -5368,6 +5479,61 @@ Promises & Async/Await (Handle Async Code Better)
         <p class="mt-4 p-0 m-0" id="auto"> <strong> What is “Auto Layout” in Figma </strong></p>
         <p> Auto Layout allows dynamic adjustment of component size and positioning based on its content. It is useful
           for responsive design and creating flexible UI components like buttons, cards, and lists. </p>
+
+        <p class="mt-4 p-0 m-0" id="reusablecompanent"> Reusable Component </p>
+        <p> To create a reusable component, select an object or group of objects, right-click, and choose “Create Component” or press Ctrl + Alt + K. <br> This allows the component to be reused across multiple frames or designs. </p>
+
+        <p class="mt-4 p-0 m-0" id="componentsss"> Component </p>
+       <p> A Component is a reusable UI element (like a button, card, input, header, etc.) that you can use across your design. When you update the main component, all its instances update automatically. </p>
+<p> <strong> Use Cases </strong> - Buttons, Navbars, Cards/Products, Forms/Input Fields, Headers/Footers</p>
+
+        <p class="mt-4 p-0 m-0" id="figmaVariable"> Figma Variable </p>
+        <p> Figma Variables are reusable design tokens that help you keep your designs consistent and make updates easier. Instead of hardcoding colors, spacing, or other values in each design element, you can define them once as variables and reuse them everywhere. </p>
+
+
+        <p class="mt-4 p-0 m-0" id="figmaphotoshop"> Figma and Photoshop </p>
+        <p> Figma and Photoshop are both powerful design tools, but they are built for different purposes and workflows.  </p>
+<ul>
+  <li><strong> Figma </strong></li>
+  <li> Primarily for UI/UX design, web/app design, prototyping, and collaboration. </li>
+  <li> Vector-based (scales easily without losing quality). </li>
+  <li> Web-based (runs in browser, Windows, Mac, Linux) </li>
+  <li> Cloud storage by default (easy sharing) </li>
+  <li> Real-time collaboration like Google Docs </li>
+  <li> Multiple designers can work simultaneously on the same file. </li>
+  <li> Has a free plan and paid plans for teams. </li>
+  <li> UI kits, components, variables, auto layout, prototyping </li>
+   <li><strong> Photoshop </strong></li>
+   <li> Primarily for photo editing, raster-based design, and advanced image manipulation. </li>
+   <li>  Raster-based (pixel-based, ideal for images and detailed editing). </li>
+   <li> Desktop software (Windows & Mac) </li>
+   <li> Files saved locally or via Adobe Cloud </li>
+   <li> Collaboration is not as seamless </li>
+   <li> Single-user editing; collaboration requires sending files back and forth. </li>
+   <li> Paid subscription (Adobe Creative Cloud). </li>
+   <li> Advanced photo manipulation, filters, 3D tools, brushes</li>
+</ul>
+
+
+        <p class="mt-4 p-0 m-0" id="darklight"> light and dark mode </p>
+       <p> Use Variable Collections (e.g., Light & Dark). Each variable (e.g., primary color) has different values per mode. Switching the mode updates the entire design automatically. </p>
+
+
+        <p class="mt-4 p-0 m-0" id="collaboration"> real-time collaboration </p>
+        <p> Multiple users can collaborate on the same file simultaneously in Figma. Each user’s cursor is displayed in real-time, and any changes made by one user are immediately visible to others. </p>
+
+
+         <p class="mt-4 p-0 m-0" id="plugin-widgets"> Figma Plugins and Widgets </p>
+        <ul>
+  <li> Plugins: Small tools that extend Figma’s functionality (e.g., stock image insertion, icon sets, accessibility checks). </li>
+  <li> Widgets: Interactive elements that you can place on the Figma canvas (mainly used in FigJam for collaboration). </li>
+  <li> Plugins: Icons8 / Material Icons – for adding icons quickly. </li>
+  <li> Content Reel – for dummy text, names, and images. </li>
+  <li> Contrast – for checking color accessibility. </li>
+  <li> Autoflow – for drawing user flows. </li>
+  <li> widgets : Voting Widget (FigJam) – for quick team feedback. </li>
+  <li> Timer Widget – for collaborative sessions. </li>
+</ul>
 
 
         <p class="mt-4 p-0 m-0" id="fonts"> <strong> Import external fonts into Figma? </strong></p>
