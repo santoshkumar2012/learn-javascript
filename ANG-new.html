@@ -144,17 +144,18 @@ pre, code {
       <li> <a href="#signals"> <strong> signal </strong> </a> </li>   
 		<li> <a href="#graphql"> graphql </a> </li>	  
       <li> <a href="#vresion-upgrade"> how to upgrade </a> </li>
-      <li> <a href="#webpack"> Webpack </a></li>
       <li> <a href="#pitfalls"> Best Practices vs. Common Pitfalls </a></li>
       <li> <a href="#aggrid"> ag-Grid vs. ngx-datatable (Angular Table Libraries) </a></li>
 	   <li class="borderline"><a href="#">  </a></li>
 
-     <li> <a href="#counter"> Counter </a> </li>
-     <li> <a href="#dynamicInput"> Dynamic Input Field </a> </li>
-    <li> <a href="#chart"> chart </a> </li>
 	  <li> <a href="#microfronted"> Microfronted </a> </li>
+    <li> <a href="#webpack"> Webpack </a></li>
 	  <li> <a href="#material"> Angular Material </a> </li> 
 	  <li> <a href="#prime"> PrimeNg </a> </li>
+    <li> <a href="#customuiliberary"> Custom UI Component Library </a></li>
+    <li> <a href="#counter"> Counter </a> </li>
+     <li> <a href="#dynamicInput"> Dynamic Input Field </a> </li>
+    <li> <a href="#chart"> chart </a> </li>
       <li> <a href="#filter"> Filter </a> </li>
       <li> <a href="#pagination"> pagination </a> </li>
       <li> <a href="#login-setup"> login-setup </a> </li>
@@ -3977,13 +3978,23 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
 
         <div class="box shadow p-2 mb-3" id="microfronted">
           <h2> <strong> Micro Frontend </strong> </h2>
-          <p> Micro Frontend (MFE) is an architectural approach where a frontend application is divided into smaller, independently deployable micro applications. </p>
-          <p> <strong> Why Use Micro Frontend in Angular? </strong></p>
-          <p> Scalability: Large applications can be split into smaller manageable parts. </p>
-          <p> Independent Deployment: Each micro frontend can be developed, tested, and deployed independently. </p>
-          <p> Technology Agnostic: Different teams can use different frameworks (Angular, React, Vue) if needed. </p>
-          <p> Better Maintainability: Smaller codebases are easier to maintain. </p>
-          <h2> Steps to Implement Micro Frontend in Angular </h2>
+
+          <ul>
+            <li> <strong> What is Micro Frontend Architecture? </strong></li>
+            <li> Micro Frontend (MFE) is a design pattern where a large frontend application is divided into smaller, independent apps (micro frontends). </li>
+            <li> Each micro frontend is developed, deployed, and maintained independently. </li>
+            <li> It's like Microservices, but for frontend UI. </li>
+          </ul>
+
+          <ul>
+            <li> <strong> Why Use Micro Frontend in Angular? </strong></li>
+            <li> Scalability: Large applications can be split into smaller manageable parts. </li>
+            <li> Independent Deployment: Each micro frontend can be developed, tested, and deployed independently. </li>
+            <li> Technology Agnostic: Different teams can use different frameworks (Angular, React, Vue) if needed. </li>
+            <li> Better Maintainability: Smaller codebases are easier to maintain. </li>
+          </ul>
+
+          <h2> <strong> Steps to Implement Micro Frontend in Angular </strong> </h2>
           <p> Let's assume we have: </p>
           Shell App (Host Application) → Main container that loads micro frontends. <br>
           Remote App 1 (Micro App 1) <br>
@@ -7133,7 +7144,28 @@ export class MyDialogComponent {
       File upload, drag-and-drop, and more <br>
       </div>
 
+    <div class="box shadow p-2 mb-3" id="customuiliberary">
+      <h2> Custom UI Component Library (Angular) </h2>
+      <ul>
+        <li> <strong> What it Means: </strong></li>
+        <li> Reusable UI components (like buttons, modals, tables, cards, form controls, etc.) tailored to the company's design guidelines. </li>
+        <li> These components are packaged into a UI Library Module and used across multiple Angular applications. </li>
+        <li> It ensures design consistency, reusability, and customization flexibility. </li>
+      </ul>
 
+      <ul>
+        <li> <strong> Common Components in a Custom UI Library: </strong></li>
+        <li> Buttons, Inputs, Selects </li>
+        <li> Modal/Dialogs </li>
+        <li> Data Tables </li>
+        <li> Cards & Panels </li>
+        <li> Form Validation Components </li>
+        <li> Notification/Toaster Service </li>
+        <li> Custom Layout Grids & Containers </li>
+      </ul>
+
+
+    </div>
 
 
 <div class="box shadow p-2 mb-3" id="dom">
