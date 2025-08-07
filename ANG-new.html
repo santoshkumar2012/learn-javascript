@@ -121,7 +121,7 @@
       <li> <a href="#ssr"> SSR </a> </li>
       <li> <a href="#optimize"> <strong> Optimization </strong> </a> </li>
       <li> <a href="#lazy"> <strong> lazy loading </strong> </a> </li>
-      <li> <a href="#change"> Change Detection </a> </li>
+      <li> <a href="#change"> Change Detection, Zone.js </a> </li>
       <li> <a href="#accessibility"> accessibility </a> </li>
       <li> <a href="#newfeatures" style="background:green; color:#fff;"> New featurs </a> </li>
       <li> <a href="#routeguards"> routeguards, Dynamic Menu </a> </li>
@@ -4490,6 +4490,18 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
             }
         </code>
       </pre>
+
+      <h2 class="mt-4"> zone.js </h2>
+      <p> zone.js is a library used by Angular to automatically detect when to update the UI (DOM) after asynchronous operations. </p>
+      <p> <strong> Why Angular Uses zone.js? </strong></p>
+      <p> Angular has Change Detection — it checks for changes and updates the view. But how does Angular know when to run it? </p>
+<ul>
+  <li> <strong> How It Works Internally? </strong></li>
+  <li> It patches async methods like: </li>
+  <li> setTimeout, setInterval, Promise.then, </li>
+  <li> XMLHttpRequest (used in HTTP calls) </li>
+</ul>
+
     </div>
 
     <div class="box shadow p-2 mb-3" id="microfronted">
