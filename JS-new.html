@@ -2338,42 +2338,89 @@ console.log("Second Largest:", secondLargest);
 
 
 
-    <div class="box shadow p-2 mb-3" id="duplicatenumber">
-      <h2> Find DUPLICATE NUMBER</h2>
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
-        <code>
-        function findDuplicates(arr) {
-            arr.sort((a, b) => a - b);
-            let duplicates = [];
-          
-            for (let i = 0; i < arr.length - 1; i++) {
-              if (arr[i] === arr[i + 1] && !duplicates.includes(arr[i])) {
-                duplicates.push(arr[i]);
-              }
-            }
-          
-            return duplicates;
-          }
-          // Example
-          console.log(findDuplicates([1, 2, 3, 4, 2, 5, 6, 3, 8, 1])); // [1, 2, 3]  
-    </code>
+<div class="box shadow p-2 mb-3" id="duplicatenumber">
+<h2> Find DUPLICATE NUMBER</h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function findDuplicates(nums) {
+  const count = {}; <small style="font-size: 0.8rem;"> // To store how many times each number appears </small>
+  const result = []; <small style="font-size: 0.8rem;"> // To store duplicates </small>
+
+  for (let num of nums) {
+    if (count[num]) {   <small style="font-size: 0.8rem;">// If number is already counted </small>
+      if (count[num] === 1) {
+        result.push(num); <small style="font-size: 0.8rem;">// Add to result only first time it becomes a duplicate </small>
+      }
+      count[num]++;<small style="font-size: 0.8rem;">// Increase the count </small>
+    } else {
+      count[num] = 1;<small style="font-size: 0.8rem;"> // First time seeing this number </small>
+    }
+  }
+  return result;
+}
+console.log(findDuplicates([1, 2, 3, 2, 4, 3, 5])); // Output: [2, 3]
+</code>
 </pre>
 
-      <h2> Remove Duplicates from an Array </h2>
-
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
-  <code>
-    function removeDuplicatesFilter(arr) {
-  return arr.filter((value, index, self) => {
+<h2> Remove Duplicates from an Array </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function removeDuplicatesFilter(arr) {
+ return arr.filter((value, index, self) => {
     return self.indexOf(value) === index;
   });
 }
-
 // Test cases
 console.log(removeDuplicatesFilter([1, 2, 2, 3, 4, 4, 5])); // Output: [1, 2, 3, 4, 5]
 console.log(removeDuplicatesFilter(["apple", "banana", "apple", "orange"])); // Output: ["apple", "banana", "orange"]
 console.log(removeDuplicatesFilter([])); // Output: []
-  </code>
+</code>
+</pre>
+
+<h2> Finding duplicates, return false. </h2>
+<pre>
+<code>
+function containsDuplicate(nums) {
+  const seen = new Set();
+
+  for (let num of nums) {
+    if (seen.has(num)) {
+      return true;
+    }
+    seen.add(num);
+  }
+
+  return false;
+}
+console.log(containsDuplicate([1, 2, 3, 1])); // Output: true
+console.log(containsDuplicate([1, 2, 3, 4])); // Output: false
+
+Explanation
+//Create a Set
+const seen = new Set();
+A Set is a special JavaScript object that only stores unique values.
+
+//Loop through the array
+for (let num of nums) {
+This loop goes through each number in the array one by one.
+
+// Check if number is already seen
+if (seen.has(num)) {
+  return true;
+}
+
+seen.has(num) checks if this number already exists in the Set
+If yes, that means it's a duplicate, so we return true immediately.
+
+If not, add it to the Set
+seen.add(num);
+
+We store the number in the Set so we can check future duplicates.
+return false;
+If we finish the loop and did not find any duplicates, return false.
+
+
+</code>
 </pre>
 
     </div>
