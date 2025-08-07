@@ -107,6 +107,7 @@
       <li> <a href="#angularjs"> Angular and Angular JS </a> </li>
       <li> <a href="#jstype"> JavaScript vs TypeScript </a> </li>
       <li> <a href="#architecture"> architecture </a> </li>
+      <li> <a href="#language"> i18n </a></li>
       <li> <a href="#modules"> Modules, bootstrap </a> </li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
       <li> <a href="#angularspa"> SPA </a> </li>
@@ -137,8 +138,6 @@
       <li> <a href="#jwt"> <strong> JWT </strong> </a> </li>
       <li> <a href="#encapsulation"> View Encapsulation </a> </li>
       <li> <a href="#async-defer"> async and defer </a> </li>
-
-
       <li class="borderline"><a href="#"> </a></li>
       <li> <a href="#databinding"> Data Binding </a> </li>
       <li> <a href="#datatransfer"> Data Transfer wrelation </a> </li>
@@ -183,8 +182,9 @@
       <li> <a href="#pitfalls"> Best Practices vs. Common Pitfalls </a></li>
       <li> <a href="#aggrid"> ag-Grid vs. ngx-datatable (Angular Table Libraries) </a></li>
       <li class="borderline"><a href="#"> </a></li>
-
-      <li> <a href="#microfronted"> Microfronted </a> </li>
+      <li><a href="#changetheme"> Change dark and light theme </a></li>
+      <li> <a href="#cross"> Cross-browser compatibility, mobile-responsive </a></li>
+      <li> <a href="#microfronted"> <strong> Microfronted </strong> </a> </li>
       <li> <a href="#webpack"> Webpack </a></li>
       <li> <a href="#material"> <strong> Angular Material </strong> </a> </li>
       <li> <a href="#prime"> PrimeNg </a> </li>
@@ -10555,10 +10555,120 @@ cy.url().should('include', '/dashboard');
       </div>
 
 
-    </div>
+      <div class="box shadow p-2 mb-3" id="changetheme">
+        <h2> Change dark and light theme </h2>
+        <ul>
+          <li> Create your styles.css with both themes defined using CSS variables: </li>
+          <li> Create a theme toggle method in a service or component: </li>
+          <li> Call Theme Toggle from Component </li>
+          <li> Add Toggle Button in Template </li>
+          <li> Angular Material provides built-in theming support for dark and light themes.  </li>
+        </ul>
 
-    <button id="toTopBtn" title="Go to top">↑</button>
-    <script src="script.js"></script>
+        <pre>
+          <code>
+/* styles.scss */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+.dark-theme {
+  --bg-color: #1e1e1e;
+  --text-color: #ffffff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/// Toggle method in services 
+
+// theme.service.ts (optional for global use)
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class ThemeService {
+  isDarkMode = false;
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }
+}
+
+
+// app.component.ts
+import { Component } from '@angular/core';
+import { ThemeService } from './theme.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+  constructor(public themeService: ThemeService) {}
+
+  toggleTheme() {
+    this.themeService.toggleTheme();
+  }
+}
+
+<!-- app.component.html -->
+button (click)="toggleTheme()">Toggle Dark/Light Mode /button>
+p> This text will change color with theme /p>
+
+          </code>
+        </pre>
+        </div>
+
+<div class="box shadow p-2 mb-3" id="language">
+<h2> i18n → Internationalization in Angular </h2>
+<p> It is the built-in Angular feature for translating your app into multiple languages (like English, Hindi, French, etc.). </p>
+h1 i18n> Welcome to My App  /h1 <br>
+
+<h2>  How It Works (Basic Steps): </h2>
+<ol>
+  <li> Mark translatable text using i18n attribute. </li>
+  <li> Extract translation file: - ng extract-i18n </li>
+  <li> Translate content for each language. </li>
+  <li> Build for specific locale: - ng build --localize </li>
+</ol>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="cross">
+<h2> cross-browser compatibility </h2>
+<p> Angular already handles many browser inconsistencies, </p>
+<ul>
+  <li> Use polyfills (Angular CLI adds them automatically). </li>
+  <li> Stick to standards-based HTML, CSS, and JS. </li>
+  <li> Avoid deprecated APIs and browser-specific hacks. </li>
+  <li> <strong> Angular uses the polyfills.ts file to load polyfills for older browsers (like IE11, if needed). </strong> <span> // polyfills.ts
+import 'zone.js';  // Required by Angular </span></li>
+<li> Use Browser Compatibility Tools - Autoprefixer for CSS = Included with Angular via PostCSS. It adds vendor prefixes automatically. </li>
+<li> Use Online Cross-Browser Testing Tools - BrowserStack, Sauce Labs, CrossBrowserTesting,  LambdaTest</li>
+</ul>
+
+<h2> Responsive Angular web application </h2>
+<ol>
+  <li> Use a Responsive CSS Framework </li>
+  <li> Angular Material </li>
+  <li> Angular Material components are responsive and mobile-friendly by design. You can use:, mat-grid-list, mat-toolbar, mat-sidenav</li>
+  <li> Use CSS Flexbox and Grid Layout - Modern CSS (Flexbox and Grid) makes responsive layouts easy. </li>
+  <li> Use Media Queries for Custom CSS Write custom breakpoints to handle different screen sizes: @media (min-width: 768px), @media (min-width: 1024px)</li>
+</ol>
+</div>
+
+</div>
+<button id="toTopBtn" title="Go to top">↑</button>
+<script src="script.js"></script>
 </body>
 
 </html>
