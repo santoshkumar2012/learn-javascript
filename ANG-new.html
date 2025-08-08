@@ -109,6 +109,7 @@
       <li> <a href="#architecture"> architecture </a> </li>
       <li> <a href="#language"> i18n </a></li>
       <li> <a href="#modules"> Modules, bootstrap </a> </li>
+      <li> <a href="#routing"> Routing  </a></li>
       <li> <a href="#shared"> shared, Challenging </a> </li>
       <li> <a href="#angularspa"> SPA </a> </li>
       <li> <a href="#mvc"> MVC </a> </li>
@@ -299,7 +300,17 @@
     </div>
 
     <div class="box shadow p-2 mb-3" id="angularjs">
-      <h2> ANGULAR and ANGULAR JS different between </h2>
+<h2> Angular Command </h2>
+ng new project-name <br>
+ng serve <br>
+ng g c component-name <br>
+ng build <br>
+ng test <br>
+npm install -g @angular/cli@17 <br>
+ng new my-app --version 17<br>
+
+
+      <h2 class="mt-4"> ANGULAR and ANGULAR JS different between </h2>
       <p>
         AngularJS = v1.x <br>
         Angular = v2 and above (latest is v17 as of 2025)
@@ -739,6 +750,87 @@ ng-template #showData>
       </ol>
     </div>
 
+
+      <div class="box shadow p-2 mb-3" id="routing">
+      <h2> Routing  </h2>
+      <p> Routing in Angular is the mechanism that lets you navigate between different views (components) in a single-page application (SPA) without reloading the whole page. </p>
+
+      <h2> <strong> 1. Setting Up Basic Routes </strong></h2>
+
+      <pre>
+        <code>
+ts file
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+
+const routes: Routes = [
+  { path: '', component: HomeComponent },       // Default route
+  { path: 'about', component: AboutComponent }, // /about
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+// html ( app.component.html )
+
+nav>
+  a routerLink="/">Home /a>
+  a routerLink="/about">About /a>
+/nav>
+
+<!-- Place where routed component will be shown -->
+router-outlet> /router-outlet>
+
+
+        </code>
+      </pre>
+
+<h2 class="mt-4"> 2. Route Parameters </h2>
+<p> Route parameters let you pass dynamic values in the URL to a component. </p>
+<pre>
+<code>
+In app-routing.module.ts:
+{ path: 'user/:id', component: UserComponent }
+In user.component.ts:
+import { ActivatedRoute } from '@angular/router';
+constructor(private route: ActivatedRoute) {
+  this.route.params.subscribe(params => {
+    console.log(params['id']); // Get the 'id' from URL
+  });
+}
+</code>
+</pre>
+
+<h2 class="mt-4"> 3. Child Routes (Nested Routes) </h2>
+<p> Child routes allow you to create routes within routes, useful for layouts or sections with sub-pages. </p>
+<pre>
+  <code>
+ts
+{ 
+  path: 'products', 
+  component: ProductsComponent,
+  children: [
+    { path: 'list', component: ProductListComponent },
+    { path: 'details/:id', component: ProductDetailsComponent }
+  ]
+}
+
+html 
+
+router-outlet> /router-outlet> <!-- child routes load here -->
+
+
+  </code>
+</pre>
+
+
+      </div>
+
     <div class="box shadow p-2 mb-3" id="services">
       <h2> SERVICES </h2>
       <p> Services is class providing a very specific functionality. The main purpose of the service is to make a
@@ -816,8 +908,8 @@ ng-template #showData>
         index.html </p>
 
       <h2 class="mt-4"> <strong> Browser Behind Angular Application </strong> </h2>
-      <p> Browser Load index.html ( app-root> /app-root> ) => Main.ts (File Runs) => Bootstrap Application => Angular
-        Replace app-root> /app-root> ( HTML from APP component )
+      <p> Browser Load index.html ( app-root> /app-root> ) => <br> Main.ts (File Runs) => <br> Bootstrap Application => <br> Angular
+        Replace app-root> /app-root> ( HTML from APP component ) <br>
         => Angular Setup DI Dependancy Injection ( Services, Routes, HTTP Client ) => Router read the URL => Component (
         Tree Based ) => Data Binding Event = Angular Render DOM
       </p>
@@ -4832,6 +4924,13 @@ export class AppComponent {
     <div class="box shadow p-2 mb-3" id="databinding">
       <h2> DATA BINDING </h2>
 
+      <ul>
+        <li> <strong> Interpolation ({{ }}) → </strong> Inserts dynamic values from component to template as text. </li>
+        <li> <strong> Property Binding ([ ]) → </strong> Binds component data to an HTML element/property. </li>
+        <li> <strong> Event Binding (( )) → </strong> Listens to DOM events and calls component methods. </li>
+        <li> <strong> Two-way Binding ([( )]) → </strong> Synchronizes data between component and template in both directions. </li>
+      </ul>
+
       <h2> Event Binding </h2>
       <p><strong> Event binding is the process of targeting an event in a HTML element. </strong></p>
       <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
@@ -5051,7 +5150,15 @@ constructor(private router: Router) {
         </li>
         <li> <strong> Attribute Directives </strong> (Modify the appearance or behavior of elements)
 
-          <p> Attribute directives change the styling or behavior of elements without altering the structure. </p>
+<p> Attribute directives change the styling or behavior of elements without altering the structure. </p>
+Examples: [ngClass], [ngStyle], custom attribute directives.
+<pre class="mt-4">
+  <code>
+p [ngClass]="{'highlight': isActive}">Styled text /p>
+p [ngStyle]="{'color': textColor}">Dynamic color /p>
+  </code>
+</pre>
+<hr>
           <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         constructor(private el: ElementRef) {
@@ -5525,90 +5632,96 @@ export class ParentComponent {
     </div>
 
 
-    <div class="box shadow p-2 mb-3" id="ngfor">
-      <h2> Ngfor, forloop </h2>
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
-      <code>
-        employees = [
-    {
-    id: 1,
-    name: "Santosh Kumar",
-    age: 30,
-    department: "Human Resources",
-    salary: 5000000
-    },
-    &lt;tr *ngFor="let employee of employees"&gt;  &lt;tr&gt;
-    ----------------------
-    isVisiable:boolean = false 
-    &lt;h2 *ngIf="isVisiable"&gt; Welcome to NgIf &lt; h2 &gt;
-    ----------------------
-      </code>
-    </pre>
+<div class="box shadow p-2 mb-3" id="ngfor">
+<h2> Ngfor, forloop </h2>
+<p> In Angular, *ngFor is a structural directive that repeats a portion of the template for each item in a collection (array or iterable). </p>
+<p> <strong> *ngIf </strong></p>
+<p> In Angular, *ngIf is a structural directive that conditionally includes or removes an element from the DOM based on a boolean expression. </p>
 
-      <h2> Ngfor and NgIf </h2>
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
-      <code>
-        TS 
-        public staffs = [
-        { staff_name: "Rakesh", age:35, salary:50000, },
-        { staff_name: "Mohan", age:35, salary:100000, },
-        { staff_name: "Sohan", age:35, salary:30000, },
-        { staff_name: "Jhannu", age:35, salary:100000, },
-        { staff_name: "Pradeep", age:35, salary:50000, },
-        { staff_name: "Kailash", age:35, salary:100000, },
-        { staff_name: "Jhunjhunwala", age:35, salary:100000, }
-      ]
+<p>"<strong> ng-container </strong> is used to group elements without adding extra HTML to the DOM. <strong> ng-template </strong> stores a block of HTML/Angular code that is not rendered by default and can be rendered later using ngTemplateOutlet or structural directives." </p>
 
-      HTML 
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+employees = [
+{
+id: 1,
+name: "Santosh Kumar",
+age: 30,
+department: "Human Resources",
+salary: 5000000
+},
+&lt;tr *ngFor="let employee of employees"&gt;  &lt;tr&gt;
+----------------------
+isVisiable:boolean = false 
+&lt;h2 *ngIf="isVisiable"&gt; Welcome to NgIf &lt; h2 &gt;
+----------------------
+  </code>
+</pre>
 
-      li *ngFor="let staff of staffs"> 
-        ng-container *ngIf="staff.salary < 50000; else highsalary">
-            {{staff.staff_name}} {{staff.salary}}
-        /ng-container>
-        ng-template #highsalary>
-          div style="background-color: #ececec;">   {{staff.staff_name}} {{staff.salary}} div>
-        /ng-template>
-    /li>
+  <h2> Ngfor and NgIf </h2>
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+TS 
+public staffs = [
+{ staff_name: "Rakesh", age:35, salary:50000, },
+{ staff_name: "Mohan", age:35, salary:100000, },
+{ staff_name: "Sohan", age:35, salary:30000, },
+{ staff_name: "Jhannu", age:35, salary:100000, },
+{ staff_name: "Pradeep", age:35, salary:50000, },
+{ staff_name: "Kailash", age:35, salary:100000, },
+{ staff_name: "Jhunjhunwala", age:35, salary:100000, }
+  ]
 
-    NODATA
+  HTML 
 
-    div *ngIf="employees && employees.length > 0; else nodata"> 
-      div *ngFor="let emp of employees">
-          ng-container *ngIf="emp.salary > 400000; else highsalary">
-             span style="color: red;">  {{emp.name}} /span>
-          /ng-container>
-          ng-template #highsalary>
-              {{emp.name}}
-          /ng-template>
-      /div>
+  li *ngFor="let staff of staffs"> 
+ng-container *ngIf="staff.salary < 50000; else highsalary">
+{{staff.staff_name}} {{staff.salary}}
+/ng-container>
+ng-template #highsalary>
+  div style="background-color: #ececec;">   {{staff.staff_name}} {{staff.salary}} div>
+/ng-template>
+/li>
+
+NODATA
+
+div *ngIf="employees && employees.length > 0; else nodata"> 
+  div *ngFor="let emp of employees">
+  ng-container *ngIf="emp.salary > 400000; else highsalary">
+ span style="color: red;">  {{emp.name}} /span>
+  /ng-container>
+  ng-template #highsalary>
+  {{emp.name}}
+  /ng-template>
+  /div>
   /div>
   ng-template #nodata> p> No Data /p>/ng-template>
 
     -------------- 
 
-    <h2> Toggle </h2>
-    TS
-    isVisiable = true
-    toggleButton(){
-      this.isVisiable = !this.isVisiable
-        } 
+<h2> Toggle </h2>
+TS
+isVisiable = true
+toggleButton(){
+  this.isVisiable = !this.isVisiable
+} 
 
-    HTML 
-    div *ngIf="isVisiable" class="mt-10"> This message for isVisiable /div>
-    button type="button" (click)="toggleButton()"> Show and Hide /button>
+HTML 
+div *ngIf="isVisiable" class="mt-10"> This message for isVisiable /div>
+button type="button" (click)="toggleButton()"> Show and Hide /button>
 
-      </code>
-    </pre>
+  </code>
+</pre>
 
-      <h2> @HostListener </h2>
-      @HostListener is a decorator in Angular that lets you listen to DOM events on the host element of a directive or
-      component.
-      You use it when you want to react to events like clicks, mouse movements, key presses, etc., directly on the
-      element where your directive or component is applied.
+  <h2> @HostListener </h2>
+  @HostListener is a decorator in Angular that lets you listen to DOM events on the host element of a directive or
+  component.
+  You use it when you want to react to events like clicks, mouse movements, key presses, etc., directly on the
+  element where your directive or component is applied.
 
 
 
-    </div>
+</div>
 
 
     <div class="box shadow p-2 mb-3" id="scrolltop">
