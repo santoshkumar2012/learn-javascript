@@ -29,7 +29,7 @@
       <li> <a href="#unions-intersections"> Unions (|) and Intersections (&)  </a> </li>
       <li> <a href="#generics"> Generics </a></li>
       <li> <a href="#classes"> Classes </a></li>
-      <li> <a href="#interface"> TypeScript Interface </a></li>
+      <li> <a href="#interface"> Interface , types vs. interfaces </a></li>
       <li> <a href="#inheritance"> Inheritance </a></li>
       <li> <a href="#public"> Access Modifiers Public </a></li>
       <li> <a href="#protected"> Protected </a></li>
@@ -569,6 +569,36 @@ store.add("Item1");
 <h2 class="mt-4"><strong> TypeScript Interface </strong></h2>
 <p> In TypeScript, an interface is used to define the shape of an object, specifying the names and types of its properties. Interfaces are helpful in providing structure, enforcing type safety, and enabling consistent coding practices—especially in large projects. </p>
 
+<p> <strong> types vs. interfaces </strong></p>
+<p> Both type and interface in TypeScript are used to describe the shape of an object — meaning what properties and methods it has. </p>
+<ul>
+  <li> <strong> interface </strong></li>
+  <li> Can be extended (extends) and also implement multiple interfaces	 </li>
+  <li> Yes — If you declare an interface with the same name twice, they merge	 </li>
+  <li> Best for object shapes and class contracts	 </li>
+  <li> Easier to read for OOP-style code	 </li>
+  <li> <strong> type </strong></li>
+  <li> Can extend other types via intersections (&) </li>
+  <li> No — Two types with the same name will cause an error </li>
+  <li> Works for any type (primitive, union, tuple, etc.) </li>
+  <li> More flexible for complex types </li>
+</ul>
+<pre>
+  <code>
+types vs. interfaces Examples 
+
+type UserType = {
+  name: string;
+  age: number;
+}
+
+interface UserInterface {
+  name: string;
+  age: number;
+}
+  </code>
+</pre>
+
 <pre>
   <code>
    //Basic Syntax of an Interface
@@ -631,10 +661,6 @@ let fruits: StringArray = ["Apple", "Banana", "Mango"];
 </pre>
 </div>
 
-
-
-
-
 <div class="box shadow p-2 mb-3 mt-4" id="inheritance">
 <h2 class="mt-4"><strong> Inheritance in TypeScript </strong></h2>
 <p> Inheritance allow a class to reuse the functionlity of an existing class without rewriting it. </p>
@@ -663,6 +689,8 @@ console.log(e.greet());
 </div>
 
 <div class="box shadow p-2 mb-3 mt-4" id="public">
+<p> <strong> Access modifiers </strong> are keywords used to control the visibility (scope) of class properties and methods — determining whether they can be accessed from inside the class, its subclasses, or from anywhere in the program. </p>
+ 
 <h2 class="mt-4"><strong> Public (default) </strong></h2>
 <ol>
   <li> Accessible anywhere: inside the class, in subclasses, and outside the class (instances). </li>
