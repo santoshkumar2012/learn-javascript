@@ -266,6 +266,15 @@
         document.getElementById('message').innerHTML = 'Hello from JavaScript!';
     </code>
 </pre>
+
+<ul class="mt-4">
+  <li> <strong> var </strong> It is function block variable declaration. it's allow redeclaration. </li>
+  <li> <strong> let </strong> It is block scoped variable declaration. it's don't allow redeclaration.  </li>
+  <li> <strong> const </strong> It is block scoped variable declaration. value can't be reassign. </li>
+  <li> <strong> == </strong> checks value only </li>
+  <li> <strong> === </strong> checks value and data type both. </li>
+</ul>
+
     </div>
 
 
@@ -840,29 +849,8 @@ console.log(a === b); // true
 
     <div class="box shadow p-2 mb-3" id="null">
       <h2> Null and Undefined </h2>
-      <p> In JavaScript, both null and undefined represent the absence of a value, but they are used in slightly
-        different <br> <br>
-        Null is an assignment value that represents the intentional absence of any object value. <br>
-        It represents an absence of value, the typeof operator returns "object" for values that are null <br>
-        A variable has been declared but not yet assigned a value.
-      </p>
-
-      <p> Javascript is also create window is big object and it has lot's of function and method. this variable and
-        function created by javascript engine.
-        <br>
-        window and this keyword both are global lavel <br>
-        window === this // true <br>
-        <br>
-        <strong> Undefined </strong> is very special keyword in javascript. variable has been declared, but no value has
-        been assigned yet.
-        <br>
-        var x; <br>
-        console.log(x); // 👉 undefined
-      </p>
-
-      <p> <strong> Not defined </strong> is variable was never declared at all. <br>
-        console.log(y); // ❌ ReferenceError: y is not defined </p>
-
+     <p> <strong> Null - null means no value. typeof null returns 'object' = let car = null;</strong> </p>
+     <p> <strong> Undefined - Declare variable but not assigned value  = let x;</strong></p>
     </div>
 
     <div class="box shadow p-2 mb-3" id="generators">
@@ -1726,8 +1714,7 @@ console.log("3");
 
     <div class="box shadow p-2 mb-3" id="this">
       <h2> This </h2>
-      <p> In JavaScript, this is a keyword that refers to an object. The value of this depends on how the function or
-        code where it's used is called. </p>
+      <p> this keyword refers to the object its value depends on how the function is called." </p>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
         <code>
             Global Scope

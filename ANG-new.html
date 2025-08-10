@@ -123,7 +123,7 @@
       <li> <a href="#angularcli"> angular CLI </a> </li>
       <li> <a href="#angularcontroller"> controllers </a> </li>
       <li> <a href="#ssr"> SSR </a> </li>
-      <li> <a href="#optimize"> <strong> Optimization </strong> </a> </li>
+      <li> <a href="#optimize"> <strong> Optimization / Bundle Size </strong> </a> </li>
       <li> <a href="#lazy"> <strong> lazy loading </strong> </a> </li>
       <li> <a href="#change"> Change Detection, Zone.js </a> </li>
       <li> <a href="#accessibility"> accessibility </a> </li>
@@ -188,7 +188,7 @@
       <li><a href="#changetheme"> Change dark and light theme </a></li>
       <li> <a href="#cross"> Cross-browser compatibility, mobile-responsive </a></li>
       <li> <a href="#microfronted"> <strong> Microfronted </strong> </a> </li>
-      <li> <a href="#webpack"> Webpack </a></li>
+      <li> <a href="#webpack"> <strong> Webpack </strong> </a></li>
       <li> <a href="#material"> <strong> Angular Material </strong> </a> </li>
       <li> <a href="#prime"> PrimeNg </a> </li>
       <li> <a href="#customuiliberary"> Custom UI Component Library </a></li>
@@ -214,15 +214,17 @@
       <li> <a href="#web"> Web Optimization? </a></li>
       <li> <a href="#asetup"> Angular Setup </a></li>
       <li> <a href="#net"> .NET Core / ASP.NET </a></li>
-      <li> <a href="#npm"> NPM </a></li>
+      <li> <a href="#npm"> <strong> NPM </strong> </a></li>
       <li> <a href="#cicd"> Tools - CI/CD environments </a> </li>
       <li> <a href="#azure"> Azure DevOps </a> </li>
-      <li> <a href="#jenkins"> Jenkins </a></li>
+      <li> <a href="#jenkins"> <strong> Jenkins </strong> </a></li>
       <li> <a href="#testtools"> Testing Tools </a></li>
       <li> <a href="#sitecore"> sitecore </a></li>
       <li> <a href="#sitecorejss"> Sitecore JSS </a></li>
       <li> <a href="#angreact"> Manage Angular + React in the same project </a></li>
       <li> <a href="#coreweb"> Core Web Vitals ( improve SEO ) </a></li>
+      <li> <a href="#deployment"> Fronted -> Backend, Deployment, CORS </a>
+      </li>
     </ul>
 
     <h2 class="mt-4">INTRO</h2>
@@ -3730,11 +3732,7 @@ export class TodoEffects {
       </ul>
 
       <p><strong> Signal Defination </strong></p>
-      <p> A signal is a wrapper around a value that notifies interested consumers when that value changes. <br> A signal
-        can contain any value, from primitives to complex data structures. </p>
-      <p> You read a signal's value by calling its getter function, which allows Angular to keep track of where the
-        signal is being used. </p>
-      <p> It like a special variable that automatically updates your UI when its value changes. </p>
+      <p> Signal is reactive value in angular. automatically active UI updates when it changes. </p>
 
       <p class="mt-4"> <strong> Angular (before Signals) </strong></p>
       <p> Normally in Angular, when a value changes, Angular uses Zone.js and change detection to update the DOM: </p>
@@ -4688,7 +4686,11 @@ exposes: {
 
     <div class="box shadow p-2 mb-3" id="webpack">
 
-      <p> Webpack is a module bundler for JavaScript applications. </p>
+      <h2> Webpack </h2>
+      <p> In Angular, Webpack is used internally by the Angular CLI to bundle, <br> 
+        for optimize, and serve our application. <br> 
+        We usually don’t configure it manually, but it’s responsible for converting our code into browser-ready, optimized files. </p>
+
       <p> It takes all the code and assets (JavaScript, CSS, images, etc.) in your project, bundles them together, and
         outputs optimized files for the browser. </p>
 
@@ -10788,6 +10790,49 @@ import 'zone.js';  // Required by Angular </span></li>
   <li> Use Media Queries for Custom CSS Write custom breakpoints to handle different screen sizes: @media (min-width: 768px), @media (min-width: 1024px)</li>
 </ol>
 </div>
+
+<div class="box shadow p-2 mb-3" id="deployment">
+<h2> How to angular application fronted integrate with backend ? </h2>
+<p> Fronted to Backend integration so create making HTTP requests from Angular to your backend API </p>
+<p> Like Backend Node.js - Backend should be Rest API </p>
+Example API :- 
+<P> GET  /api/users, POST /api/users, PUT  /api/users/:id, DELETE /api/users/:id </P>
+<p> Angular Setup - Angular has build in services HttpClient for API calls </p>
+
+<p> <strong> If Angular and backend are on different domains enable CORS on backend </strong></p>
+<p> We integrated Angular frontend with backend REST APIs using HttpClient. 
+  We can handled environment-based API URLs, and managed CORS for local development, and in production, we served Angular static files from the backend server. </p>
+<p>1. <strong> Environment-based API URL in Angular </strong> To use different backend URLs for development, testing, and production without changing code manually. </p>
+
+<p><strong> CORS </strong></p>
+<p> When the frontend and backend run on different domains or ports, browsers block requests for security reasons. <br>
+  CORS is a protocol that lets the backend specify which origins are allowed to access it. During development, I configure backend CORS to allow my Angular development server, and in production, it usually allows the production domain only. </p>
+
+  <h2 class="mt-5"> <strong> Deployment Process </strong></h2>
+
+<p> <strong> 1. Firebase Hosting (Google Cloud ecosystem) </strong></p>
+<p> Why: No server setup, free SSL, works well with Angular, backed by Google Cloud. </p>
+
+Steps:
+<ol>
+  <li> npm install -g firebase-tools </li>
+  <li> firebase login </li>
+  <li> firebase init hosting </li>
+  <li> ng build --configuration production </li>
+  <li> firebase deploy </li>
+  <li> Interview angle: Say you’ve used Firebase Hosting (Google Cloud) for static app deployment. </li>
+</ol>
+<br> 
+<ol>
+  <li> <strong> 2. AWS S3 + CloudFront (Easy first step into AWS) </strong> </li>
+  <li> Why: S3 for storage + CloudFront for CDN → common in real projects. </li>
+  <li> Create S3 bucket → Enable static hosting. </li>
+  <li> Upload Angular dist/ files. </li>
+  <li> Set bucket policy for public read. </li>
+  <li> (Optional) Add CloudFront for caching + custom domain. </li>
+</ol>
+</div>
+
 
 </div>
 <button id="toTopBtn" title="Go to top">↑</button>
