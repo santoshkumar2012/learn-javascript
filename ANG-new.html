@@ -170,7 +170,7 @@
       <li> <a href="#rxjsoperatorlive"> Rxjs Operators live example </a> </li>
       <li><a href="#error"> Error Handling </a></li>
       <li> <a href="#rxjssubject"> Rxjs subject </a> </li>
-      <li> <a href="#ngrx"> Ngrx, Transition between two states </a> </li>
+      <li> <a href="#ngrx"> <strong> Ngrx </strong>, Transition between two states </a> </li>
       <li> <a href="#life-cycle"> life-cycle </a> </li>
       <li> <a href="#services"> Services </a> </li>
       <li> <a href="#interceptor"> <strong> Interceptor </strong> </a> </li>
@@ -3065,9 +3065,10 @@ export class DataService {
 
     <div class="box shadow p-2 mb-3" id="ngrx">
       <h2> NgRx (Redux for Angular) </h2>
-      <p><strong> NgRx is a state management library for Angular applications that implements the Redux pattern using
-          RxJS.
-          Uses Actions, Reducers, Store, Effects, and Selectors. </strong></p>
+      <p> NgRx is a state management library for Angular applications that implements the Redux pattern using
+          RxJS. <br> Uses Actions, Reducers, Store, Effects, and Selectors. </p>
+
+
       <strong> TS Actions examples - </strong>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
@@ -3112,20 +3113,60 @@ export class DataService {
     </pre>
       <h2 class="mt-2"> ngRx Store? </h2>
       <p> ngRx Store is a state management library for Angular applications. It is based on Redux and helps manage
-        application state in a predictable way using actions, reducers, and selectors. </p>
-      <p><strong>
-          ngRx Store helps manage global state in Angular apps.
-          It follows Redux principles with actions, reducers, and selectors.
-          Effects handle async operations like API calls.
-          Improves scalability, performance, and debugging.
-        </strong></p>
+        application state and using actions, reducers, and selectors. </p>
+
+        <ol>
+          <li> ngRx Store helps manage global state in Angular apps. </li>
+          <li> It follows Redux principles with actions, reducers, and selectors. </li>
+          <li> Effects handle async operations like API calls. </li>
+          <li> Improves scalability, performance, and debugging. </li>
+        </ol>
+
+        <p class="p-0 m-0"> <strong> Redux pattern </strong> is a state management approach where state, Actions, Reducers </p>
+        <p> <strong> Pure function </strong> is a function which is Always returns the same output for the same input <br> 
+          ( function add(a: number, b: number) {
+  return a + b;
+} )</p>
+
       <ol>
-        <li> <strong> Actions – </strong>Define what happens in the app (e.g., "Add Product", "Delete User"). </li>
-        <li> <strong> Reducers – </strong> Handle state changes based on actions. </li>
+        <li> <strong> Actions – </strong>It is plain objects, and Define what happens in our application (e.g., "Add Product", "Delete User"). </li>
+        <li> <strong> Reducers – </strong> Handle state changes based on actions., <br> Pure functions that take the current state and an action, and return a new state without mutating the old one.  </li>
         <li> <strong> State – </strong> The single source of truth for the app. </li>
         <li> <strong> Selectors – </strong> Retrieve specific data from the store. </li>
-        <li> <strong> Effects – </strong> Handle asynchronous operations like API calls. </li>
+        <li> <strong> Effects – </strong> Services and Handle asynchronous operations like API calls. </li>
       </ol>
+<div class="mb-5"> 
+<h2> Store </h2>
+<p> NgRx, the Store is a centralized container that holds the entire application state, it a single source of truth that components can read from and write to through actions. </p>
+<ul>
+  <li> Store Flow in NgRx </li>
+  <li> Component dispatches an Action → </li>
+  <li> Reducer updates the State → </li>
+  <li> Store holds the new state </li>
+  <li> Updated Store notifies components using Selectors. </li>
+</ul>
+
+
+<h2> Why use NgRx instead of Service-based state management? </h2>
+<ul>
+  <li> Predictable state updates </li>
+  <li> Centralized single source of truth </li>
+  <li> Works well for large, complex apps </li>
+</ul>
+</div>
+
+
+<pre>
+  <code>
+// Selector Example
+export const selectUsers = createSelector(
+  selectUserState,
+  state => state.users
+);
+  </code>
+</pre>
+
+<hr>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
       <code>
         <strong>
@@ -9490,6 +9531,38 @@ console.log(user.greet());  // "Hello, my name is John"
       git checkout main <br>
       git merge feature/login-page
 
+
+<pre>
+  <code>
+git init        # Initialize a new repository
+git clone       # Copy a remote repo to your system
+git status                 # Check current status of repo
+git add <file>             # Stage a file
+git add .                  # Stage all changes
+git commit -m "Message"    # Commit staged changes
+git push origin <branch>   # Push commits to remote
+git pull origin <branch>   # Pull latest changes from remote
+git fetch                  # Fetch updates without merging
+
+git branch                 # List branches
+git branch <name>          # Create new branch
+git checkout <branch>      # Switch branch
+git checkout -b <name>     # Create + switch branch
+git merge <branch>         # Merge branch into current branch
+git branch -d <name>       # Delete branch locally
+
+git log                    # View commit history
+git log --oneline          # Short commit history
+git diff                   # Show unstaged changes
+git show <commit_id>       # Show details of a commit
+git stash                  # Temporarily save changes
+git stash pop              # Restore stashed changes
+git remote -v              # List remotes
+git tag <tag_name>         # Create a tag
+  </code>
+</pre>
+
+
       <h2> GIT Workflow </h2>
       <ul>
         <li>git clone – Copy repo from GitHub </li>
@@ -10821,6 +10894,62 @@ Steps:
   <li> Set bucket policy for public read. </li>
   <li> (Optional) Add CloudFront for caching + custom domain. </li>
 </ol>
+</div>
+
+
+<div class="box shadow p-2 mb-3" id="sort">
+<h2> Flatten, Sort </h2>
+
+<pre>
+  <code>
+JSON = JSON;
+
+  arr1 = [[[1, 2], [[3, 4]], [5, [6, 7]], [[8, 9]]], 10];
+  arr2 = [[['3', '2'], [['1', '4']], ['8', ['7', '6']], [['5', '9']]], '10'];
+  arr3 = [[[3, 2], [[1, 4]], [8, [7, 6]], [[5, 9]]], 10];
+
+  // Flatten nested arrays using recursion
+  flatArray(array: any[]): any[] {
+    const result: any[] = [];
+    const flatten = (arr: any[]) => {
+      for (let item of arr) {
+        if (Array.isArray(item)) {
+          // If the item is an array, call flatten again
+          flatten(item);
+        } else {
+          // If the item is not an array, push to final result
+          result.push(item);
+        }
+      }
+    };
+    flatten(array);
+    return result;
+  }
+
+  // Sort array in ascending order (handles strings & numbers)
+  sortArray(array: any[]): any[] {
+    return [...array].sort((a, b) => Number(a) - Number(b));
+  }
+
+  // Prepare array for printing (flatten + sort)
+  arrayToPrint(array: any[]): any[] {
+    return this.sortArray(this.flatArray(array));
+  }
+
+  HTML 
+
+h3>Array 1 Output:/h3>
+p>{{ JSON.stringify(arrayToPrint(arr1)) }}/p>
+
+h3>Array 2 Output/h3>
+p>{{ JSON.stringify(arrayToPrint(arr2)) }}/p>
+
+h3>Array 3 Output:/h3>
+p>{{ JSON.stringify(arrayToPrint(arr3)) }}/p>
+  
+  </code>
+</pre>
+
 </div>
 
 
