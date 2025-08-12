@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -179,7 +178,7 @@
       <li> <a href="#sse"> SSE </a></li>
       <li> <a href="#debugging"> Debugging </a></li>
       <li> <a href="#frontend"> Frontend Performance </a></li>
-      <li> <a href="#database"> Database Mysql </a></li>
+      
       <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
       <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
       <li> <a href="#formvalidation"> Form Validation </a></li>
@@ -228,6 +227,7 @@
       <hr>
       <hr>
       <h5> MSQL </h5>
+      <li> <a href="#database"> <strong> Database Mysql </strong> </a></li>
       <li> <a href="#sql"> difference between DELETE, TRUNCATE, and DROP </a></li>
       <li> <a href="#acid"> ACID properties of a transaction </a></li>
       <li> <a href="#clustered"> clustered index, non-clustered index </a></li>
@@ -1246,6 +1246,39 @@ document.addEventListener("click", function (event) {
       <p> <strong> Bubbling Phase: </strong> The click event would then bubble up from the button to the div, then body,
         then html, then document, and finally window. </p>
       <p> <strong> Target Phase: </strong> The event reaches the actual element on which it was triggered. </p>
+
+  <pre style="white-space: pre-wrap; word-wrap: break-word;">
+        <code>
+div id="parent" style="padding:20px; background:lightblue;">
+Parent
+button id="child">Click Me /button>
+/div>
+
+///script 
+  const parent = document.getElementById('parent');
+  const child = document.getElementById('child');
+
+  // Capturing phase listener (3rd parameter = true)
+  parent.addEventListener('click', () => {
+    console.log('Parent Capturing');
+  }, true);
+
+  // Bubbling phase listener (default = false)
+  parent.addEventListener('click', () => {
+    console.log('Parent Bubbling');
+  });
+
+  // Child click
+  child.addEventListener('click', () => {
+    console.log('Child Clicked');
+  });
+
+
+======
+
+Note - In JS event handling, addEventListener’s third argument (or options.capture = true) decides whether the handler runs in the capturing phase (true) or bubbling phase (false by default).
+        </code>
+      </pre>
 
       <p class="mt-4"> <strong> What is event.preventDefault()? </strong></p>
       <p> This method is called on an event object to stop the browser's default behavior for that event.</p>
@@ -4035,46 +4068,42 @@ script>
   </pre>
       </div>
 
-      <div id="database">
+      <div id="database" class="mt-5">
         <h2> What are Database Technologies? </h2>
         Database technologies are systems that allow you to store, manage, retrieve, and manipulate data efficiently.
         <br>
-        They help applications (like web apps, mobile apps, etc.) to:<br>
-        Save user data (like name, email, orders, etc.)<br>
-        Search and filter data<br>
-        Update or delete data<br>
-        Maintain data integrity and security<br>
-        ----------
-        Common Types of Databases:<br>
-        1. Relational Databases (SQL)<br>
-        Store data in tables (rows & columns)<br>
-        Use Structured Query Language (SQL) to interact<br>
-        Relationships can be defined between tables<br>
+        <ul>
+          <li> They help applications (like web apps, mobile apps, etc.) to: Save user data (like name, email, orders, etc.) </li>
+          <li> Search and filter data </li>
+          <li> Update or delete data </li>
+          <li> Maintain data integrity and security </li>
+        </ul>
 
-        🛠️ Examples:<br>
-        MySQL (very popular, open-source)<br>
-        PostgreSQL<br>
-        Oracle Database<br>
-        SQL Server (Microsoft)<br>
-        2. Non-Relational Databases (NoSQL)<br>
-        Store data in formats like JSON, key-value, documents, graphs<br>
-        More flexible for large-scale, unstructured data<br>
-        <br>
-        🛠️ Examples:<br>
-        MongoDB (document-based)<br>
-        Redis (key-value)<br>
-        Firebase Realtime DB / Firestore<br>
-        Cassandra<br>
+        ----------
+       <h2> Common Types of Databases: </h2>
+       <ol>
+        <li> Relational Databases (SQL) 
+          <ul>
+            <li> Store data in tables (rows & columns) </li>
+            <li> Use Structured Query Language (SQL) to interact </li>
+            <li> Relationships can be defined between tables. Examp -   MySQL (very popular, open-source), PostgreSQL  Oracle Database, SQL Server (Microsoft) </li>
+          </ul>
+        </li>
+        <li> Non-Relational Databases (NoSQL) <ul>
+          <li> Store data in formats like JSON, key-value, documents, graphs </li>
+          <li> More flexible for large-scale, unstructured data Example - MongoDB (document-based), Redis (key-value), Firebase Realtime DB / Firestore </li>
+        </ul>
+      </li>
+       </ol>
 
         <h2> What is MySQL? </h2>
-
         MySQL is a relational database management system (RDBMS) that:<br>
         Uses SQL (Structured Query Language)<br>
         Organizes data into tables<br>
         Is free and open-source (owned by Oracle)<br>
         Commonly used in web development with PHP, Node.js, and many backend frameworks<br>
 
-        📦 MySQL Core Concepts:<br>
+    <h2 class="mt-4"> MySQL Core Concepts: </h2>
         Concept Description<br>
         Database A collection of tables<br>
         Table A structure to store rows of data<br>
@@ -4082,11 +4111,9 @@ script>
         Column A field or property of the record<br>
         Primary Key Unique identifier for each row<br>
         Foreign Key Creates a relationship between tables<br>
-
-
       </div>
 
-      <div id="position">
+      <div id="position" class="mt-5">
         <h2> Position </h2>
         <p> <strong> Relative </strong> - The element moves relative to its normal position. </p>
         <p> <strong> Absolute </strong> - The element is positioned relative to the nearest positioned ancestor. </p>
