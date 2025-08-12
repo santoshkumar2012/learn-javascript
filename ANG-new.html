@@ -116,6 +116,7 @@
       <li> <a href="#root"> root </a> </li>
       <li> <a href="#jse"> AngularJS Expression - JS Expressions </a> </li>
       <li> <a href="#component"> components </a> </li>
+      <li> <a href="#reusable"> Component Reusable </a> </li>
       <li> <a href="#template"> template / router-outlet </a> </li>
       <li> <a href="#metadata"> metadata </a> </li>
       <li> <a href="#angularcli"> angular CLI </a> </li>
@@ -139,6 +140,7 @@
       <li> <a href="#jwt"> <strong> JWT </strong> </a> </li>
       <li> <a href="#encapsulation"> View Encapsulation </a> </li>
       <li> <a href="#async-defer"> async and defer </a> </li>
+      <li> <a href="#debugg"> Debugging </a></li>
       <li class="borderline"><a href="#"> </a></li>
       <li> <a href="#databinding"> Data Binding </a> </li>
       <li> <a href="#datatransfer"> Data Transfer wrelation </a> </li>
@@ -146,7 +148,7 @@
       <li> <a href="#directive"> directive </a> </li>
       <li> <a href="#input"> @input() </a> </li>
       <li> <a href="#datatransferinput"> Data Transfer </a></li>
-      <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle, @HostListener </a> </li>
+      <li> <a href="#ngfor"> *ngFor, *ngIf, else, Toggle, @HostListener, ng-template </a> </li>
       <li> <a href="#pipe"> pipe, pure, impure </a> </li>
       <li> <a href="#viewchild"> viewchild </a> </li>
       <li> <a href="#global-variable"> global-variable </a> </li>
@@ -160,9 +162,7 @@
       <li> <a href="#emp-dynamic"> Emp crud API Dynamic Form </a> </li>
       <li> <a href="#emp-withoutdynamic"> Emp crud WITHOUT API Dynamic Form </a> </li>
       <li> <a href="#crudstaticdata"> Crud Static Data </a></li>
-      <li> <a href="#reusable"> Component Reusable </a> </li>
       <li> <a href="#apiservices"> <strong> API </strong> Rest API / Web API </a> </li>
-
       <li class="borderline"><a href="#"> </a></li>
       <li> <a href="#rxjs"> Rxjs </a> </li>
       <li> <a href="#rxjsoperator"> Rxjs Operators (Map, Switch map, Concate Map, Mergemap, DebounceTime, pluck, Filter)
@@ -217,7 +217,7 @@
       <li> <a href="#azure"> Azure DevOps </a> </li>
       <li> <a href="#jenkins"> <strong> Jenkins </strong> </a></li>
       <li> <a href="#testtools"> Testing Tools </a></li>
-      <li> <a href="#sitecore"> sitecore </a></li>
+      <li> <a href="#sitecore"> sitecore MVC </a></li>
       <li> <a href="#sitecorejss"> Sitecore JSS </a></li>
       <li> <a href="#angreact"> Manage Angular + React in the same project </a></li>
       <li> <a href="#coreweb"> Core Web Vitals ( improve SEO ) </a></li>
@@ -301,7 +301,38 @@
 
     </div>
 
-    <div class="box shadow p-2 mb-3" id="angularjs">
+<div class="box shadow p-2 mb-3" id="debugg">
+<h2> Debugg </h2>
+<p> In Angular, we can debug using console.log(), browser DevTools, Angular DevTools extension, VS Code breakpoints, lifecycle hook logging, and API monitoring via Network tab. </p>
+
+<ol>
+  <li>  <strong> Use console.log() (Quick Checks)  </strong>
+    <ul>
+      <li> Place console.log() statements in your code to see variable values and execution flow. </li>
+      <li> Use console.table() for arrays/objects to see them clearly. </li>
+    </ul>
+  </li>
+  <li> <strong> Browser Developer Tools (Chrome/Edge/Firefox)  </strong>
+    <ul>
+      <li> <strong> Elements tab  </strong>→ Inspect HTML, CSS, and check bindings. </li>
+      <li> <strong> Console tab </strong> → View errors, warnings, and logs. </li>
+      <li> <strong> Sources tab </strong> → Set breakpoints in .ts files (Angular generates source maps in development mode so you can debug TypeScript directly). </li>
+      <li> <strong> Network tab </strong> → Check API requests, responses, headers, and status codes. </li>
+    </ul>
+  </li>
+  <li> <strong> Angular DevTools Extension </strong>
+  <ul>
+    <li> Official Chrome/Edge extension from Angular team. </li>
+    <li> View current state of component inputs, outputs, and signals. </li>
+    <li> Profile change detection cycles. </li>
+    <li> "Angular DevTools" in the Chrome Web Store. </li>
+  </ul>
+  </li>
+</ol>
+
+</div>
+
+<div class="box shadow p-2 mb-3" id="angularjs">
 <h2> Angular Command </h2>
 ng new project-name <br>
 ng serve <br>
@@ -517,7 +548,7 @@ function add(a: number, b: number): number {
     </div>
 
     <div class="box shadow p-2 mb-3" id="why">
-      <h2 id="component"> What are some of the advantages of Angular over other frameworks? </h2>
+      <h2> What are some of the advantages of Angular over other frameworks? </h2>
       <ul>
         <li> <strong> Features that are provided out of the box - </strong> Angular provides a number of built-in
           features like routing, state management, rxjs library and http servicesstraight out of the box. This means
@@ -531,7 +562,7 @@ function add(a: number, b: number): number {
     </div>
 
     <div class="box shadow p-2 mb-3" id="angular-react">
-      <h2 id="component"> Angular and React difference </h2>
+      <h2> Angular and React difference </h2>
       Angular
       <p> Full-fledged framework </p>
       <p> Uses TypeScript by default </p>
@@ -546,9 +577,41 @@ function add(a: number, b: number): number {
     </div>
 
     <h2 id="component"> COMPONENTS </h2>
-    <div class="box shadow p-2 mb-3" id="component">
-      <p> Angular Component is the building block of every Angular application. Every angular application is made up of
+    <div class="box shadow p-2 mb-3">
+      <p> Angular Component is the building block of every Angular application. <br> Every angular application is made up of
         one more Angular Component. </p>
+
+<h2> Types of component </h2>
+<p> Angular has a single component class type, but based on usage, we can classify into root, feature, shared, container, and standalone components. </p>
+
+<ol>
+  <li> Root Component 
+    <ul>
+      <li> The entry point of the Angular application. </li>
+      <li> Declared in AppModule and bootstrapped in main.ts. </li>
+      <li> Example: AppComponent.</li>
+    </ul>
+  </li>
+  <li> Feature Components 
+    <ul> 
+      <li> Represent a specific feature or section of the app. </li>
+  </ul>
+  </li>
+  <li> Shared/Reusable Components <ul>
+    <li> Components used across multiple parts of the app. </li>
+    <li> Often placed inside a SharedModule. </li>
+    <li> Example: Buttons, modals, loaders. </li>
+  </ul>
+</li>
+<li> 
+  Standalone Components (Angular 14+)
+  <ul>
+    <li> Do not require an NgModule. </li>
+    <li> Can be imported directly into other standalone components or modules. </li>
+  </ul>
+</li>
+</ol>
+
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
   import { Component } from '@angular/core';
 
@@ -3321,6 +3384,14 @@ export class DemoComponent {
           This feature simplifies component development and reuse, making it easier to build and maintain large-scale
           applications. </strong></p>
 
+<p> <strong>  Use one standalone component inside another component </strong></p>
+<ol>
+<li> Import the standalone component into the component where you want to use it. </li>
+<li> Add that standalone component to the imports array of the component’s metadata (inside @Component). </li>
+<li> After that, you can use its selector tag directly in the template of the importing component. </li>
+<li> This works because standalone components are self-contained — they don’t need to be declared in an NgModule, </li>
+</ol>
+
 
       <h2> Standalone components Advantages </h2>
 
@@ -3849,6 +3920,15 @@ export class TodoEffects {
 
       <p class="m-0 p-0"> <strong> Angular 18 Signal with @signal Decorator </strong></p>
       <p> Instead of count = signal(0), you write @signal count = 0. </p>
+
+
+
+<!-- 1. Signals are reactive primitives introduced in Angular for fine-grained reactivity.
+2. They hold a value and notify dependents when that value changes — like observables but simpler.
+3. Change detection is automatically triggered when a signal's value is updated.
+4. This removes the need for manual `ChangeDetectorRef` or `@Input` tracking in many cases.
+5. Signals work well with `OnPush`, providing predictable and efficient updates.
+6. They're a key part of Angular's move toward a more reactive, zoneless future. -->
 
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <h2>signal Basic Scenario Example – Counter </h2>
@@ -7987,7 +8067,7 @@ export class MyDialogComponent {
 
 
     <div class="box shadow p-2 mb-3" id="dom">
-      <h2 id="component"> DOM Manipulation </h2>
+      <h2> DOM Manipulation </h2>
       Document Object Model
       <p> <strong> What is DOM Manipulation? </strong></p>
       <p> DOM Manipulation means changing elements, structure, or content of a webpage using JavaScript (or frameworks
