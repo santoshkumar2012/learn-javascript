@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -98,6 +99,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container-fluid">
 
@@ -1117,7 +1119,8 @@ router-outlet> /router-outlet> <!-- child routes load here -->
         components. <br> At its core, Angular applications are made up of modules, components, templates, directives,
         services, and dependency injection.<br> The root module, typically named AppModule, acts as the entry point of
         the application and can include multiple feature modules to organize different functionalities. These modules
-        help in maintaining scalability by dividing the application into separate logical parts. </p>
+        help in maintaining scalability by dividing the application into separate logical parts.
+      </p>
       <p> A component in Angular is the fundamental building block of the UI. <br> Each component consists of three
         parts: an HTML template that defines the structure, a TypeScript class that contains business logic, and a CSS
         file that handles styling. </p>
@@ -1339,7 +1342,9 @@ router-outlet> /router-outlet> <!-- child routes load here -->
 
     <div class="box shadow p-2 mb-3" id="accessibility">
       <h2> Accessibility (A11Y) </h2>
-      <p> <em> "Accessibility in Angular means developing applications that are usable by all users, including those with disabilities. This involves using semantic HTML, ARIA attributes, Angular Material components with built-in a11y support, and ensuring keyboard and screen reader compatibility."</em></p>
+      <p> <em> "Accessibility in Angular means developing applications that are usable by all users, including those
+          with disabilities. This involves using semantic HTML, ARIA attributes, Angular Material components with
+          built-in a11y support, and ensuring keyboard and screen reader compatibility."</em></p>
 
       <p class="p-0 m-0"> Make your UI inclusive for everyone (including users with disabilities). </p>
       <p class="p-0 m-0"> Add alt text for images. </p>
@@ -1413,15 +1418,15 @@ router-outlet> /router-outlet> <!-- child routes load here -->
       <P> <strong> When you call multiple APIs in the same Angular component, and one of them fails, it's important to
           handle errors gracefully so the app doesn’t break and other successful calls can still work. </strong></P>
 
-<h2> <strong> Interview Tip: </strong></h2>
-<p> "If one API fails, how will you handle it while calling multiple APIs in Angular?" </p>
-<ol>
-  <li> <strong> Use forkJoin when you want all must succeed. </strong></li>
-  <li> Use catchError with forkJoin to allow partial success. </li>
-  <li> Use switchMap/concatMap for sequential dependent APIs. </li>
-  <li> You can also mention combineLatest if APIs can emit multiple times (less common for HTTP). </li>
-</ol>
-<pre>
+      <h2> <strong> Interview Tip: </strong></h2>
+      <p> "If one API fails, how will you handle it while calling multiple APIs in Angular?" </p>
+      <ol>
+        <li> <strong> Use forkJoin when you want all must succeed. </strong></li>
+        <li> Use catchError with forkJoin to allow partial success. </li>
+        <li> Use switchMap/concatMap for sequential dependent APIs. </li>
+        <li> You can also mention combineLatest if APIs can emit multiple times (less common for HTTP). </li>
+      </ol>
+      <pre>
   <code>
 import { forkJoin } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -1510,21 +1515,21 @@ forkJoin({
     </div>
 
 
-<div class="box shadow p-2 mb-3" id="http-request">
+    <div class="box shadow p-2 mb-3" id="http-request">
 
-<div class="my-4">
-<p class="p-0 m-0"> <strong> How do you make HTTP requests in Angular? </strong></p>
-<p> You use Angular's HttpClient module to make HTTP requests. </p>
-<ul>
-  <li> First, import HttpClientModule in AppModule. </li>
-  <li> Inject HttpClient in your service or component. </li>
-  <li> Use methods like get(), post(), put(), delete(). </li>
-</ul>
-</div>
+      <div class="my-4">
+        <p class="p-0 m-0"> <strong> How do you make HTTP requests in Angular? </strong></p>
+        <p> You use Angular's HttpClient module to make HTTP requests. </p>
+        <ul>
+          <li> First, import HttpClientModule in AppModule. </li>
+          <li> Inject HttpClient in your service or component. </li>
+          <li> Use methods like get(), post(), put(), delete(). </li>
+        </ul>
+      </div>
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How to import and configure HttpClientModule in Angular ? </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How to import and configure HttpClientModule in Angular ? </strong></p>
+        <pre>
 <code>
 import { HttpClientModule } from '@angular/common/http';
 
@@ -1537,12 +1542,12 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppModule { }
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> Explain how to consume a REST API GET request in Angular. </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> Explain how to consume a REST API GET request in Angular. </strong></p>
+        <pre>
 <code>
 import { HttpClient } from '@angular/common/http';
 constructor(private http: HttpClient) {}
@@ -1553,24 +1558,24 @@ getData() {
 }
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How do you send data using POST request in Angular? </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How do you send data using POST request in Angular? </strong></p>
+        <pre>
 <code>
 postData(data: any) {
   return this.http.post('https://api.example.com/data', data);
 }
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How to handle HTTP error responses in Angular? </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How to handle HTTP error responses in Angular? </strong></p>
+        <pre>
 <code>
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
@@ -1584,13 +1589,14 @@ this.http.get('url').pipe(
 
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> What is Interceptor in Angular and how is it used for API calls? </strong></p>
-<p> An HTTP Interceptor is a middleware that intercepts HTTP requests and responses. You can use it to add headers (like auth tokens), handle errors globally, log requests, etc. </p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> What is Interceptor in Angular and how is it used for API calls? </strong></p>
+        <p> An HTTP Interceptor is a middleware that intercepts HTTP requests and responses. You can use it to add
+          headers (like auth tokens), handle errors globally, log requests, etc. </p>
+        <pre>
 <code>
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -1603,12 +1609,12 @@ export class AuthInterceptor implements HttpInterceptor {
 }
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How to implement retry logic for failed API calls in Angular? </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How to implement retry logic for failed API calls in Angular? </strong></p>
+        <pre>
 <code>
 import { retry } from 'rxjs/operators';
 
@@ -1617,13 +1623,13 @@ this.http.get('url').pipe(
 ).subscribe();
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How can you cancel an ongoing HTTP request in Angular? </strong></p>
-<p> You can use RxJS Subject to trigger an unsubscribe: </p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How can you cancel an ongoing HTTP request in Angular? </strong></p>
+        <p> You can use RxJS Subject to trigger an unsubscribe: </p>
+        <pre>
 <code>
 private unsubscribe$ = new Subject<void>();
 
@@ -1637,29 +1643,31 @@ ngOnDestroy() {
 }
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> Explain how Observables work with HTTPClient. </strong></p>
-<p> HttpClient methods like get(), post() return Observables. Angular subscribes to these Observables to handle async data streams, enabling operators like map, filter, catchError, etc., for transformation and error handling. </p>
-</div>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> Explain how Observables work with HTTPClient. </strong></p>
+        <p> HttpClient methods like get(), post() return Observables. Angular subscribes to these Observables to handle
+          async data streams, enabling operators like map, filter, catchError, etc., for transformation and error
+          handling. </p>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> Difference between HttpClient and Http in Angular? </strong></p>
-<ul>
-<li> HttpClient (introduced in Angular 4.3) is a simplified, improved, and powerful API.</li>
-<li> Http is deprecated. </li>
-<li> HttpClient provides typed response objects, interceptors, progress events, etc. </li>
-</ul>
-</div>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> Difference between HttpClient and Http in Angular? </strong></p>
+        <ul>
+          <li> HttpClient (introduced in Angular 4.3) is a simplified, improved, and powerful API.</li>
+          <li> Http is deprecated. </li>
+          <li> HttpClient provides typed response objects, interceptors, progress events, etc. </li>
+        </ul>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How to handle API loading states (show loader) globally in Angular? </strong></p>
-<p> Use an HTTP Interceptor to track requests in progress: </p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How to handle API loading states (show loader) globally in Angular? </strong></p>
+        <p> Use an HTTP Interceptor to track requests in progress: </p>
+        <pre>
 <code>
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -1673,14 +1681,14 @@ export class LoaderInterceptor implements HttpInterceptor {
 }
 </code>
 </pre>
-</div>
+      </div>
 
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> What are RxJS operators commonly used with REST API in Angular? </strong></p>
-<p> Use an HTTP Interceptor to track requests in progress: </p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> What are RxJS operators commonly used with REST API in Angular? </strong></p>
+        <p> Use an HTTP Interceptor to track requests in progress: </p>
+        <pre>
 <code>
 map()
 filter()
@@ -1692,13 +1700,13 @@ retry()
 finalize()
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> How to handle multiple API calls and wait for all to finish? </strong></p>
-<p> Use RxJS forkJoin: </p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> How to handle multiple API calls and wait for all to finish? </strong></p>
+        <p> Use RxJS forkJoin: </p>
+        <pre>
 <code>
 forkJoin([
   this.http.get('url1'),
@@ -1708,34 +1716,34 @@ forkJoin([
 });
 </code>
 </pre>
-</div>
+      </div>
 
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> Difference between Promise and Observable in HTTP Requests (Angular) </strong></p>
-<ul>
-<li> <strong> Promise </strong></li>
-<li> Executes immediately when created.	 </li>
-<li> Can handle only one response. </li>
-<li> Does not support RxJS operators (map, filter).	</li>
-<li> Cannot be cancelled once started.	 </li>
-<li> Can chain using .then().	</li>
-<li> Handled via .catch().	 </li>
-<li> Rarely used in HTTP (old way).	 </li>
-<li> <strong> Observable </strong></li>
-<li> Executes only when subscribed. (Lazy by nature) </li>
-<li> Can emit multiple values over time (Streams). </li>
-<li> Supports powerful RxJS operators (map, filter, etc.) </li>
-<li> Can be cancelled using unsubscribe(). </li>
-<li> Uses operators like pipe(), switchMap(), etc. </li>
-<li> Handled via catchError() operator. </li>
-<li> Angular's HttpClient returns Observables. </li>
-</ul>
-</div>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> Difference between Promise and Observable in HTTP Requests (Angular) </strong></p>
+        <ul>
+          <li> <strong> Promise </strong></li>
+          <li> Executes immediately when created. </li>
+          <li> Can handle only one response. </li>
+          <li> Does not support RxJS operators (map, filter). </li>
+          <li> Cannot be cancelled once started. </li>
+          <li> Can chain using .then(). </li>
+          <li> Handled via .catch(). </li>
+          <li> Rarely used in HTTP (old way). </li>
+          <li> <strong> Observable </strong></li>
+          <li> Executes only when subscribed. (Lazy by nature) </li>
+          <li> Can emit multiple values over time (Streams). </li>
+          <li> Supports powerful RxJS operators (map, filter, etc.) </li>
+          <li> Can be cancelled using unsubscribe(). </li>
+          <li> Uses operators like pipe(), switchMap(), etc. </li>
+          <li> Handled via catchError() operator. </li>
+          <li> Angular's HttpClient returns Observables. </li>
+        </ul>
+      </div>
 
-<div class="my-4">
-<p class="p-0 mb-2"> <strong> Example: Angular HTTP Request </strong></p>
-<pre>
+      <div class="my-4">
+        <p class="p-0 mb-2"> <strong> Example: Angular HTTP Request </strong></p>
+        <pre>
 <code>
 // Observable (Angular HttpClient default)
 this.http.get('api/url').subscribe(data => {
@@ -1748,13 +1756,15 @@ this.http.get('api/url').toPromise().then(data => {
 });
 </code>
 </pre>
-<h2 class="mt-4"> <strong> Which is better in Angular HTTP? </strong></h2>
-<p> Angular’s HttpClient returns Observables because they provide more flexibility like cancellation, multiple values handling, and RxJS operators. Promises are useful for simple one-time responses but lack the stream capabilities and operators that Observables offer.</p>
-</div>
+        <h2 class="mt-4"> <strong> Which is better in Angular HTTP? </strong></h2>
+        <p> Angular’s HttpClient returns Observables because they provide more flexibility like cancellation, multiple
+          values handling, and RxJS operators. Promises are useful for simple one-time responses but lack the stream
+          capabilities and operators that Observables offer.</p>
+      </div>
 
 
 
-</div>
+    </div>
 
 
     <div class="box shadow p-2 mb-3" id="validation">
@@ -7860,7 +7870,7 @@ onSubmit(): void {
 
     <div class="box shadow p-2 mb-3" id="material">
       <h2> Angular Material </h2>
-      <p>  ng add @angular/material </p>
+      <p> ng add @angular/material </p>
       <p> Angular Material is a User Interface (UI) component library that we can use in their Angular projects to speed
         up the development of consistent user interfaces.</p>
       <p> Angular Material offers you reusable and beautiful UI components like Cards, Inputs, Data Tables, Datepickers,
@@ -7974,9 +7984,9 @@ mat-form-field>
   </code>
 </pre>
 
-<p> <strong> How do you implement Angular Material Table with pagination and sorting? </strong></p>
+      <p> <strong> How do you implement Angular Material Table with pagination and sorting? </strong></p>
 
-<pre style="white-space: pre-wrap; word-wrap: break-word;">
+      <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 ng add @angular/material
 
@@ -10077,7 +10087,7 @@ p>Message from Child: {{ messageFromChild }} /p>
 </code>
 </pre>
 
-<hr>
+      <hr>
 
 
 <div class="mt-5">
@@ -10161,7 +10171,7 @@ ul>
 <div class="mt-5">
 <h2> @Output child to parent with real API data </h2>
 
-<pre style="white-space: pre-wrap; word-wrap: break-word;">
+        <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 
 1. Parent.ts 
