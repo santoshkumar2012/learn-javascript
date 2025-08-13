@@ -9914,10 +9914,10 @@ export class AppComponent {
     <div class="box shadow p-2 mb-3" id="datatransferinput">
       <h2> Data Transfer by @Input and @Output </h2>
 
-      <h2> Data Transfer by Parent to Child </h2>
+<h2 class="mt-5"> Data Transfer by Parent to Child </h2>
 
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
-  <code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
 1. Parent.component.ts 
 
 import { Component } from '@angular/core';
@@ -9968,14 +9968,16 @@ h3>Message from Parent: {{ message }}  /h3>
 </code>
 </pre>
 
-      <p>
-        @Output() creates a custom event. <br>
-        .emit(value) triggers that event and sends the value to the parent.<br>
-        EventEmitter A special class to emit events<br>
-        $event The data received in parent component<br>
-      </p>
-      <h2> @Output Child to Parent </h2>
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
+<p style="font-size: 0.9rem;">
+@Output() creates a custom event. <br>
+.emit(value) triggers that event and sends the value to the parent.<br>
+EventEmitter A special class to emit events<br>
+$event The data received in parent component<br>
+</p>
+
+<h2 class="mt-5 mb-2"> @Output Child to Parent </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 1. Child.Compoent.ts
 
@@ -9990,7 +9992,7 @@ styleUrl: './childs.component.css'
 })
 
 export class ChildsComponent {
-@Output() sendMessage = new EventEmitter<string>();
+@Output() sendMessage = new EventEmitter string>();
 sendToParent(){
 this.sendMessage.emit('Hello from Child component!');
 }
@@ -10040,9 +10042,9 @@ p>Message from Child: {{ messageFromChild }} /p>
       <hr>
 
 
-      <div class="mt-5">
-        <h2> @Input Parent to child with real API data </h2>
-        <pre style="white-space: pre-wrap; word-wrap: break-word;">
+<div class="mt-5">
+<h2 class="mb-2"> @Input Parent to child with real API data </h2>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
 
 1. ParentComponent.ts
@@ -10117,8 +10119,9 @@ ul>
 </pre>
       </div>
 
-      <div class="mt-5">
-        <h2> @Output child to parent with real API data </h2>
+
+<div class="mt-5">
+<h2> @Output child to parent with real API data </h2>
 
         <pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
@@ -10212,10 +10215,10 @@ p> Child is fetching data from API and sending to Parent... /p>
 
       <hr>
 
-      <div class="mt-5">
-        <h2> Pass [1, 2, 3] from Parent to Child </h2>
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from Parent to Child </h2>
 
-        <pre style="white-space: pre-wrap; word-wrap: break-word;">
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 
   1. Parent.ts 
@@ -10272,16 +10275,15 @@ Child Component
 
 </code>
 </pre>
+</div>
 
-      </div>
+<hr>
 
-      <hr>
+<div class="mt-5">
+<h2> Pass [1, 2, 3] from child to Parent </h2>
 
-      <div class="mt-5">
-        <h2> Pass [1, 2, 3] from child to Parent </h2>
-
-        <pre style="white-space: pre-wrap; word-wrap: break-word;">
-  <code>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
     1. child component.ts 
 
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
@@ -10291,7 +10293,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   templateUrl: './child.component.html'
 })
 export class ChildComponent implements OnInit {
-  @Output() sendData = new EventEmitter<number[]>();
+  @Output() sendData = new EventEmitter number[]>();
 
   ngOnInit() {
     const numbers = [1, 2, 3];
@@ -10342,12 +10344,107 @@ Parent Component
 
   </code>
 </pre>
-
-      </div>
-
+</div>
 
 
-      <hr>
+<div class="mt-5">
+<h2> Parent to Child with Live Input Value </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+//parent.ts 
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CdataComponent } from "../cdata/cdata.component";
+
+@Component({
+  selector: 'app-pdata',
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, CdataComponent],
+  templateUrl: './pdata.component.html',
+  styleUrl: './pdata.component.css'
+})
+export class PdataComponent {
+parentInput = '';
+}
+
+//parent.html 
+div class="container"> 
+app-cdata [inputValue]="parentInput">/app-cdata>
+input type="text" [(ngModel)]="parentInput" placeholder="Type something" class="form-control" />
+/div>
+
+
+//child.html 
+h3> Value from Parent Input: {{ inputValue }} /h3>
+
+//child.ts 
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'app-cdata',
+  imports: [],
+  templateUrl: './cdata.component.html',
+  styleUrl: './cdata.component.css'
+})
+export class CdataComponent {
+  @Input() inputValue!: string; // Will receive live value from parent
+}
+
+</code>
+</pre>
+</div>
+
+
+<div class="mt-5">
+<h2> child to Parent with Live Input Value </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+//child.component.ts 
+import { Component, Output, EventEmitter } from '@angular/core';
+@Component({
+  selector: 'app-child',
+  template: ``
+})
+export class ChildComponent {
+  @Output() valueChange = new EventEmitter string>(); // Create an event emitter
+
+  sendValue(value: string) {
+    this.valueChange.emit(value); // Emit the value to the parent
+  }
+}
+
+//child.component.html 
+input type="text" #childInput placeholder="Enter something" />
+button (click)="sendValue(childInput.value)">Send to Parent /button>
+
+//parent.component.ts
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-parent',
+  template: ``
+})
+export class ParentComponent {
+  childValue = '';
+  receiveFromChild(value: string) {
+    this.childValue = value; // Store the value from child
+  }
+}
+
+
+//parent.component.html
+app-child (valueChange)="receiveFromChild($event)"> /app-child>
+p>Value received from child: {{ childValue }} /p>
+
+</code>
+</pre>
+</div>
+
+
+
+<hr>
 
       <div class="mt-5">
 
