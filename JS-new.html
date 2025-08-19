@@ -156,7 +156,7 @@
       <li> <a href="#counter"> Counter using Closure (No Global Variable) </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
-      <li> <a href="#html"> HTML5 </a> </li>
+      <li> <a href="#html"> <strong> HTML5 </strong> </a> </li>
       <li> <a href="#html5"> HTML5 API, Canvas</a> </li>
       <li> <a href="#semantic"> Semantic </a> </li>
       <li> <a href="#div-span"> div and span </a></li>
@@ -168,16 +168,18 @@
       <li> <a href="#void"> void elements </a></li>
       <li> <a href="#pseudoclass"> Pseudo-class and Pseudo-element</a></li>
 
-      <li> <a href="#rwd"> Responsive Design </a> </li>
+      <li> <a href="#rwd"> <strong> Responsive Design </strong> </a> </li>
+      <li> <a href="#crossbrowser"> Cross-Browser Compatibility </a></li>
       <li> <a href="#grid-flexbox"> <strong> CSS Grid & Flexbox </strong> </a> </li>
       <li> <a href="#cssoptimize"> CSS Optimization Techniques </a></li>
       <li> <a href="#cssAnimation"> CSS Animation </a></li>
-      <li> <a href="#less"> Less, Sass, Scss </a> </li>
+      <li> <a href="#less"> <strong> Less, Sass, Scss </strong> </a> </li>
       <li> <a href="#position"> Position style </a> </li>
       <li> <a href="#gridFlex"> Gridflex </a> </li>
-      <li> <a href="#sse"> SSE </a></li>
-      <li> <a href="#debugging"> Debugging </a></li>
+      <li> <a href="#sse"> <strong> SSE vs WebSockets </strong> </a></li>
+      <li> <a href="#debugging"> <strong> Debugging </strong> </a></li>
       <li> <a href="#frontend"> Frontend Performance </a></li>
+      <li> <a href="#bootstraptailwind"> Bootstap vs Tailwind css </a></li>
       
       <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
       <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
@@ -3838,23 +3840,47 @@ person.name = "Jane";
         Application tab: View localStorage, sessionStorage, cookies. <br>
       </div>
 
-      <div id="sse">
-        <p> SSE is a way for the server to push real-time updates to the browser over HTTP — using a unidirectional
-          communication channel. </p>
+      <div id="sse" class="mt-5">
+        <h2> SSE </h2>
+        <p>
+          <strong> SSE is a simple way to push server updates to the client using HTTP, but it’s one-way. <br>
+             WebSockets allow full-duplex, two-way communication, which makes them suitable for real-time applications like chat or gaming. </strong>
+        </p>
+        <p> Server-Sent Events (SSE) is a one-way communication channel where the server pushes updates to the client over a single HTTP connection. </p>
+
         <h2> SSE vs WebSockets </h2>
         <p> <strong> SSE </strong></p>
-        <p class="p-0 m-0"> One-way (Server→Client) </p>
-        <p class="p-0 m-0"> Protocol -> HTTP </p>
-        <p class="p-0 m-0"> Reconnect -> Auto </p>
-        <p class="p-0 m-0"> Easy </p>
+        <p class="p-0 m-0"> Based on HTTP protocol. </p>
+        <p class="p-0 m-0"> Works with EventSource API in JavaScript. </p>
+        <p class="p-0 m-0"> Only server → client communication (not bidirectional). </p>
+        <p class="p-0 m-0"> Example use: Live news feed, stock prices, notifications. </p>
+<pre>
+<code>
+const eventSource = new EventSource('/events');
+eventSource.onmessage = function(event) {
+  console.log("New message: ", event.data);
+};
+</code>
+</pre>
+
+        <p class="mt-5"> <strong> WebSocket </strong> = Two-way (Client ↔ Server)</p>
         <p> <strong> WebSocket </strong></p>
         <p class="p-0 m-0"> Two-way (Full duplex) </p>
-        <p class="p-0 m-0"> WebSocket (WS) </p>
-        <p class="p-0 m-0"> Manual </p>
+        <p class="p-0 m-0"> Suitable for real-time apps like chat, gaming, live collaboration, stock trading.</p>
+        <p class="p-0 m-0"> Both server ↔ client communication. </p>
         <p class="p-0 m-0"> Complex </p>
+<pre>
+  <code>
+const socket = new WebSocket("ws://localhost:8080");
+socket.onmessage = (event) => {
+  console.log("Message from server: ", event.data);
+};
+socket.send("Hello Server!");
+  </code>
+</pre>
       </div>
 
-      <div id="html5">
+      <div id="html5" class="mt-5">
         <h2> HTML 5 CANVAS </h2>
         <P> HTML5 canvas element is used to draw graphics . Lines and shapes. Animations. Games, charts</P>
 
@@ -4139,6 +4165,26 @@ script>
     </code>
   </pre>
       </div>
+
+<div id="bootstraptailwind" class="mt-5">
+<h2> What is different between Bootstrap and Tailwind css and how identify ? </h2>
+<p> “Bootstrap is a component-based framework with predefined UI elements,  Tailwind is a utility-first framework that gives low-level classes for building custom designs. Bootstrap sites look similar, while Tailwind gives more flexibility. You can identify them by checking class names—btn, row mean Bootstrap; bg-blue-500, px-4 mean Tailwind.” </p>
+
+<h2> Tailwind css </h2>
+<ul>
+  <li> No prebuilt UI components (just utility classes). </li>
+  <li> More flexible, but you design from scratch. </li>
+  <li> Lightweight because unused classes can be removed (purgeCSS). </li>
+  <li> button class="bg-blue-500 text-white px-4 py-2 rounded"> Click Me /button> </li>
+</ul>
+
+<h2> How to Identify on a Website </h2>
+<ul>
+  <li> class names like btn, btn-primary, container, row, col-md-6 → It’s Bootstrap. </li>
+  <li> class names like bg-blue-500, px-4, py-2, flex, grid-cols-3 → It’s Tailwind CSS. </li>
+</ul>
+
+</div>
 
       <div id="database" class="mt-5">
         <h2> What are Database Technologies? </h2>
@@ -5351,6 +5397,7 @@ Promises & Async/Await (Handle Async Code Better)
           <li> Flexible images and media </li>
           <li> Media queries </li>
           <li> Viewport meta tag </li>
+          <li> Mobile-First Approach → Design for smaller screens first, then scale up. </li>
         </ul>
 
         <h2> <strong> Media query </strong></h2>
@@ -5421,6 +5468,27 @@ Promises & Async/Await (Handle Async Code Better)
           modular and reusable designs. </p>
 
       </div>
+
+
+<div id="crossbrowser" class="mt-5">
+<h2> <strong> Cross-Browser Compatibility </strong> </h2>
+<p> Cross-browser compatibility ensures that a website works consistently across different browsers (Chrome, Firefox, Safari, Edge, etc.) and their versions. </p>
+<ul>
+  <li> Use Standard HTML5, CSS3, and JS (avoid browser-specific code). </li>
+  <li> Test on Multiple Browsers & Devices (BrowserStack, LambdaTest, or manual testing). </li>
+  <li> Vendor Prefixes (if needed) </li>
+  <li> <strong> Polyfills & Transpilers → </strong> Use Babel, Autoprefixer for older browser support. </li>
+</ul>
+<pre>
+<code>
+.box {
+  -webkit-box-shadow: 2px 2px 5px #000;
+  -moz-box-shadow: 2px 2px 5px #000;
+  box-shadow: 2px 2px 5px #000;
+}
+</code>
+</pre>
+</div>
 
 
       <div id="grid-flexbox" class="mt-5">
