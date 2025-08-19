@@ -266,13 +266,86 @@
 </pre>
 
       <ul class="mt-4">
-        <li> <strong> var </strong> It is function block variable declaration. it's allow redeclaration. </li>
-        <li> <strong> let </strong> It is block scoped variable declaration. it's don't allow redeclaration. </li>
-        <li> <strong> const </strong> It is block scoped variable declaration. value can't be reassign. </li>
         <li> <strong> == </strong> checks value only </li>
         <li> <strong> === </strong> checks value and data type both. </li>
       </ul>
 
+      <h2> <strong> var </strong> </h2>
+      <p> var is function-scoped and hoisted, meaning its declaration is moved to the top of the scope and initialized with undefined. </p>
+        Examples : <br>
+        console.log(a); // undefined (hoisted, not error) <br>
+        var a = 10; <br>
+
+      <h2 class="mt-4"> <strong> let and Const </strong> </h2>
+      <p> let and const are block-scoped and hoisted to the temporal dead zone — 
+        meaning you can’t access them before their declaration. </p>
+
+<pre>
+<code>
+//let Example 
+console.log(x); // ❌ ReferenceError (TDZ)
+let x = 5;
+
+if (true) {
+  let y = 10;
+  console.log(y); // ✅ 10
+}
+console.log(y); // ❌ ReferenceError (block scoped)
+
+//const Example 
+console.log(a); // ❌ ReferenceError (TDZ)
+const a = 100;
+
+if (true) {
+  const b = 200;
+  console.log(b); // ✅ 200
+}
+console.log(b); // ❌ ReferenceError (block scoped)
+
+// const also requires initialization
+const c; // ❌ SyntaxError: Missing initializer
+
+// Example = var - let 
+
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000); // logs 3,3,3
+}
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000); // logs 0,1,2
+}
+</code>
+</pre>
+
+<p> <strong> let and const = different between </strong> 
+  let - let re-assigned, Cannot be re-declared <br>
+  const - Cannot be re-assigned or re-declared
+</p>
+
+<p class="mt-5 p-0 mb-0"> null is an intentional absence of value, explicitly set by the developer. </p>
+<p> undefined means a variable has been declared but hasn’t been assigned a value yet, or a property doesn’t exist. </p>
+<pre>
+<code>
+let a;
+console.log(a); // undefined
+let b = null;
+console.log(b); // null
+</code>
+</pre>
+
+<h2> Nullish coalescing operator (??) </h2>
+<p> The nullish coalescing operator (??) is used to provide a default value when the left-hand side is either null or undefined. </p>
+<pre>
+<code>
+let count = 0;
+
+let result1 = count || 10;   // returns 10 (because 0 is falsy)
+let result2 = count ?? 10;   // returns 0 (because 0 is NOT null/undefined)
+
+console.log(result1); // 10
+console.log(result2); // 0
+
+</code>
+</pre>
     </div>
 
 
@@ -1092,41 +1165,6 @@ outer();
     <div class="box shadow p-2 mb-3" id="foreach">
       <h2> ForEach </h2>
       <hr>
-      <h2 class="mt-4"> <strong> Event Loop </strong></h2>
-      <p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and
-        processing events. <br> It makes asynchronous programming (like setTimeout, Promises, and async/await)
-      </p>
-      <h2> How it works (step by step):</h2>
-      <ol>
-        <li> Call Stack - Executes your code line-by-line </li>
-        <li> Web APIs / Node APIs - setTimeout, DOM events, or fetch are handled outside the stack by the browser </li>
-        <li> Callback Queue (or Task Queue) - Stores callbacks (like setTimeout or resolved Promises) that are waiting
-          to run. </li>
-        <li> Event Loop - Keeps checking the stack. If it's empty, it pushes the next task from the queue to the stack.
-        </li>
-      </ol>
-
-      <strong> Examples </strong>
-      <pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
-console.log("Start");
-setTimeout(() => {
-  console.log("Timeout callback");
-}, 0);
-Promise.resolve().then(() => {
-  console.log("Promise callback");
-});
-console.log("End");
-</code>
-</pre>
-      output - <br>
-      Start <br>
-      End <br>
-      Promise callback <br>
-      Timeout callback <br>
-      <hr>
-
-
-
       <p> ForEach method is used to iterate over arrays and execute a provided function once for each element. </p>
       <p> ForEach is faster because it doesn’t create a new array. </p>
       <p> map is slightly slower because it returns a new array. </p>
@@ -1144,6 +1182,40 @@ console.log(sum); //100
 
 
     <div class="box shadow p-2 mb-3" id="event">
+
+<h2 class="mt-4"> <strong> Event Loop </strong></h2>
+      <p> The event loop is a component of the JavaScript engine that manages the execution of code, collecting and
+        processing events. <br> It makes asynchronous programming (like setTimeout, Promises, and async/await)
+      </p>
+      <h2> How it works (step by step):</h2>
+      <ol>
+        <li> Call Stack - Executes your code line-by-line </li>
+        <li> Web APIs / Node APIs - setTimeout, DOM events, or fetch are handled outside the stack by the browser </li>
+        <li> Callback Queue (or Task Queue) - Stores callbacks (like setTimeout or resolved Promises) that are waiting
+          to run. </li>
+        <li> Event Loop - Keeps checking the stack. If it's empty, it pushes the next task from the queue to the stack.
+        </li>
+      </ol>
+
+<strong> Examples </strong>
+<pre style="white-space: pre-wrap; word-wrap: break-word;"><code>
+console.log("Start");
+setTimeout(() => {
+  console.log("Timeout callback");
+}, 0);
+Promise.resolve().then(() => {
+  console.log("Promise callback");
+});
+console.log("End");
+</code>
+</pre>
+      output - <br>
+      Start <br>
+      End <br>
+      Promise callback <br>
+      Timeout callback <br>
+      <hr>
+
       <h2> Event </h2>
       <p> An event in JavaScript is an action in the browser, user clicking a button, typing in an input field, or
         scrolling a page. JavaScript can detect these events and execute functions accordingly. </p>

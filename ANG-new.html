@@ -227,10 +227,9 @@
       <li> <a href="#deployment"> Fronted -> Backend, Deployment, CORS </a>
       </li>
     </ul>
-
     <h2 class="mt-4">INTRO</h2>
     <div class="box shadow p-2 mb-3">
-<em> I have done MCA in 2016. I have overall 8 years experience as fronted developer in Angular 4 years experience. </em> <br> <br>
+    <em> I have done MCA in 2016. I have overall 8 years experience as fronted developer in Angular 4 years experience. </em> <br> <br>
 
       "In my previous role at Quickparts, a manufacturing-based company, I worked primarily as an Angular Frontend
       Developer. My main responsibility was building the Product Management Dashboard, where I developed complex UI
@@ -1060,14 +1059,16 @@ router-outlet> /router-outlet> <!-- child routes load here -->
         index.html </p>
 
       <h2 class="mt-4"> <strong> Browser Behind Angular Application </strong> </h2>
-      <p> Browser Load index.html ( app-root> /app-root> ) => <br> Main.ts (File Runs) => <br> Bootstrap Application => <br> Angular
+      <!-- <p> Browser Load index.html ( app-root> /app-root> ) => <br> Main.ts (File Runs) => <br> Bootstrap Application => <br> Angular
         Replace app-root> /app-root> ( HTML from APP component ) <br>
         => Angular Setup DI Dependancy Injection ( Services, Routes, HTTP Client ) => Router read the URL => Component (
         Tree Based ) => Data Binding Event = Angular Render DOM
-      </p>
+      </p> -->
 
-
-    </div>
+<p> First of all Browser loads Angular Application by requesting the index.html inside <app-root></app-root> element, app-root as the container and it is connecting the main.ts file. where calls bootstrapApplication() so bootstrap start the angular application by loading root component. Next Angular replaces <app-root> in index.html Next root component tree is created. </p>
+<p> Next Angular set up dependency injection services, interceptors, router, HTTPClient etc. Next angular router reads the current url and decides which component should be loads based on on the root configuration. Angular then builds the component tree from the root. </p>
+<p> After rendering Angular change detection is applied. Next data binding (One-way or two-way) event handling are connected between the component. Finally, the browser DOM is updated to reflect the Angular component tree. </p>
+</div>
 
 
     <div class="box shadow p-2 mb-3" id="angularcli">
