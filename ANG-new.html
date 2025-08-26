@@ -11270,6 +11270,87 @@ p>{{ JSON.stringify(arrayToPrint(arr3)) }}/p>
   </code>
 </pre>
 
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+  ts 
+  
+  import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-email-form',
+  templateUrl: './email-form.component.html',
+})
+export class EmailFormComponent {
+  form: FormGroup;
+
+  // Example existing emails (in real case you will check from API)
+  private existingEmails = ['test@example.com', 'santosh@gmail.com'];
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      email: [
+        '',
+        [Validators.required, Validators.email], // ✅ Format + Required validation
+        [this.emailExistsValidator()]           // ✅ Async validator
+      ]
+    });
+  }
+
+  // Custom Async Validator
+  emailExistsValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<{ emailExists: boolean } | null> => {
+      if (!control.value) {
+        return of(null);
+      }
+      return of(this.existingEmails.includes(control.value.toLowerCase())).pipe(
+        delay(1000), // simulate server delay
+        map(exists => (exists ? { emailExists: true } : null))
+      );
+    };
+  }
+
+  onSubmit() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+    }
+  }
+}
+
+
+
+
+html 
+
+form [formGroup]="form" (ngSubmit)="onSubmit()">
+  label for="email">Email:/label>
+  input id="email" type="email" formControlName="email" />
+
+  <!-- Required Error -->
+  div *ngIf="form.get('email')?.touched && form.get('email')?.hasError('required')" style="color:red">
+    Email is required
+  /div>
+
+  <!-- Invalid Format Error -->
+  div *ngIf="form.get('email')?.touched && form.get('email')?.hasError('email')" style="color:red">
+    Please enter a valid email
+  /div>
+
+  <!-- Already Exists Error -->
+  div *ngIf="form.get('email')?.touched && form.get('email')?.hasError('emailExists')" style="color:red">
+    This email is already in use, please use another one
+  /div>
+
+  button type="submit" [disabled]="form.invalid">Submit/button>
+/form>
+
+  
+ </code>
+ </pre>
+
 </div>
 
 
