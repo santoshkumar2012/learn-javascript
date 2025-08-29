@@ -165,6 +165,7 @@
       <li> <a href="#emp-dynamic"> Emp crud API Dynamic Form </a> </li>
       <li> <a href="#emp-withoutdynamic"> Emp crud WITHOUT API Dynamic Form </a> </li>
       <li> <a href="#crudstaticdata"> Crud Static Data </a></li>
+      <li> <a href="#crudpagination"> Crud with input-edit Pagination </a></li>
       <li> <a href="#apiservices"> <strong> API </strong> Rest API / Web API </a> </li>
       <li class="borderline"><a href="#"> </a></li>
       <li> <a href="#rxjs"> Rxjs </a> </li>
@@ -1362,6 +1363,9 @@ AppComponent (root)
         <li> Server-Side Rendering (SSR) with Angular Universal </li>
         <li> Service Worker and PWA , ng add @angular/pwa</li>
       </ol>
+
+      <h2 class="mt-4"> Tree Shaking  </h2>
+    <p> Tree Shaking in Angular is an optimization technique that removes unused code (functions, classes, modules) from the final production bundle, reducing app size and improving performance. </p>
 
     </div>
 
@@ -4834,7 +4838,59 @@ button (click)="reloadUI()" class="btn btn-success mb-5"> Reload UI /button>
   <li> XMLHttpRequest (used in HTTP calls) </li>
 </ul>
 
-    </div>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+Example 1: setTimeout with Zone.js
+@Component({
+  selector: 'app-root',
+  template: `h2>{{ message }}/h2>`
+})
+export class AppComponent {
+  message = "Hello";
+  ngOnInit() {
+    setTimeout(() => {
+      this.message = "Updated after 2 sec"; 
+      // Zone.js detects this async change and Angular updates DOM automatically
+    }, 2000);
+  }
+}
+Note - Without Zone.js, Angular would not know message changed inside setTimeout.
+---
+Example 2: Promise
+@Component({
+  selector: 'app-root',
+  template: `p>{{ data }} /p>`
+})
+export class AppComponent {
+  data = "Loading...";
+  ngOnInit() {
+    Promise.resolve("Data fetched!").then(res => {
+      this.data = res;
+      // Zone.js tracks the promise, Angular updates UI automatically
+    });
+  }
+}
+----
+Example 3: Promise
+HTTP Request
+@Component({
+  selector: 'app-root',
+  template: `div>{{ user?.name }}/div>`
+})
+export class AppComponent {
+  user: any;
+  constructor(private http: HttpClient) {}
+  ngOnInit() {
+    this.http.get('https://jsonplaceholder.typicode.com/users/1')
+      .subscribe(response => {
+        this.user = response; 
+        // Zone.js detects async HTTP, updates UI automatically
+      });
+  }
+}
+</code>
+</pre>
+</div>
 
     <div class="box shadow p-2 mb-3" id="microfronted">
       <h2> <strong> Micro Frontend </strong> </h2>
@@ -9724,6 +9780,221 @@ div class="container">
           </pre>
 
     </div>
+
+
+<div class="box shadow p-2 mb-3" id="crudpagination">
+<h2> User crud operation and edit same field visiable input box with pagination </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+---- User ts file 
+
+import { CommonModule } from '@angular/common';
+import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+interface User {
+  [key: string]: any;
+  id: string;
+  name: string;
+  bio: string;
+  language: string;
+  version: string;
+  isEditing?: boolean;
+  viewUser?: boolean
+  form?: FormGroup;
+}
+
+@Component({
+  selector: 'app-user-data',
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  templateUrl: './user-data.component.html',
+  styleUrl: './user-data.component.css'
+})
+export class UserDataComponent {
+
+  users!: User[]
+
+  displayedUsers: any[] = []
+  pageSize = 10;
+  currentPage = 0;
+
+  tableData: {title: string, field: string} [] = [
+    {
+      title: 'Id',
+      field: 'id'
+    },
+    {
+      title: 'Name',
+      field: 'name'
+    },
+    {
+      title: 'Bio',
+      field: 'bio'
+    },
+    {
+      title: 'Language',
+      field: 'language'
+    },
+    {
+      title: 'Version',
+      field: 'version'
+    },
+    {
+      title: 'Action',
+      field: 'action'
+    }
+  ]
+  constructor(private http: HttpClient, private router: Router, private fb: FormBuilder) { }
+
+  ngOnInit() {
+    this.getUser()
+  }
+
+  getUser() {
+    this.http.get('https://microsoftedge.github.io/Demos/json-dummy-data/64KB.json').subscribe((response: any) => {
+      this.users = response;
+      this.loadPage()
+    });
+  }
+
+  userEdit(user: User) {
+    user.isEditing = true;
+    user.form = this.fb.group({
+      id      : [user.id, [Validators.required]],
+      name    : [user.name, [Validators.required, Validators.minLength(3)]],
+      bio     : [user.bio, [Validators.required]],
+      language: [user.language, [Validators.required]],
+      version : [user.version, [Validators.required]]
+    });
+  }
+
+
+  save(user: User) {
+    if (user.form?.valid) {
+      const updated   = user.form.value;
+      user.name       = updated.name;
+      user.bio        = updated.bio;
+      user.language   = updated.language;
+      user.version    = updated.version
+      user.isEditing  = false;
+    }
+  }
+
+  view(user: User) {
+    user.viewUser = !user.viewUser
+  }
+
+  cancel(user: User) {
+    user.isEditing = false;
+  }
+
+  loadPage(){
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    this.displayedUsers = this.users.slice(start, end);
+  }
+
+  nextPage(){
+    if((this.currentPage + 1) * this.pageSize < this.users.length) {
+      this.currentPage++;
+      this.loadPage()
+    }
+  }
+
+  prevPage(){
+    if(this.currentPage > 0){
+      this.currentPage--;
+      this.loadPage()
+    }
+  }
+
+}
+
+
+--- user html file 
+
+div class="container">
+h1 class="mt-4"> User Data Management /h1>
+div class="user-data mt-5">
+table class="table table-bordered">
+thead>
+tr>
+@for (header of tableData; track $index) {
+th> {{header.title}} /th>
+}
+/tr>
+/thead>
+tbody>
+@for (user of displayedUsers; track user.id) {
+tr>
+@for (header of tableData; track $index) {
+
+@if (header.field == 'id') {
+td> {{user.id}} </td>
+
+} @else if(header.field != 'action') {
+td>
+@if (!user.isEditing) {
+{{ user[header.field]}}
+} @else {
+form [formGroup]="user.form!">
+input type="text" class="form-control" [placeholder]="header.title"
+[formControlName]="header.field" />
+@if (user.form?.get(header.field)?.touched && user.form?.get(header.field)?.invalid) {
+div class="text-danger small"> {{header.title}} is required /div>
+}
+/form>
+}
+/td>
+} @else {
+td>
+div class="d-flex">
+@if (!user.isEditing) {
+button class="btn btn-primary btn-sm me-2" (click)="userEdit(user)">Edit/button>
+} @else {
+button class="btn btn-success btn-sm me-2" (click)="save(user)" [disabled]="user.form?.invalid"> Save /button>
+button class="btn btn-danger btn-sm me-2" (click)="cancel(user)">Cancel/button>
+}
+button class="btn btn-sm me-2" [ngClass]="user.viewUser ? 'btn-danger': 'btn-success'" (click)="view(user)">
+{{ user.viewUser ? 'Close': 'View' }}
+/button>
+/div>
+/td>
+}
+}
+/tr>
+
+@if (user.viewUser) {
+tr>
+td colspan="6">
+div class="p-3 bg-light border rounded">
+p class="p-0 m-0"><strong>ID:</strong> {{ user.id }}/p>
+p class="p-0 m-0"><strong>Name:</strong> {{ user.name }}/p>
+p class="p-0 m-0"><strong>Bio:</strong> {{ user.bio }}/p>
+p class="p-0 m-0"><strong> Language : </strong> {{user.language}} /p>
+p class="p-0 m-0"><strong> Version : </strong> {{user.version}} /p>
+/div>
+/td>
+/tr>
+}
+}
+/tbody>
+/table>
+
+nav aria-label="Page navigation example">
+  ul class="pagination">
+    li class="page-item">button (click)="prevPage()" [disabled]="currentPage === 0" class="page-link">Previous/button>/li>
+    li class="page-item">button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= users.length" class="page-link">Next/button>/li>
+  /ul>
+/nav>
+/div>
+/div>
+</code>
+</pre>
+</div>
 
     <div class="box shadow p-2 mb-3" id="class">
       <h2> classs </h2>
