@@ -180,6 +180,9 @@
       <li> <a href="#debugging"> <strong> Debugging </strong> </a></li>
       <li> <a href="#frontend"> Frontend Performance </a></li>
       <li> <a href="#bootstraptailwind"> Bootstap vs Tailwind css </a></li>
+      <li> <a href="#materialui"> Material UI  </a></li>
+      
+      
       
       <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
       <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
@@ -4200,6 +4203,7 @@ script>
   </pre>
       </div>
 
+
 <div id="bootstraptailwind" class="mt-5">
 <h2> What is different between Bootstrap and Tailwind css and how identify ? </h2>
 <p> “Bootstrap is a component-based framework with predefined UI elements,  Tailwind is a utility-first framework that gives low-level classes for building custom designs. Bootstrap sites look similar, while Tailwind gives more flexibility. You can identify them by checking class names—btn, row mean Bootstrap; bg-blue-500, px-4 mean Tailwind.” </p>
@@ -4216,6 +4220,115 @@ script>
 <ul>
   <li> class names like btn, btn-primary, container, row, col-md-6 → It’s Bootstrap. </li>
   <li> class names like bg-blue-500, px-4, py-2, flex, grid-cols-3 → It’s Tailwind CSS. </li>
+</ul>
+
+
+<h2> What is Bootstrap, and why is it used? </h2>
+<p> Responsive, mobile-first CSS framework with prebuilt components. </p>
+
+<h2> What are breakpoints in Bootstrap? </h2>
+<p> Grid system (Extra small (xs) < 576px (phones) , Small (sm) ≥576px (large phones), Medium (md) ≥768px (tablets), Large (lg) ≥992px (small laptops), Extra Large (xl) ≥1200px (desktops), Extra Extra Large (xxl) ≥1400px (large desktops/TVs)) and responsive design. </p>
+
+
+<h2> px, %, em, rem different </h2>
+
+<ul>
+  <li> px → fixed size </li>
+  <li> % → relative to parent size (width/height or font-size) </li>
+  <li> em → relative to parent font size (can compound) </li>
+  <li> rem → relative to root font size (stable, scalable, used by Bootstrap) </li>
+</ul>
+
+<h2> Bootstrap utilities? Give examples. </h2>
+<p> Spacing (m-3, p-2), display (d-flex, d-none), text (text-center). </p>
+
+<h2> How do you customize Bootstrap? </h2>
+<ol>
+  <li> Override the default CSS with our own rules, </li>
+  <li> Use SASS variables to theme Bootstrap globally </li>
+  <li> Leverage the Utility API in Bootstrap 5+ to generate custom utility classes.</li>
+</ol>
+<strong> Utility API (Bootstrap 5+) </strong>
+<ul>
+  <li> Bootstrap 5 introduced a Utility API → lets you generate new utility classes without writing custom CSS. </li>
+  <li> You configure it in SASS, and Bootstrap builds the classes for you. </li>
+</ul>
+<pre>
+<code>
+  $utilities: (
+  "w-20": (
+    property: width,
+    class: w-20,
+    values: 20%
+  ),
+  "text-shadow": (
+    property: text-shadow,
+    class: text-shadow,
+    values: (
+      sm: 1px 1px 2px gray,
+      lg: 2px 2px 5px black
+    )
+  )
+);
+
+@import "bootstrap";
+
+</code>
+</pre>
+
+<h2> Advantages & disadvantages of Bootstrap? </h2>
+<ul>
+  <li> Advantages: Faster development, responsive. </li>
+  <li> Disadvantages: Heavy, sites may look similar. </li>
+</ul>
+
+<h2> <strong> Tailwind CSS </strong></h2>
+<p> Definition - Utility-first framework; instead of prebuilt components, you build with utility classes. </p>
+
+<p> <strong> customize Tailwind CSS? </strong></p>
+<p> Using tailwind.config.js (extend theme, colors, spacing). </p>
+
+<p class="mt-4 p-0"> <strong> JIT (Just-In-Time) </strong> mode in Tailwind? </p>
+<p> Generates only required CSS at build time → reduces CSS size. </p>
+
+
+<p><strong> How to add custom colors or themes in Tailwind? </strong></p>
+<p class="p-0 m-0"> Tailwind configuration file (tailwind.config.js) </p>
+<pre>
+  <code>
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          light: '#6EE7B7',  // light green
+          DEFAULT: '#10B981', // default brand color
+          dark: '#047857'     // dark green
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+  </code>
+</pre>
+
+<h2> Dark Mode Theming </h2>
+<p> Tailwind also supports dark mode themes out of the box. </p>
+<pre>
+  <code>
+    module.exports = {
+  darkMode: 'class', // or 'media'
+}
+  </code>
+</pre>
+
+
+<h2> Advantages & Disadvantages of Tailwind CSS? </h2>
+<ul>
+  <li> Advantages: Lightweight, customizable, no opinionated design. </li>
+  <li> Disadvantages: Verbose HTML, learning curve. </li>
 </ul>
 
 </div>
