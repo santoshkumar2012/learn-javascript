@@ -154,6 +154,7 @@
       <li> <a href="#anagram"> Anagram </a></li>
       <li> <a href="#even"> Even Number </a></li>
       <li> <a href="#counter"> Counter using Closure (No Global Variable) </a></li>
+      <li> <a href="#jssmall"> JS Small Logic </a></li>
 
       <li class="borderline"> <a href="#hoisting"> </a> </li>
       <li> <a href="#html"> <strong> HTML5 </strong> </a> </li>
@@ -181,8 +182,6 @@
       <li> <a href="#frontend"> Frontend Performance </a></li>
       <li> <a href="#bootstraptailwind"> Bootstap vs Tailwind css </a></li>
       <li> <a href="#materialui"> Material UI  </a></li>
-      
-      
       
       <h5 class="mt-4"> HTML AND JAVASCRIPT</h5>
       <li> <a href="#htmljs"> HTMLJS, Tabs, Add & Remove, Sidebar Menu, Toggle </a></li>
@@ -5999,6 +5998,399 @@ Promises & Async/Await (Handle Async Code Better)
 
 
       </div>
+
+
+
+<div id="jssmall" class="mt-5">
+<h2> <strong> javascript Small Logic </strong></h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+console.log(1 + "2" + "2"); // 122
+console.log(1 + +"2" + "2"); // 32 
+console.log(1 + -"1" + "2"); // 02
+console.log(+"1" + "1" + "2"); // 112
+console.log("A" - "B" + "2"); // NaN2
+console.log("A" - "B" + 2); // NaN
+===========
+
+1 == '1'         // true  (type coercion happens)
+1 === '1'        // false (number !== string)
+
+0 == false       // true  (false becomes 0)
+0 === false      // false
+null == undefined // true (special rule)
+null === undefined // false
+' ' == 0               // true   (empty string converts to 0)
+false == '0'           // true   ('0' → 0, false → 0)
+false === '0'          // false  (boolean !== string)
+
+
+[] == false      // true  ([] becomes '')
+[] === false     // false
+
+[] == ![]       // true
+
+
+0 == '0'    // true (string '0' is coerced to number 0)
+0 === '0'   // false (number !== string)
+
+
+1. 0 == '0'             // true
+2. 0 === '0'            // false
+3. null == undefined    // true 
+4. null === undefined   // false ( Because null datatype is null and undefined datatype is object )
+5. ' \t\r\n' == 0       // true
+6. false == 'false'     // false
+7. [] == 0              // true
+[] == ''               // true   ([] → '')
+[] === ''              // false  (array !== string)
+[1] == 1               // true   ([1] → '1' → 1)
+[1,2] == '1,2'         // true   (array → string '1,2')
+
+8. {} == {}             // false (reference comparison)
+NaN == NaN             // false  (NaN is never equal to itself)
+isNaN(NaN)             // true
+Object.is(NaN, NaN)    // true   (special method)
+9. (parseInt('10 + 2'))  // 10
+
+console.log(new Date() == new Date());   // false
+console.log(new Date() === new Date());  // false
+//Result is false, because Date objects are compared by reference, and two new Date() calls create different objects in memory.
+console.log({} == {});   // false
+console.log([] == []);   // false
+
+
+------------------------------------------------------------------
+
+
+9 > 5 > 1   // false
+
+9 > 5 > 1
+↓
+true > 1
+↓
+1 > 1
+↓
+false
+-----------------
+
+5 < 9 < 1
+↓
+true < 1
+↓
+1 < 1 → false
+
+-------------------
+
+false == 0 → true (Boolean to number)
+
+'2' > 1 → true ('2' is converted to number)
+
+-----------
+
+true + true → 1 + 1 = 2
+
+--------------
+
+10 > 9 > 8 === true
+
+10 > 9 → true
+true > 8 → 1 > 8 → false
+false === true → false
+
+-------------
+
+9 > 5 > 1	false	true > 1 → 1 > 1 → false
+5 < 9 < 1	false	true < 1 → 1 < 1 → false
+1 < 2 < 3	true	true < 3 → 1 < 3 → true
+3 > 2 > 1	false	true > 1 → 1 > 1 → false
+
+=======================================================
+
+The || operator is the logical OR operator. In JavaScript:
+It returns the first truthy value, or
+The last value if none are truthy.
+
+
+var x = "welcome";
+var y = "Hello";
+var z = undefined;
+
+x || y;
+
+Since x is already truthy, JavaScript stops there and returns "welcome".
+
+---------
+x && y // Output: Hello
+
+&& in JavaScript: The && (logical AND) operator returns:
+The first falsy value, or
+The last value if all are truthy.
+
+-----
+
+x ?? y // welcome
+
+What is ???
+The nullish coalescing operator (??) returns:
+The right-hand value only if the left-hand value is null or undefined.
+Otherwise, it returns the left-hand value.
+
+============
+
+1. Simple replace (removes only first occurrence)
+
+function removeSubstring(str, sub) {
+  return str.replace(sub, "");
+}
+
+console.log(removeSubstring("javascript is fun", "is")); 
+// Output: "javascript  fun"
+
+2. Remove substring and trim extra spaces
+function removeSubstring(str, sub) {
+  return str.replace(new RegExp("\\b" + sub + "\\b", "g"), "").replace(/\s+/g, " ").trim();
+}
+
+console.log(removeSubstring("javascript is fun", "is")); 
+// Output: "javascript fun"
+
+
+3. remove all occurrences,
+function removeSubstring(str, sub) {
+  return str.replace(new RegExp(sub, "g"), "");
+}
+
+console.log(removeSubstring("javascript is fun, is cool", "is")); 
+// "javascript  fun,  cool"
+
+
+
+3. Remove Duplicate 
+function removeDuplicates(str) {
+  let result = "";
+  for (let char of str) {
+    if (!result.includes(char)) {
+      result += char;
+    }
+  }
+  return result;
+}
+
+console.log(removeDuplicates("programming"));
+// Output: "progamin"
+
+
+4. count Vowel 
+function countVowels(str) {
+  return str.match(/[aeiou]/gi)?.length || 0;
+}
+console.log(countVowels("javascript")); // 3
+
+
+5.Find the first non-repeating character
+function firstUniqueChar(str) {
+  for (let ch of str) {
+    if (str.indexOf(ch) === str.lastIndexOf(ch)) return ch;
+  }
+  return null;
+}
+console.log(firstUniqueChar("aabbcde")); // c
+
+
+6. Find the most frequent element in an array
+function mostFrequent(arr) {
+  let freq = {};
+  let maxCount = 0, result;
+  for (let num of arr) {
+    freq[num] = (freq[num] || 0) + 1;
+    if (freq[num] > maxCount) {
+      maxCount = freq[num];
+      result = num;
+    }
+  }
+  return result;
+}
+console.log(mostFrequent([1,2,2,3,3,3,4])); // 3
+
+
+7. Merge two objects
+let obj1 = {a:1, b:2};
+let obj2 = {b:3, c:4};
+let merged = {...obj1, ...obj2};
+console.log(merged); // {a:1, b:3, c:4}
+
+
+8. Swap keys and values in object
+function swap(obj) {
+  let swapped = {};
+  for (let key in obj) {
+    swapped[obj[key]] = key;
+  }
+  return swapped;
+}
+console.log(swap({a:1, b:2})); // {1:"a", 2:"b"}
+
+9. Find intersection of two arrays
+function intersection(arr1, arr2) {
+  return arr1.filter(x => arr2.includes(x));
+}
+console.log(intersection([1,2,3],[2,3,4])); // [2,3]
+
+
+10.Find union of two arrays
+function union(arr1, arr2) {
+  return [...new Set([...arr1, ...arr2])];
+}
+console.log(union([1,2,3],[2,3,4])); // [1,2,3,4]
+
+
+11. Rotate array by k steps
+function rotate(arr, k) {
+  k %= arr.length;
+  return [...arr.slice(-k), ...arr.slice(0, -k)];
+}
+console.log(rotate([1,2,3,4,5], 2)); // [4,5,1,2,3]
+
+12. Check if string contains only digits
+function isNumeric(str) {
+  return /^\d+$/.test(str);
+}
+console.log(isNumeric("12345")); // true
+
+13.Find missing number in sequence
+function missingNumber(arr) {
+  let n = arr.length + 1;
+  let total = (n * (n+1)) / 2;
+  let sum = arr.reduce((a,b)=>a+b,0);
+  return total - sum;
+}
+console.log(missingNumber([1,2,4,5])); // 3
+
+14.Check if two arrays are equal
+function arraysEqual(a, b) {
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+console.log(arraysEqual([1,2],[1,2])); // true
+
+
+Basic String & Substring Logic in JavaScript
+
+15. Find length of a string
+
+let str = "javascript";
+console.log(str.length); // 10
+
+
+16. Get character at a specific index
+
+let str = "javascript";
+console.log(str.charAt(4));   // s
+console.log(str[4]);          // s
+
+
+17. Find substring inside string
+
+let str = "javascript is fun";
+console.log(str.includes("is"));   // true
+console.log(str.indexOf("is"));    // 11
+console.log(str.lastIndexOf("is"));// 11
+
+
+18. Extract substring
+
+let str = "javascript";
+console.log(str.substring(0, 4));   // "java"
+console.log(str.slice(4, 10));      // "script"
+
+
+19. Convert case
+
+let str = "JavaScript";
+console.log(str.toUpperCase()); // "JAVASCRIPT"
+console.log(str.toLowerCase()); // "javascript"
+
+
+20. Remove spaces
+
+let str = "   hello world   ";
+console.log(str.trim());      // "hello world"
+console.log(str.trimStart()); // "hello world   "
+console.log(str.trimEnd());   // "   hello world"
+
+
+21. Replace substring
+
+let str = "I like Java";
+console.log(str.replace("Java", "JavaScript")); // "I like JavaScript"
+
+
+22. Split string into array
+
+let str = "apple,banana,orange";
+console.log(str.split(",")); // ["apple","banana","orange"]
+
+
+23. Reverse a string
+
+let str = "hello";
+console.log(str.split("").reverse().join("")); // "olleh"
+
+
+24. Check if string starts/ends with substring
+
+let str = "javascript";
+console.log(str.startsWith("java")); // true
+console.log(str.endsWith("script")); // true
+
+
+25. Count occurrences of substring
+
+let str = "is this is good";
+let sub = "is";
+let count = str.split(sub).length - 1;
+console.log(count); // 2
+
+
+26. Remove a substring (all occurrences)
+
+function removeSubstring(str, sub) {
+  return str.replace(new RegExp(sub, "g"), "");
+}
+console.log(removeSubstring("javascript is fun, is cool", "is"));
+// "javascript  fun,  cool"
+
+
+27. Check if string contains only letters
+
+function isAlphabet(str) {
+  return /^[a-zA-Z]+$/.test(str);
+}
+console.log(isAlphabet("Hello")); // true
+console.log(isAlphabet("Hello123")); // false
+
+
+28. Check if string contains only digits
+
+function isNumeric(str) {
+  return /^\d+$/.test(str);
+}
+console.log(isNumeric("12345")); // true
+console.log(isNumeric("12a45")); // false
+
+
+29. Capitalize first letter
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+console.log(capitalize("javascript")); // "Javascript"
+
+  </code>
+</pre>
+
+</div>
 
 
     </div>
