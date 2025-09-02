@@ -1000,7 +1000,23 @@ console.log(squared); // [1, 4, 9, 16]
 </code>
 </pre>
 
-      <h2> Map and Set </h2>
+<h2 class="mt-4"> Filter Method </h2>
+<p> In JavaScript, filter() is an array method used to create a new array with all elements that pass a condition (test) provided by a callback function. </p>
+<pre>
+<code>
+Filter
+const numbers = [1, 2, 3, 4];
+const even = numbers.filter(num => num % 2 === 0);
+console.log(even); // [2, 4]
+//Odd Number
+let array = [1,2,4,5,6,7]
+let array1 = array.filter((x) => x % 2)
+console.log(array1)
+</code>
+</pre>
+
+
+      <h2 class="mt-4"> Map and Set </h2>
       <p> * Map and Set ( Map Stores key-value pairs, Set is a collection of unique values. ) </p>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
     <code>
@@ -1014,7 +1030,7 @@ console.log(squared); // [1, 4, 9, 16]
     </code>
 </pre>
 
-      <h2> Different between forEach, map, filter </h2>
+      <h2 class="mt-4"> Different between forEach, map, filter </h2>
 
       forEach - Retuns No array <br>
       map - Returns new array <br>
@@ -1137,17 +1153,77 @@ console.log(arr.reverse());  // [ 5, 4, 3, 2, 1 ]
     </code>
 </pre>
 
-      <h2> Hoisting </h2>
+      <h2 class="mt-4"> Hoisting </h2>
       <p> <strong> Hoisting is JavaScript's default behavior of moving declarations (variables and functions) to the top
           of their scope before the code executes. </strong></p>
-      <h2> Callback </h2>
-      <p> Callback Function - A callback is a function passed as an argument to another function. </p>
 
-      <h2> Lexical Scope </h2>
-      <p> In JavaScript, "lexical" refers to how things are organized and scoped based on the structure of the code when
-        it's written (at compile time), rather than when it's executed (runtime).</p>
 
-      <pre style="white-space: pre-wrap; word-wrap: break-word;">
+<h2 class="mt-4"> Callback </h2>
+<p> Callback Function - A callback is a function passed as an argument to another function. </p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+const calc = (num1, num2, callback) => {
+      return callback(num1, num2)
+}
+function addition( add1, add2 ){
+    return add1 + add2
+}
+const result = calc(15, 50, addition)
+console.log(result)
+</code>
+</pre>
+
+
+<h2 class="mt-4"> Scope </h2>
+<p> Scope decides where a variable can be used. </p>
+<ol>
+  <li> <strong> Global Scope </strong></li>
+  <li> Variables declared outside any function or block </li>
+  <li> Accessible anywhere in the code. </li>
+  <li> <strong> Function Scope (Local Scope) </strong></li>
+ <li> Variables declared inside a function. </li>
+ <li> Accessible only inside that function. </li>
+<li> <strong> Block Scope (ES6 - let and const) </strong></li>
+<li> Variables declared inside {} with let or const exist only within that block. </li>
+</ol>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+var globalVar = "I am global";
+
+function test() {
+  console.log(globalVar); // ✅ Accessible here
+}
+
+test();
+console.log(globalVar); // ✅ Accessible here
+
+//Function Scope Example 
+
+function test() {
+  let localVar = "I am local";
+  console.log(localVar); // ✅ Accessible here
+}
+
+test();
+console.log(localVar); // ❌ Error: not defined
+
+
+//Block Scope 
+if (true) {
+  let blockVar = "I am block scoped";
+  console.log(blockVar); // ✅ Accessible here
+}
+
+console.log(blockVar); // ❌ Error: not defined
+
+
+</code>
+</pre>
+
+<h2 class="mt-4"> Lexical Scope </h2>
+<p> In JavaScript, "lexical" refers to how things are organized and scoped based on the structure of the code when it's written (at compile time), rather than when it's executed (runtime).</p>
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
 <code>
 function outer() {
   let name = "ChatGPT";
@@ -1164,7 +1240,10 @@ outer();
 </code>
 </pre>
 
-    </div>
+
+
+
+</div>
 
     <div class="box shadow p-2 mb-3" id="foreach">
       <h2> ForEach </h2>
@@ -6386,6 +6465,76 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 console.log(capitalize("javascript")); // "Javascript"
+
+==========
+==========
+
+1. for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+Answer = 
+Step-by-Step Execution
+
+var i = 0 → Schedules console.log(i) for later.
+var i = 1 → Schedules another console.log(i) for later.
+var i = 2 → Schedules another console.log(i) for later.
+Loop ends. Now i = 3.
+👉 When the callbacks run, they all access the same variable i, and its final value is 3.
+----
+for (var i = 0; i < 3; i++) {
+  console.log("Loop i:", i); // runs immediately
+  setTimeout(() => console.log("Timeout i:", i), 0); // runs after loop ends
+}
+Loop i: 0
+Loop i: 1
+Loop i: 2
+Timeout i: 3
+Timeout i: 3
+Timeout i: 3
+
+=========
+
+2. Promise.resolve(1)  // 1
+  .then(x => x + 1) // received 1, output 2
+  .then(x => { throw new Error("Oops"); }) // Oops
+  .then(x => console.log("Won't run"))// 
+  .catch(err => console.log(err.message)); // Oops
+
+=======
+
+2. console.log(0.1 + 0.2 === 0.3); // false
+
+===
+
+3. Character count
+Input = Apple
+Output = {
+A : 1
+P : 2
+L : 1
+E : 1
+}
+
+4. Write a counter function and each function call increment value without use of global variable
+
+function createCounter() {
+  let count = 0; // Private variable (not global)
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const counter = createCounter();
+
+console.log(counter()); // 1
+console.log(counter()); // 2
+console.log(counter()); // 3
+
+=======
+
+
 
   </code>
 </pre>
