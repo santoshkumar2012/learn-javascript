@@ -166,6 +166,7 @@
       <li> <a href="#emp-withoutdynamic"> Emp crud WITHOUT API Dynamic Form </a> </li>
       <li> <a href="#crudstaticdata"> Crud Static Data </a></li>
       <li> <a href="#crudpagination"> Crud with input-edit Pagination </a></li>
+      <li> <a href="#crudpaginationstatic"> Crud with input-edit static data </a></li>
       <li> <a href="#apiservices"> <strong> API </strong> Rest API / Web API </a> </li>
       <li class="borderline"><a href="#"> </a></li>
       <li> <a href="#rxjs"> Rxjs </a> </li>
@@ -9995,6 +9996,165 @@ nav aria-label="Page navigation example">
 </code>
 </pre>
 </div>
+
+
+<div class="box shadow p-2 mb-3" id="crudpaginationstatic">
+<h2> User crud operation and edit same field visiable input box with STATIC DATA </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+
+- TS FILE
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isEditing?: boolean;
+  viewUser?: boolean 
+  form?: FormGroup;
+}
+
+@Component({
+  selector: 'app-user-demo',
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  templateUrl: './user-demo.component.html',
+  styleUrl: './user-demo.component.css'
+})
+export class UserDemoComponent {
+
+  users: User[];
+
+  constructor(private fb: FormBuilder){
+    this.users = [
+      { id: 1, name: 'John Doe', email: 'john@example.com', isEditing: false, viewUser: false },
+      { id: 2, name: 'Jane Smith', email: 'jane@example.com', isEditing: false, viewUser: false },
+      { id: 3, name: 'Alice Johnson', email: 'alice@example.com', isEditing: false, viewUser: false },
+      { id: 4, name: 'Bob Williams', email: 'bob@example.com', isEditing: false, viewUser: false },
+      { id: 5, name: 'Charlie Brown', email: 'charlie@example.com', isEditing: false, viewUser: false }
+    ]
+  }
+
+  edit(user: User) {
+    user.isEditing = true;
+    user.form = this.fb.group({
+      id: [user.id, [Validators.required]],
+      name: [user.name, [Validators.required, Validators.minLength(3)]],
+      email: [user.email, [Validators.required, Validators.email]],
+    });
+  }
+
+  save(user: User) {
+    if (user.form?.valid) {
+      const updated = user.form.value;
+      user.name = updated.name;
+      user.email = updated.email;
+      user.isEditing = false;
+    } else {
+      user.form?.markAllAsTouched();
+    }
+  }
+
+  view(user: User){
+    user.viewUser = !user.viewUser
+  }
+
+  cancel(user: User) {
+    user.isEditing = false;
+  }
+
+}
+
+-HTML FILE 
+
+div class="container mt-5">
+  div class="row">
+    div class="col-md-12">
+      table class="table table-bordered table-striped">
+        thead class="table-dark">
+          tr>
+            th>ID/th>
+            th>Name/th>
+            th>Email/th>
+            th>Actions/th>
+          /tr>
+        /thead>
+        tbody>
+
+          ng-container *ngFor="let user of users">
+            tr>
+              td>{{ user.id }}/td>
+              td>
+                ng-container *ngIf="!user.isEditing; else editName">
+                  {{ user.name }}
+                /ng-container>
+                ng-template #editName>
+                  form [formGroup]="user.form!">
+                    input type="text" class="form-control" placeholder="Name" formControlName="name" />
+                    div class="text-danger small"
+                      *ngIf="user.form?.get('name')?.touched && user.form?.get('name')?.invalid">
+                      Name is required
+                    /div>
+                  /form>
+                /ng-template>
+              /td>
+              td>
+                ng-container *ngIf="!user.isEditing; else editEmail">
+                  {{ user.email }}
+                /ng-container>
+                ng-template #editEmail>
+                  form [formGroup]="user.form!">
+                    input type="email" class="form-control" placeholder="Email" formControlName="email" />
+                    div class="text-danger small"
+                      *ngIf="user.form?.get('email')?.touched && user.form?.get('email')?.invalid">
+                      Valid email is required
+                    /div>
+                  /form>
+                /ng-template>
+              /td>
+              td>
+                ng-container *ngIf="!user.isEditing; else editButtons">
+                  button class="btn btn-primary btn-sm me-2" (click)="edit(user)">Edit/button>
+                /ng-container>
+                ng-template #editButtons>
+                  button class="btn btn-success btn-sm me-2" (click)="save(user)" [disabled]="user.form?.invalid">
+                    Save
+                  /button>
+                  button class="btn btn-secondary btn-sm" (click)="cancel(user)">Cancel/button>
+                /ng-template>
+                button class="btn btn-sm me-2" [ngClass]="user.viewUser ? 'btn-danger': 'btn-success'" (click)="view(user)">
+                  {{ user.viewUser ? 'Close': 'View' }}
+                /button>
+              /td>
+
+            /tr>
+            tr *ngIf="user.viewUser">
+              td colspan="4">
+                div class="p-3 bg-light border rounded">
+                  p>strong>ID:/strong> {{ user.id }}/p>
+                  p>strong>Name:/strong> {{ user.name }}/p>
+                  p>strong>Email:/strong> {{ user.email }}/p>
+                /div>
+              /td>
+            /tr>
+          /ng-container>
+
+          
+        /tbody>
+      /table>
+    /div>
+  /div>
+/div>
+
+  </code>
+</pre>
+
+</div>
+
 
     <div class="box shadow p-2 mb-3" id="class">
       <h2> classs </h2>

@@ -2753,20 +2753,22 @@ console.log(flatArray); // Output: [1, 2, 3, 4, 5, 6, 7, 8, 9]
       <h2> Nested Array By Loop </h2>
       <pre style="white-space: pre-wrap; word-wrap: break-word;">
   <code>
-let array = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
+  
+let array = [1, [2, [3, [4]]]];
 let flatArray = [];
 
-for (let item of array) {
-  if (Array.isArray(item)) {
-    for (let subItem of item) {
-      flatArray.push(subItem);
+function flatten(arr) {
+  for (let item of arr) {
+    if (Array.isArray(item)) {
+      flatten(item);   // recursive call
+    } else {
+      flatArray.push(item);
     }
-  } else {
-    flatArray.push(item);
   }
 }
 
-console.log(flatArray); // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+flatten(array);
+console.log(flatArray); // [1, 2, 3, 4]
 
   </code>
 </pre>
