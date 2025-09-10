@@ -6541,6 +6541,181 @@ console.log(counter()); // 3
   </code>
 </pre>
 
+
+<h2> Animation </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+  <code>
+
+    /** Animation **/
+Animation - Used to create complex animations with multiple keyframes.
+Requires @keyframes to define multiple animation steps.
+animation: 5s ease-in-out 2 alternate none running rectAnimation; 
+@keyframes rectAnimation {
+    0% {
+        top:1%;
+        left:5%;
+    }}
+    @keyframes bounce {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
+    }
+    animation: bounce 1s infinite;
+
+transition - Used for smooth transitions between two states (e.g., hover effects).
+Does not use keyframes; transitions between two states only.
+ease-in - slow start, Fast end 
+ease-in-ouit - somooth start & End
+transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+transition: all 4s;
+transition-property:all;
+-delay:1s
+:hover {transform:scale(45deg)}
+
+-------------------------------------------------------
+CSS Grid	
+A two-dimensional layout system (handles both rows and columns).
+Best for overall page layouts, grids, and complex structures.
+example - <code>
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); 
+        grid-template-rows: auto;
+        gap: 10px;
+    }
+    // 1fr is fraction unit just like 200px width
+    // Automatically adjusts based on available space.
+</code>
+
+FlexBox
+A one-dimensional layout system (handles either rows or columns, not both at once).
+Best for aligning items in a row or column, great for components.
+display:flex
+-------------------------------------------------------
+Media Queries - in CSS allow us to apply different styles based on the screen size, resolution, or device type. 
+Extra Small (Mobile)	max-width: 576px
+Small (Tablets)     	max-width: 768px
+Medium (Laptops)	    max-width: 992px
+Large (Desktops)	    max-width: 1200px
+----------------------------------------------------------------------
+Viewport Units → Great for scaling elements dynamically without fixed sizes.
+vw (Viewport Width)	1vw = 1% of the viewport’s width
+vh (Viewport Height)	1vh = 1% of the viewport’s height
+vmin (Viewport Minimum)	Takes the smaller value of vw or vh
+vmax (Viewport Maximum)	Takes the larger value of vw or vh
+----------------------------------------------------------------------
+px for fixed elements (borders, images)
+em for scaling within a component (buttons, cards).
+rem for consistent typography across a website.
+-------------------------------------------------------
+ES6 (ECMAScript 2015) and later versions introduced many powerful features that make JavaScript cleaner, faster, and easier to work with.
+let & const (Block-Scoped Variables)
+Arrow Functions (Shorter Syntax)
+Spread & Rest Operator (...)
+Promises & Async/Await (Handle Async Code Better)
+
+
+-------------
+
+ANIMATIO STYLE 
+
+.container { background-color: red; padding: 15px; height: 100vh;}
+        .rectangle {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 10px;
+            position: relative;
+            /* animation-fill-mode: backwards; */
+            /* animation-name: rectAnimation;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-delay: 1s;
+            animation-timing-function: linear;
+            animation-direction: alternate; */
+            /* animation: 5s ease-in-out 2 alternate none running rectAnimation; */
+            
+        }
+
+        @keyframes rectAnimation {
+            0% {
+                top:1%;
+                left:5%;
+            }
+            30% {
+                top: 5%;
+                left: 90%;
+            }
+            60% {
+                top:90%;
+                left:10%
+            }
+            100% {
+                top:95%;
+                left:90%;
+            }
+        }
+
+        .box {
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            margin-top: 50px;
+            border-radius: 5px;
+            /* transition-property: all;
+            transition-duration: 4s;
+            transition-delay: 1s;
+            transition-timing-function: linear; */
+            transition: all 4s;
+        }
+
+        .box:hover {
+            background-color: black;
+            width: 500px;
+            transform: scale(45deg);
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .box1 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            animation: bounce 1s infinite;
+            margin-top: 50px;
+        }
+
+        .box3 {
+    width: 100px;
+    height: 100px;
+    margin-top: 25px;
+    background-color: black;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.box3:hover {
+    background-color: blue;
+}
+
+
+HTML 
+
+ div class="container">
+        div class="rectangle"> /div>
+        div class="box">/div>
+        div class="box1"> /div>
+        div class="box3"> /div>
+    /div>
+
+
+</code>
+</pre>
+
 </div>
 
 
