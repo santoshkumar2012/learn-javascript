@@ -132,6 +132,7 @@
       <li> <a href="#duplicatenumber"> duplicatenumber </a> </li>
       <li> <a href="#find"> find sum number </a> </li>
       <li> <a href="#sum"> sum - 123456 </a> </li>
+      <li> <a href="#mergeSorted"> Sort, mergesort </a></li>
       <li> <a href="#count"> word count </a> </li>
       <li> <a href="#vowel"> Vowel </a> </li>
       <li> <a href="#sumnumber"> sumnumber </a> </li>
@@ -2647,9 +2648,85 @@ console.log(output);
                 sum += Number(numStr[i]);
             }
             console.log(sum)
+
+//// Without using string method
+
+function sumOfDigits(num) {
+  let sum = 0;
+
+  while (num > 0) {
+    sum += num % 10;       // get last digit
+    num = Math.floor(num / 10); //remove lastdigit
+  }
+
+  return sum;
+}
+
+// Example
+console.log(sumOfDigits(1234)); // 10
+console.log(sumOfDigits(9876)); // 30
+
         </code>
     </pre>
     </div>
+
+
+<div class="sorted mt-5" id="mergeSorted">
+<h2> Sorted Number // Merge Sort in JavaScript to sort an array of numbers: </h2>
+
+<pre style="white-space: pre-wrap; word-wrap: break-word;">
+<code>
+function mergeSort(arr) {
+  if (arr.length <= 1) {
+    return arr; // Base case: arrays with 0 or 1 element are already sorted
+  }
+
+  // Split the array into halves
+  const mid = Math.floor(arr.length / 2);
+  const left = arr.slice(0, mid);
+  const right = arr.slice(mid);
+
+  // Recursively sort each half
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  let result = [];
+  let i = 0;
+  let j = 0;
+
+  // Compare elements and push the smaller one into result
+  while (i < left.length && j < right.length) {
+    if (left[i] < right[j]) {
+      result.push(left[i]);
+      i++;
+    } else {
+      result.push(right[j]);
+      j++;
+    }
+  }
+
+  // Add remaining elements from both arrays
+  return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
+// Example usage:
+let unsortedArray = [34, 7, 23, 32, 5, 62];
+let sortedArray = mergeSort(unsortedArray);
+console.log("Sorted array:", sortedArray);
+
+
+//Sorting 
+// Ascending
+let array = [10,24,3,4,55,6,7,8,9]
+array.sort((a,b) => a - b)
+console.log(array) // 3,  4,  6,  7, 8, 9, 10, 24, 55
+
+
+</code>
+</pre>
+
+</div>
 
     <div class="box shadow p-2 mb-3" id="count">
       <h2> Count Word Fequency in a string </h2>
